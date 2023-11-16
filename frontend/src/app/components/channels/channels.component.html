@@ -1,0 +1,33 @@
+<div class="bg-primary flex h-screen">
+    <div class="w-20 bg-accent flex flex-col items-center pt-4">
+        <button *ngFor="let server of servers"
+            class="bg-amber-700 rounded-lg w-16 h-16 flex items-center justify-center mb-2">
+            <p>{{ server.name }}</p>
+        </button>
+        <button class="text-text" (click)="openCreateServer()">Create Server</button>
+    </div>
+
+    <div class="w-1/4 bg-secondary flex flex-col">
+        <div class="flex-1"></div>
+        <div class="h-14 bg-accent flex flex-row">
+            <!-- add here the nickname of the user and his username -->
+            <div class=" bg-red-500 w-1/4">
+                <p>pfp</p>
+            </div>
+            <div class="bg-green-500 w-1/2">
+                <p>{{user.nickname}}</p>
+                <p>{{user.username}}</p>
+            </div>
+            <div class="bg-blue-500 w-1/4">
+                <p>sett</p>
+            </div>
+        </div>
+    </div>
+    <div class="w-1/2 bg-primary">
+
+    </div>
+    <div class="w-1/4 bg-primary">
+
+    </div>
+</div>
+<app-create-server-popup></app-create-server-popup>

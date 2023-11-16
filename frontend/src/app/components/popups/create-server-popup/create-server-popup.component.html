@@ -1,0 +1,17 @@
+<div *ngIf="visible" class="fixed inset-0 flex items-center justify-center z-50 bg-gray-900 bg-opacity-50">
+    <div class="bg-primary w-full max-w-md p-6 rounded-lg">
+        <div class="flex justify-between items-center mb-4">
+            <h1 class="text-text text-xl font-medium">Create Server</h1>
+            <button (click)="close()" class="text-xl font-medium text-text">&times;</button>
+        </div>
+        <form [formGroup]="serverNameForm" class="mb-4">
+            <label for="serverName" class="text-base font-medium text-text">Server Name:</label>
+            <input type="text" formControlName="serverName"
+                class="border rounded-lg px-3 py-2 w-full text-text bg-primary border-slate-400 hover:border-slate-50">
+        </form>
+        <div class="flex justify-end">
+            <button (click)="confirm()"
+                class="bg-blue-500 hover:bg-blue-700 text-text font-medium py-2 px-4 rounded-lg">Confirm</button>
+        </div>
+    </div>
+</div>
