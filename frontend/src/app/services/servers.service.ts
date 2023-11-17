@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AuthService } from './auth.service';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
 })
-export class ChannelsService {
+export class ServersService {
     private showDialogSubject = new BehaviorSubject<boolean>(false);
     showDialogObservable = this.showDialogSubject.asObservable();
-    constructor(
-        private httpClient: HttpClient,
-        private authService: AuthService
-    ) {}
 
-    baseUrl = 'http://localhost:8000/channels';
+    private serversUpdatedSubject = new Subject<void>();
+    serversUpdated$ = this.serversUpdatedSubject.asObservable();
+
+    constructor(private httpClient: HttpClient) {}
+
+    baseUrl = 'http://localhost:8000/servers';
 
     openDialog() {
         this.showDialogSubject.next(true);
@@ -27,23 +27,27 @@ export class ChannelsService {
         console.log('close dialog');
     }
 
+    updateServers() {
+        console.log('update servers');
+        this.serversUpdatedSubject.next();
+    }
+
     createServer(serverName: any): Observable<any> {
         console.log(serverName);
         const token = localStorage.getItem('token') as string;
-        const url = `${this.baseUrl}/create-channel`;
+        const url = `${this.baseUrl}/create-server`;
         const headers = {
             'Content-Type': 'application/json',
             token: token,
         };
         const body = { name: serverName['serverName'] };
 
-        // Subscribe to the Observable returned by HttpClient.post
         return this.httpClient.post(url, body, { headers });
     }
 
     getServers(): Observable<any> {
         const token = localStorage.getItem('token') as string;
-        const url = `${this.baseUrl}/get-channels`;
+        const url = `${this.baseUrl}/get-servers`;
         const headers = new HttpHeaders({
             'Content-Type': 'application/json',
             token: token,

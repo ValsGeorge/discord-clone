@@ -1,4 +1,5 @@
-export interface Channels {
+export interface Servers {
+    id: string;
     name: string;
     owner: string;
     members: string[];

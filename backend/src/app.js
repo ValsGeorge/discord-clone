@@ -14,8 +14,8 @@ app.use(cors());
 const usersRouter = require("./routes/Users");
 app.use("/users", usersRouter);
 
-const channelsRouter = require("./routes/Channels");
-app.use("/channels", channelsRouter);
+const serversRouter = require("./routes/Servers");
+app.use("/servers", serversRouter);
 
 sequelize.sync({ force: false }).then(() => {
     app.listen(config.port);

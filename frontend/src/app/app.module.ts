@@ -10,10 +10,14 @@ import { LoginComponent } from './components/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ActivateComponent } from './components/activate/activate.component';
-import { ChannelsComponent } from './components/channels/channels.component';
+import { ServersComponent } from './components/servers/servers.component';
 import { CreateServerPopupComponent } from './components/popups/create-server-popup/create-server-popup.component';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
+import { RouterModule } from '@angular/router';
+import { ServerDetailsComponent } from './components/server-details/server-details.component';
+import { ServersSidePanelComponent } from './components/servers-side-panel/servers-side-panel.component';
+import { UserInfoComponent } from './components/user-info/user-info.component';
 
 @NgModule({
     declarations: [
@@ -23,8 +27,11 @@ import { ButtonModule } from 'primeng/button';
         LoginComponent,
         NavbarComponent,
         ActivateComponent,
-        ChannelsComponent,
+        ServersComponent,
         CreateServerPopupComponent,
+        ServerDetailsComponent,
+        ServersSidePanelComponent,
+        UserInfoComponent,
     ],
     imports: [
         BrowserModule,
@@ -34,6 +41,7 @@ import { ButtonModule } from 'primeng/button';
         HttpClientXsrfModule,
         DialogModule,
         ButtonModule,
+        RouterModule.forRoot([]),
     ],
     providers: [],
     bootstrap: [AppComponent],

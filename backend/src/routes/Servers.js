@@ -1,31 +1,31 @@
 const express = require("express");
 const router = express.Router();
-const { Channels } = require("../models");
+const { Servers } = require("../models");
 const { validateToken } = require("../middlewares/AuthMiddleware");
 
 router.get("/", validateToken, async (req, res) => {
     const username = req.user.username;
 
-    const channels = await Channels.findAll({
+    const servers = await Servers.findAll({
         where: {
             username,
         },
     });
-    res.json(channels);
+    res.json(servers);
 });
 
-router.get("/get-channels", validateToken, async (req, res) => {
+router.get("/get-servers", validateToken, async (req, res) => {
     const userId = req.user.id;
 
-    const channels = await Channels.findAll({
+    const servers = await Servers.findAll({
         where: {
             userId,
         },
     });
-    res.json(channels);
+    res.json(servers);
 });
 
-router.post("/create-channel", validateToken, async (req, res) => {
+router.post("/create-server", validateToken, async (req, res) => {
     console.log("____________________________________________________");
     const data = req.body;
     console.log(data);
@@ -38,14 +38,14 @@ router.post("/create-channel", validateToken, async (req, res) => {
     data["description"] = data["description"] || "No description provided";
 
     try {
-        const channel = await Channels.create({
+        const server = await Servers.create({
             ...data,
             username,
             userId,
         });
-        res.json(channel);
+        res.json(server);
     } catch (error) {
-        console.error("Error during channel creation:", error);
+        console.error("Error during server creation:", error);
         res.status(500).send("Internal Server Error");
     }
 });

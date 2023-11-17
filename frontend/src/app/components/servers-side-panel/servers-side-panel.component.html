@@ -1,0 +1,15 @@
+<div class="h-screen w-20 bg-accent flex flex-col items-center pt-4">
+    <button class="text-text h-16 w-16 bg-secondary rounded-full mb-2" routerLink="/servers"
+        (click)="resetSelectedServer()"><i class="pi pi-home"></i></button>
+    <button *ngFor="let server of servers"
+        class="bg-red-600 rounded-full w-16 h-16 flex items-center justify-center mb-2"
+        [routerLink]="['/servers', server.id]" [class.bg-white]="server.id.toString() === selectedServerId"
+        [class.border-l-4]="server.id.toString() === selectedServerId" (click)="selectServer(server.id)">
+        <p class="{{ server.id.toString() === selectedServerId ? 'text-black' : 'text-white' }}">
+            {{ server.name }}
+        </p>
+
+    </button>
+    <button class="text-text h-16 w-16 bg-secondary rounded-full" (click)="openCreateServer()"><i
+            class="pi pi-plus"></i></button>
+</div>

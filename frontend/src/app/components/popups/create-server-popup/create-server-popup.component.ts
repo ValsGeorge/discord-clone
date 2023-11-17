@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { ChannelsService } from 'src/app/services/channels.service';
+import { ServersService } from 'src/app/services/servers.service';
 
 @Component({
     selector: 'app-create-server-popup',
@@ -12,10 +12,10 @@ export class CreateServerPopupComponent {
     serverNameForm: FormGroup;
 
     constructor(
-        private channelsService: ChannelsService,
+        private serversService: ServersService,
         private formBuilder: FormBuilder
     ) {
-        this.channelsService.showDialogObservable.subscribe((response) => {
+        this.serversService.showDialogObservable.subscribe((response) => {
             this.visible = response;
         });
         this.serverNameForm = this.formBuilder.group({
@@ -24,22 +24,21 @@ export class CreateServerPopupComponent {
     }
 
     confirm() {
-        this.channelsService.createServer(this.serverNameForm.value).subscribe(
+        this.serversService.createServer(this.serverNameForm.value).subscribe(
             (response) => {
-                // Handle successful response
                 console.log('Server created successfully:', response);
+                this.serversService.updateServers();
             },
             (error) => {
-                // Handle error
                 console.error('Error creating server:', error);
             }
         );
 
         this.serverNameForm.reset();
-        this.channelsService.closeDialog();
+        this.serversService.closeDialog();
     }
 
     close() {
-        this.channelsService.closeDialog();
+        this.serversService.closeDialog();
     }
 }

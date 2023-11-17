@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const Channels = sequelize.define("Channels", {
+    const Servers = sequelize.define("Servers", {
         name: {
             type: DataTypes.STRING,
             unique: false,
@@ -17,12 +17,12 @@ module.exports = (sequelize, DataTypes) => {
         },
     });
 
-    Channels.associate = (models) => {
-        Channels.belongsTo(models.Users, {
+    Servers.associate = (models) => {
+        Servers.belongsTo(models.Users, {
             foreignKey: "userId",
             as: "user",
         });
     };
 
-    return Channels;
+    return Servers;
 };
