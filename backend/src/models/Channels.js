@@ -5,11 +5,6 @@ module.exports = (sequelize, DataTypes) => {
             unique: true,
             allowNull: false,
         },
-        userId: {
-            type: DataTypes.INTEGER,
-            unique: false,
-            allowNull: false,
-        },
         serverId: {
             type: DataTypes.INTEGER,
             unique: false,

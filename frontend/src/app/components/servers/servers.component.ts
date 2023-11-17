@@ -6,7 +6,7 @@ import { Servers } from 'src/app/models/server';
 import { ServersService } from 'src/app/services/servers.service';
 
 @Component({
-    selector: 'app-channels',
+    selector: 'app-servers',
     templateUrl: './servers.component.html',
     styleUrls: ['./servers.component.css'],
 })

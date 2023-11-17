@@ -18,6 +18,8 @@ import { RouterModule } from '@angular/router';
 import { ServerDetailsComponent } from './components/server-details/server-details.component';
 import { ServersSidePanelComponent } from './components/servers-side-panel/servers-side-panel.component';
 import { UserInfoComponent } from './components/user-info/user-info.component';
+import { ChannelsComponent } from './components/channels/channels.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -32,6 +34,7 @@ import { UserInfoComponent } from './components/user-info/user-info.component';
         ServerDetailsComponent,
         ServersSidePanelComponent,
         UserInfoComponent,
+        ChannelsComponent,
     ],
     imports: [
         BrowserModule,
@@ -42,6 +45,7 @@ import { UserInfoComponent } from './components/user-info/user-info.component';
         DialogModule,
         ButtonModule,
         RouterModule.forRoot([]),
+        FormsModule,
     ],
     providers: [],
     bootstrap: [AppComponent],

@@ -17,6 +17,9 @@ app.use("/users", usersRouter);
 const serversRouter = require("./routes/Servers");
 app.use("/servers", serversRouter);
 
+const channelsRouter = require("./routes/Channels");
+app.use("/channels", channelsRouter);
+
 sequelize.sync({ force: false }).then(() => {
     app.listen(config.port);
     console.log(`Server started on port ${config.port}`);
