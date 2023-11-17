@@ -22,6 +22,11 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: "userId",
             as: "user",
         });
+
+        Servers.hasMany(models.Channels, {
+            foreignKey: "serverId",
+            as: "channels",
+        });
     };
 
     return Servers;
