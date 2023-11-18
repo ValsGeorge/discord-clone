@@ -18,10 +18,13 @@ export class ChannelsComponent implements OnInit {
     selectedServerId: string | null = null;
     ngOnInit(): void {
         this.getChannels();
+
+        this.channelsService.channelsUpdated$.subscribe(() => {
+            this.getChannels();
+        });
     }
 
     getChannels() {
-        // TODO: Get server id from url
         this.selectedServerId = this.utilsService.getSelectedServerId();
         this.channelsService.getChannels(this.selectedServerId).subscribe(
             (response) => {

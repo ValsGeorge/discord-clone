@@ -30,9 +30,18 @@ export class ChannelsService {
         this.showDialogSubject.next(false);
     }
 
-    updateChannels() {
-        console.log('update channels');
+    updateChannels(serverId: string) {
         this.channelsUpdatedSubject.next();
+        // Optionally, you can also call getChannels here to fetch updated channels immediately
+        this.getChannels(serverId).subscribe(
+            (channels) => {
+                // Update channels array or any other logic here
+                console.log('Channels:', channels);
+            },
+            (error) => {
+                console.error('Error getting channels:', error);
+            }
+        );
     }
 
     createChannel(channel: Channels): Observable<any> {
@@ -42,14 +51,14 @@ export class ChannelsService {
             'Content-Type': 'application/json',
             token: token,
         };
-        console.log('channel:', channel);
         this.selectedServerId = this.utilsService.getSelectedServerId();
         const data = {
             name: channel.name,
             type: channel.type,
             serverId: this.selectedServerId,
         };
-        console.log('data:', data);
+
+        this.updateChannels(this.selectedServerId || '0');
 
         return this.http.post(url, data, { headers });
     }

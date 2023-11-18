@@ -3,6 +3,7 @@ import { OnInit } from '@angular/core';
 import { Servers } from 'src/app/models/server';
 import { ServersService } from 'src/app/services/servers.service';
 import { UtilsService } from 'src/app/services/utils.service';
+import { ChannelsService } from 'src/app/services/channels/channels.service';
 
 @Component({
     selector: 'app-servers-side-panel',
@@ -14,7 +15,8 @@ export class ServersSidePanelComponent implements OnInit {
 
     constructor(
         private serversService: ServersService,
-        private utilsService: UtilsService
+        private utilsService: UtilsService,
+        private channelsService: ChannelsService
     ) {}
     servers: Servers[] = [];
 
@@ -36,6 +38,17 @@ export class ServersSidePanelComponent implements OnInit {
         this.selectedServerId = serverId;
         this.utilsService.setSelectedServerId(serverId);
         this.selectedServerId = this.utilsService.getSelectedServerId();
+        // Update channels
+        this.channelsService.getChannels(this.selectedServerId).subscribe(
+            (channels) => {
+                this.channelsService.updateChannels(
+                    this.selectedServerId || '0'
+                ); // Notify about channel update
+            },
+            (error) => {
+                console.error('Error getting channels:', error);
+            }
+        );
     }
 
     openCreateServer() {
