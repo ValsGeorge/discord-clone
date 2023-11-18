@@ -2,37 +2,28 @@ import { Component } from '@angular/core';
 import { ChannelsService } from '../../services/channels/channels.service';
 import { OnInit } from '@angular/core';
 import { Channels } from 'src/app/models/channel';
+import { UtilsService } from 'src/app/services/utils.service';
 @Component({
     selector: 'app-channels',
     templateUrl: './channels.component.html',
     styleUrls: ['./channels.component.css'],
 })
 export class ChannelsComponent implements OnInit {
-    channelName: string = '';
-    serverId!: string;
+    constructor(
+        private channelsService: ChannelsService,
+        private utilsService: UtilsService
+    ) {}
 
-    constructor(private channelsService: ChannelsService) {}
     channels: Channels[] = [];
+    selectedServerId: string | null = null;
     ngOnInit(): void {
         this.getChannels();
     }
 
-    createChannel() {
-        this.channelsService
-            .createChannel(this.channelName, this.serverId)
-            .subscribe(
-                (response) => {
-                    console.log('Channel created successfully:', response);
-                },
-                (error) => {
-                    console.error('Error creating channel:', error);
-                }
-            );
-    }
-
     getChannels() {
         // TODO: Get server id from url
-        this.channelsService.getChannels('1').subscribe(
+        this.selectedServerId = this.utilsService.getSelectedServerId();
+        this.channelsService.getChannels(this.selectedServerId).subscribe(
             (response) => {
                 this.channels = response;
                 console.log('Channels:', response);
@@ -41,5 +32,9 @@ export class ChannelsComponent implements OnInit {
                 console.error('Error getting channels:', error);
             }
         );
+    }
+
+    openDialog() {
+        this.channelsService.openDialog();
     }
 }

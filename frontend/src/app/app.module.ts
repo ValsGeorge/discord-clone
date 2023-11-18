@@ -20,6 +20,7 @@ import { ServersSidePanelComponent } from './components/servers-side-panel/serve
 import { UserInfoComponent } from './components/user-info/user-info.component';
 import { ChannelsComponent } from './components/channels/channels.component';
 import { FormsModule } from '@angular/forms';
+import { CreateChannelPopupComponent } from './components/popups/create-channel-popup/create-channel-popup.component';
 
 @NgModule({
     declarations: [
@@ -35,6 +36,7 @@ import { FormsModule } from '@angular/forms';
         ServersSidePanelComponent,
         UserInfoComponent,
         ChannelsComponent,
+        CreateChannelPopupComponent,
     ],
     imports: [
         BrowserModule,

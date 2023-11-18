@@ -19,7 +19,7 @@ export class ServersService {
 
     openDialog() {
         this.showDialogSubject.next(true);
-        console.log('open dialog');
+        console.log('open dialog1');
     }
 
     closeDialog() {

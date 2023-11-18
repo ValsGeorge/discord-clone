@@ -1,19 +1,12 @@
-<button class="text-text text-xl" *ngFor="let channel of channels">
-    {{ channel.name }}
-</button>
-
-
-<div class="max-w-md mx-auto mt-8 p-6 bg-white shadow-md">
-    <label for="channelName" class="block text-gray-700 text-sm font-bold mb-2">Channel Name:</label>
-    <input type="text" [(ngModel)]="channelName" id="channelName"
-        class="w-full border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-
-    <label for="serverId" class="block text-gray-700 text-sm font-bold mt-4 mb-2">Server ID:</label>
-    <input type="text" [(ngModel)]="serverId" id="serverId"
-        class="w-full border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-
-    <button (click)="createChannel()"
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 focus:outline-none focus:shadow-outline">
-        Create Channel
+<div class="flex flex-col space-y-1 mt-4 max-w-sm mx-auto">
+    <button *ngFor="let channel of channels"
+        class=" hover:bg-primary text-white font-bold py-2 px-4 rounded text-left mx-4">
+        {{ channel.name }}
     </button>
 </div>
+
+<button (click)="openDialog()" class="mt-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+    Create Channel
+</button>
+
+<app-create-channel-popup></app-create-channel-popup>

@@ -16,7 +16,6 @@ router.get("/get-channels/:id", validateToken, async (req, res) => {
 
 router.post("/create", validateToken, async (req, res) => {
     const channel = req.body;
-    console.log("channel", channel);
     await Channels.create(channel);
     res.json(channel);
 });
