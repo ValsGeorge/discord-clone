@@ -88,4 +88,14 @@ export class AuthService {
             })
         );
     }
+
+    getUserName(userId: string): Observable<any> {
+        const url = `${this.baseUrl}/details/${userId}`;
+        const headers = {
+            'Content-Type': 'application/json',
+            token: `${this.getAuthTokenFromLocalStorage()}`,
+        };
+
+        return this.httpClient.get(url, { headers });
+    }
 }

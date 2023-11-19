@@ -9,6 +9,7 @@ import { ServersService } from 'src/app/services/servers.service';
 })
 export class ServerDetailsComponent {
     serverId!: string;
+    channelId!: string;
     constructor(
         private route: ActivatedRoute,
         private serversService: ServersService

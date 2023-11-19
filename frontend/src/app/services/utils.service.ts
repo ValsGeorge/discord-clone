@@ -11,4 +11,12 @@ export class UtilsService {
     getSelectedServerId(): string {
         return localStorage.getItem('selectedServerId') || '0';
     }
+
+    setSelectedChannelId(channelId: string) {
+        localStorage.setItem('selectedChannelId', channelId);
+    }
+
+    getSelectedChannelId(): string {
+        return localStorage.getItem('selectedChannelId') || '0';
+    }
 }

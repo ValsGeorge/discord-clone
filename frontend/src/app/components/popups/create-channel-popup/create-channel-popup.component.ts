@@ -42,6 +42,13 @@ export class CreateChannelPopupComponent {
 
         this.channelForm.reset();
         this.channelsService.closeDialog();
+        this.channelForm = this.formBuilder.group({
+            id: null,
+            name: [''],
+            type: ['text'],
+            created_at: null,
+            updated_at: null,
+        });
     }
 
     close() {

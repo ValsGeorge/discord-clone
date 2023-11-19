@@ -1,0 +1,15 @@
+<div class="chat-room flex flex-col h-full bg-secondary">
+    <div class="chat-messages flex-grow overflow-y-scroll p-4 border-b border-gray-300">
+        <div class="message mb-2" *ngFor="let message of messages">
+            <div class="flex">
+                <span class="font-bold text-text">{{ message.username }}:</span>
+                <p class="text-text">{{ message.content }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="chat-input p-4 flex items-center">
+        <input [(ngModel)]="messageContent" type="text" id="message-input" placeholder="Type your message..."
+            class="flex-grow p-2 border rounded-l-md">
+        <button (click)="sendMessage()" class="px-4 py-2 bg-blue-500 text-text rounded-r-md">Send</button>
+    </div>
+</div>

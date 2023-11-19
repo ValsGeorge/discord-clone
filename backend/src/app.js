@@ -20,6 +20,9 @@ app.use("/servers", serversRouter);
 const channelsRouter = require("./routes/Channels");
 app.use("/channels", channelsRouter);
 
+const messagesRouter = require("./routes/Messages");
+app.use("/messages", messagesRouter);
+
 sequelize.sync({ force: false }).then(() => {
     app.listen(config.port);
     console.log(`Server started on port ${config.port}`);

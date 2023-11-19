@@ -21,6 +21,7 @@ import { UserInfoComponent } from './components/user-info/user-info.component';
 import { ChannelsComponent } from './components/channels/channels.component';
 import { FormsModule } from '@angular/forms';
 import { CreateChannelPopupComponent } from './components/popups/create-channel-popup/create-channel-popup.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 @NgModule({
     declarations: [
@@ -37,6 +38,7 @@ import { CreateChannelPopupComponent } from './components/popups/create-channel-
         UserInfoComponent,
         ChannelsComponent,
         CreateChannelPopupComponent,
+        ChatComponent,
     ],
     imports: [
         BrowserModule,

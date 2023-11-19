@@ -71,4 +71,18 @@ router.get("/details", validateToken, async (req, res) => {
     res.json(user);
 });
 
+router.get("/details/:id", validateToken, async (req, res) => {
+    const id = req.params.id;
+
+    const user = await Users.findByPk(id, {
+        attributes: { exclude: ["password"] },
+    });
+
+    if (!user) {
+        return res.status(404).send("User not found");
+    }
+
+    res.json(user);
+});
+
 module.exports = router;

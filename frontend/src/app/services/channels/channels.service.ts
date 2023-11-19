@@ -32,12 +32,8 @@ export class ChannelsService {
 
     updateChannels(serverId: string) {
         this.channelsUpdatedSubject.next();
-        // Optionally, you can also call getChannels here to fetch updated channels immediately
         this.getChannels(serverId).subscribe(
-            (channels) => {
-                // Update channels array or any other logic here
-                console.log('Channels:', channels);
-            },
+            (channels) => {},
             (error) => {
                 console.error('Error getting channels:', error);
             }

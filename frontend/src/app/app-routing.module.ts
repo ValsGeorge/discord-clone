@@ -6,6 +6,7 @@ import { LoginComponent } from './components/login/login.component';
 import { ActivateComponent } from './components/activate/activate.component';
 import { ServersComponent } from './components/servers/servers.component';
 import { ServerDetailsComponent } from './components/server-details/server-details.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -13,7 +14,11 @@ const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'activate/:uidb64/:token', component: ActivateComponent },
     { path: 'servers', component: ServersComponent },
-    { path: 'servers/:id', component: ServerDetailsComponent },
+    {
+        path: 'servers/:id',
+        component: ServerDetailsComponent,
+        children: [{ path: 'channels/:channelId', component: ChatComponent }],
+    },
 ];
 
 @NgModule({
