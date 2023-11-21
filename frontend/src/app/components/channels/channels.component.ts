@@ -46,13 +46,6 @@ export class ChannelsComponent implements OnInit {
     selectChannel(channelId: string) {
         this.utilsService.setSelectedChannelId(channelId);
         this.selectedChannelId = this.utilsService.getSelectedChannelId();
-        this.chatService.getMessages(this.selectedChannelId).subscribe(
-            (response) => {
-                this.chatService.updateChat(this.selectedChannelId || '0');
-            },
-            (error) => {
-                console.error('Error getting messages:', error);
-            }
-        );
+        this.chatService.fetchInitialMessages();
     }
 }

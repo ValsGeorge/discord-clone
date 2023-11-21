@@ -19,5 +19,6 @@ export class ServersComponent {
         email: '',
         password: '',
         confirmPassword: '',
+        userProfilePicture: '',
     };
 }

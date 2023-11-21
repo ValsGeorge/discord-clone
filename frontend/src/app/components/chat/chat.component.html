@@ -2,6 +2,8 @@
     <div class="chat-messages flex-grow overflow-y-scroll p-4 border-b border-gray-300">
         <div class="message mb-2" *ngFor="let message of messages">
             <div class="flex">
+                <img *ngIf="message.userProfilePicture" [src]="getProfilePictureUrl(message.userId)"
+                    alt="Profile Picture" class="w-8 h-8 rounded-full mr-2">
                 <span class="font-bold text-text">{{ message.username }}:</span>
                 <p class="text-text">{{ message.content }}</p>
             </div>

@@ -1,31 +1,27 @@
-const express = require("express");
-const router = express.Router();
 const { Messages } = require("../models");
-const { validateToken } = require("../middlewares/AuthMiddleware");
 
-router.get("/get-messages", validateToken, async (req, res) => {
-    const { channelId } = req.query;
+const getMessages = async (req, res) => {
+    try {
+        const channelId = parseInt(req.query.channelId);
+        const messages = await Messages.findAll({
+            where: { channelId },
+            order: [["createdAt", "ASC"]],
+        });
+        res.json(messages);
+    } catch (error) {
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+const createMessage = async (message) => {
+    try {
+        message.channelId = parseInt(message.channelId);
+        console.log("message: ", message);
+        const savedMessage = await Messages.create(message);
+        console.log("savedMessage: ", savedMessage);
+        return savedMessage;
+    } catch (error) {
+        throw new Error("Error saving message to the database");
+    }
+};
 
-    const messages = await Messages.findAll({
-        where: {
-            channelId: channelId,
-        },
-    });
-
-    res.json(messages);
-});
-
-router.post("/create-message", validateToken, async (req, res) => {
-    const userId = req.user.id;
-
-    const data = {
-        content: req.body.content,
-        userId: userId,
-        channelId: req.body.channelId,
-    };
-
-    await Messages.create(data);
-    res.json(data);
-});
-
-module.exports = router;
+module.exports = { getMessages, createMessage };

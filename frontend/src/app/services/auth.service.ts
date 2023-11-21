@@ -15,6 +15,7 @@ export class AuthService {
         email: '',
         password: '',
         confirmPassword: '',
+        userProfilePicture: '',
     };
     constructor(private httpClient: HttpClient, private router: Router) {}
 
@@ -97,5 +98,8 @@ export class AuthService {
         };
 
         return this.httpClient.get(url, { headers });
+    }
+    getProfilePictureUrl(userId: string): string {
+        return `${this.baseUrl}/uploads/${userId}`;
     }
 }

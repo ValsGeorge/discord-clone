@@ -3,5 +3,6 @@ export interface Message {
     content: string;
     userId: string;
     username: string;
+    userProfilePicture: string;
     channelId: string;
 }

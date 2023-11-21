@@ -32,6 +32,7 @@ export class RegisterComponent {
                 email: registrationFormData.email,
                 password: registrationFormData.password,
                 confirmPassword: registrationFormData.confirmPassword,
+                userProfilePicture: '',
             };
 
             this.authService.register(this.user).subscribe(

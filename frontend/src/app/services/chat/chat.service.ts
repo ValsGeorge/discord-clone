@@ -1,71 +1,133 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { Channels } from 'src/app/models/channel';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable, Subject } from 'rxjs';
+import { io, Socket } from 'socket.io-client';
+import { Message } from 'src/app/models/message';
+import { AuthService } from '../auth.service';
 import { UtilsService } from '../utils.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class ChatService {
-    constructor(private http: HttpClient, private utilsService: UtilsService) {}
+    constructor(
+        private http: HttpClient,
+        private authService: AuthService,
+        private utilsService: UtilsService
+    ) {}
 
     private chatUpdatedSubject = new Subject<void>();
     chatUpdated$ = this.chatUpdatedSubject.asObservable();
 
-    selectedServerId: string | null = null;
-    selectedChannelId: string | null = null;
+    private messages: Message[] = [];
+    private messageUpdateSubject = new Subject<Message[]>();
+    public messageUpdate$ = this.messageUpdateSubject.asObservable();
 
     baseUrl = 'http://localhost:8000/messages';
 
-    updateChat(channelId: string) {
-        this.chatUpdatedSubject.next();
-        this.getMessages(channelId).subscribe(
-            (messages) => {},
-            (error) => {
-                console.error('Error getting messages:', error);
-            }
-        );
+    socketUrl = 'http://localhost:3000';
+
+    socket: Socket | undefined;
+    setupSocketConnection(): void {
+        console.log('Setting up socket connection');
+        const token = localStorage.getItem('token');
+        if (token) {
+            this.socket = io(this.socketUrl, {
+                query: { token },
+            });
+
+            this.socket.on('connect', () => {
+                console.log('Connected to socket.io server');
+                this.fetchInitialMessages();
+            });
+
+            this.socket.on('disconnect', () => {
+                console.log('Disconnected from socket.io server');
+            });
+
+            this.socket.on('receiveMessage', (message: any) => {
+                console.log('Received message:', message);
+            });
+        }
     }
 
-    getMessages(channelId: string): Observable<any> {
-        const url = `${this.baseUrl}/get-messages`;
-        const token = localStorage.getItem('token') as string;
-        const headers = {
-            'Content-Type': 'application/json',
-            token: token,
-        };
-
-        const data = {
-            channelId: channelId,
-        };
-
-        return this.http.get(url, { headers, params: data });
+    private updateLocalMessages(message: Message): void {
+        this.messages.push(message);
+        this.messageUpdateSubject.next([...this.messages]);
     }
 
-    sendMessage(content: string, serverId: string, channelId: string): void {
-        const url = `${this.baseUrl}/create-message`;
-        const token = localStorage.getItem('token') as string;
-        const headers = {
-            'Content-Type': 'application/json',
-            token: token,
-        };
-
-        const data = {
-            content: content,
-            userId: serverId,
-            channelId: channelId,
-        };
-
-        this.http.post(url, data, { headers }).subscribe(
-            (response) => {
-                console.log('Response:', response);
-            },
-            (error) => {
-                console.error('Error sending message:', error);
-            }
+    public fetchInitialMessages(): void {
+        const params = new HttpParams().set(
+            'channelId',
+            this.utilsService.getSelectedChannelId() || ''
         );
+        this.http
+            .get<Message[]>(`${this.baseUrl}/get-messages`, { params })
+            .subscribe(
+                (initialMessages) => {
+                    // for each message get the profile picture url and the username
+                    initialMessages.forEach((message) => {
+                        message.userProfilePicture =
+                            this.authService.getProfilePictureUrl(
+                                message.userId
+                            );
+                        this.authService.getUserName(message.userId).subscribe(
+                            (response) => {
+                                message.username = response.username;
+                            },
+                            (error) => {
+                                console.error('Error getting username:', error);
+                            }
+                        );
+                    });
+                    this.messages = initialMessages;
+                    this.messageUpdateSubject.next([...this.messages]);
+                },
+                (error) => {
+                    console.error('Error fetching initial messages:', error);
+                }
+            );
+    }
 
-        this.updateChat(channelId);
+    sendMessage(content: string, channelId: string): void {
+        if (this.socket) {
+            this.authService.getUser().subscribe(
+                (response) => {
+                    console.log('response', response);
+                    const userId = response.id;
+                    const username = response.username;
+
+                    const lastId =
+                        this.messages.length > 0
+                            ? this.messages[this.messages.length - 1].id
+                            : '';
+
+                    const newMessage: Message = {
+                        content,
+                        userId,
+                        channelId,
+                        id: lastId + 1,
+                        username: username,
+                        userProfilePicture:
+                            this.authService.getProfilePictureUrl(userId),
+                    };
+
+                    this.updateLocalMessages(newMessage);
+                },
+                (error) => {
+                    console.error('Error getting username:', error);
+                }
+            );
+
+            this.socket.emit(
+                'sendMessage',
+                { content, channelId },
+                (response: any) => {
+                    if (!response.success) {
+                        console.error('Failed to send message');
+                    }
+                }
+            );
+        }
     }
 }
