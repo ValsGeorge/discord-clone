@@ -31,6 +31,8 @@ export class ChannelsService {
     }
 
     updateChannels(serverId: string) {
+        console.log('update channels');
+        console.log('serverId:', serverId);
         this.channelsUpdatedSubject.next();
         this.getChannels(serverId).subscribe(
             (channels) => {},

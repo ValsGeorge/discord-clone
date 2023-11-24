@@ -47,12 +47,24 @@ export class ChatService {
 
             this.socket.on('receiveMessage', (message: any) => {
                 console.log('Received message:', message);
+                this.updateLocalMessages(message);
             });
         }
     }
 
     private updateLocalMessages(message: Message): void {
         this.messages.push(message);
+        message.userProfilePicture = this.authService.getProfilePictureUrl(
+            message.userId
+        );
+        this.authService.getUserName(message.userId).subscribe(
+            (response) => {
+                message.username = response.username;
+            },
+            (error) => {
+                console.error('Error getting username:', error);
+            }
+        );
         this.messageUpdateSubject.next([...this.messages]);
     }
 
@@ -112,7 +124,7 @@ export class ChatService {
                             this.authService.getProfilePictureUrl(userId),
                     };
 
-                    this.updateLocalMessages(newMessage);
+                    // this.updateLocalMessages(newMessage);
                 },
                 (error) => {
                     console.error('Error getting username:', error);

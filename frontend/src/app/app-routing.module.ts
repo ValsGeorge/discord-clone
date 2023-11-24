@@ -7,6 +7,7 @@ import { ActivateComponent } from './components/activate/activate.component';
 import { ServersComponent } from './components/servers/servers.component';
 import { ServerDetailsComponent } from './components/server-details/server-details.component';
 import { ChatComponent } from './components/chat/chat.component';
+import { JoinServerComponent } from './components/join-server/join-server.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
         component: ServerDetailsComponent,
         children: [{ path: 'channels/:channelId', component: ChatComponent }],
     },
+    { path: 'servers/join-server/:inviteCode', component: JoinServerComponent },
 ];
 
 @NgModule({

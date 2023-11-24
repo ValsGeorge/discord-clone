@@ -55,4 +55,28 @@ export class ServersService {
 
         return this.httpClient.get(url, { headers });
     }
+
+    generateInviteCode(serverId: string): Observable<any> {
+        const token = localStorage.getItem('token') as string;
+        const url = `${this.baseUrl}/generate-invite-code/${serverId}`;
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            token: token,
+        });
+        const body = { serverId: serverId };
+
+        return this.httpClient.get(url, { headers, params: body });
+    }
+
+    joinServer(inviteCode: string): Observable<any> {
+        const token = localStorage.getItem('token') as string;
+        const url = `${this.baseUrl}/join-server`;
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            token: token,
+        });
+        const body = { inviteCode: inviteCode };
+
+        return this.httpClient.post(url, body, { headers });
+    }
 }

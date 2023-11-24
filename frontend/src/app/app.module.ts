@@ -22,6 +22,7 @@ import { ChannelsComponent } from './components/channels/channels.component';
 import { FormsModule } from '@angular/forms';
 import { CreateChannelPopupComponent } from './components/popups/create-channel-popup/create-channel-popup.component';
 import { ChatComponent } from './components/chat/chat.component';
+import { JoinServerComponent } from './components/join-server/join-server.component';
 
 @NgModule({
     declarations: [
@@ -39,6 +40,7 @@ import { ChatComponent } from './components/chat/chat.component';
         ChannelsComponent,
         CreateChannelPopupComponent,
         ChatComponent,
+        JoinServerComponent,
     ],
     imports: [
         BrowserModule,

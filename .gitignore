@@ -5,3 +5,5 @@
 .editorconfig
 *.code-workspace
 *.sqlite
+backend/config
+backend/migrations
