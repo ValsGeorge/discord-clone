@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { Servers } from 'src/app/models/server';
 import { ServersService } from 'src/app/services/servers.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { ChannelsService } from 'src/app/services/channels/channels.service';
-
+import { EditMenuComponent } from '../edit-menu/edit-menu.component';
 @Component({
     selector: 'app-servers-side-panel',
     templateUrl: './servers-side-panel.component.html',
@@ -12,6 +12,7 @@ import { ChannelsService } from 'src/app/services/channels/channels.service';
 })
 export class ServersSidePanelComponent implements OnInit {
     selectedServerId: string | null = null;
+    @ViewChildren(EditMenuComponent) editMenu!: QueryList<EditMenuComponent>;
 
     constructor(
         private serversService: ServersService,
@@ -20,11 +21,30 @@ export class ServersSidePanelComponent implements OnInit {
     ) {}
     servers: Servers[] = [];
 
+    itemsList = [
+        { label: 'Delete Server', action: 'deleteServer' },
+        { label: 'Info Server', action: 'infoServer' },
+        { label: 'Mute Server', action: 'muteServer' },
+    ];
+
     ngOnInit(): void {
         this.getServers();
         this.selectedServerId = this.utilsService.getSelectedServerId();
         this.serversService.serversUpdated$.subscribe(() => {
             this.getServers();
+        });
+    }
+
+    showContextMenu(event: MouseEvent, serverId: string): void {
+        event.preventDefault();
+        event.stopPropagation();
+
+        this.editMenu.forEach((menu) => {
+            if (menu.targetId === serverId) {
+                menu.showMenu = true;
+            } else {
+                menu.showMenu = false;
+            }
         });
     }
 

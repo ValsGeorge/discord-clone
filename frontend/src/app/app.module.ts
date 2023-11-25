@@ -23,6 +23,9 @@ import { FormsModule } from '@angular/forms';
 import { CreateChannelPopupComponent } from './components/popups/create-channel-popup/create-channel-popup.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { JoinServerComponent } from './components/join-server/join-server.component';
+import { EditMenuComponent } from './components/edit-menu/edit-menu.component';
+import { ContextMenuModule } from 'primeng/contextmenu';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
     declarations: [
@@ -35,12 +38,13 @@ import { JoinServerComponent } from './components/join-server/join-server.compon
         ServersComponent,
         CreateServerPopupComponent,
         ServerDetailsComponent,
-        ServersSidePanelComponent,
         UserInfoComponent,
         ChannelsComponent,
         CreateChannelPopupComponent,
         ChatComponent,
         JoinServerComponent,
+        EditMenuComponent,
+        ServersSidePanelComponent,
     ],
     imports: [
         BrowserModule,
@@ -52,6 +56,8 @@ import { JoinServerComponent } from './components/join-server/join-server.compon
         ButtonModule,
         RouterModule.forRoot([]),
         FormsModule,
+        ContextMenuModule,
+        BrowserAnimationsModule,
     ],
     providers: [],
     bootstrap: [AppComponent],

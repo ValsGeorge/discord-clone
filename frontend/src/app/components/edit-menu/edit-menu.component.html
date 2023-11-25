@@ -1,0 +1,7 @@
+<!-- context-menu.component.html -->
+<div *ngIf="showMenu" class="absolute bg-secondary text-text shadow-md rounded-md p-2">
+    <div *ngFor="let item of itemsList" (click)="handleAction(item.action)"
+        class="cursor-pointer p-2 hover:bg-blue-600">
+        {{ item.label }}
+    </div>
+</div>

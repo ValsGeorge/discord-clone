@@ -79,4 +79,16 @@ export class ServersService {
 
         return this.httpClient.post(url, body, { headers });
     }
+
+    leaveServer(serverId: string): Observable<any> {
+        const token = localStorage.getItem('token') as string;
+        const url = `${this.baseUrl}/leave-server`;
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            token: token,
+        });
+        const body = { serverId: serverId };
+
+        return this.httpClient.post(url, body, { headers });
+    }
 }
