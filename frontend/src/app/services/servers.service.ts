@@ -91,4 +91,18 @@ export class ServersService {
 
         return this.httpClient.post(url, body, { headers });
     }
+
+    deleteServer(serverId: string): Observable<any> {
+        console.log('delete server with id', serverId);
+        const token = localStorage.getItem('token') as string;
+        const url = `${this.baseUrl}/delete-server/${serverId}`;
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            token: token,
+        });
+        console.log('token: ', token);
+        console.log('URL: ', url);
+
+        return this.httpClient.delete(url, { headers });
+    }
 }

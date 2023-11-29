@@ -1,5 +1,11 @@
 module.exports = (sequelize, DataTypes) => {
     const Users = sequelize.define("Users", {
+        id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            primaryKey: true,
+            autoIncrement: true,
+        },
         nickname: {
             type: DataTypes.STRING,
             unique: false,
@@ -28,14 +34,12 @@ module.exports = (sequelize, DataTypes) => {
 
     Users.associate = (models) => {
         Users.hasMany(models.Servers, {
-            foreignKey: "creatorId",
-            as: "createdServers",
+            foreignKey: "userId",
         });
         Users.belongsToMany(models.Servers, {
             through: "ServerMembers",
+            onDelete: "CASCADE",
             foreignKey: "userId",
-            otherKey: "serverId",
-            as: "memberServers",
         });
     };
 

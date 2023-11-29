@@ -54,6 +54,7 @@ export class ChatService {
 
     private updateLocalMessages(message: Message): void {
         this.messages.push(message);
+        console.log('this.messages', this.messages);
         message.userProfilePicture = this.authService.getProfilePictureUrl(
             message.userId
         );
@@ -73,16 +74,24 @@ export class ChatService {
             'channelId',
             this.utilsService.getSelectedChannelId() || ''
         );
+        console.log('params', params);
         this.http
             .get<Message[]>(`${this.baseUrl}/get-messages`, { params })
             .subscribe(
                 (initialMessages) => {
                     // for each message get the profile picture url and the username
+                    console.log('initialMessages', initialMessages);
                     initialMessages.forEach((message) => {
+                        console.log('message', message);
+                        console.log('typeof message', typeof message);
                         message.userProfilePicture =
                             this.authService.getProfilePictureUrl(
                                 message.userId
                             );
+                        console.log(
+                            'message.userProfilePicture',
+                            message.userProfilePicture
+                        );
                         this.authService.getUserName(message.userId).subscribe(
                             (response) => {
                                 message.username = response.username;

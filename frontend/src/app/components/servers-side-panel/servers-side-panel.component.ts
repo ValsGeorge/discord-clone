@@ -5,6 +5,7 @@ import { ServersService } from 'src/app/services/servers.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { ChannelsService } from 'src/app/services/channels/channels.service';
 import { EditMenuComponent } from '../edit-menu/edit-menu.component';
+import { ContextMenu } from 'src/app/models/contextMenu';
 @Component({
     selector: 'app-servers-side-panel',
     templateUrl: './servers-side-panel.component.html',
@@ -21,10 +22,22 @@ export class ServersSidePanelComponent implements OnInit {
     ) {}
     servers: Servers[] = [];
 
-    itemsList = [
-        { label: 'Delete Server', action: 'deleteServer' },
-        { label: 'Info Server', action: 'infoServer' },
-        { label: 'Mute Server', action: 'muteServer' },
+    itemsList: ContextMenu[] = [
+        {
+            icon: 'pi pi-plus',
+            label: 'Add Channel',
+            action: 'add-channel',
+        },
+        {
+            icon: 'pi pi-pencil',
+            label: 'Edit Server',
+            action: 'edit-server',
+        },
+        {
+            icon: 'pi pi-trash',
+            label: 'Delete Server',
+            action: 'delete-server',
+        },
     ];
 
     ngOnInit(): void {
@@ -54,6 +67,7 @@ export class ServersSidePanelComponent implements OnInit {
     }
 
     selectServer(serverId: string) {
+        console.log(`Selected server: ${serverId}`);
         // Save selected server to local storage
         this.selectedServerId = serverId;
         this.utilsService.setSelectedServerId(serverId);

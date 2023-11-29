@@ -16,7 +16,11 @@ const createMessage = async (message) => {
     try {
         message.channelId = parseInt(message.channelId);
         console.log("message: ", message);
-        const savedMessage = await Messages.create(message);
+        const savedMessage = await Messages.create({
+            content: message.content,
+            channelId: message.channelId,
+            userId: message.userId,
+        });
         console.log("savedMessage: ", savedMessage);
         return savedMessage;
     } catch (error) {

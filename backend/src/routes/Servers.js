@@ -13,7 +13,6 @@ router.get("/", validateToken, async (req, res) => {
 });
 
 router.get("/get-servers", validateToken, async (req, res) => {
-    console.log("____________________________________________________");
     const userId = req.user.id;
     console.log(userId);
 
@@ -30,7 +29,7 @@ router.get("/get-servers", validateToken, async (req, res) => {
             where: {
                 id: serverIds,
             },
-            include: [{ model: Channels, as: "channels" }],
+            include: [{ model: Channels, as: "Channels" }],
         });
 
         res.json(userServers);
@@ -41,12 +40,11 @@ router.get("/get-servers", validateToken, async (req, res) => {
 });
 
 router.post("/create-server", validateToken, async (req, res) => {
-    // console.log("____________________________________________________");
     const data = req.body;
     console.log(data);
 
     const username = req.user.username;
-    const creatorId = req.user.id;
+    const userId = req.user.id;
 
     // for now, check the data
     // TODO: IMPLEMENT THE CORRECT FORM IN THE FRONTEND
@@ -56,7 +54,7 @@ router.post("/create-server", validateToken, async (req, res) => {
     console.log("data['inviteCode']: ", data["inviteCode"]);
 
     console.log("username: ", username);
-    console.log("creatorId: ", creatorId);
+    console.log("userId: ", userId);
     console.log("data: ", data);
 
     try {
@@ -64,13 +62,16 @@ router.post("/create-server", validateToken, async (req, res) => {
         const server = await Servers.create({
             ...data,
             username,
-            creatorId,
+            userId: userId,
         });
         // Add the creator as a member of the server
-        await ServerMembers.create({
+        const serverMember = await ServerMembers.create({
+            userId: userId,
             serverId: server.id,
-            userId: creatorId,
         });
+
+        console.log("serverMember: ", serverMember);
+
         res.json(server);
     } catch (error) {
         console.error("Error during server creation:", error);
@@ -147,7 +148,6 @@ const generateInviteCode = () => {
 };
 
 router.post("/join-server", validateToken, async (req, res) => {
-    console.log("____________________________________________________");
     console.log("join server");
     const { inviteCode } = req.body;
     const userId = req.user.id;
@@ -173,6 +173,34 @@ router.post("/join-server", validateToken, async (req, res) => {
         res.json(server);
     } catch (error) {
         console.error("Error during server joining:", error);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
+router.delete("/delete-server/:serverId", validateToken, async (req, res) => {
+    const serverId = parseInt(req.params.serverId);
+    const userId = parseInt(req.user.id);
+
+    try {
+        const server = await Servers.findOne({
+            where: {
+                id: serverId,
+                creatorId: userId,
+            },
+        });
+        if (!server) {
+            return res.status(401).send("You are not the owner of this server");
+        }
+
+        await Servers.destroy({
+            where: {
+                id: serverId,
+            },
+        });
+
+        res.json("Server deleted");
+    } catch (error) {
+        console.error("Error during server deletion:", error);
         res.status(500).send("Internal Server Error");
     }
 });

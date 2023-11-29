@@ -1,25 +1,20 @@
 module.exports = (sequelize, DataTypes) => {
     const ServerMembers = sequelize.define("ServerMembers", {
-        serverId: {
+        id: {
             type: DataTypes.INTEGER,
             allowNull: false,
-        },
-        userId: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
+            primaryKey: true,
+            autoIncrement: true,
         },
     });
 
     ServerMembers.associate = (models) => {
         ServerMembers.belongsTo(models.Servers, {
-            foreignKey: "id",
             as: "server",
         });
         ServerMembers.belongsTo(models.Users, {
-            foreignKey: "id",
-            as: "user",
+            foreignKey: "userId",
         });
     };
-
     return ServerMembers;
 };

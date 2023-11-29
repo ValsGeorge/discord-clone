@@ -19,11 +19,6 @@ module.exports = (sequelize, DataTypes) => {
             },
             allowNull: false,
         },
-        serverId: {
-            type: DataTypes.INTEGER,
-            unique: false,
-            allowNull: false,
-        },
         type: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -32,8 +27,13 @@ module.exports = (sequelize, DataTypes) => {
 
     Channels.associate = (models) => {
         Channels.belongsTo(models.Servers, {
+            onDelete: "CASCADE",
             foreignKey: "serverId",
-            as: "server",
+        });
+
+        Channels.hasMany(models.Messages, {
+            onDelete: "CASCADE",
+            foreignKey: "channelId",
         });
     };
 

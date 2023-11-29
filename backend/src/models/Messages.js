@@ -4,25 +4,15 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        userId: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        },
-        channelId: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        },
     });
 
     Messages.associate = (models) => {
         Messages.belongsTo(models.Users, {
             foreignKey: "userId",
-            as: "user",
         });
 
         Messages.belongsTo(models.Channels, {
             foreignKey: "channelId",
-            as: "channel",
         });
     };
 

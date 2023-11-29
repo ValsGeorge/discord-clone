@@ -1,5 +1,11 @@
 module.exports = (sequelize, DataTypes) => {
     const Servers = sequelize.define("Servers", {
+        id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            primaryKey: true,
+            autoIncrement: true,
+        },
         name: {
             type: DataTypes.STRING,
             unique: false,
@@ -7,11 +13,6 @@ module.exports = (sequelize, DataTypes) => {
         },
         description: {
             type: DataTypes.STRING,
-            unique: false,
-            allowNull: false,
-        },
-        creatorId: {
-            type: DataTypes.INTEGER,
             unique: false,
             allowNull: false,
         },
@@ -24,29 +25,20 @@ module.exports = (sequelize, DataTypes) => {
 
     Servers.associate = (models) => {
         Servers.belongsTo(models.Users, {
-            foreignKey: "creatorId",
-            as: "user",
+            foreignKey: "userId",
         });
 
         Servers.hasMany(models.Channels, {
+            onDelete: "CASCADE",
             foreignKey: "serverId",
-            as: "channels",
         });
+
         Servers.belongsToMany(models.Users, {
             through: "ServerMembers",
+            onDelete: "CASCADE",
             foreignKey: "serverId",
-            otherKey: "userId",
-            as: "members",
         });
     };
-
-    Servers.sync({ alter: true })
-        .then(() => {
-            console.log("ServersModel synchronized successfully");
-        })
-        .catch((error) => {
-            console.error("Error synchronizing ServersModel:", error);
-        });
 
     return Servers;
 };
