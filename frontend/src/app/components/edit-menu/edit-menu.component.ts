@@ -55,6 +55,20 @@ export class EditMenuComponent {
                         console.log(err);
                     }
                 );
+        } else if (action === 'invite-to-server') {
+            this.serversService
+                .generateInviteCode(this.targetId as string)
+                .subscribe(
+                    (res) => {
+                        console.log(res);
+                        this.channelsService.updateChannels(
+                            this.targetId as string
+                        );
+                    },
+                    (err) => {
+                        console.log(err);
+                    }
+                );
         } else if (action === 'edit-channel') {
             console.log('edit channel');
         } else if (action === 'edit-message') {

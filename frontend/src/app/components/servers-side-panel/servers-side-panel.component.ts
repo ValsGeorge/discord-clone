@@ -38,6 +38,11 @@ export class ServersSidePanelComponent implements OnInit {
             label: 'Delete Server',
             action: 'delete-server',
         },
+        {
+            icon: 'pi pi-share',
+            label: 'Invite friend',
+            action: 'invite-to-server',
+        },
     ];
 
     ngOnInit(): void {

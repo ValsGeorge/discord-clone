@@ -107,7 +107,7 @@ router.get(
             const server = await Servers.findOne({
                 where: {
                     id: serverId,
-                    creatorId: userId,
+                    userId: userId,
                 },
             });
             console.log("serverId: ", serverId);
