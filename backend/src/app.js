@@ -4,7 +4,11 @@ const cors = require("cors");
 const morgan = require("morgan");
 const { sequelize } = require("./models");
 const config = require("./config/config");
-const { createMessage, getMessages } = require("./routes/Messages");
+const {
+    createMessage,
+    getMessages,
+    editMessage,
+} = require("./routes/Messages");
 const { validateSocketToken } = require("./middlewares/AuthMiddleware");
 
 const app = express();
@@ -54,6 +58,18 @@ io.use(function (socket, next) {
         console.log(message);
         createMessage(message);
         io.emit("receiveMessage", message);
+    });
+    socket.on("editMessage", (message) => {
+        console.log(message);
+        editMessage(message)
+            .then((fullMessage) => {
+                console.log("fullMessage: ", fullMessage);
+                io.emit("receiveMessage", fullMessage);
+            })
+            .catch((error) => {
+                console.error("Error editing message:", error);
+                // Handle the error appropriately
+            });
     });
 });
 

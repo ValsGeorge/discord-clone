@@ -5,4 +5,5 @@ export interface Message {
     username: string;
     userProfilePicture: string;
     channelId: string;
+    isEditing?: boolean;
 }

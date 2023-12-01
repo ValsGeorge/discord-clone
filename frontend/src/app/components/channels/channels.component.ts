@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, QueryList, ViewChildren } from '@angular/core';
 import { ChannelsService } from '../../services/channels/channels.service';
 import { OnInit } from '@angular/core';
 import { Channels } from 'src/app/models/channel';
 import { UtilsService } from 'src/app/services/utils.service';
 import { ChatService } from 'src/app/services/chat/chat.service';
+import { ContextMenu } from 'src/app/models/contextMenu';
+import { EditMenuComponent } from '../edit-menu/edit-menu.component';
 @Component({
     selector: 'app-channels',
     templateUrl: './channels.component.html',
@@ -19,6 +21,21 @@ export class ChannelsComponent implements OnInit {
     channels: Channels[] = [];
     selectedServerId: string | null = null;
     selectedChannelId: string | null = null;
+
+    @ViewChildren(EditMenuComponent) editMenu!: QueryList<EditMenuComponent>;
+    itemsList: ContextMenu[] = [
+        {
+            icon: 'pi pi-pencil',
+            label: 'Edit Channel',
+            action: 'edit-channel',
+        },
+        {
+            icon: 'pi pi-trash',
+            label: 'Delete Channel',
+            action: 'delete-channel',
+        },
+    ];
+
     ngOnInit(): void {
         this.getChannels();
         this.selectedChannelId = this.utilsService.getSelectedChannelId();
@@ -47,5 +64,18 @@ export class ChannelsComponent implements OnInit {
         this.utilsService.setSelectedChannelId(channelId);
         this.selectedChannelId = this.utilsService.getSelectedChannelId();
         this.chatService.fetchInitialMessages();
+    }
+
+    showContextMenu(event: MouseEvent, channelId: string): void {
+        event.preventDefault();
+        event.stopPropagation();
+
+        this.editMenu.forEach((menu) => {
+            if (menu.targetId === channelId) {
+                menu.showMenu = true;
+            } else {
+                menu.showMenu = false;
+            }
+        });
     }
 }

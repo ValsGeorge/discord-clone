@@ -10,6 +10,7 @@ export class AuthService {
     baseUrl = 'http://localhost:8000/users';
 
     user$: User = {
+        id: '',
         nickname: '',
         username: '',
         email: '',
@@ -101,5 +102,9 @@ export class AuthService {
     }
     getProfilePictureUrl(userId: string): string {
         return `${this.baseUrl}/uploads/${userId}`;
+    }
+    getUserId(): string {
+        this.getUser();
+        return this.user$.id;
     }
 }

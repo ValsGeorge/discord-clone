@@ -1,5 +1,6 @@
 import { Component, HostListener, Input } from '@angular/core';
 import { ContextMenu } from 'src/app/models/contextMenu';
+import { ChannelsService } from 'src/app/services/channels/channels.service';
 import { ServersService } from 'src/app/services/servers.service';
 
 @Component({
@@ -8,11 +9,15 @@ import { ServersService } from 'src/app/services/servers.service';
     styleUrls: ['./edit-menu.component.css'],
 })
 export class EditMenuComponent {
+    [x: string]: any;
     @Input() targetId: string | undefined;
     @Input() itemsList: ContextMenu[] | undefined;
     showMenu = false;
 
-    constructor(private serversService: ServersService) {}
+    constructor(
+        private serversService: ServersService,
+        private channelsService: ChannelsService
+    ) {}
 
     @HostListener('document:click', ['$event'])
     clickOutside(event: Event) {
@@ -34,6 +39,28 @@ export class EditMenuComponent {
                     console.log(err);
                 }
             );
+        } else if (action === 'edit-server') {
+            console.log('edit server');
+        } else if (action === 'delete-channel') {
+            this.channelsService
+                .deleteChannel(this.targetId as string)
+                .subscribe(
+                    (res) => {
+                        console.log(res);
+                        this.channelsService.updateChannels(
+                            this.targetId as string
+                        );
+                    },
+                    (err) => {
+                        console.log(err);
+                    }
+                );
+        } else if (action === 'edit-channel') {
+            console.log('edit channel');
+        } else if (action === 'edit-message') {
+            console.log('edit message');
+        } else if (action === 'delete-message') {
+            console.log('delete message');
         }
     }
 

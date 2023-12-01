@@ -52,20 +52,31 @@ export class ChatService {
         }
     }
 
-    private updateLocalMessages(message: Message): void {
-        this.messages.push(message);
-        console.log('this.messages', this.messages);
-        message.userProfilePicture = this.authService.getProfilePictureUrl(
-            message.userId
+    private updateLocalMessages(updatedMessage: Message): void {
+        const index = this.messages.findIndex(
+            (message) => message.id === updatedMessage.id
         );
-        this.authService.getUserName(message.userId).subscribe(
+
+        if (index !== -1) {
+            this.messages[index] = updatedMessage;
+        } else {
+            // If the message is not found, add it to the array
+            this.messages.push(updatedMessage);
+        }
+
+        // Update the rest of the properties
+        updatedMessage.userProfilePicture =
+            this.authService.getProfilePictureUrl(updatedMessage.userId);
+
+        this.authService.getUserName(updatedMessage.userId).subscribe(
             (response) => {
-                message.username = response.username;
+                updatedMessage.username = response.username;
             },
             (error) => {
                 console.error('Error getting username:', error);
             }
         );
+
         this.messageUpdateSubject.next([...this.messages]);
     }
 
@@ -132,8 +143,6 @@ export class ChatService {
                         userProfilePicture:
                             this.authService.getProfilePictureUrl(userId),
                     };
-
-                    // this.updateLocalMessages(newMessage);
                 },
                 (error) => {
                     console.error('Error getting username:', error);
@@ -146,6 +155,20 @@ export class ChatService {
                 (response: any) => {
                     if (!response.success) {
                         console.error('Failed to send message');
+                    }
+                }
+            );
+        }
+    }
+
+    editMessage(messageId: string, content: string): void {
+        if (this.socket) {
+            this.socket.emit(
+                'editMessage',
+                { id: messageId, content },
+                (response: any) => {
+                    if (!response.success) {
+                        console.error('Failed to edit message');
                     }
                 }
             );

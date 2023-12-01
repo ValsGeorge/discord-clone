@@ -27,6 +27,7 @@ export class RegisterComponent {
         if (this.registrationForm.valid) {
             const registrationFormData = this.registrationForm.value;
             this.user = {
+                id: '',
                 nickname: registrationFormData.nickname,
                 username: registrationFormData.username,
                 email: registrationFormData.email,

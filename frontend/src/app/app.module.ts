@@ -26,6 +26,7 @@ import { JoinServerComponent } from './components/join-server/join-server.compon
 import { EditMenuComponent } from './components/edit-menu/edit-menu.component';
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MessageOptionsComponent } from './components/message-options/message-options.component';
 
 @NgModule({
     declarations: [
@@ -45,6 +46,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         JoinServerComponent,
         EditMenuComponent,
         ServersSidePanelComponent,
+        MessageOptionsComponent,
     ],
     imports: [
         BrowserModule,

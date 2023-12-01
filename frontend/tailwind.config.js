@@ -24,6 +24,7 @@ module.exports = {
                 "secondary-accent": "#1e1f22",
                 hover: "#3a3c41",
                 text: "#e9eaeb",
+                "message-hover": "#2e3035",
             },
         }),
     ],

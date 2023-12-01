@@ -28,4 +28,42 @@ const createMessage = async (message) => {
     }
 };
 
-module.exports = { getMessages, createMessage };
+// This function edits a message in the database and returns the full message
+const editMessage = async (message) => {
+    try {
+        console.log("message: ", message);
+
+        // Update the message in the database
+        await Messages.update(
+            {
+                content: message.content,
+                updatedAt: new Date(),
+            },
+            {
+                where: {
+                    id: message.id,
+                },
+            }
+        );
+
+        // Fetch the updated message from the database
+        const updatedMessage = await Messages.findOne({
+            where: {
+                id: message.id,
+            },
+        });
+
+        console.log("updatedMessage: ", updatedMessage);
+
+        if (!updatedMessage) {
+            throw new Error("Message not found");
+        }
+
+        return updatedMessage;
+    } catch (error) {
+        console.error("Error editing message:", error);
+        throw new Error("Error saving message to the database");
+    }
+};
+
+module.exports = { getMessages, createMessage, editMessage };

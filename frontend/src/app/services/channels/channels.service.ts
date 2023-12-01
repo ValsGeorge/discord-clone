@@ -70,4 +70,17 @@ export class ChannelsService {
         };
         return this.http.get(url, { headers });
     }
+
+    deleteChannel(channelId: string): Observable<any> {
+        const url = `${this.baseUrl}/${channelId}`;
+        const token = localStorage.getItem('token') as string;
+        const headers = {
+            'Content-Type': 'application/json',
+            token: token,
+        };
+
+        this.updateChannels(this.selectedServerId || '0');
+
+        return this.http.delete(url, { headers });
+    }
 }

@@ -14,6 +14,7 @@ export class ServersComponent {
     constructor() {}
 
     user: User = {
+        id: '',
         nickname: '',
         username: '',
         email: '',

@@ -21,4 +21,14 @@ router.post("/create", validateToken, async (req, res) => {
     res.json(channel);
 });
 
+router.delete("/:id", validateToken, async (req, res) => {
+    const id = req.params.id;
+    await Channels.destroy({
+        where: {
+            id: id,
+        },
+    });
+    res.json("Deleted Successfully");
+});
+
 module.exports = router;
