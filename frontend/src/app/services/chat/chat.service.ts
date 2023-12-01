@@ -53,15 +53,18 @@ export class ChatService {
     }
 
     private updateLocalMessages(updatedMessage: Message): void {
-        const index = this.messages.findIndex(
+        // Check if the message already exists in the array
+        const existingIndex = this.messages.findIndex(
             (message) => message.id === updatedMessage.id
         );
 
-        if (index !== -1) {
-            this.messages[index] = updatedMessage;
+        if (existingIndex !== -1) {
+            this.messages.splice(existingIndex, 1, updatedMessage);
         } else {
-            // If the message is not found, add it to the array
             this.messages.push(updatedMessage);
+            console.log('this.messages', this.messages);
+            this.messages.sort((a, b) => +a.updatedAt - +b.updatedAt);
+            console.log('this.messages', this.messages);
         }
 
         // Update the rest of the properties
@@ -93,16 +96,10 @@ export class ChatService {
                     // for each message get the profile picture url and the username
                     console.log('initialMessages', initialMessages);
                     initialMessages.forEach((message) => {
-                        console.log('message', message);
-                        console.log('typeof message', typeof message);
                         message.userProfilePicture =
                             this.authService.getProfilePictureUrl(
                                 message.userId
                             );
-                        console.log(
-                            'message.userProfilePicture',
-                            message.userProfilePicture
-                        );
                         this.authService.getUserName(message.userId).subscribe(
                             (response) => {
                                 message.username = response.username;
@@ -142,6 +139,8 @@ export class ChatService {
                         username: username,
                         userProfilePicture:
                             this.authService.getProfilePictureUrl(userId),
+                        createdAt: new Date(0),
+                        updatedAt: new Date(0),
                     };
                 },
                 (error) => {

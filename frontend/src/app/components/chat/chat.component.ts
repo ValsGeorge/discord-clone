@@ -39,10 +39,11 @@ export class ChatComponent {
     }
 
     sendMessage(): void {
-        this.chatService.sendMessage(
-            this.messageContent,
-            this.utilsService.getSelectedChannelId()
-        );
+        if (this.messageContent != '')
+            this.chatService.sendMessage(
+                this.messageContent,
+                this.utilsService.getSelectedChannelId()
+            );
     }
 
     getProfilePictureUrl(userId: string): string {
@@ -50,6 +51,7 @@ export class ChatComponent {
     }
     showOptions(message: any): void {
         const userId = this.authService.getUserId();
+        // console.log('message.userId - userId', message.userId, userId);
         if (message.userId == userId) this.showOptionsForMessage = message.id;
     }
 

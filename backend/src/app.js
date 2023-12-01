@@ -56,8 +56,14 @@ io.use(function (socket, next) {
     socket.on("sendMessage", (message) => {
         message.userId = userId;
         console.log(message);
-        createMessage(message);
-        io.emit("receiveMessage", message);
+        createMessage(message)
+            .then((fullMessage) => {
+                console.log("fullMessage: ", fullMessage);
+                io.emit("receiveMessage", fullMessage);
+            })
+            .catch((error) => {
+                console.log("Error creating message:", error);
+            });
     });
     socket.on("editMessage", (message) => {
         console.log(message);
