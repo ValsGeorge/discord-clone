@@ -49,6 +49,7 @@ export class UtilsService {
             });
 
             this.socket.on('updateOnlineUsers', (onlineUsers: User[]) => {
+                console.log('Online users:', onlineUsers);
                 this.onlineUsers = onlineUsers;
                 this.onlineUsersSubject.next([...this.onlineUsers]);
                 console.log(this.onlineUsers);

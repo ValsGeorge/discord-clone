@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
-import { ChatService } from 'src/app/services/chat/chat.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
@@ -13,7 +12,6 @@ export class OnlineUsersComponent implements OnInit {
     onlineUsers: User[] = [];
 
     constructor(
-        private chatService: ChatService,
         private authService: AuthService,
         private utilsService: UtilsService
     ) {}
@@ -21,7 +19,6 @@ export class OnlineUsersComponent implements OnInit {
     ngOnInit() {
         this.utilsService.onlineUsers$.subscribe((onlineUsers) => {
             this.onlineUsers = onlineUsers;
-            console.log('@onlineUsers', this.onlineUsers);
             // for each user, get their profile picture
             this.onlineUsers.forEach((user) => {
                 user.userProfilePicture = this.authService.getProfilePictureUrl(
@@ -29,6 +26,5 @@ export class OnlineUsersComponent implements OnInit {
                 );
             });
         });
-        console.log('onlineUsers', this.onlineUsers);
     }
 }

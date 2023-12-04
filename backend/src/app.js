@@ -85,7 +85,7 @@ io.use(function (socket, next) {
         delete onlineUsers[userId];
 
         // Broadcast the updated online user list to all clients
-        io.emit("updateOnlineUsers", Object.keys(onlineUsers));
+        io.emit("updateOnlineUsers", Object.values(onlineUsers));
     });
 
     socket.on("sendMessage", (message) => {
