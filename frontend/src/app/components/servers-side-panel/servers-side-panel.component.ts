@@ -113,7 +113,6 @@ export class ServersSidePanelComponent implements OnInit {
 
     generateInviteCode() {
         const serverId = this.utilsService.getSelectedServerId();
-        console.log(serverId);
         this.serversService.generateInviteCode(serverId).subscribe(
             (response: any) => {
                 console.log(response);

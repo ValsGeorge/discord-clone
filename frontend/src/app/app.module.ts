@@ -27,6 +27,7 @@ import { EditMenuComponent } from './components/edit-menu/edit-menu.component';
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MessageOptionsComponent } from './components/message-options/message-options.component';
+import { OnlineUsersComponent } from './components/online-users/online-users.component';
 
 @NgModule({
     declarations: [
@@ -47,6 +48,7 @@ import { MessageOptionsComponent } from './components/message-options/message-op
         EditMenuComponent,
         ServersSidePanelComponent,
         MessageOptionsComponent,
+        OnlineUsersComponent,
     ],
     imports: [
         BrowserModule,

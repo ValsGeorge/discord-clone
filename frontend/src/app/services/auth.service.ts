@@ -101,6 +101,7 @@ export class AuthService {
         return this.httpClient.get(url, { headers });
     }
     getProfilePictureUrl(userId: string): string {
+        console.log('getProfilePictureUrl userId', userId);
         return `${this.baseUrl}/uploads/${userId}`;
     }
     getUserId(): string {

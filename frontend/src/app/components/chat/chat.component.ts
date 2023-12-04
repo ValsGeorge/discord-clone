@@ -51,7 +51,6 @@ export class ChatComponent {
     }
     showOptions(message: any): void {
         const userId = this.authService.getUserId();
-        // console.log('message.userId - userId', message.userId, userId);
         if (message.userId == userId) this.showOptionsForMessage = message.id;
     }
 

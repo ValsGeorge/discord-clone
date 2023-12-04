@@ -3,8 +3,8 @@
         <div class="message mb-2 hover:bg-message-hover rounded-md" *ngFor="let message of messages"
             (mouseenter)="showOptions(message)" (mouseleave)="hideOptions()">
             <div class="flex">
-                <img *ngIf="message.userProfilePicture" [src]="getProfilePictureUrl(message.userId)"
-                    alt="Profile Picture" class="w-8 h-8 rounded-full mr-2">
+                <img *ngIf="message.userProfilePicture" [src]="message.userProfilePicture" alt="Profile Picture"
+                    class="w-8 h-8 rounded-full mr-2">
                 <span class="font-bold text-text">{{ message.username }}:</span>
                 <ng-container *ngIf="!message.isEditing; else editMessageTemplate">
                     <p class="text-text">{{ message.content }}</p>

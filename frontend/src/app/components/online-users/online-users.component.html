@@ -1,0 +1,11 @@
+<!-- online-users.component.html -->
+<div class="active-users p-4">
+    <div *ngFor="let user of onlineUsers" class="flex items-center p-2">
+        <div class="relative">
+            <img [src]="user.userProfilePicture" alt="Profile Picture" class="w-8 h-8 rounded-full mr-2">
+            <div *ngIf="user.username"
+                class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-green-500 border-2 border-white"></div>
+        </div>
+        <span class="text-white">{{ user.username }}</span>
+    </div>
+</div>

@@ -5,6 +5,7 @@ import { io, Socket } from 'socket.io-client';
 import { Message } from 'src/app/models/message';
 import { AuthService } from '../auth.service';
 import { UtilsService } from '../utils.service';
+import { User } from 'src/app/models/user';
 
 @Injectable({
     providedIn: 'root',
@@ -23,11 +24,15 @@ export class ChatService {
     private messageUpdateSubject = new Subject<Message[]>();
     public messageUpdate$ = this.messageUpdateSubject.asObservable();
 
+    private onlineUsersSubject = new Subject<User[]>();
+    onlineUsers$ = this.onlineUsersSubject.asObservable();
+
     baseUrl = 'http://localhost:8000/messages';
 
     socketUrl = 'http://localhost:3000';
 
     socket: Socket | undefined;
+    onlineUsers: User[] = [];
     setupSocketConnection(): void {
         console.log('Setting up socket connection');
         const token = localStorage.getItem('token');
@@ -49,6 +54,12 @@ export class ChatService {
                 console.log('Received message:', message);
                 this.updateLocalMessages(message);
             });
+
+            this.socket.on('updateOnlineUsers', (onlineUsers: User[]) => {
+                this.onlineUsers = onlineUsers;
+                this.onlineUsersSubject.next([...this.onlineUsers]);
+                console.log(this.onlineUsers);
+            });
         }
     }
 
@@ -62,9 +73,7 @@ export class ChatService {
             this.messages.splice(existingIndex, 1, updatedMessage);
         } else {
             this.messages.push(updatedMessage);
-            console.log('this.messages', this.messages);
             this.messages.sort((a, b) => +a.updatedAt - +b.updatedAt);
-            console.log('this.messages', this.messages);
         }
 
         // Update the rest of the properties
@@ -93,16 +102,23 @@ export class ChatService {
             .get<Message[]>(`${this.baseUrl}/get-messages`, { params })
             .subscribe(
                 (initialMessages) => {
-                    // for each message get the profile picture url and the username
-                    console.log('initialMessages', initialMessages);
-                    initialMessages.forEach((message) => {
-                        message.userProfilePicture =
-                            this.authService.getProfilePictureUrl(
-                                message.userId
-                            );
-                        this.authService.getUserName(message.userId).subscribe(
+                    const userIds = Array.from(
+                        new Set(
+                            initialMessages.map((message) => message.userId)
+                        )
+                    );
+
+                    userIds.forEach((userId) => {
+                        this.authService.getUserName(userId).subscribe(
                             (response) => {
-                                message.username = response.username;
+                                initialMessages.forEach((message) => {
+                                    if (message.userId === userId) {
+                                        message.username = response.username;
+                                        message.userProfilePicture =
+                                            'http://localhost:8000/users/uploads/' +
+                                            response.id;
+                                    }
+                                });
                             },
                             (error) => {
                                 console.error('Error getting username:', error);
