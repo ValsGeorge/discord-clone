@@ -35,8 +35,6 @@ export class ChatComponent {
             this.messages = updatedMessages;
             console.log('Messages:', this.messages);
         });
-
-        this.utilsService.setupSocketConnection();
     }
 
     sendMessage(): void {
