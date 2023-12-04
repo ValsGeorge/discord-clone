@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { ChatService } from 'src/app/services/chat/chat.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
     selector: 'app-online-users',
@@ -13,11 +14,12 @@ export class OnlineUsersComponent implements OnInit {
 
     constructor(
         private chatService: ChatService,
-        private authService: AuthService
+        private authService: AuthService,
+        private utilsService: UtilsService
     ) {}
 
     ngOnInit() {
-        this.chatService.onlineUsers$.subscribe((onlineUsers) => {
+        this.utilsService.onlineUsers$.subscribe((onlineUsers) => {
             this.onlineUsers = onlineUsers;
             console.log('@onlineUsers', this.onlineUsers);
             // for each user, get their profile picture

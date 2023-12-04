@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
-import { io, Socket } from 'socket.io-client';
+import { Subject } from 'rxjs';
 import { Message } from 'src/app/models/message';
 import { AuthService } from '../auth.service';
 import { UtilsService } from '../utils.service';
-import { User } from 'src/app/models/user';
 
 @Injectable({
     providedIn: 'root',
@@ -15,7 +13,16 @@ export class ChatService {
         private http: HttpClient,
         private authService: AuthService,
         private utilsService: UtilsService
-    ) {}
+    ) {
+        this.utilsService.connected$.subscribe((connected) => {
+            if (connected) {
+                this.fetchInitialMessages();
+            }
+        });
+        this.utilsService.chatUpdated$.subscribe((message: Message) => {
+            this.updateLocalMessages(message);
+        });
+    }
 
     private chatUpdatedSubject = new Subject<void>();
     chatUpdated$ = this.chatUpdatedSubject.asObservable();
@@ -24,46 +31,9 @@ export class ChatService {
     private messageUpdateSubject = new Subject<Message[]>();
     public messageUpdate$ = this.messageUpdateSubject.asObservable();
 
-    private onlineUsersSubject = new Subject<User[]>();
-    onlineUsers$ = this.onlineUsersSubject.asObservable();
-
     baseUrl = 'http://localhost:8000/messages';
 
-    socketUrl = 'http://localhost:3000';
-
-    socket: Socket | undefined;
-    onlineUsers: User[] = [];
-    setupSocketConnection(): void {
-        console.log('Setting up socket connection');
-        const token = localStorage.getItem('token');
-        if (token) {
-            this.socket = io(this.socketUrl, {
-                query: { token },
-            });
-
-            this.socket.on('connect', () => {
-                console.log('Connected to socket.io server');
-                this.fetchInitialMessages();
-            });
-
-            this.socket.on('disconnect', () => {
-                console.log('Disconnected from socket.io server');
-            });
-
-            this.socket.on('receiveMessage', (message: any) => {
-                console.log('Received message:', message);
-                this.updateLocalMessages(message);
-            });
-
-            this.socket.on('updateOnlineUsers', (onlineUsers: User[]) => {
-                this.onlineUsers = onlineUsers;
-                this.onlineUsersSubject.next([...this.onlineUsers]);
-                console.log(this.onlineUsers);
-            });
-        }
-    }
-
-    private updateLocalMessages(updatedMessage: Message): void {
+    updateLocalMessages(updatedMessage: Message): void {
         // Check if the message already exists in the array
         const existingIndex = this.messages.findIndex(
             (message) => message.id === updatedMessage.id
@@ -135,7 +105,7 @@ export class ChatService {
     }
 
     sendMessage(content: string, channelId: string): void {
-        if (this.socket) {
+        if (this.utilsService.socket) {
             this.authService.getUser().subscribe(
                 (response) => {
                     console.log('response', response);
@@ -164,7 +134,7 @@ export class ChatService {
                 }
             );
 
-            this.socket.emit(
+            this.utilsService.socket.emit(
                 'sendMessage',
                 { content, channelId },
                 (response: any) => {
@@ -177,8 +147,8 @@ export class ChatService {
     }
 
     editMessage(messageId: string, content: string): void {
-        if (this.socket) {
-            this.socket.emit(
+        if (this.utilsService.socket) {
+            this.utilsService.socket.emit(
                 'editMessage',
                 { id: messageId, content },
                 (response: any) => {

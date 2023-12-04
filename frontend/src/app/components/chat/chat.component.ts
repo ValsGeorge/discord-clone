@@ -33,9 +33,10 @@ export class ChatComponent {
     ngOnInit(): void {
         this.chatService.messageUpdate$.subscribe((updatedMessages) => {
             this.messages = updatedMessages;
+            console.log('Messages:', this.messages);
         });
 
-        this.chatService.setupSocketConnection();
+        this.utilsService.setupSocketConnection();
     }
 
     sendMessage(): void {
