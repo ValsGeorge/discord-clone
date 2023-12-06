@@ -77,6 +77,7 @@ export class ServersSidePanelComponent implements OnInit {
         this.selectedServerId = serverId;
         this.utilsService.setSelectedServerId(serverId);
         this.selectedServerId = this.utilsService.getSelectedServerId();
+        this.utilsService.updateOnlineUsers();
         // Update channels
         this.channelsService.getChannels(this.selectedServerId).subscribe(
             (channels) => {

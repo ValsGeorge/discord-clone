@@ -52,9 +52,16 @@ export class UtilsService {
                 console.log('Online users:', onlineUsers);
                 this.onlineUsers = onlineUsers;
                 this.onlineUsersSubject.next([...this.onlineUsers]);
-                console.log(this.onlineUsers);
             });
         }
+    }
+
+    updateOnlineUsers() {
+        this.onlineUsersSubject.next([...this.onlineUsers]);
+    }
+
+    getOnlineUsers() {
+        return this.onlineUsers;
     }
 
     setSelectedServerId(serverId: string) {
