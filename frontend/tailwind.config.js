@@ -5,7 +5,11 @@ module.exports = {
     darkMode: "class",
     content: ["./src/**/*.{html,ts}"],
     theme: {
-        extend: {},
+        extend: {
+            fontSize: {
+                xxs: ["0.625rem", { lineHeight: "1rem" }],
+            },
+        },
     },
     plugins: [
         createThemes({

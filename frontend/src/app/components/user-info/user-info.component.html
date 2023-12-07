@@ -1,12 +1,20 @@
-<div class="h-14 bg-accent flex flex-row">
-    <div class=" bg-red-500 w-1/4">
-        <p>pfp</p>
+<div class="h-[52px] bg-accent flex flex-row">
+    <div class="bg-accent w-1/2 flex flex-row hover:bg-secondary rounded-lg m-1" (mouseenter)="onMouseEnter()"
+        (mouseleave)="onMouseLeave()">
+        <div class="flex items-center">
+            <img [src]="user.userProfilePicture" alt="user profile picture" class="w-8 h-8 rounded-full mr-2">
+        </div>
+        <div class="flex items-left flex-col justify-center relative group">
+            <div class="text-text text-sm">{{ user.nickname }}</div>
+            <div class="relative overflow-hidden text-text text-xxs h-4">
+                <div [@rollText]="rollTextState">Invisible</div>
+                <div [@rollText]="rollTextState">{{ user.username }}</div>
+            </div>
+        </div>
     </div>
-    <div class="bg-green-500 w-1/2">
-        <p>{{user.nickname}}</p>
-        <p>{{user.username}}</p>
-    </div>
-    <div class="bg-blue-500 w-1/4">
-        <p>sett</p>
+    <div class="bg-accent w-1/2 flex justify-around items-center">
+        <button><i class="bi bi-gear text-white"></i></button>
+        <button><i class="bi bi-mic text-text"></i></button>
+        <button><i class="bi bi-headphones text-white"></i></button>
     </div>
 </div>

@@ -1,6 +1,6 @@
 <div class="h-screen w-20 bg-accent flex flex-col items-center pt-4">
     <button class="text-text h-16 w-16 bg-secondary rounded-full mb-2" routerLink="/servers"
-        (click)="resetSelectedServer()"><i class="pi pi-home"></i></button>
+        (click)="resetSelectedServer()"><i class="bi bi-house"></i></button>
     <button *ngFor="let server of servers" (contextmenu)="showContextMenu($event, server.id)"
         class="bg-red-600 rounded-full w-16 h-16 flex items-center justify-center mb-2"
         [routerLink]="['/servers', server.id]" [class.bg-white]="server.id.toString() === selectedServerId"
@@ -10,5 +10,5 @@
         </p>
         <app-edit-menu [itemsList]="itemsList" [targetId]="server.id"></app-edit-menu>
     </button> <button class="text-text h-16 w-16 bg-secondary rounded-full" (click)="openCreateServer()"><i
-            class="pi pi-plus"></i></button>
+            class="bi bi-plus-lg"></i></button>
 </div>
