@@ -1,0 +1,52 @@
+<div class="fixed bg-accent p-4 rounded shadow-md min-w-[340px] min-h-[450px] w-[340px] h-[450px] flex flex-col justify-start"
+    [style.top.px]="position.top + bottomOffset" [style.left.px]="position.left">
+    <!-- user profile picture and banner -->
+    <div class="">
+        <img [src]="user.userProfilePicture" alt="user profile picture" class="w-20 h-20 rounded-full mb-2">
+    </div>
+    <!-- user details nickname, username, join date, activity status, status, copy user id? -->
+    <div class=" bg-accent-2 h-[50vh] p-4 rounded text-text-faded">
+
+        <div class="">
+            <div class="text-lg text-text font-bold">{{ user.nickname }}</div>
+            <div class="text-base text-text">{{ user.username }}</div>
+        </div>
+
+        <hr class="my-4 border-t border-bgray-1">
+
+        <div class="p-1">
+            <div class="text-sm rounded">
+                <label for="" class="uppercase text-xs text-text font-bold">Discord member since</label>
+            </div>
+        </div>
+
+        <hr class="my-2 border-t border-bgray-1">
+
+        <div class="">
+            <div class="text-sm flex flex-row items-center py-2">
+                <div class="w-[14px] h-[14px] border-[4px] border-solid border-text-faded rounded-full"></div>
+                <label for="" class="ml-2">Invisible</label>
+            </div>
+
+            <div class="text-sm py-2">
+                <i class="bi bi-emoji-smile-fill"></i>
+                <label for="" class="ml-2">Set Custom Status</label>
+            </div>
+        </div>
+
+        <hr class="my-2 border-t border-bgray-1">
+
+        <div class="text-sm py-2">
+            <i class="bi bi-arrow-left-right"></i>
+            <label for="" class="ml-2">Switch Accounts</label>
+        </div>
+
+        <hr class="my-2 border-t border-bgray-1">
+
+        <div class="text-sm py-2">
+            <i class="bi bi-123"></i>
+            <label for="" class="ml-2">Copy ID</label>
+        </div>
+
+    </div>
+</div>

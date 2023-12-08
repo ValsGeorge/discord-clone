@@ -1,5 +1,12 @@
 import { AuthService } from 'src/app/services/auth.service';
-import { Component, OnInit } from '@angular/core';
+import {
+    Component,
+    ElementRef,
+    HostListener,
+    OnInit,
+    Renderer2,
+    ViewChild,
+} from '@angular/core';
 import {
     trigger,
     transition,
@@ -9,6 +16,7 @@ import {
     keyframes,
 } from '@angular/animations';
 import { User } from '../../models/user';
+import { OpenUserInfoDetailsComponent } from '../popups/open-user-info-details/open-user-info-details.component';
 
 @Component({
     selector: 'app-user-info',
@@ -24,7 +32,25 @@ import { User } from '../../models/user';
     ],
 })
 export class UserInfoComponent implements OnInit {
-    constructor(private authService: AuthService) {}
+    @ViewChild(OpenUserInfoDetailsComponent)
+    openUserInfoDetails!: OpenUserInfoDetailsComponent;
+    position: any = { top: 0, left: 0 };
+    bottomOffset: number = 50;
+
+    @HostListener('document:click', ['$event'])
+    onClickOutside(event: Event) {
+        if (
+            this.showDetails &&
+            !this.elementRef.nativeElement.contains(event.target)
+        ) {
+            this.closeDetails();
+        }
+    }
+    constructor(
+        private authService: AuthService,
+        private elementRef: ElementRef,
+        private renderer: Renderer2
+    ) {}
 
     user: User = {
         id: '0',
@@ -61,5 +87,26 @@ export class UserInfoComponent implements OnInit {
 
     onMouseLeave() {
         this.rollTextState = 'initial';
+    }
+
+    showDetails = false;
+
+    openDetails(event: MouseEvent) {
+        console.log('open details');
+        this.showDetails = !this.showDetails;
+
+        const clickedElement = event.currentTarget as HTMLElement;
+        const rect = clickedElement.getBoundingClientRect();
+
+        const scrollY = window.scrollY - 450 || window.pageYOffset;
+        const scrollX = window.scrollX - 30 || window.pageXOffset;
+        this.position = {
+            top: rect.top + scrollY - 0, // Adjust as needed
+            left: rect.left + scrollX + 0, // Adjust as needed
+        };
+    }
+
+    closeDetails() {
+        this.showDetails = false;
     }
 }

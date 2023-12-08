@@ -28,6 +28,7 @@ import { ContextMenuModule } from 'primeng/contextmenu';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MessageOptionsComponent } from './components/message-options/message-options.component';
 import { OnlineUsersComponent } from './components/online-users/online-users.component';
+import { OpenUserInfoDetailsComponent } from './components/popups/open-user-info-details/open-user-info-details.component';
 
 @NgModule({
     declarations: [
@@ -49,6 +50,7 @@ import { OnlineUsersComponent } from './components/online-users/online-users.com
         ServersSidePanelComponent,
         MessageOptionsComponent,
         OnlineUsersComponent,
+        OpenUserInfoDetailsComponent,
     ],
     imports: [
         BrowserModule,

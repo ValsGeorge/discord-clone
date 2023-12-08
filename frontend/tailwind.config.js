@@ -20,6 +20,8 @@ module.exports = {
                 "secondary-accent": "#ebedef",
                 hover: "#e0e1e5",
                 text: "#060607",
+                "message-hover": "#f4f5f7",
+                "text-faded": "#b1b3b5",
             },
             dark: {
                 primary: "#313338",
@@ -29,6 +31,9 @@ module.exports = {
                 hover: "#3a3c41",
                 text: "#e9eaeb",
                 "message-hover": "#2e3035",
+                "text-faded": "#d6d9dc",
+                "accent-2": "#111214",
+                "bgray-1": "#2e2f34",
             },
         }),
     ],
