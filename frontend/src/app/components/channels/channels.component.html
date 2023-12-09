@@ -1,6 +1,6 @@
 <div class="flex flex-col space-y-1 mt-4 max-w-sm mx-auto">
     <button *ngFor="let channel of channels" (contextmenu)="showContextMenu($event, channel.id)"
-        class="hover:bg-primary text-white font-bold py-2 px-4 rounded text-left mx-4"
+        class="hover:bg-primary text-text font-bold py-2 px-4 rounded text-left mx-4"
         [routerLink]="['/servers', selectedServerId, 'channels', channel.id]" (click)="selectChannel(channel.id)">
         <p>{{ channel.name }}</p>
         <app-edit-menu [itemsList]="itemsList" [targetId]="channel.id"></app-edit-menu>

@@ -15,7 +15,7 @@ export class OpenUserInfoDetailsComponent {
         email: '',
         password: '',
         confirmPassword: '',
-        userProfilePicture: '',
+        profilePicture: '',
     };
     @Input() position: { top: number; left: number } = { top: 0, left: 0 };
     @Input() bottomOffset: number = 0;
@@ -23,8 +23,6 @@ export class OpenUserInfoDetailsComponent {
         this.authService.getUser().subscribe((user) => {
             console.log('user:', user);
             this.user = user;
-            this.user.userProfilePicture =
-                this.authService.getProfilePictureUrl(this.user.id);
         });
     }
 }

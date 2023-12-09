@@ -97,7 +97,10 @@ router.get("/details/:id", validateToken, async (req, res) => {
     if (!user) {
         return res.status(404).send("User not found");
     }
-    user.profilePicture = `/uploads/${user.profilePicture}`;
+    // user.profilePicture = `/uploads/${user.profilePicture}`;
+    user.profilePicture = `${req.protocol}://${req.get("host")}/uploads/${
+        user.profilePicture
+    }`;
 
     res.json(user);
 });

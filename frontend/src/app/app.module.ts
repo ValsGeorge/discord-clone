@@ -29,6 +29,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MessageOptionsComponent } from './components/message-options/message-options.component';
 import { OnlineUsersComponent } from './components/online-users/online-users.component';
 import { OpenUserInfoDetailsComponent } from './components/popups/open-user-info-details/open-user-info-details.component';
+import { DirectMessagesComponent } from './components/direct-messages/direct-messages.component';
 
 @NgModule({
     declarations: [
@@ -51,6 +52,7 @@ import { OpenUserInfoDetailsComponent } from './components/popups/open-user-info
         MessageOptionsComponent,
         OnlineUsersComponent,
         OpenUserInfoDetailsComponent,
+        DirectMessagesComponent,
     ],
     imports: [
         BrowserModule,

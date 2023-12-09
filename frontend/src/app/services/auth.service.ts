@@ -16,7 +16,7 @@ export class AuthService {
         email: '',
         password: '',
         confirmPassword: '',
-        userProfilePicture: '',
+        profilePicture: '',
     };
     constructor(private httpClient: HttpClient, private router: Router) {}
 
@@ -83,6 +83,11 @@ export class AuthService {
         return this.httpClient.get(url, { headers }).pipe(
             tap((response: any) => {
                 this.user$ = response;
+                this.user$.profilePicture = this.getProfilePictureUrl(
+                    this.user$.id
+                );
+
+                console.log('user$: ', this.user$);
                 return response;
             }),
             catchError((error) => {

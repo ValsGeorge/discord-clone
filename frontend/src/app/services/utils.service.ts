@@ -4,12 +4,13 @@ import { io, Socket } from 'socket.io-client';
 import { User } from '../models/user';
 import { Subject } from 'rxjs';
 import { Message } from '../models/message';
+import { AuthService } from './auth.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class UtilsService {
-    constructor() {}
+    constructor(private authService: AuthService) {}
 
     socketUrl = 'http://localhost:3000';
 
@@ -49,8 +50,13 @@ export class UtilsService {
             });
 
             this.socket.on('updateOnlineUsers', (onlineUsers: User[]) => {
-                console.log('Online users:', onlineUsers);
+                console.log('Online usersss:', onlineUsers);
                 this.onlineUsers = onlineUsers;
+                this.onlineUsers.forEach((user) => {
+                    user.profilePicture = this.authService.getProfilePictureUrl(
+                        user.id
+                    );
+                });
                 this.onlineUsersSubject.next([...this.onlineUsers]);
             });
         }

@@ -23,18 +23,6 @@ export class OnlineUsersComponent implements OnInit {
         // Subscribe to the online users subject to get updates when the online users change
         this.utilsService.onlineUsers$.subscribe((onlineUsers) => {
             this.onlineUsers = onlineUsers;
-            // For each user, get their profile picture
-            this.onlineUsers.forEach((user) => {
-                user.userProfilePicture = this.authService.getProfilePictureUrl(
-                    user.id
-                );
-            });
-        });
-        // For each user, get their profile picture
-        this.onlineUsers.forEach((user) => {
-            user.userProfilePicture = this.authService.getProfilePictureUrl(
-                user.id
-            );
         });
     }
 }

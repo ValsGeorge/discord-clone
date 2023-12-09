@@ -9,6 +9,13 @@ module.exports = {
             fontSize: {
                 xxs: ["0.625rem", { lineHeight: "1rem" }],
             },
+            fontFamily: {
+                disc: ["Fragment Mono"],
+            },
+            letterSpacing: {
+                extraTight: "-0.05em",
+                superTight: "-0.0.8em",
+            },
         },
     },
     plugins: [
@@ -31,7 +38,7 @@ module.exports = {
                 hover: "#3a3c41",
                 text: "#e9eaeb",
                 "message-hover": "#2e3035",
-                "text-faded": "#d6d9dc",
+                "text-faded": "#dbdee1",
                 "accent-2": "#111214",
                 "bgray-1": "#2e2f34",
             },

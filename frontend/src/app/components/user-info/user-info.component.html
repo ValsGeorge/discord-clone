@@ -2,7 +2,7 @@
     <div class="bg-accent w-1/2 flex flex-row hover:bg-secondary rounded-lg m-1" (mouseenter)="onMouseEnter()"
         (mouseleave)="onMouseLeave()" (click)="openDetails($event)">
         <div class="flex items-center">
-            <img [src]="user.userProfilePicture" alt="user profile picture" class="w-8 h-8 rounded-full mr-2">
+            <img [src]="user.profilePicture" alt="user profile picture" class="w-8 h-8 rounded-full mr-2">
         </div>
         <div class="flex items-left flex-col justify-center relative group">
             <div class="text-text text-sm">{{ user.nickname }}</div>

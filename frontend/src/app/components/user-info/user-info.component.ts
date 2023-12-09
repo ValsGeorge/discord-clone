@@ -59,7 +59,7 @@ export class UserInfoComponent implements OnInit {
         email: '',
         password: '',
         confirmPassword: '',
-        userProfilePicture: '',
+        profilePicture: '',
     };
     ngOnInit(): void {
         this.getUserInfo();
@@ -69,7 +69,7 @@ export class UserInfoComponent implements OnInit {
         this.authService.getUser().subscribe(
             (response: User) => {
                 this.user = response;
-                this.user.userProfilePicture =
+                this.user.profilePicture =
                     this.authService.getProfilePictureUrl(this.user.id);
                 console.log(response);
             },

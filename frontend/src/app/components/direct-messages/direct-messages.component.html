@@ -1,0 +1,24 @@
+<div class="bg-secondary h-full w-full text-text-faded flex flex-col items-center">
+    <button class="w-11/12 h-12 flex flex-row bg-accesecondarynt text-base items-center px-4 tracking-extraTight">
+        <i class="bi bi-person-raised-hand"></i>
+        <span class="ml-2">Friends</span>
+    </button>
+    <button class="w-11/12 h-12 flex flex-row bg-secondary text-base items-center px-4 tracking-extraTight">
+        <i class="bi bi-person-wheelchair"></i>
+        <span class="ml-2">Nitro</span>
+    </button>
+    <button class="w-11/12 h-12 flex flex-row bg-secondary text-base items-center px-4 tracking-extraTight">
+        <i class="bi bi-cart"></i>
+        <span class="ml-2">Shop</span>
+    </button>
+
+    <div class="w-11/12 h-12 flex flex-row bg-secondary text-base items-center px-4">
+        <span class="uppercase text-xs font-bold">Direct Messages</span>
+    </div>
+    <ul *ngFor="let user of onlineUsers" class="font-sans m-2 flex flex-col items-start justify-start text-left">
+        <li class="flex flex-row">
+            <img [src]="user.profilePicture" alt="" class="w-8 h-8 rounded-full">
+            <span class="ml-2">{{user.username}}</span>
+        </li>
+    </ul>
+</div>
