@@ -30,6 +30,7 @@ import { MessageOptionsComponent } from './components/message-options/message-op
 import { OnlineUsersComponent } from './components/online-users/online-users.component';
 import { OpenUserInfoDetailsComponent } from './components/popups/open-user-info-details/open-user-info-details.component';
 import { DirectMessagesComponent } from './components/direct-messages/direct-messages.component';
+import { ChatDmComponent } from './components/chat-dm/chat-dm.component';
 
 @NgModule({
     declarations: [
@@ -53,6 +54,7 @@ import { DirectMessagesComponent } from './components/direct-messages/direct-mes
         OnlineUsersComponent,
         OpenUserInfoDetailsComponent,
         DirectMessagesComponent,
+        ChatDmComponent,
     ],
     imports: [
         BrowserModule,

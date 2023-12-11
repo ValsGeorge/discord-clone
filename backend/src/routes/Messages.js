@@ -1,4 +1,5 @@
 const { Messages } = require("../models");
+const { DMs } = require("../models");
 
 const getMessages = async (req, res) => {
     try {
@@ -66,4 +67,36 @@ const editMessage = async (message) => {
     }
 };
 
-module.exports = { getMessages, createMessage, editMessage };
+const getDMs = async (req, res) => {
+    try {
+        const senderId = parseInt(req.query.senderId);
+        const receiverId = parseInt(req.query.receiverId);
+        const dms = await DMs.findAll({
+            where: { senderId, receiverId },
+            order: [["createdAt", "ASC"]],
+        });
+
+        res.json(dms);
+    } catch (error) {
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+
+const createDM = async (message) => {
+    try {
+        message.senderId = parseInt(message.senderId);
+        message.receiverId = parseInt(message.receiverId);
+        console.log("message: ", message);
+        const savedMessage = await DMs.create({
+            content: message.content,
+            senderId: message.senderId,
+            receiverId: message.receiverId,
+        });
+        console.log("savedMessage: ", savedMessage);
+        return savedMessage;
+    } catch (error) {
+        throw new Error("Error saving message to the database");
+    }
+};
+
+module.exports = { getMessages, createMessage, editMessage, getDMs, createDM };

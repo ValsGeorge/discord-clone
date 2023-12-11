@@ -8,6 +8,8 @@ const {
     createMessage,
     getMessages,
     editMessage,
+    getDMs,
+    createDM,
 } = require("./routes/Messages");
 const { validateSocketToken } = require("./middlewares/AuthMiddleware");
 
@@ -28,6 +30,8 @@ const channelsRouter = require("./routes/Channels");
 app.use("/channels", channelsRouter);
 
 app.use("/messages/get-messages", getMessages);
+
+app.get("/messages/get-dms", getDMs);
 
 const { Server } = require("socket.io");
 
@@ -112,9 +116,21 @@ io.use(function (socket, next) {
                 // Handle the error appropriately
             });
     });
+    socket.on("sendDM", (dm) => {
+        dm.userId = userId;
+        console.log(dm);
+        createDM(dm)
+            .then((fullDM) => {
+                console.log("fullDM: ", fullDM);
+                io.emit("receiveDM", fullDM);
+            })
+            .catch((error) => {
+                console.log("Error creating DM:", error);
+            });
+    });
 });
 
-sequelize.sync({ force: false }).then(() => {
+sequelize.sync({ force: false, logging: console.log }).then(() => {
     app.listen(config.port);
     console.log(`Server started on port ${config.port}`);
 });

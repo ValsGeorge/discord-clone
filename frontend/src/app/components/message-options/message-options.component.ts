@@ -13,7 +13,7 @@ export class MessageOptionsComponent {
 
     showOptions = false;
 
-    @Input() message: Message | undefined;
+    @Input() message: any | undefined;
     @Output() editClick = new EventEmitter<void>();
 
     editMessage(): void {

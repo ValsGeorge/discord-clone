@@ -1,0 +1,43 @@
+<h5 class="text-text">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</h5>
+<div class="chat-room flex flex-col h-full bg-secondary">
+    <div class="chat-messages flex-grow overflow-y-scroll p-4 border-b border-gray-300">
+        <div class="message mb-2 hover:bg-message-hover rounded-md" *ngFor="let message of messages"
+            (mouseenter)="showOptions(message)" (mouseleave)="hideOptions()">
+            <div class="flex">
+                <img *ngIf="message.userProfilePicture" [src]="message.userProfilePicture" alt="Profile Picture"
+                    class="w-8 h-8 rounded-full mr-2">
+                <span class="font-bold text-text">{{ message.senderUsername }}:</span>
+                <ng-container *ngIf="!message.isEditing; else editMessageTemplate">
+                    <p class="text-text">{{ message.content }}</p>
+                </ng-container>
+                <ng-template #editMessageTemplate>
+                    <div class="flex flex-col">
+                        <input [(ngModel)]="editMessageForm.value.editedContent" type="text"
+                            class="bg-primary border border-secondary text-text rounded-md p-2">
+                        <div class="flex flex-row">
+                            <div class="flex flex-row">
+                                <p>Enter to </p>
+                                <button (click)="saveEditedMessage(message)" class="mx-2 text-blue-600">Save</button>
+                            </div>
+                            <div class="flex flex-row">
+                                <p>Esc to </p>
+                                <button (click)="cancelEditing(message)" class="mx-2 text-blue-600">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+            <div class="relative">
+                <app-message-options *ngIf="showOptionsForMessage === +message.id" [message]="message"
+                    (editClick)="handleEditClick(message)"></app-message-options>
+            </div>
+        </div>
+    </div>
+    <div class="chat-input p-4 flex items-center">
+        <input [(ngModel)]="messageContent" type="text" id="message-input" placeholder="Type your message..."
+            class="flex-grow p-2 border rounded-l-md">
+        <div class="">
+            <button (click)="sendDM()" class="px-4 py-2 bg-green-500 text-text rounded-r-md">Send</button>
+        </div>
+    </div>
+</div>

@@ -50,7 +50,6 @@ export class UtilsService {
             });
 
             this.socket.on('updateOnlineUsers', (onlineUsers: User[]) => {
-                console.log('Online usersss:', onlineUsers);
                 this.onlineUsers = onlineUsers;
                 this.onlineUsers.forEach((user) => {
                     user.profilePicture = this.authService.getProfilePictureUrl(
@@ -58,6 +57,10 @@ export class UtilsService {
                     );
                 });
                 this.onlineUsersSubject.next([...this.onlineUsers]);
+            });
+            this.socket.on('receiveDM', (message: any) => {
+                console.log('Received private message:', message);
+                this.chatUpdatedSubject.next(message);
             });
         }
     }

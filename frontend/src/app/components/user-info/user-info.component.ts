@@ -71,7 +71,6 @@ export class UserInfoComponent implements OnInit {
                 this.user = response;
                 this.user.profilePicture =
                     this.authService.getProfilePictureUrl(this.user.id);
-                console.log(response);
             },
             (error: any) => {
                 console.log(error);

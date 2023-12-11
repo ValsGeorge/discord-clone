@@ -1,18 +1,18 @@
-import { Component, QueryList, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
+import { OnInit } from '@angular/core';
 import { ChatService } from 'src/app/services/chat/chat.service';
-import { UtilsService } from 'src/app/services/utils.service';
-import { Message } from 'src/app/models/message';
-import { AuthService } from 'src/app/services/auth.service';
 import { FormGroup } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { DM } from 'src/app/models/DM';
+import { AuthService } from 'src/app/services/auth.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
-    selector: 'app-chat',
-    templateUrl: './chat.component.html',
-    styleUrls: ['./chat.component.css'],
+    selector: 'app-chat-dm',
+    templateUrl: './chat-dm.component.html',
+    styleUrls: ['./chat-dm.component.css'],
 })
-export class ChatComponent {
+export class ChatDmComponent implements OnInit {
     messageContent: string = '';
     userId = '1';
     constructor(
@@ -21,30 +21,24 @@ export class ChatComponent {
         private authService: AuthService,
         private formBuilder: FormBuilder
     ) {
+        console.log('ChatDmComponent');
         this.editMessageForm = this.formBuilder.group({
             editedContent: [''], // Add a form control for edited content
         });
     }
 
-    messages: Message[] = [];
+    messages: DM[] = [];
 
     showOptionsForMessage: number | null = null;
 
     editMessageForm: FormGroup;
 
     ngOnInit(): void {
-        this.chatService.messageUpdate$.subscribe((updatedMessages) => {
+        console.log('ChatDmComponent ngOnInit');
+        this.chatService.DMUpdate$.subscribe((updatedMessages) => {
             this.messages = updatedMessages;
             console.log('Messages:', this.messages);
         });
-    }
-
-    sendMessage(): void {
-        if (this.messageContent != '')
-            this.chatService.sendMessage(
-                this.messageContent,
-                this.utilsService.getSelectedChannelId()
-            );
     }
 
     sendDM(): void {
@@ -63,22 +57,22 @@ export class ChatComponent {
     hideOptions(): void {
         this.showOptionsForMessage = null;
     }
-    handleEditClick(message: Message): void {
+    handleEditClick(message: DM): void {
         this.startEditing(message);
     }
 
-    startEditing(message: Message): void {
+    startEditing(message: DM): void {
         message.isEditing = true;
         this.editMessageForm.setValue({
             editedContent: message.content,
         });
     }
 
-    cancelEditing(message: Message): void {
+    cancelEditing(message: DM): void {
         message.isEditing = false;
     }
 
-    saveEditedMessage(message: Message): void {
+    saveEditedMessage(message: DM): void {
         const editedContent = this.editMessageForm.value.editedContent;
         this.chatService.editMessage(message.id, editedContent);
         message.content = editedContent;

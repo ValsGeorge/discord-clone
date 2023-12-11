@@ -27,13 +27,21 @@ router.get("/", (req, res) => {
 
 router.post("/register", async (req, res) => {
     const data = req.body;
+    console.log("data: ", data);
 
     try {
         const hash = await bcrypt.hash(data.password, 10);
 
         data.password = hash;
 
-        await Users.create(data);
+        await Users.create({
+            nickname: data.nickname,
+            username: data.username,
+            password: data.password,
+            email: data.email,
+            profilePicture:
+                data.profilePicture || "default-profile-picture.png",
+        });
 
         res.json(data);
     } catch (error) {
