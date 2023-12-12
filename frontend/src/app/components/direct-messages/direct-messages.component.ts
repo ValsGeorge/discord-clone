@@ -31,7 +31,6 @@ export class DirectMessagesComponent implements OnInit {
 
     ngOnInit(): void {
         this.getOnlineUsers();
-        console.log('Online users1:', this.onlineUsers);
         this.utilsService.onlineUsers$.subscribe((onlineUsers) => {
             this.onlineUsers = onlineUsers;
         });
@@ -41,8 +40,11 @@ export class DirectMessagesComponent implements OnInit {
     }
 
     openPrivateChat(user: User): void {
-        console.log('Opening private chat with:', user);
-        this.chatService.fetchInitialDMs('1', '2');
+        if (user.id === this.authService.getUserId()) {
+            this.router.navigate(['/servers']);
+            return;
+        }
+        this.chatService.fetchInitialDMs(this.authService.getUserId(), user.id);
         this.router.navigate(['/servers/chat-dm', user.id]);
     }
 }

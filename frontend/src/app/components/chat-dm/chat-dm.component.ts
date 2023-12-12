@@ -33,6 +33,7 @@ export class ChatDmComponent implements OnInit {
     editMessageForm: FormGroup;
 
     ngOnInit(): void {
+        this.chatService.fetchInitialDMs('1', '2');
         this.chatService.DMUpdate$.subscribe((updatedMessages) => {
             this.messages = updatedMessages;
             console.log('Messages:', this.messages);
