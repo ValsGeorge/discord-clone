@@ -1,15 +1,14 @@
 <div class="bg-primary flex h-screen">
     <app-servers-side-panel></app-servers-side-panel>
 
-    <div class="w-1/4 bg-secondary flex flex-col">
-        <app-channels></app-channels>
-        <div class="flex-1"></div>
+    <div class="min-w-[240px] bg-secondary flex flex-col">
+        <app-channels class="flex-1"></app-channels>
         <app-user-info></app-user-info>
     </div>
-    <div class="w-1/2 bg-primary">
+    <div class="w-full lg:w-3/4 bg-primary">
         <router-outlet></router-outlet>
     </div>
-    <div class="w-1/4 bg-slate-900">
+    <div class="hidden w-1/4 lg:block bg-secondary">
         <app-online-users></app-online-users>
     </div>
 </div>

@@ -21,7 +21,6 @@ export class ChatDmComponent implements OnInit {
         private authService: AuthService,
         private formBuilder: FormBuilder
     ) {
-        console.log('ChatDmComponent');
         this.editMessageForm = this.formBuilder.group({
             editedContent: [''], // Add a form control for edited content
         });
@@ -34,7 +33,6 @@ export class ChatDmComponent implements OnInit {
     editMessageForm: FormGroup;
 
     ngOnInit(): void {
-        console.log('ChatDmComponent ngOnInit');
         this.chatService.DMUpdate$.subscribe((updatedMessages) => {
             this.messages = updatedMessages;
             console.log('Messages:', this.messages);

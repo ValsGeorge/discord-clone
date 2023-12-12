@@ -20,8 +20,17 @@ export class ChatService {
                 this.fetchInitialMessages();
             }
         });
-        this.utilsService.chatUpdated$.subscribe((message: Message) => {
-            this.updateLocalMessages(message);
+        this.utilsService.chatUpdated$.subscribe((message: any) => {
+            // check the type o message
+            // if it is Message, then updateLocalMessages
+            // if it is DM, then updateLocalDMs
+            if (message.channelId) {
+                console.log('message', message);
+                this.updateLocalMessages(message);
+            } else {
+                console.log('message', message);
+                this.updateLocalDMs(message);
+            }
         });
     }
 
@@ -51,10 +60,6 @@ export class ChatService {
             this.messages.sort((a, b) => +a.updatedAt - +b.updatedAt);
         }
 
-        // Update the rest of the properties
-        // updatedMessage.userProfilePicture =
-        //     this.authService.getProfilePictureUrl(updatedMessage.userId);
-        console.log('updatedMessage', updatedMessage);
         this.authService.getUserName(updatedMessage.userId).subscribe(
             (response) => {
                 console.log('response', response);
@@ -81,6 +86,23 @@ export class ChatService {
             this.DMs.push(updatedDM);
             this.DMs.sort((a, b) => +a.updatedAt - +b.updatedAt);
         }
+        this.authService.getUserName(updatedDM.senderId).subscribe(
+            (response) => {
+                console.log('response', response);
+                updatedDM.senderUsername = response.username;
+                updatedDM.userProfilePicture =
+                    this.authService.getProfilePictureUrl(updatedDM.senderId);
+                console.log(
+                    'this.authService.getProfilePictureUrl(updatedDM.senderId)',
+                    this.authService.getProfilePictureUrl(updatedDM.senderId)
+                );
+                console.log('updatedDM', updatedDM);
+            },
+            (error) => {
+                console.error('Error getting username:', error);
+            }
+        );
+        this.DMUpdateSubject.next([...this.DMs]);
     }
 
     public fetchInitialMessages(): void {
@@ -88,7 +110,6 @@ export class ChatService {
             'channelId',
             this.utilsService.getSelectedChannelId() || ''
         );
-        console.log('params', params);
         this.http
             .get<Message[]>(`${this.baseUrl}/get-messages`, { params })
             .subscribe(
@@ -130,25 +151,6 @@ export class ChatService {
             this.authService.getUser().subscribe(
                 (response) => {
                     console.log('response', response);
-                    const userId = response.id;
-                    const username = response.username;
-
-                    const lastId =
-                        this.messages.length > 0
-                            ? this.messages[this.messages.length - 1].id
-                            : '';
-
-                    const newMessage: Message = {
-                        content,
-                        userId,
-                        channelId,
-                        id: lastId + 1,
-                        username: username,
-                        userProfilePicture:
-                            this.authService.getProfilePictureUrl(userId),
-                        createdAt: new Date(0),
-                        updatedAt: new Date(0),
-                    };
                 },
                 (error) => {
                     console.error('Error getting username:', error);

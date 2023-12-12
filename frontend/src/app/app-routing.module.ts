@@ -20,24 +20,21 @@ const routes: Routes = [
         component: ServersComponent,
         children: [
             { path: 'chat-dm/:userId', component: ChatDmComponent },
-            {
-                path: ':id',
-                component: ServerDetailsComponent,
-                children: [
-                    { path: 'channels/:channelId', component: ChatComponent },
-                ],
-            },
+            // {
+            //     path: ':id',
+            //     component: ServerDetailsComponent,
+            //     children: [
+            //         { path: 'channels/:channelId', component: ChatComponent },
+            //     ],
+            // },
             { path: 'join-server/:inviteCode', component: JoinServerComponent },
         ],
     },
-    // {
-    //     path: 'servers/:id',
-    //     component: ServerDetailsComponent,
-    //     children: [
-    //         { path: 'channels/:channelId', component: ChatComponent },
-    //         { path: 'chat-dm/:userId', component: ChatDmComponent },
-    //     ],
-    // },
+    {
+        path: 'servers/:id',
+        component: ServerDetailsComponent,
+        children: [{ path: 'channels/:channelId', component: ChatComponent }],
+    },
     // { path: 'servers/join-server/:inviteCode', component: JoinServerComponent },
 ];
 

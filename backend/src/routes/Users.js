@@ -105,11 +105,15 @@ router.get("/details/:id", validateToken, async (req, res) => {
     if (!user) {
         return res.status(404).send("User not found");
     }
-    // user.profilePicture = `/uploads/${user.profilePicture}`;
-    user.profilePicture = `${req.protocol}://${req.get("host")}/uploads/${
-        user.profilePicture
-    }`;
+    // Old system
+    // user.profilePicture = `${req.protocol}://${req.get("host")}/uploads/${
+    //     user.profilePicture
+    // }`;
 
+    // Now get the profile image using the user id because that's how it's uploaded fsr
+    user.profilePicture = `${req.protocol}://${req.get("host")}/users/uploads/${
+        user.id
+    }`;
     res.json(user);
 });
 
