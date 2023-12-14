@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { ChatService } from 'src/app/services/chat/chat.service';
 import { UtilsService } from 'src/app/services/utils.service';
+import { EditMenuComponent } from '../edit-menu/edit-menu.component';
+import { ContextMenu } from 'src/app/models/contextMenu';
 
 @Component({
     selector: 'app-direct-messages',
@@ -21,6 +23,27 @@ export class DirectMessagesComponent implements OnInit {
         confirmPassword: '',
         profilePicture: '',
     };
+
+    @ViewChildren(EditMenuComponent) editMenu!: QueryList<EditMenuComponent>;
+    itemsList: ContextMenu[] = [
+        {
+            icon: 'pi pi-plus',
+            label: 'Add Friend',
+            action: 'add-friend',
+        },
+    ];
+    showContextMenu(event: MouseEvent, userId: string): void {
+        event.preventDefault();
+        event.stopPropagation();
+
+        this.editMenu.forEach((menu) => {
+            if (menu.targetId === userId) {
+                menu.showMenu = true;
+            } else {
+                menu.showMenu = false;
+            }
+        });
+    }
 
     constructor(
         private authService: AuthService,

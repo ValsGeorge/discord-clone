@@ -86,7 +86,6 @@ export class UtilsService {
     updateOnlineFriends() {
         // based on the user id I have to call the backend and check for every friend if he is online
         this.authService.getFriends().subscribe((friends) => {
-            console.log('Friends:', friends);
             this.onlineFriends = friends.filter((friend: any) =>
                 this.onlineUsers.find((user) => user.id === friend.id)
             );
@@ -95,7 +94,6 @@ export class UtilsService {
                     friend.id
                 );
             });
-            console.log('Online friends:', this.onlineFriends);
             this.onlineFriendsSubject.next([...this.onlineFriends]);
         });
         this.onlineFriendsSubject.next([...this.onlineFriends]);

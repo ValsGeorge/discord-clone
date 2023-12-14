@@ -58,13 +58,10 @@ export class FriendsComponent implements OnInit {
             this.friendRequests = friendRequests;
         });
 
-        // this.utilsService.onlineFriends$.subscribe((onlineFriends) => {
-        //     this.onlineFriends = onlineFriends;
-        // });
-
-        this.utilsService.onlineUsers$.subscribe((onlineUsers) => {
-            this.onlineFriends = onlineUsers;
+        this.utilsService.onlineFriends$.subscribe((onlineFriends) => {
+            this.onlineFriends = onlineFriends;
         });
+
         this.utilsService.friendRequests$.subscribe((friendRequests) => {
             console.log('Friend requests:', friendRequests);
             this.friendRequests = friendRequests;

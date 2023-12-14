@@ -17,11 +17,12 @@
         <span class="uppercase text-xs font-bold">Direct Messages</span>
     </div>
     <ul *ngFor="let user of onlineUsers" class="font-sans flex flex-col w-11/12 px-4 hover:cursor-pointer"
-        (click)="openPrivateChat(user)">
+        (click)="openPrivateChat(user)" (contextmenu)="showContextMenu($event, user.id)">
         <li class="flex flex-row items-start my-2">
             <img [src]="user.profilePicture" alt="" class="w-8 h-8 rounded-full">
             <span class="ml-2">{{user.username}}</span>
         </li>
+        <app-edit-menu [itemsList]="itemsList" [targetId]="user.id"></app-edit-menu>
     </ul>
 
 </div>
