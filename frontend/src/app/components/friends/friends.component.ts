@@ -16,6 +16,7 @@ export class FriendsComponent implements OnInit {
     friends: User[] = [];
     onlineFriends: User[] = [];
     onlineUsers: User[] = [];
+    friendRequests: User[] = [];
 
     selectedTab = 'online';
 
@@ -45,15 +46,28 @@ export class FriendsComponent implements OnInit {
         private chatService: ChatService,
         private router: Router
     ) {
-        this.authService.getFriends().subscribe((friends) => {
-            this.friends = friends;
+        this.utilsService.onlineUsers$.subscribe((onlineUsers) => {
+            this.onlineFriends = onlineUsers;
         });
     }
 
     ngOnInit(): void {
         this.getOnlineFriends();
-        this.utilsService.onlineFriends$.subscribe((onlineFriends) => {
-            this.onlineFriends = onlineFriends;
+        this.authService.getFriendRequests().subscribe((friendRequests) => {
+            console.log('Friend requests:', friendRequests);
+            this.friendRequests = friendRequests;
+        });
+
+        // this.utilsService.onlineFriends$.subscribe((onlineFriends) => {
+        //     this.onlineFriends = onlineFriends;
+        // });
+
+        this.utilsService.onlineUsers$.subscribe((onlineUsers) => {
+            this.onlineFriends = onlineUsers;
+        });
+        this.utilsService.friendRequests$.subscribe((friendRequests) => {
+            console.log('Friend requests:', friendRequests);
+            this.friendRequests = friendRequests;
         });
     }
 

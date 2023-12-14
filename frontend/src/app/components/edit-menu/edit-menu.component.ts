@@ -3,6 +3,7 @@ import { ContextMenu } from 'src/app/models/contextMenu';
 import { AuthService } from 'src/app/services/auth.service';
 import { ChannelsService } from 'src/app/services/channels/channels.service';
 import { ServersService } from 'src/app/services/servers.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
     selector: 'app-edit-menu',
@@ -18,7 +19,8 @@ export class EditMenuComponent {
     constructor(
         private serversService: ServersService,
         private channelsService: ChannelsService,
-        private authService: AuthService
+        private authService: AuthService,
+        private utilsService: UtilsService
     ) {}
 
     @HostListener('document:click', ['$event'])
@@ -110,17 +112,36 @@ export class EditMenuComponent {
             );
     }
 
+    // handleAddFriend() {
+    //     console.log('add friend');
+    //     console.log(this.targetId);
+    //     this.authService.addFriend(this.targetId as string).subscribe(
+    //         (res: any) => {
+    //             console.log(res);
+    //         },
+    //         (err: any) => {
+    //             console.log(err);
+    //         }
+    //     );
+    // }
+
     handleAddFriend() {
         console.log('add friend');
         console.log(this.targetId);
-        this.authService.addFriend(this.targetId as string).subscribe(
-            (res: any) => {
-                console.log(res);
-            },
-            (err: any) => {
-                console.log(err);
-            }
-        );
+        if (this.utilsService.socket) {
+            this.utilsService.socket.emit(
+                'sendFriendRequest',
+                {
+                    senderId: this.authService.getUserId(),
+                    receiverId: this.targetId,
+                },
+                (response: any) => {
+                    if (!response.success) {
+                        console.error('Failed to send friend request');
+                    }
+                }
+            );
+        }
     }
 
     setPosition(x: number, y: number) {

@@ -130,4 +130,25 @@ export class AuthService {
         };
         return this.httpClient.get(url, { headers });
     }
+
+    getFriendRequests(): Observable<any> {
+        const url = `${this.baseUrl}/friend-requests`;
+        const headers = {
+            'Content-Type': 'application/json',
+            token: `${this.getAuthTokenFromLocalStorage()}`,
+        };
+        return this.httpClient.get(url, { headers }).pipe(
+            tap((response: any) => {
+                response.forEach((request: any) => {
+                    request.profilePicture = this.getProfilePictureUrl(
+                        request.id
+                    );
+                });
+                return response;
+            }),
+            catchError((error) => {
+                return throwError(() => error);
+            })
+        );
+    }
 }

@@ -20,7 +20,8 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // Routers
-const usersRouter = require("./routes/Users");
+// const usersRouter = require("./routes/Users");
+const { router: usersRouter, sendFriendRequest } = require("./routes/Users");
 app.use("/users", usersRouter);
 
 const serversRouter = require("./routes/Servers");
@@ -116,16 +117,29 @@ io.use(function (socket, next) {
                 // Handle the error appropriately
             });
     });
+    // how to make this be a private message and not a broadcast?
+
     socket.on("sendDM", (dm) => {
         dm.userId = userId;
         console.log(dm);
         createDM(dm)
             .then((fullDM) => {
                 console.log("fullDM: ", fullDM);
-                io.emit("receiveDM", fullDM);
+                socket.broadcast.emit("receiveDM", fullDM);
             })
             .catch((error) => {
                 console.log("Error creating DM:", error);
+            });
+    });
+    socket.on("sendFriendRequest", (friendRequest) => {
+        console.log(friendRequest);
+        sendFriendRequest(friendRequest)
+            .then((sender) => {
+                console.log("sender: ", sender);
+                socket.broadcast.emit("receiveFriendRequest", sender);
+            })
+            .catch((error) => {
+                console.error("Error sending friend request:", error);
             });
     });
 });

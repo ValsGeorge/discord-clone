@@ -24,6 +24,9 @@ export class UtilsService {
     private onlineFriendsSubject = new Subject<User[]>();
     onlineFriends$ = this.onlineFriendsSubject.asObservable();
 
+    private friendRequestsSubject = new Subject<User[]>();
+    friendRequests$ = this.friendRequestsSubject.asObservable();
+
     private connectedSubject = new Subject<boolean>();
     connected$ = this.connectedSubject.asObservable();
 
@@ -54,6 +57,7 @@ export class UtilsService {
             });
 
             this.socket.on('updateOnlineUsers', (onlineUsers: User[]) => {
+                console.log('Online users:', onlineUsers);
                 this.onlineUsers = onlineUsers;
                 this.onlineUsers.forEach((user) => {
                     user.profilePicture = this.authService.getProfilePictureUrl(
@@ -66,6 +70,11 @@ export class UtilsService {
             this.socket.on('receiveDM', (message: any) => {
                 console.log('Received private message:', message);
                 this.chatUpdatedSubject.next(message);
+            });
+            this.socket.on('receiveFriendRequest', (request: any) => {
+                console.log('Received friend request:', request);
+
+                this.friendRequestsSubject.next(request);
             });
         }
     }
@@ -97,7 +106,8 @@ export class UtilsService {
     }
 
     getOnlineFriends() {
-        return this.onlineFriends;
+        // return this.onlineFriends;
+        return this.onlineUsers;
     }
 
     setSelectedServerId(serverId: string) {

@@ -22,6 +22,15 @@
         </ul>
     </div>
     <div class="" *ngIf="selectedTab==='all'"></div>
-    <div class="" *ngIf="selectedTab==='pending'"></div>
+    <div class="" *ngIf="selectedTab==='pending'">
+        <ul *ngFor="let friend of friendRequests" class="font-sans flex flex-col w-11/12 px-4 hover:cursor-pointer"
+            (click)="openPrivateChat(friend)" (contextmenu)="showContextMenu($event, friend.id)">
+            <li class="flex flex-row items-start p-2 rounded-md hover:bg-hover">
+                <img [src]="friend.profilePicture" alt="" class="w-8 h-8 rounded-full">
+                <span class="ml-2">{{friend.username}}</span>
+            </li>
+            <app-edit-menu [itemsList]="itemsList" [targetId]="friend.id"></app-edit-menu>
+        </ul>
+    </div>
     <div class="" *ngIf="selectedTab==='blocked'"></div>
 </div>

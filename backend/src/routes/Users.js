@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { Users } = require("../models");
 const { Friends } = require("../models");
+const { FriendRequest } = require("../models");
 const bcrypt = require("bcrypt");
 const { sign } = require("jsonwebtoken");
 const { validateToken } = require("../middlewares/AuthMiddleware");
@@ -151,31 +152,31 @@ router.get("/uploads/:id", async (req, res) => {
     }
 });
 
-router.post("/friends", validateToken, async (req, res) => {
-    const data = req.body;
+// router.post("/friends", validateToken, async (req, res) => {
+//     const data = req.body;
 
-    try {
-        const user = await Users.findByPk(data.userId);
-        if (!user) {
-            return res.status(404).send("User not found");
-        }
+//     try {
+//         const user = await Users.findByPk(data.userId);
+//         if (!user) {
+//             return res.status(404).send("User not found");
+//         }
 
-        const friend = await Users.findByPk(data.friendId);
-        if (!friend) {
-            return res.status(404).send("Friend not found");
-        }
+//         const friend = await Users.findByPk(data.friendId);
+//         if (!friend) {
+//             return res.status(404).send("Friend not found");
+//         }
 
-        const info = await Friends.create({
-            userId: data.userId,
-            friendId: data.friendId,
-        });
+//         const info = await Friends.create({
+//             userId: data.userId,
+//             friendId: data.friendId,
+//         });
 
-        res.json(info);
-    } catch (error) {
-        console.error("Error during adding friend:", error);
-        res.status(500).send("Internal Server Error");
-    }
-});
+//         res.json(info);
+//     } catch (error) {
+//         console.error("Error during adding friend:", error);
+//         res.status(500).send("Internal Server Error");
+//     }
+// });
 
 router.get("/friends", validateToken, async (req, res) => {
     const id = req.user.id;
@@ -208,4 +209,85 @@ router.get("/friends", validateToken, async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 });
-module.exports = router;
+
+const sendFriendRequest = async (data) => {
+    try {
+        console.log("data: ", data);
+        const senderId = parseInt(data.senderId);
+        const receiverId = parseInt(data.receiverId);
+
+        const user = await Users.findByPk(senderId);
+        if (!user) {
+            throw new Error("User not found");
+        }
+
+        const friend = await Users.findByPk(receiverId);
+        if (!friend) {
+            throw new Error("Friend not found");
+        }
+
+        await FriendRequest.create({
+            userId: senderId,
+            friendRequestId: receiverId,
+        });
+
+        const sender = await Users.findByPk(senderId, {
+            attributes: { exclude: ["password"] },
+        });
+        console.log("sender: ", sender);
+        return sender;
+    } catch (error) {
+        console.error("Error sending friend request:", error);
+        throw error;
+    }
+};
+
+router.get("/friend-requests", validateToken, async (req, res) => {
+    const id = req.user.id;
+    console.log("friend-requests");
+    console.log("id: ", id);
+
+    try {
+        const user = await Users.findByPk(id);
+        console.log("user: ", user);
+        if (!user) {
+            return res.status(404).send("User not found");
+        }
+
+        const friendRequests = await FriendRequest.findAll({
+            where: {
+                friendRequestId: id,
+            },
+        });
+
+        console.log("friendRequests: ", friendRequests);
+
+        const friendRequestIds = friendRequests.map(
+            (friendRequest) => friendRequest.userId
+        );
+
+        console.log("friendRequestIds: ", friendRequestIds);
+
+        const friendRequestUsers = await Users.findAll({
+            where: {
+                id: friendRequestIds,
+            },
+            attributes: { exclude: ["password"] },
+        });
+        friendRequestUsers.forEach((friendRequestUser) => {
+            friendRequestUser.profilePicture = `${req.protocol}://${req.get(
+                "host"
+            )}/users/uploads/${friendRequestUser.id}`;
+        });
+        console.log("friendRequestUsers: ", friendRequestUsers);
+        res.json(friendRequestUsers);
+    } catch (error) {
+        console.error("Error during getting friend requests:", error);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
+module.exports = {
+    router,
+    sendFriendRequest,
+};
