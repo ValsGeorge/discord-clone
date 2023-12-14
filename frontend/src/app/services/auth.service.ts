@@ -151,4 +151,23 @@ export class AuthService {
             })
         );
     }
+
+    respondFriendRequest(
+        userId: string,
+        friendRequestId: string,
+        status: 'accept' | 'decline'
+    ): Observable<any> {
+        const url = `${this.baseUrl}/friend-request`;
+        const headers = {
+            'Content-Type': 'application/json',
+            token: this.getAuthTokenFromLocalStorage() || '',
+        };
+
+        const body = { userId, friendRequestId, status };
+        const options = {
+            headers: new HttpHeaders(headers), // Use HttpHeaders to set headers correctly
+        };
+
+        return this.httpClient.put(url, body, options);
+    }
 }

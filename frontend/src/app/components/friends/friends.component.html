@@ -24,10 +24,16 @@
     <div class="" *ngIf="selectedTab==='all'"></div>
     <div class="" *ngIf="selectedTab==='pending'">
         <ul *ngFor="let friend of friendRequests" class="font-sans flex flex-col w-11/12 px-4 hover:cursor-pointer"
-            (click)="openPrivateChat(friend)" (contextmenu)="showContextMenu($event, friend.id)">
+            (contextmenu)="showContextMenu($event, friend.id)">
             <li class="flex flex-row items-start p-2 rounded-md hover:bg-hover">
                 <img [src]="friend.profilePicture" alt="" class="w-8 h-8 rounded-full">
                 <span class="ml-2">{{friend.username}}</span>
+                <div class="">
+                    <button class="bg-green-600 rounded-md p-1 m-1"
+                        (click)="respondFriendRequest(friend.id, 'accept')">Accept</button>
+                    <button class="bg-red-600 rounded-md p-1 m-1"
+                        (click)="respondFriendRequest(friend.id, 'decline')">Decline</button>
+                </div>
             </li>
             <app-edit-menu [itemsList]="itemsList" [targetId]="friend.id"></app-edit-menu>
         </ul>

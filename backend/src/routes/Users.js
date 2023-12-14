@@ -231,9 +231,10 @@ const sendFriendRequest = async (data) => {
             friendRequestId: receiverId,
         });
 
-        const sender = await Users.findByPk(senderId, {
+        let sender = await Users.findByPk(senderId, {
             attributes: { exclude: ["password"] },
         });
+
         console.log("sender: ", sender);
         return sender;
     } catch (error) {
@@ -244,12 +245,8 @@ const sendFriendRequest = async (data) => {
 
 router.get("/friend-requests", validateToken, async (req, res) => {
     const id = req.user.id;
-    console.log("friend-requests");
-    console.log("id: ", id);
-
     try {
         const user = await Users.findByPk(id);
-        console.log("user: ", user);
         if (!user) {
             return res.status(404).send("User not found");
         }
@@ -260,13 +257,9 @@ router.get("/friend-requests", validateToken, async (req, res) => {
             },
         });
 
-        console.log("friendRequests: ", friendRequests);
-
         const friendRequestIds = friendRequests.map(
             (friendRequest) => friendRequest.userId
         );
-
-        console.log("friendRequestIds: ", friendRequestIds);
 
         const friendRequestUsers = await Users.findAll({
             where: {
@@ -279,10 +272,48 @@ router.get("/friend-requests", validateToken, async (req, res) => {
                 "host"
             )}/users/uploads/${friendRequestUser.id}`;
         });
-        console.log("friendRequestUsers: ", friendRequestUsers);
         res.json(friendRequestUsers);
     } catch (error) {
         console.error("Error during getting friend requests:", error);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
+router.put("/friend-request", validateToken, async (req, res) => {
+    const userId = req.body.userId;
+    const friendRequestId = req.body.friendRequestId;
+    const status = req.body.status;
+
+    try {
+        const friendRequest = await FriendRequest.findOne({
+            where: {
+                userId: userId,
+                friendRequestId: friendRequestId,
+            },
+        });
+
+        if (!friendRequest) {
+            return res.status(404).send("Friend request not found");
+        }
+
+        if (status === "accept") {
+            await Friends.create({
+                userId: userId,
+                friendId: friendRequestId,
+            });
+
+            await Friends.create({
+                userId: friendRequestId,
+                friendId: userId,
+            });
+            await friendRequest.destroy();
+            res.json({ message: "Friend request accepted" });
+        } else if (status === "decline") {
+            await friendRequest.destroy();
+            res.json({ message: "Friend request deleted" });
+        }
+    } catch (error) {
+        console.error("Error during deleting friend request:", error);
         res.status(500).send("Internal Server Error");
     }
 });

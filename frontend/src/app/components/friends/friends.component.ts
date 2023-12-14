@@ -91,4 +91,25 @@ export class FriendsComponent implements OnInit {
     setSelectedTab(tab: string): void {
         this.selectedTab = tab;
     }
+
+    respondFriendRequest(
+        requesterId: string,
+        status: 'accept' | 'decline'
+    ): void {
+        this.authService
+            .respondFriendRequest(
+                requesterId,
+                this.authService.getUserId(),
+                status
+            )
+            .subscribe((res) => {
+                console.log('Friend request accepted:', res);
+                this.authService
+                    .getFriendRequests()
+                    .subscribe((friendRequests) => {
+                        console.log('Friend requests:', friendRequests);
+                        this.friendRequests = friendRequests;
+                    });
+            });
+    }
 }
