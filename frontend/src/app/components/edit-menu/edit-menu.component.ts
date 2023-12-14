@@ -1,5 +1,6 @@
 import { Component, HostListener, Input } from '@angular/core';
 import { ContextMenu } from 'src/app/models/contextMenu';
+import { AuthService } from 'src/app/services/auth.service';
 import { ChannelsService } from 'src/app/services/channels/channels.service';
 import { ServersService } from 'src/app/services/servers.service';
 
@@ -16,7 +17,8 @@ export class EditMenuComponent {
 
     constructor(
         private serversService: ServersService,
-        private channelsService: ChannelsService
+        private channelsService: ChannelsService,
+        private authService: AuthService
     ) {}
 
     @HostListener('document:click', ['$event'])
@@ -29,53 +31,96 @@ export class EditMenuComponent {
         this.showMenu = false;
         event.stopPropagation();
 
-        if (action === 'delete-server') {
-            this.serversService.deleteServer(this.targetId as string).subscribe(
+        switch (action) {
+            case 'delete-server':
+                this.handleDeleteServer();
+                break;
+
+            case 'edit-server':
+                console.log('edit server');
+                break;
+
+            case 'delete-channel':
+                this.handleDeleteChannel();
+                break;
+
+            case 'invite-to-server':
+                this.handleInviteToServer();
+                break;
+
+            case 'edit-channel':
+                console.log('edit channel');
+                break;
+
+            case 'edit-message':
+                console.log('edit message');
+                break;
+
+            case 'delete-message':
+                console.log('delete message');
+                break;
+
+            case 'add-friend':
+                this.handleAddFriend();
+                break;
+
+            default:
+                console.log('Unknown action');
+                break;
+        }
+    }
+
+    handleDeleteServer() {
+        this.serversService.deleteServer(this.targetId as string).subscribe(
+            (res) => {
+                console.log(res);
+                this.serversService.updateServers();
+            },
+            (err) => {
+                console.log(err);
+            }
+        );
+    }
+
+    handleDeleteChannel() {
+        this.channelsService.deleteChannel(this.targetId as string).subscribe(
+            (res) => {
+                console.log(res);
+                this.channelsService.updateChannels(this.targetId as string);
+            },
+            (err) => {
+                console.log(err);
+            }
+        );
+    }
+
+    handleInviteToServer() {
+        this.serversService
+            .generateInviteCode(this.targetId as string)
+            .subscribe(
                 (res) => {
                     console.log(res);
-                    this.serversService.updateServers();
+                    this.channelsService.updateChannels(
+                        this.targetId as string
+                    );
                 },
                 (err) => {
                     console.log(err);
                 }
             );
-        } else if (action === 'edit-server') {
-            console.log('edit server');
-        } else if (action === 'delete-channel') {
-            this.channelsService
-                .deleteChannel(this.targetId as string)
-                .subscribe(
-                    (res) => {
-                        console.log(res);
-                        this.channelsService.updateChannels(
-                            this.targetId as string
-                        );
-                    },
-                    (err) => {
-                        console.log(err);
-                    }
-                );
-        } else if (action === 'invite-to-server') {
-            this.serversService
-                .generateInviteCode(this.targetId as string)
-                .subscribe(
-                    (res) => {
-                        console.log(res);
-                        this.channelsService.updateChannels(
-                            this.targetId as string
-                        );
-                    },
-                    (err) => {
-                        console.log(err);
-                    }
-                );
-        } else if (action === 'edit-channel') {
-            console.log('edit channel');
-        } else if (action === 'edit-message') {
-            console.log('edit message');
-        } else if (action === 'delete-message') {
-            console.log('delete message');
-        }
+    }
+
+    handleAddFriend() {
+        console.log('add friend');
+        console.log(this.targetId);
+        this.authService.addFriend(this.targetId as string).subscribe(
+            (res: any) => {
+                console.log(res);
+            },
+            (err: any) => {
+                console.log(err);
+            }
+        );
     }
 
     setPosition(x: number, y: number) {

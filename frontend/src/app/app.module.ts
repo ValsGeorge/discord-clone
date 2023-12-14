@@ -31,6 +31,7 @@ import { OnlineUsersComponent } from './components/online-users/online-users.com
 import { OpenUserInfoDetailsComponent } from './components/popups/open-user-info-details/open-user-info-details.component';
 import { DirectMessagesComponent } from './components/direct-messages/direct-messages.component';
 import { ChatDmComponent } from './components/chat-dm/chat-dm.component';
+import { FriendsComponent } from './components/friends/friends.component';
 
 @NgModule({
     declarations: [
@@ -55,6 +56,7 @@ import { ChatDmComponent } from './components/chat-dm/chat-dm.component';
         OpenUserInfoDetailsComponent,
         DirectMessagesComponent,
         ChatDmComponent,
+        FriendsComponent,
     ],
     imports: [
         BrowserModule,

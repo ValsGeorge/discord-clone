@@ -1,0 +1,27 @@
+<div class="text-text-faded">
+    <div class="flex flex-row text-base">
+        <div class=" m-2 p-1 flex flex-row">
+            <i class="bi bi-person-raised-hand"></i>
+            <p>Friends</p>
+        </div>
+        <button class="m-2 p-1 rounded-md" (click)="(setSelectedTab('online'))">Online</button>
+        <button class="m-2 p-1 rounded-md" (click)="(setSelectedTab('all'))">All</button>
+        <button class="m-2 p-1 rounded-md" (click)="(setSelectedTab('pending'))">Pending</button>
+        <button class="m-2 p-1 rounded-md" (click)="(setSelectedTab('blocked'))">Blocked</button>
+        <button class="m-2 p-1 rounded-md bg-green-600">Add Friend</button>
+    </div>
+    <div class=""></div>
+    <div class="" *ngIf="selectedTab === 'online'">
+        <ul *ngFor="let friend of onlineFriends" class="font-sans flex flex-col w-11/12 px-4 hover:cursor-pointer"
+            (click)="openPrivateChat(friend)" (contextmenu)="showContextMenu($event, friend.id)">
+            <li class="flex flex-row items-start p-2 rounded-md hover:bg-hover">
+                <img [src]="friend.profilePicture" alt="" class="w-8 h-8 rounded-full">
+                <span class="ml-2">{{friend.username}}</span>
+            </li>
+            <app-edit-menu [itemsList]="itemsList" [targetId]="friend.id"></app-edit-menu>
+        </ul>
+    </div>
+    <div class="" *ngIf="selectedTab==='all'"></div>
+    <div class="" *ngIf="selectedTab==='pending'"></div>
+    <div class="" *ngIf="selectedTab==='blocked'"></div>
+</div>

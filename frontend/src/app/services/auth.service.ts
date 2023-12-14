@@ -110,4 +110,24 @@ export class AuthService {
         this.getUser();
         return this.user$.id;
     }
+
+    addFriend(friendId: string): Observable<any> {
+        const userId = this.getUserId();
+        const url = `${this.baseUrl}/friends`;
+        const headers = {
+            'Content-Type': 'application/json',
+            token: `${this.getAuthTokenFromLocalStorage()}`,
+        };
+        const body = JSON.stringify({ userId, friendId });
+        return this.httpClient.post(url, body, { headers });
+    }
+
+    getFriends(): Observable<any> {
+        const url = `${this.baseUrl}/friends`;
+        const headers = {
+            'Content-Type': 'application/json',
+            token: `${this.getAuthTokenFromLocalStorage()}`,
+        };
+        return this.httpClient.get(url, { headers });
+    }
 }

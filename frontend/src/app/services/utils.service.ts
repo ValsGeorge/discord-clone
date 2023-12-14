@@ -16,9 +16,13 @@ export class UtilsService {
 
     socket: Socket | undefined;
     onlineUsers: User[] = [];
+    onlineFriends: User[] = [];
 
     private onlineUsersSubject = new Subject<User[]>();
     onlineUsers$ = this.onlineUsersSubject.asObservable();
+
+    private onlineFriendsSubject = new Subject<User[]>();
+    onlineFriends$ = this.onlineFriendsSubject.asObservable();
 
     private connectedSubject = new Subject<boolean>();
     connected$ = this.connectedSubject.asObservable();
@@ -57,6 +61,7 @@ export class UtilsService {
                     );
                 });
                 this.onlineUsersSubject.next([...this.onlineUsers]);
+                this.updateOnlineFriends();
             });
             this.socket.on('receiveDM', (message: any) => {
                 console.log('Received private message:', message);
@@ -69,8 +74,30 @@ export class UtilsService {
         this.onlineUsersSubject.next([...this.onlineUsers]);
     }
 
+    updateOnlineFriends() {
+        // based on the user id I have to call the backend and check for every friend if he is online
+        this.authService.getFriends().subscribe((friends) => {
+            console.log('Friends:', friends);
+            this.onlineFriends = friends.filter((friend: any) =>
+                this.onlineUsers.find((user) => user.id === friend.id)
+            );
+            this.onlineFriends.forEach((friend) => {
+                friend.profilePicture = this.authService.getProfilePictureUrl(
+                    friend.id
+                );
+            });
+            console.log('Online friends:', this.onlineFriends);
+            this.onlineFriendsSubject.next([...this.onlineFriends]);
+        });
+        this.onlineFriendsSubject.next([...this.onlineFriends]);
+    }
+
     getOnlineUsers() {
         return this.onlineUsers;
+    }
+
+    getOnlineFriends() {
+        return this.onlineFriends;
     }
 
     setSelectedServerId(serverId: string) {

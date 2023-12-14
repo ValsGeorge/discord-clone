@@ -9,6 +9,7 @@ import { ServerDetailsComponent } from './components/server-details/server-detai
 import { ChatComponent } from './components/chat/chat.component';
 import { JoinServerComponent } from './components/join-server/join-server.component';
 import { ChatDmComponent } from './components/chat-dm/chat-dm.component';
+import { FriendsComponent } from './components/friends/friends.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -28,6 +29,7 @@ const routes: Routes = [
             //     ],
             // },
             { path: 'join-server/:inviteCode', component: JoinServerComponent },
+            { path: '', component: FriendsComponent },
         ],
     },
     {

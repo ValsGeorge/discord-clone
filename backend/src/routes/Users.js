@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { Users } = require("../models");
+const { Friends } = require("../models");
 const bcrypt = require("bcrypt");
 const { sign } = require("jsonwebtoken");
 const { validateToken } = require("../middlewares/AuthMiddleware");
@@ -146,6 +147,64 @@ router.get("/uploads/:id", async (req, res) => {
         res.sendFile(filePath);
     } catch (error) {
         console.error("Error during file upload:", error);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
+router.post("/friends", validateToken, async (req, res) => {
+    const data = req.body;
+
+    try {
+        const user = await Users.findByPk(data.userId);
+        if (!user) {
+            return res.status(404).send("User not found");
+        }
+
+        const friend = await Users.findByPk(data.friendId);
+        if (!friend) {
+            return res.status(404).send("Friend not found");
+        }
+
+        const info = await Friends.create({
+            userId: data.userId,
+            friendId: data.friendId,
+        });
+
+        res.json(info);
+    } catch (error) {
+        console.error("Error during adding friend:", error);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
+router.get("/friends", validateToken, async (req, res) => {
+    const id = req.user.id;
+    console.log("friends");
+    console.log("id: ", id);
+    try {
+        const user = await Users.findByPk(id);
+        if (!user) {
+            return res.status(404).send("User not found");
+        }
+
+        const friends = await Friends.findAll({
+            where: {
+                userId: id,
+            },
+        });
+
+        const friendIds = friends.map((friend) => friend.friendId);
+
+        const friendUsers = await Users.findAll({
+            where: {
+                id: friendIds,
+            },
+            attributes: { exclude: ["password"] },
+        });
+        console.log("friendUsers: ", friendUsers);
+        res.json(friendUsers);
+    } catch (error) {
+        console.error("Error during getting friends:", error);
         res.status(500).send("Internal Server Error");
     }
 });
