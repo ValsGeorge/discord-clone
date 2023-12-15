@@ -6,6 +6,7 @@ import { FormBuilder } from '@angular/forms';
 import { DM } from 'src/app/models/DM';
 import { AuthService } from 'src/app/services/auth.service';
 import { UtilsService } from 'src/app/services/utils.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-chat-dm',
@@ -14,12 +15,12 @@ import { UtilsService } from 'src/app/services/utils.service';
 })
 export class ChatDmComponent implements OnInit {
     messageContent: string = '';
-    userId = '1';
     constructor(
         private chatService: ChatService,
         private utilsService: UtilsService,
         private authService: AuthService,
-        private formBuilder: FormBuilder
+        private formBuilder: FormBuilder,
+        private route: ActivatedRoute
     ) {
         this.editMessageForm = this.formBuilder.group({
             editedContent: [''], // Add a form control for edited content
@@ -41,8 +42,13 @@ export class ChatDmComponent implements OnInit {
     }
 
     sendDM(): void {
+        const receiverId = this.route.snapshot.paramMap.get('userId') as string;
         if (this.messageContent != '')
-            this.chatService.sendDM(this.messageContent, this.userId, '2');
+            this.chatService.sendDM(
+                this.messageContent,
+                this.authService.getUserId(),
+                receiverId
+            );
     }
 
     getProfilePictureUrl(userId: string): string {

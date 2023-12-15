@@ -33,6 +33,8 @@ export class UtilsService {
     private chatUpdatedSubject = new Subject<Message>();
     chatUpdated$ = this.chatUpdatedSubject.asObservable();
 
+    private connectedUser: any = {};
+
     setupSocketConnection(): void {
         console.log('Setting up socket connection');
         const token = localStorage.getItem('token');
@@ -43,6 +45,12 @@ export class UtilsService {
 
             this.socket.on('connect', () => {
                 console.log('Connected to socket.io server');
+
+                if (this.socket) {
+                    this.connectedUser[this.authService.getUserId()] =
+                        this.socket.id;
+                }
+
                 this.connectedSubject.next(true);
             });
 
@@ -67,8 +75,9 @@ export class UtilsService {
                 this.onlineUsersSubject.next([...this.onlineUsers]);
                 this.updateOnlineFriends();
             });
-            this.socket.on('receiveDM', (message: any) => {
+            this.socket.on('private message', ({ message, from }) => {
                 console.log('Received private message:', message);
+                console.log('From:', from);
                 this.chatUpdatedSubject.next(message);
             });
             this.socket.on('receiveFriendRequest', (request: any) => {
@@ -98,7 +107,6 @@ export class UtilsService {
         });
         this.onlineFriendsSubject.next([...this.onlineFriends]);
     }
-
     getOnlineUsers() {
         return this.onlineUsers;
     }

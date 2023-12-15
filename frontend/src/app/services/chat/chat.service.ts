@@ -180,9 +180,13 @@ export class ChatService {
                 }
             );
 
+            console.log('receiverId', receiverId);
+            console.log('senderId', senderId);
+            console.log('content', content);
+
             this.utilsService.socket.emit(
                 'sendDM',
-                { content, senderId, receiverId },
+                { dm: { content, senderId, receiverId }, to: receiverId },
                 (response: any) => {
                     if (!response.success) {
                         console.error('Failed to send message');

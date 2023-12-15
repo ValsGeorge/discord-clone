@@ -77,6 +77,7 @@ io.use(function (socket, next) {
         fetchUserDetails(userId).then((user) => {
             console.log("user: ", user);
             onlineUsers[userId] = user;
+            // onlineUsers[socket.id] = user;
             console.log("onlineUsers: ", onlineUsers);
             // Broadcast the updated online user list to all clients
             io.emit("updateOnlineUsers", Object.values(onlineUsers));
@@ -117,20 +118,31 @@ io.use(function (socket, next) {
                 // Handle the error appropriately
             });
     });
-    // how to make this be a private message and not a broadcast?
 
-    socket.on("sendDM", (dm) => {
-        dm.userId = userId;
-        console.log(dm);
+    socket.on("sendDM", ({ dm, to }) => {
+        // dm.userId = userId;
+        console.log("dddm", dm);
+        console.log("to", to);
         createDM(dm)
             .then((fullDM) => {
                 console.log("fullDM: ", fullDM);
-                socket.broadcast.emit("receiveDM", fullDM);
+
+                try {
+                    socket.join(fullDM.receiverId);
+                    console.log("socket.rooms", socket.rooms);
+                    io.to(fullDM.senderId).emit("private message", {
+                        message: fullDM,
+                        from: fullDM.receiverId,
+                    });
+                } catch (error) {
+                    console.error("Error sending DM:", error);
+                }
             })
             .catch((error) => {
                 console.log("Error creating DM:", error);
             });
     });
+
     socket.on("sendFriendRequest", (friendRequest) => {
         console.log(friendRequest);
         sendFriendRequest(friendRequest)
