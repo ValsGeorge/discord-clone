@@ -49,6 +49,7 @@ export class ChatService {
 
     updateLocalMessages(updatedMessage: Message): void {
         // Check if the message already exists in the array
+        console.log('updatedMessage', updatedMessage);
         const existingIndex = this.messages.findIndex(
             (message) => message.id === updatedMessage.id
         );
@@ -76,6 +77,7 @@ export class ChatService {
 
     updateLocalDMs(updatedDM: DM): void {
         // Check if the message already exists in the array
+        console.log('updatedDM', updatedDM);
         const existingIndex = this.DMs.findIndex(
             (DM) => DM.id === updatedDM.id
         );
@@ -96,12 +98,12 @@ export class ChatService {
                     'this.authService.getProfilePictureUrl(updatedDM.senderId)',
                     this.authService.getProfilePictureUrl(updatedDM.senderId)
                 );
-                console.log('updatedDM', updatedDM);
             },
             (error) => {
                 console.error('Error getting username:', error);
             }
         );
+
         this.DMUpdateSubject.next([...this.DMs]);
     }
 
@@ -184,15 +186,10 @@ export class ChatService {
             console.log('senderId', senderId);
             console.log('content', content);
 
-            this.utilsService.socket.emit(
-                'sendDM',
-                { dm: { content, senderId, receiverId }, to: receiverId },
-                (response: any) => {
-                    if (!response.success) {
-                        console.error('Failed to send message');
-                    }
-                }
-            );
+            this.utilsService.socket.emit('sendDM', {
+                dm: { content, senderId, receiverId },
+                to: receiverId,
+            });
         }
     }
 
@@ -224,7 +221,6 @@ export class ChatService {
                 userIds.forEach((userId) => {
                     this.authService.getUserName(userId).subscribe(
                         (response) => {
-                            console.log('response', response);
                             initialMessages.forEach((message) => {
                                 // console.log('message', message);
                                 if (message.senderId === userId) {
@@ -240,6 +236,7 @@ export class ChatService {
                         }
                     );
                 });
+
                 this.DMs = initialMessages;
                 this.DMUpdateSubject.next([...this.DMs]);
             },

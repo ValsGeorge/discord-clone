@@ -1,5 +1,6 @@
 const { Messages } = require("../models");
 const { DMs } = require("../models");
+const { Op } = require("sequelize");
 
 const getMessages = async (req, res) => {
     try {
@@ -71,8 +72,14 @@ const getDMs = async (req, res) => {
     try {
         const senderId = parseInt(req.query.senderId);
         const receiverId = parseInt(req.query.receiverId);
+
         const dms = await DMs.findAll({
-            where: { senderId, receiverId },
+            where: {
+                [Op.or]: [
+                    { senderId, receiverId },
+                    { senderId: receiverId, receiverId: senderId },
+                ],
+            },
             order: [["createdAt", "ASC"]],
         });
 

@@ -7,6 +7,8 @@ import { DM } from 'src/app/models/DM';
 import { AuthService } from 'src/app/services/auth.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { ActivatedRoute } from '@angular/router';
+import { ElementRef, ViewChild } from '@angular/core';
+import { DatePipe } from '@angular/common';
 
 @Component({
     selector: 'app-chat-dm',
@@ -14,6 +16,8 @@ import { ActivatedRoute } from '@angular/router';
     styleUrls: ['./chat-dm.component.css'],
 })
 export class ChatDmComponent implements OnInit {
+    @ViewChild('chatContainer') private chatContainer!: ElementRef;
+
     messageContent: string = '';
     constructor(
         private chatService: ChatService,
@@ -38,6 +42,7 @@ export class ChatDmComponent implements OnInit {
         this.chatService.DMUpdate$.subscribe((updatedMessages) => {
             this.messages = updatedMessages;
             console.log('Messages:', this.messages);
+            this.scrollToBottom();
         });
     }
 
@@ -82,5 +87,13 @@ export class ChatDmComponent implements OnInit {
         this.chatService.editMessage(message.id, editedContent);
         message.content = editedContent;
         message.isEditing = false;
+    }
+    scrollToBottom(): void {
+        try {
+            this.chatContainer.nativeElement.scrollTop =
+                this.chatContainer.nativeElement.scrollHeight;
+        } catch (err) {
+            console.error(err);
+        }
     }
 }

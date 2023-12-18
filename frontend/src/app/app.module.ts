@@ -32,6 +32,8 @@ import { OpenUserInfoDetailsComponent } from './components/popups/open-user-info
 import { DirectMessagesComponent } from './components/direct-messages/direct-messages.component';
 import { ChatDmComponent } from './components/chat-dm/chat-dm.component';
 import { FriendsComponent } from './components/friends/friends.component';
+import { DatePipe } from '@angular/common';
+import { CustomDatePipe } from './models/custom.datepipe';
 
 @NgModule({
     declarations: [
@@ -57,6 +59,7 @@ import { FriendsComponent } from './components/friends/friends.component';
         DirectMessagesComponent,
         ChatDmComponent,
         FriendsComponent,
+        CustomDatePipe,
     ],
     imports: [
         BrowserModule,
@@ -71,7 +74,7 @@ import { FriendsComponent } from './components/friends/friends.component';
         ContextMenuModule,
         BrowserAnimationsModule,
     ],
-    providers: [],
+    providers: [DatePipe],
     bootstrap: [AppComponent],
 })
 export class AppModule {}

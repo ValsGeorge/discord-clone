@@ -44,7 +44,7 @@ const io = new Server(3000, {
 });
 
 const onlineUsers = {};
-
+const connectedUsers = {};
 const { Users } = require("./models");
 
 // Function to fetch user details from the database
@@ -77,6 +77,7 @@ io.use(function (socket, next) {
         fetchUserDetails(userId).then((user) => {
             console.log("user: ", user);
             onlineUsers[userId] = user;
+            connectedUsers[user.id] = socket.id;
             // onlineUsers[socket.id] = user;
             console.log("onlineUsers: ", onlineUsers);
             // Broadcast the updated online user list to all clients
@@ -128,12 +129,11 @@ io.use(function (socket, next) {
                 console.log("fullDM: ", fullDM);
 
                 try {
-                    socket.join(fullDM.receiverId);
-                    console.log("socket.rooms", socket.rooms);
-                    io.to(fullDM.senderId).emit("private message", {
-                        message: fullDM,
-                        from: fullDM.receiverId,
-                    });
+                    // Emit the DM to the sender
+                    io.to(socket.id).emit("privateMessage", fullDM);
+                    // Emit the DM to the receiver
+                    const receiverSocketId = connectedUsers[dm.receiverId];
+                    io.to(receiverSocketId).emit("privateMessage", fullDM);
                 } catch (error) {
                     console.error("Error sending DM:", error);
                 }

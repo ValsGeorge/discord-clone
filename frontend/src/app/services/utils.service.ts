@@ -75,9 +75,9 @@ export class UtilsService {
                 this.onlineUsersSubject.next([...this.onlineUsers]);
                 this.updateOnlineFriends();
             });
-            this.socket.on('private message', ({ message, from }) => {
+            this.socket.on('privateMessage', (message) => {
                 console.log('Received private message:', message);
-                console.log('From:', from);
+                // console.log('From:', from);
                 this.chatUpdatedSubject.next(message);
             });
             this.socket.on('receiveFriendRequest', (request: any) => {

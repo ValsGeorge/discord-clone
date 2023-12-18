@@ -1,13 +1,19 @@
 <div class="chat-room flex flex-col h-full bg-secondary">
-    <div class="chat-messages flex-grow overflow-y-scroll p-4 border-b border-gray-300">
+    <div #chatContainer class="chat-messages flex-grow overflow-y-scroll p-4 border-b border-gray-300">
         <div class="message mb-2 hover:bg-message-hover rounded-md" *ngFor="let message of messages"
             (mouseenter)="showOptions(message)" (mouseleave)="hideOptions()">
             <div class="flex">
-                <img *ngIf="message.userProfilePicture" [src]="message.userProfilePicture" alt="Profile Picture"
-                    class="w-8 h-8 rounded-full mr-2">
-                <span class="font-bold text-text">{{ message.senderUsername }}:</span>
-                <ng-container *ngIf="!message.isEditing; else editMessageTemplate">
-                    <p class="text-text">{{ message.content }}</p>
+                <ng-container *ngIf="!message.isEditing; else editMessageTemplate" class="flex flex-row">
+                    <img *ngIf="message.userProfilePicture" [src]="message.userProfilePicture" alt="Profile Picture"
+                        class="w-8 h-8 rounded-full m-2">
+                    <div class="flex flex-col">
+                        <div class="flex flex-row items-center">
+                            <p class="font-bold text-text">{{ message.senderUsername }}</p>
+                            <p class="text-text-faded text-xs ml-2">{{ message.createdAt | customDate }}</p>
+
+                        </div>
+                        <p class="text-text">{{ message.content }}</p>
+                    </div>
                 </ng-container>
                 <ng-template #editMessageTemplate>
                     <div class="flex flex-col">
