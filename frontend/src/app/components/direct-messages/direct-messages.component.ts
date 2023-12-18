@@ -6,6 +6,7 @@ import { ChatService } from 'src/app/services/chat/chat.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { EditMenuComponent } from '../edit-menu/edit-menu.component';
 import { ContextMenu } from 'src/app/models/contextMenu';
+import { DirectMessagesService } from 'src/app/services/direct-messages/direct-messages.service';
 
 @Component({
     selector: 'app-direct-messages',
@@ -14,6 +15,7 @@ import { ContextMenu } from 'src/app/models/contextMenu';
 })
 export class DirectMessagesComponent implements OnInit {
     onlineUsers: User[] = [];
+    dmList: User[] = [];
     currentUser: User = {
         id: '',
         nickname: '',
@@ -49,6 +51,7 @@ export class DirectMessagesComponent implements OnInit {
         private authService: AuthService,
         private utilsService: UtilsService,
         private chatService: ChatService,
+        private dmService: DirectMessagesService,
         private router: Router
     ) {}
 
@@ -57,6 +60,21 @@ export class DirectMessagesComponent implements OnInit {
         this.utilsService.onlineUsers$.subscribe((onlineUsers) => {
             this.onlineUsers = onlineUsers;
         });
+        this.dmService.getDMList().subscribe(
+            (dmList) => {
+                console.log('DM List:', dmList);
+                // add the users to the DM list
+                if (Array.isArray(dmList)) {
+                    this.dmList = dmList;
+                } else {
+                    // If it's a single object, wrap it in an array
+                    this.dmList = [dmList];
+                }
+            },
+            (error) => {
+                console.error('Error fetching DM list:', error);
+            }
+        );
     }
     getOnlineUsers(): void {
         this.onlineUsers = this.utilsService.getOnlineUsers();

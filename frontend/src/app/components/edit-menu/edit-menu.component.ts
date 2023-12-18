@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ChannelsService } from 'src/app/services/channels/channels.service';
 import { ServersService } from 'src/app/services/servers.service';
 import { UtilsService } from 'src/app/services/utils.service';
+import { DirectMessagesService } from 'src/app/services/direct-messages/direct-messages.service';
 
 @Component({
     selector: 'app-edit-menu',
@@ -20,7 +21,8 @@ export class EditMenuComponent {
         private serversService: ServersService,
         private channelsService: ChannelsService,
         private authService: AuthService,
-        private utilsService: UtilsService
+        private utilsService: UtilsService,
+        private dmService: DirectMessagesService
     ) {}
 
     @HostListener('document:click', ['$event'])
@@ -64,6 +66,14 @@ export class EditMenuComponent {
 
             case 'add-friend':
                 this.handleAddFriend();
+                break;
+
+            case 'remove-friend':
+                console.log('remove friend');
+                break;
+
+            case 'add-dm':
+                this.handleAddDM();
                 break;
 
             default:
@@ -142,6 +152,17 @@ export class EditMenuComponent {
                 }
             );
         }
+    }
+
+    handleAddDM() {
+        this.dmService.addUserToDMList(this.targetId as string).subscribe(
+            (res) => {
+                console.log('res', res);
+            },
+            (err) => {
+                console.log('err', err);
+            }
+        );
     }
 
     setPosition(x: number, y: number) {

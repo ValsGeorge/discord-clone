@@ -16,9 +16,9 @@
     <div class="w-11/12 text-base px-4">
         <span class="uppercase text-xs font-bold">Direct Messages</span>
     </div>
-    <ul *ngFor="let user of onlineUsers" class="font-sans flex flex-col w-11/12 px-4 hover:cursor-pointer"
+    <ul *ngFor="let user of dmList" class="font-sans flex flex-col w-11/12 px-4 hover:cursor-pointer"
         (click)="openPrivateChat(user)" (contextmenu)="showContextMenu($event, user.id)">
-        <li class="flex flex-row items-start my-2">
+        <li class="flex flex-row items-start my-1 p-2 hover:bg-hover">
             <img [src]="user.profilePicture" alt="" class="w-8 h-8 rounded-full">
             <span class="ml-2">{{user.username}}</span>
         </li>

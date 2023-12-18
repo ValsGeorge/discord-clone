@@ -27,6 +27,11 @@ export class FriendsComponent implements OnInit {
             label: 'Add Friend',
             action: 'add-friend',
         },
+        {
+            icon: 'pi pi-plus',
+            label: 'Add DM',
+            action: 'add-dm',
+        },
     ];
     showContextMenu(event: MouseEvent, userId: string): void {
         event.preventDefault();
