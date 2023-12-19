@@ -56,10 +56,13 @@ export class DirectMessagesComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.getOnlineUsers();
-        this.utilsService.onlineUsers$.subscribe((onlineUsers) => {
-            this.onlineUsers = onlineUsers;
+        this.getDMList();
+        this.dmService.userList$.subscribe((user) => {
+            this.dmList = this.dmList.concat(user);
         });
+    }
+
+    getDMList(): void {
         this.dmService.getDMList().subscribe(
             (dmList) => {
                 console.log('DM List:', dmList);
@@ -76,9 +79,6 @@ export class DirectMessagesComponent implements OnInit {
             }
         );
     }
-    getOnlineUsers(): void {
-        this.onlineUsers = this.utilsService.getOnlineUsers();
-    }
 
     openPrivateChat(user: User): void {
         if (user.id === this.authService.getUserId()) {
@@ -87,5 +87,18 @@ export class DirectMessagesComponent implements OnInit {
         }
         this.chatService.fetchInitialDMs(this.authService.getUserId(), user.id);
         this.router.navigate(['/servers/chat-dm', user.id]);
+    }
+
+    removeUserFromDMList(userId: string): void {
+        console.log('Removing user from DM list:', userId);
+        this.dmService.removeUserFromDMList(userId).subscribe(
+            (response) => {
+                console.log('User removed from DM list:', response);
+                this.dmList = this.dmList.filter((user) => user.id !== userId);
+            },
+            (error) => {
+                console.error('Error removing user from DM list:', error);
+            }
+        );
     }
 }

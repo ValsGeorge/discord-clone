@@ -60,4 +60,22 @@ router.post("/add-user", validateToken, async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 });
+
+router.delete("/remove-user/:dmUserId", validateToken, async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const dmUserId = parseInt(req.params.dmUserId);
+        console.log(userId, dmUserId);
+
+        const dmList = await DMList.destroy({
+            where: {
+                userId,
+                dmUserId,
+            },
+        });
+        res.json(dmList);
+    } catch (error) {
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
 module.exports = router;

@@ -18,11 +18,14 @@
     </div>
     <ul *ngFor="let user of dmList" class="font-sans flex flex-col w-11/12 px-4 hover:cursor-pointer"
         (click)="openPrivateChat(user)" (contextmenu)="showContextMenu($event, user.id)">
-        <li class="flex flex-row items-start my-1 p-2 hover:bg-hover">
+        <li class="flex flex-row items-start rounded-md my-1 p-2 hover:bg-hover relative group">
             <img [src]="user.profilePicture" alt="" class="w-8 h-8 rounded-full">
             <span class="ml-2">{{user.username}}</span>
+            <i class="bi bi-x-lg ml-auto my-1 text-text-faded text-sm opacity-0 group-hover:opacity-100"
+                (click)="removeUserFromDMList(user.id); $event.stopPropagation();"></i>
         </li>
         <app-edit-menu [itemsList]="itemsList" [targetId]="user.id"></app-edit-menu>
     </ul>
+
 
 </div>

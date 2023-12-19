@@ -122,19 +122,6 @@ export class EditMenuComponent {
             );
     }
 
-    // handleAddFriend() {
-    //     console.log('add friend');
-    //     console.log(this.targetId);
-    //     this.authService.addFriend(this.targetId as string).subscribe(
-    //         (res: any) => {
-    //             console.log(res);
-    //         },
-    //         (err: any) => {
-    //             console.log(err);
-    //         }
-    //     );
-    // }
-
     handleAddFriend() {
         console.log('add friend');
         console.log(this.targetId);
@@ -155,14 +142,7 @@ export class EditMenuComponent {
     }
 
     handleAddDM() {
-        this.dmService.addUserToDMList(this.targetId as string).subscribe(
-            (res) => {
-                console.log('res', res);
-            },
-            (err) => {
-                console.log('err', err);
-            }
-        );
+        this.dmService.addUserToDMList(this.targetId as string);
     }
 
     setPosition(x: number, y: number) {
