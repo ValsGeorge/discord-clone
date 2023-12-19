@@ -112,8 +112,7 @@ export class UtilsService {
     }
 
     getOnlineFriends() {
-        // return this.onlineFriends;
-        return this.onlineUsers;
+        return this.onlineFriends;
     }
 
     setSelectedServerId(serverId: string) {

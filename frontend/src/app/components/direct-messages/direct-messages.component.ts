@@ -58,6 +58,8 @@ export class DirectMessagesComponent implements OnInit {
 
     ngOnInit(): void {
         this.getDMList();
+        this.onlineUsers = this.utilsService.getOnlineUsers();
+        this.onlineUserIds = new Set(this.onlineUsers.map((user) => user.id));
         this.dmService.userList$.subscribe((user) => {
             this.dmList = this.dmList.concat(user);
         });

@@ -15,9 +15,8 @@ import { ContextMenu } from 'src/app/models/contextMenu';
 export class FriendsComponent implements OnInit {
     friends: User[] = [];
     onlineFriends: User[] = [];
-    onlineUsers: User[] = [];
     friendRequests: User[] = [];
-    onlineUserIds = new Set<string>();
+    onlineFriendsIds = new Set<string>();
 
     selectedTab = 'online';
 
@@ -51,26 +50,24 @@ export class FriendsComponent implements OnInit {
         private utilsService: UtilsService,
         private chatService: ChatService,
         private router: Router
-    ) {
-        this.utilsService.onlineUsers$.subscribe((onlineUsers) => {
-            this.onlineFriends = onlineUsers;
-            this.onlineUserIds = new Set(onlineUsers.map((user) => user.id));
-        });
-    }
+    ) {}
 
     ngOnInit(): void {
+        // Get the initial list of online users
         this.getOnlineFriends();
         this.authService.getFriendRequests().subscribe((friendRequests) => {
-            console.log('Friend requests:', friendRequests);
             this.friendRequests = friendRequests;
         });
 
+        // Subscribe to the online users list for updates
         this.utilsService.onlineFriends$.subscribe((onlineFriends) => {
             this.onlineFriends = onlineFriends;
+            this.onlineFriendsIds = new Set(
+                this.onlineFriends.map((user) => user.id)
+            );
         });
 
         this.utilsService.friendRequests$.subscribe((friendRequests) => {
-            console.log('Friend requests:', friendRequests);
             this.friendRequests = friendRequests;
         });
 
@@ -81,6 +78,9 @@ export class FriendsComponent implements OnInit {
 
     getOnlineFriends(): void {
         this.onlineFriends = this.utilsService.getOnlineFriends();
+        this.onlineFriendsIds = new Set(
+            this.onlineFriends.map((user) => user.id)
+        );
     }
 
     openPrivateChat(user: User): void {
