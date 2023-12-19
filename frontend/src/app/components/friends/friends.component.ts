@@ -17,6 +17,7 @@ export class FriendsComponent implements OnInit {
     onlineFriends: User[] = [];
     onlineUsers: User[] = [];
     friendRequests: User[] = [];
+    onlineUserIds = new Set<string>();
 
     selectedTab = 'online';
 
@@ -53,6 +54,7 @@ export class FriendsComponent implements OnInit {
     ) {
         this.utilsService.onlineUsers$.subscribe((onlineUsers) => {
             this.onlineFriends = onlineUsers;
+            this.onlineUserIds = new Set(onlineUsers.map((user) => user.id));
         });
     }
 
@@ -70,6 +72,10 @@ export class FriendsComponent implements OnInit {
         this.utilsService.friendRequests$.subscribe((friendRequests) => {
             console.log('Friend requests:', friendRequests);
             this.friendRequests = friendRequests;
+        });
+
+        this.authService.getFriends().subscribe((friends) => {
+            this.friends = friends;
         });
     }
 

@@ -25,6 +25,7 @@ export class DirectMessagesComponent implements OnInit {
         confirmPassword: '',
         profilePicture: '',
     };
+    onlineUserIds = new Set<string>();
 
     @ViewChildren(EditMenuComponent) editMenu!: QueryList<EditMenuComponent>;
     itemsList: ContextMenu[] = [
@@ -59,6 +60,9 @@ export class DirectMessagesComponent implements OnInit {
         this.getDMList();
         this.dmService.userList$.subscribe((user) => {
             this.dmList = this.dmList.concat(user);
+        });
+        this.utilsService.onlineUsers$.subscribe((onlineUsers) => {
+            this.onlineUserIds = new Set(onlineUsers.map((user) => user.id));
         });
     }
 

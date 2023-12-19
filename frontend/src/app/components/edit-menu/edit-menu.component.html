@@ -1,7 +1,7 @@
 <ng-container>
-    <div *ngIf="showMenu" class="absolute bg-gray-950 text-text shadow-md rounded-md p-2 text-left">
+    <div *ngIf="showMenu" class="absolute bg-gray-950 text-text shadow-md rounded-md p-2 text-left z-20">
         <div *ngFor="let item of itemsList" (click)="handleAction($event, item.action)"
-            class="cursor-pointer p-2 hover:bg-blue-600">
+            class="cursor-pointer p-2 hover:bg-blue-900">
             <div class='{{ item.icon}}'></div>
             {{ item.label }}
         </div>

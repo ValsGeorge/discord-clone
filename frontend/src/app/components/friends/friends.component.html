@@ -14,22 +14,47 @@
             (click)="(setSelectedTab('blocked'))">Blocked</button>
         <button class="m-2 p-1 rounded-md bg-green-600">Add Friend</button>
     </div>
-    <div class=""></div>
-    <div class="" *ngIf="selectedTab === 'online'">
-        <ul *ngFor="let friend of onlineFriends" class="font-sans flex flex-col w-11/12 px-4 hover:cursor-pointer"
+    <div class="ml-4" *ngIf="selectedTab === 'online'">
+        <div class="flex flex-row items-center font-disc text-sm text-text-faded">
+            <p class="text-text-faded">ONLINE - {{ onlineUserIds.size }}</p>
+        </div>
+        <ul *ngFor="let friend of onlineFriends" class="font-sans flex flex-col w-11/12 hover:cursor-pointer"
             (click)="openPrivateChat(friend)" (contextmenu)="showContextMenu($event, friend.id)">
-            <li class="flex flex-row items-start p-2 rounded-md hover:bg-hover">
-                <img [src]="friend.profilePicture" alt="" class="w-8 h-8 rounded-full">
+            <li class="flex flex-row items-start py-2 rounded-md -ml-2 hover:bg-hover">
+                <div class="relative">
+                    <img [src]="friend.profilePicture" alt="Profile Picture" class="w-8 h-8 ml-2 rounded-full">
+                    <div *ngIf="friend.username"
+                        class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-green-500 border-2 border-white"></div>
+                </div>
                 <span class="ml-2">{{friend.username}}</span>
             </li>
             <app-edit-menu [itemsList]="itemsList" [targetId]="friend.id"></app-edit-menu>
         </ul>
     </div>
-    <div class="" *ngIf="selectedTab==='all'"></div>
-    <div class="" *ngIf="selectedTab==='pending'">
-        <ul *ngFor="let friend of friendRequests" class="font-sans flex flex-col w-11/12 px-4 hover:cursor-pointer"
+    <div class="ml-4" *ngIf="selectedTab==='all'">
+        <div class="flex flex-row items-center font-disc text-sm text-text-faded">
+            <p class="text-text-faded">ALL - {{ friends.length }}</p>
+        </div>
+        <ul *ngFor="let friend of friends" class="font-sans flex flex-col w-11/12 hover:cursor-pointer"
+            (click)="openPrivateChat(friend)" (contextmenu)="showContextMenu($event, friend.id)">
+            <li class="flex flex-row items-start py-2 rounded-md hover:bg-hover">
+                <div class="relative">
+                    <img [src]="friend.profilePicture" alt="Profile Picture" class="w-8 h-8 rounded-full">
+                    <div *ngIf="onlineUserIds.has(friend.id)"
+                        class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-green-500 border-2 border-white"></div>
+                </div>
+                <span class="ml-2">{{friend.username}}</span>
+            </li>
+            <app-edit-menu [itemsList]="itemsList" [targetId]="friend.id"></app-edit-menu>
+        </ul>
+    </div>
+    <div class="ml-4" *ngIf="selectedTab==='pending'">
+        <div class="flex flex-row items-center font-disc text-sm text-text-faded">
+            <p class="text-text-faded">PENDING - {{ friendRequests.length }}</p>
+        </div>
+        <ul *ngFor="let friend of friendRequests" class="font-sans flex flex-col w-11/12 hover:cursor-pointer"
             (contextmenu)="showContextMenu($event, friend.id)">
-            <li class="flex flex-row items-start p-2 rounded-md hover:bg-hover">
+            <li class="flex flex-row items-start py-2 rounded-md hover:bg-hover">
                 <img [src]="friend.profilePicture" alt="" class="w-8 h-8 rounded-full">
                 <span class="ml-2">{{friend.username}}</span>
                 <div class="">
@@ -42,5 +67,10 @@
             <app-edit-menu [itemsList]="itemsList" [targetId]="friend.id"></app-edit-menu>
         </ul>
     </div>
-    <div class="" *ngIf="selectedTab==='blocked'"></div>
+    <div class="ml-4" *ngIf="selectedTab==='blocked'">
+        <div class="flex flex-row items-center font-disc text-sm text-text-faded">
+            <p class="text-text-faded">BLOCKED - ?</p>
+        </div>
+
+    </div>
 </div>

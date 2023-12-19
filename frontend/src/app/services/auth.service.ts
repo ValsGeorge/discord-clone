@@ -128,7 +128,19 @@ export class AuthService {
             'Content-Type': 'application/json',
             token: `${this.getAuthTokenFromLocalStorage()}`,
         };
-        return this.httpClient.get(url, { headers });
+        return this.httpClient.get(url, { headers }).pipe(
+            tap((response: any) => {
+                response.forEach((friend: any) => {
+                    friend.profilePicture = this.getProfilePictureUrl(
+                        friend.id
+                    );
+                });
+                return response;
+            }),
+            catchError((error) => {
+                return throwError(() => error);
+            })
+        );
     }
 
     getFriendRequests(): Observable<any> {
