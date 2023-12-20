@@ -41,7 +41,12 @@ module.exports = {
                 "text-faded": "#dbdee1",
                 "accent-2": "#111214",
                 "bgray-1": "#2e2f34",
+                "scrollbar-bar": "#1a1b1e",
             },
         }),
+        require("tailwind-scrollbar"),
     ],
+    variants: {
+        scrollbar: ["rounded"],
+    },
 };

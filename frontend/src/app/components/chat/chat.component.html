@@ -1,40 +1,66 @@
 <div class="chat-room flex flex-col h-full bg-secondary">
-    <div class="chat-messages flex-grow overflow-y-scroll p-4 border-b border-gray-300">
-        <div class="message mb-2 hover:bg-message-hover rounded-md" *ngFor="let message of messages"
-            (mouseenter)="showOptions(message)" (mouseleave)="hideOptions()">
-            <div class="flex">
-                <ng-container *ngIf="!message.isEditing; else editMessageTemplate" class="flex flex-row">
-                    <img *ngIf="message.userProfilePicture" [src]="message.userProfilePicture" alt="Profile Picture"
-                        class="w-8 h-8 rounded-full m-2">
-                    <div class="flex flex-col">
-                        <div class="flex flex-row items-center">
-                            <p class="font-bold text-text">{{ message.username }}</p>
-                            <p class="text-text-faded text-xs ml-2">{{ message.createdAt | customDate }}</p>
+    <div class="bg-primary flex flex-row items-center h-[60px] border-b-2 border-secondary">
+        <div class="flex flex-row p-3">
+            <div class="relative">
 
+            </div>
+        </div>
+        <p class="text-text">test</p>
+    </div>
+    <div
+        class="h-full chat-messages flex-grow overflow-y-scroll p-4 border-b border-scrollbar-bar scrollbar-thin scrollbar-thumb-scrollbar-bar scrollbar-track-secondary">
+        <div class="chat-messages flex-grow p-4 border-b border-gray-300">
+            <div class="message mb-2 hover:bg-message-hover rounded-md" *ngFor="let message of messages"
+                (mouseenter)="showOptions(message)" (mouseleave)="hideOptions()">
+                <ng-container *ngIf="loading; else messageTemplate">
+                    <div class="flex flex-row">
+                        <div class="animate-pulse flex flex-row">
+                            <div class="w-8 h-8 rounded-full bg-gray-300"></div>
+                            <div class="flex flex-col ml-2">
+                                <div class="w-32 h-4 bg-gray-300 rounded-md"></div>
+                                <div class="w-48 h-4 bg-gray-300 rounded-md mt-1"></div>
+                            </div>
                         </div>
-                        <p class="text-text">{{ message.content }}</p>
                     </div>
                 </ng-container>
-                <ng-template #editMessageTemplate>
-                    <div class="flex flex-col">
-                        <input [(ngModel)]="editMessageForm.value.editedContent" type="text"
-                            class="bg-primary border border-secondary text-text rounded-md p-2">
-                        <div class="flex flex-row">
-                            <div class="flex flex-row">
-                                <p>Enter to </p>
-                                <button (click)="saveEditedMessage(message)" class="mx-2 text-blue-600">Save</button>
+                <ng-template #messageTemplate>
+                    <div class="flex">
+                        <ng-container *ngIf="!message.isEditing; else editMessageTemplate" class="flex flex-row">
+                            <img *ngIf="message.userProfilePicture" [src]="message.userProfilePicture"
+                                alt="Profile Picture" class="w-8 h-8 rounded-full m-2">
+                            <div class="flex flex-col">
+                                <div class="flex flex-row items-center">
+                                    <p class="font-bold text-text">{{ message.username }}</p>
+                                    <p class="text-text-faded text-xs ml-2">{{ message.createdAt | customDate }}</p>
+
+                                </div>
+                                <p class="text-text">{{ message.content }}</p>
                             </div>
-                            <div class="flex flex-row">
-                                <p>Esc to </p>
-                                <button (click)="cancelEditing(message)" class="mx-2 text-blue-600">Cancel</button>
+                        </ng-container>
+                        <ng-template #editMessageTemplate>
+                            <div class="flex flex-col">
+                                <input [(ngModel)]="editMessageForm.value.editedContent" type="text"
+                                    class="bg-primary border border-secondary text-text rounded-md p-2">
+                                <div class="flex flex-row">
+                                    <div class="flex flex-row">
+                                        <p>Enter to </p>
+                                        <button (click)="saveEditedMessage(message)"
+                                            class="mx-2 text-blue-600">Save</button>
+                                    </div>
+                                    <div class="flex flex-row">
+                                        <p>Esc to </p>
+                                        <button (click)="cancelEditing(message)"
+                                            class="mx-2 text-blue-600">Cancel</button>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        </ng-template>
                     </div>
                 </ng-template>
-            </div>
-            <div class="relative">
-                <app-message-options *ngIf="showOptionsForMessage === +message.id" [message]="message"
-                    (editClick)="handleEditClick(message)"></app-message-options>
+                <div class="relative">
+                    <app-message-options *ngIf="showOptionsForMessage === +message.id" [message]="message"
+                        (editClick)="handleEditClick(message)"></app-message-options>
+                </div>
             </div>
         </div>
     </div>

@@ -32,10 +32,15 @@ export class ChatComponent {
 
     editMessageForm: FormGroup;
 
+    loading: boolean = false;
+
     ngOnInit(): void {
         this.chatService.messageUpdate$.subscribe((updatedMessages) => {
             this.messages = updatedMessages;
             console.log('Messages:', this.messages);
+            setTimeout(() => {
+                this.loading = false;
+            }, 1000);
         });
     }
 

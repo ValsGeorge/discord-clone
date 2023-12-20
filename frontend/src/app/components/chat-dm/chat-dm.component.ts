@@ -74,6 +74,7 @@ export class ChatDmComponent implements OnInit {
         });
 
         this.route.paramMap.subscribe((params) => {
+            this.loading = true;
             const receiverId = params.get('userId') as string;
             this.authService.getUserName(receiverId).subscribe((user) => {
                 this.receiver = user;
