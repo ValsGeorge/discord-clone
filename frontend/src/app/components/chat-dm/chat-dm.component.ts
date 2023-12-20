@@ -8,9 +8,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { ActivatedRoute } from '@angular/router';
 import { ElementRef, ViewChild } from '@angular/core';
-import { DatePipe } from '@angular/common';
 import { User } from 'src/app/models/user';
-
 @Component({
     selector: 'app-chat-dm',
     templateUrl: './chat-dm.component.html',
@@ -31,6 +29,7 @@ export class ChatDmComponent implements OnInit {
             editedContent: [''], // Add a form control for edited content
         });
     }
+    loading: boolean = true;
 
     receiver: User = {
         id: '',
@@ -56,6 +55,7 @@ export class ChatDmComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.loading = true;
         this.editMessageForm = this.formBuilder.group({
             editedContent: [''], // Add a form control for edited content
         });
@@ -82,7 +82,11 @@ export class ChatDmComponent implements OnInit {
         this.chatService.DMUpdate$.subscribe((updatedMessages) => {
             this.messages = updatedMessages;
             console.log('Messages:', this.messages);
-            this.scrollToBottom();
+
+            setTimeout(() => {
+                this.loading = false;
+                // force wait for DOM to load
+            }, 100);
         });
     }
 
