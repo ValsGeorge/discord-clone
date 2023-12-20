@@ -1,5 +1,17 @@
-<div class="chat-room flex flex-col h-full bg-secondary">
-    <div #chatContainer class="chat-messages flex-grow overflow-y-scroll p-4 border-b border-gray-300">
+<div class="chat-room flex flex-col h-full bg-primary">
+    <div class="bg-primary flex flex-row items-center h-[60px] border-b-2 border-secondary">
+        <div class="flex flex-row p-3">
+            <div class="relative">
+                <img [src]="receiver.profilePicture" alt="Profile Picture" class="w-8 h-8 rounded-full">
+                <div *ngIf="onlineUserIds.has(receiver.id)"
+                    class="absolute -bottom-1 -right-1 w-[16px] h-[16px] rounded-full bg-green-500 border-[3px] border-secondary">
+                </div>
+            </div>
+        </div>
+        <p class="text-text">{{ receiver.nickname }}</p>
+    </div>
+
+    <div #chatContainer class="h-full chat-messages flex-grow overflow-y-scroll p-4 border-b border-gray-300">
         <div class="message mb-2 hover:bg-message-hover rounded-md" *ngFor="let message of messages"
             (mouseenter)="showOptions(message)" (mouseleave)="hideOptions()">
             <div class="flex">
@@ -38,9 +50,10 @@
             </div>
         </div>
     </div>
-    <div class="chat-input p-4 flex items-center">
+
+    <div class="chat-input p-4 flex items-center h-[80px]">
         <input [(ngModel)]="messageContent" type="text" id="message-input" placeholder="Type your message..."
-            class="flex-grow p-2 border rounded-l-md">
+            class="flex-grow p-2 border rounded-l-md bg-hover border-none">
         <div class="">
             <button (click)="sendDM()" class="px-4 py-2 bg-green-500 text-text rounded-r-md">Send</button>
         </div>

@@ -9,6 +9,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { ActivatedRoute } from '@angular/router';
 import { ElementRef, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { User } from 'src/app/models/user';
 
 @Component({
     selector: 'app-chat-dm',
@@ -31,14 +32,53 @@ export class ChatDmComponent implements OnInit {
         });
     }
 
+    receiver: User = {
+        id: '',
+        nickname: '',
+        username: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+        profilePicture: '',
+    };
+
+    onlineUserIds = new Set<string>();
+
     messages: DM[] = [];
 
     showOptionsForMessage: number | null = null;
 
     editMessageForm: FormGroup;
 
+    isReceiverOnline(): boolean {
+        const receiverId = this.route.snapshot.paramMap.get('userId') as string;
+        return this.utilsService.isUserOnline(receiverId);
+    }
+
     ngOnInit(): void {
-        this.chatService.fetchInitialDMs('1', '2');
+        this.editMessageForm = this.formBuilder.group({
+            editedContent: [''], // Add a form control for edited content
+        });
+
+        this.authService.getUser().subscribe((user) => {
+            const userId = user.id;
+            const receiverId = this.route.snapshot.paramMap.get(
+                'userId'
+            ) as string;
+            this.chatService.fetchInitialDMs(userId, receiverId);
+            this.utilsService.onlineUsers$.subscribe((onlineUsers) => {
+                this.onlineUserIds = new Set(
+                    onlineUsers.map((user) => user.id)
+                );
+            });
+        });
+
+        this.route.paramMap.subscribe((params) => {
+            const receiverId = params.get('userId') as string;
+            this.authService.getUserName(receiverId).subscribe((user) => {
+                this.receiver = user;
+            });
+        });
         this.chatService.DMUpdate$.subscribe((updatedMessages) => {
             this.messages = updatedMessages;
             console.log('Messages:', this.messages);

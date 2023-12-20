@@ -115,6 +115,10 @@ export class UtilsService {
         return this.onlineFriends;
     }
 
+    isUserOnline(userId: string): boolean {
+        return this.onlineUsers.some((user) => user.id === userId);
+    }
+
     setSelectedServerId(serverId: string) {
         localStorage.setItem('selectedServerId', serverId);
     }

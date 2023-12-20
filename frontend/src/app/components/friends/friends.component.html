@@ -1,5 +1,5 @@
-<div class="text-text-faded">
-    <div class="flex flex-row text-base">
+<div class=" h-full w-full">
+    <div class="flex flex-row text-base text-text-faded border-b-secondary border-b-2">
         <div class=" m-2 p-1 flex flex-row">
             <i class="bi bi-person-raised-hand"></i>
             <p>Friends</p>
@@ -14,65 +14,72 @@
             (click)="(setSelectedTab('blocked'))">Blocked</button>
         <button class="m-2 p-1 rounded-md bg-green-600">Add Friend</button>
     </div>
-    <div class="ml-4" *ngIf="selectedTab === 'online'">
-        <div class="flex flex-row items-center font-disc text-sm text-text-faded">
-            <p class="text-text-faded">ONLINE - {{ onlineFriends.length }}</p>
-        </div>
-        <ul *ngFor="let friend of onlineFriends" class="font-sans flex flex-col w-11/12 hover:cursor-pointer"
-            (click)="openPrivateChat(friend)" (contextmenu)="showContextMenu($event, friend.id)">
-            <li class="flex flex-row items-start py-2 rounded-md -ml-2 hover:bg-hover">
-                <div class="relative">
-                    <img [src]="friend.profilePicture" alt="Profile Picture" class="w-8 h-8 ml-2 rounded-full">
-                    <div *ngIf="friend.username"
-                        class="absolute -bottom-1 -right-1 w-[16px] h-[16px] rounded-full bg-green-500 border-[3px] border-primary">
-                    </div>
+    <div class="flex flex-row h-full">
+        <div class="text-text-faded w-3/5 lg:w-full">
+            <div class="ml-4" *ngIf="selectedTab === 'online'">
+                <div class="flex flex-row items-center font-disc text-sm text-text-faded">
+                    <p class="text-text-faded">ONLINE - {{ onlineFriends.length }}</p>
                 </div>
-                <span class="ml-2">{{friend.username}}</span>
-            </li>
-            <app-edit-menu [itemsList]="itemsList" [targetId]="friend.id"></app-edit-menu>
-        </ul>
-    </div>
-    <div class="ml-4" *ngIf="selectedTab==='all'">
-        <div class="flex flex-row items-center font-disc text-sm text-text-faded">
-            <p class="text-text-faded">ALL - {{ friends.length }}</p>
-        </div>
-        <ul *ngFor="let friend of friends" class="font-sans flex flex-col w-11/12 hover:cursor-pointer"
-            (click)="openPrivateChat(friend)" (contextmenu)="showContextMenu($event, friend.id)">
-            <li class="flex flex-row items-start py-2 rounded-md hover:bg-hover">
-                <div class="relative">
-                    <img [src]="friend.profilePicture" alt="Profile Picture" class="w-8 h-8 rounded-full">
-                    <div *ngIf="onlineFriendsIds.has(friend.id)"
-                        class="absolute -bottom-1 -right-1 w-[16px] h-[16px] rounded-full bg-green-500 border-[3px] border-primary">
-                    </div>
+                <ul *ngFor="let friend of onlineFriends" class="font-sans flex flex-col w-11/12 hover:cursor-pointer"
+                    (click)="openPrivateChat(friend)" (contextmenu)="showContextMenu($event, friend.id)">
+                    <li class="flex flex-row items-start py-2 rounded-md -ml-2 hover:bg-hover">
+                        <div class="relative">
+                            <img [src]="friend.profilePicture" alt="Profile Picture" class="w-8 h-8 ml-2 rounded-full">
+                            <div *ngIf="friend.username"
+                                class="absolute -bottom-1 -right-1 w-[16px] h-[16px] rounded-full bg-green-500 border-[3px] border-primary">
+                            </div>
+                        </div>
+                        <span class="ml-2">{{friend.username}}</span>
+                    </li>
+                    <app-edit-menu [itemsList]="itemsList" [targetId]="friend.id"></app-edit-menu>
+                </ul>
+            </div>
+            <div class="ml-4" *ngIf="selectedTab==='all'">
+                <div class="flex flex-row items-center font-disc text-sm text-text-faded">
+                    <p class="text-text-faded">ALL - {{ friends.length }}</p>
                 </div>
-                <span class="ml-2">{{friend.username}}</span>
-            </li>
-            <app-edit-menu [itemsList]="itemsList" [targetId]="friend.id"></app-edit-menu>
-        </ul>
-    </div>
-    <div class="ml-4" *ngIf="selectedTab==='pending'">
-        <div class="flex flex-row items-center font-disc text-sm text-text-faded">
-            <p class="text-text-faded">PENDING - {{ friendRequests.length }}</p>
-        </div>
-        <ul *ngFor="let friend of friendRequests" class="font-sans flex flex-col w-11/12 hover:cursor-pointer"
-            (contextmenu)="showContextMenu($event, friend.id)">
-            <li class="flex flex-row items-start py-2 rounded-md hover:bg-hover">
-                <img [src]="friend.profilePicture" alt="" class="w-8 h-8 rounded-full">
-                <span class="ml-2">{{friend.username}}</span>
-                <div class="">
-                    <button class="bg-green-600 rounded-md p-1 m-1"
-                        (click)="respondFriendRequest(friend.id, 'accept')">Accept</button>
-                    <button class="bg-red-600 rounded-md p-1 m-1"
-                        (click)="respondFriendRequest(friend.id, 'decline')">Decline</button>
+                <ul *ngFor="let friend of friends" class="font-sans flex flex-col w-11/12 hover:cursor-pointer"
+                    (click)="openPrivateChat(friend)" (contextmenu)="showContextMenu($event, friend.id)">
+                    <li class="flex flex-row items-start py-2 rounded-md hover:bg-hover">
+                        <div class="relative">
+                            <img [src]="friend.profilePicture" alt="Profile Picture" class="w-8 h-8 rounded-full">
+                            <div *ngIf="onlineFriendsIds.has(friend.id)"
+                                class="absolute -bottom-1 -right-1 w-[16px] h-[16px] rounded-full bg-green-500 border-[3px] border-primary">
+                            </div>
+                        </div>
+                        <span class="ml-2">{{friend.username}}</span>
+                    </li>
+                    <app-edit-menu [itemsList]="itemsList" [targetId]="friend.id"></app-edit-menu>
+                </ul>
+            </div>
+            <div class="ml-4" *ngIf="selectedTab==='pending'">
+                <div class="flex flex-row items-center font-disc text-sm text-text-faded">
+                    <p class="text-text-faded">PENDING - {{ friendRequests.length }}</p>
                 </div>
-            </li>
-            <app-edit-menu [itemsList]="itemsList" [targetId]="friend.id"></app-edit-menu>
-        </ul>
-    </div>
-    <div class="ml-4" *ngIf="selectedTab==='blocked'">
-        <div class="flex flex-row items-center font-disc text-sm text-text-faded">
-            <p class="text-text-faded">BLOCKED - ?</p>
-        </div>
+                <ul *ngFor="let friend of friendRequests" class="font-sans flex flex-col w-11/12 hover:cursor-pointer"
+                    (contextmenu)="showContextMenu($event, friend.id)">
+                    <li class="flex flex-row items-start py-2 rounded-md hover:bg-hover">
+                        <img [src]="friend.profilePicture" alt="" class="w-8 h-8 rounded-full">
+                        <span class="ml-2">{{friend.username}}</span>
+                        <div class="">
+                            <button class="bg-green-600 rounded-md p-1 m-1"
+                                (click)="respondFriendRequest(friend.id, 'accept')">Accept</button>
+                            <button class="bg-red-600 rounded-md p-1 m-1"
+                                (click)="respondFriendRequest(friend.id, 'decline')">Decline</button>
+                        </div>
+                    </li>
+                    <app-edit-menu [itemsList]="itemsList" [targetId]="friend.id"></app-edit-menu>
+                </ul>
+            </div>
+            <div class="ml-4" *ngIf="selectedTab==='blocked'">
+                <div class="flex flex-row items-center font-disc text-sm text-text-faded">
+                    <p class="text-text-faded">BLOCKED - ?</p>
+                </div>
 
+            </div>
+        </div>
+        <div class="hidden w-2/5 lg:block bg-primary border-l-2 border-hover">
+            <p class="text-text-faded ml-2 text-lg font-semibold mt-2">Active Now</p>
+        </div>
     </div>
 </div>
