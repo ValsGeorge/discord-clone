@@ -1,0 +1,9 @@
+<div class="flex justify-between py-3 px-4">
+    <div class="text-text font-semibold">
+        <p>{{ server.name }}</p>
+        <app-edit-menu [itemsList]="itemsList" [targetId]="server.id"></app-edit-menu>
+    </div>
+    <button class="mr-1" (click)="showContextMenu($event, server.id)">
+        <i class="bi bi-chevron-down"></i>
+    </button>
+</div>

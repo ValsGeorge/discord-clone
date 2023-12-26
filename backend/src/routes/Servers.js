@@ -205,4 +205,27 @@ router.delete("/delete-server/:serverId", validateToken, async (req, res) => {
     }
 });
 
+router.get("/server-info/:serverId", validateToken, async (req, res) => {
+    const serverId = parseInt(req.params.serverId);
+    const userId = parseInt(req.user.id);
+
+    try {
+        const server = await Servers.findOne({
+            where: {
+                id: serverId,
+                userId: userId,
+            },
+        });
+
+        if (!server) {
+            return res.status(401).send("Not authorized to view this server");
+        }
+
+        res.json(server);
+    } catch (error) {
+        console.error("Error during server info retrieval:", error);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
 module.exports = router;

@@ -1,6 +1,7 @@
 export interface Servers {
     id: string;
     name: string;
+    image?: string;
     owner: string;
     members: string[];
     chats: string[];

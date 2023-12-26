@@ -34,6 +34,8 @@ import { ChatDmComponent } from './components/chat-dm/chat-dm.component';
 import { FriendsComponent } from './components/friends/friends.component';
 import { DatePipe } from '@angular/common';
 import { CustomDatePipe } from './models/custom.datepipe';
+import { ServerNamePipe } from './pipes/server-name.pipe';
+import { ServerNameOptionsComponent } from './components/server-name-options/server-name-options.component';
 
 @NgModule({
     declarations: [
@@ -60,6 +62,8 @@ import { CustomDatePipe } from './models/custom.datepipe';
         ChatDmComponent,
         FriendsComponent,
         CustomDatePipe,
+        ServerNamePipe,
+        ServerNameOptionsComponent,
     ],
     imports: [
         BrowserModule,

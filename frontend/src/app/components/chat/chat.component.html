@@ -1,15 +1,13 @@
 <div class="chat-room flex flex-col h-full bg-secondary">
-    <div class="bg-primary flex flex-row items-center h-[60px] border-b-2 border-secondary">
+    <div class="bg-primary flex flex-row items-center h-[48px] min-h-[48px] border-b-2 border-secondary">
         <div class="flex flex-row p-3">
-            <div class="relative">
 
-            </div>
         </div>
-        <p class="text-text">test</p>
+        <p class="text-text">qwe</p>
     </div>
     <div
-        class="h-full chat-messages flex-grow overflow-y-scroll p-4 border-b border-scrollbar-bar scrollbar-thin scrollbar-thumb-scrollbar-bar scrollbar-track-secondary">
-        <div class="chat-messages flex-grow p-4 border-b border-gray-300">
+        class="h-full chat-messages flex-grow overflow-y-scroll border-b bg-primary border-scrollbar-bar scrollbar-thin scrollbar-thumb-scrollbar-bar scrollbar-track-secondary">
+        <div class="chat-messages flex-grow border-b border-gray-300">
             <div class="message mb-2 hover:bg-message-hover rounded-md" *ngFor="let message of messages"
                 (mouseenter)="showOptions(message)" (mouseleave)="hideOptions()">
                 <ng-container *ngIf="loading; else messageTemplate">
@@ -25,7 +23,7 @@
                 </ng-container>
                 <ng-template #messageTemplate>
                     <div class="flex">
-                        <ng-container *ngIf="!message.isEditing; else editMessageTemplate" class="flex flex-row">
+                        <ng-container *ngIf="!message.isEditing; else editMessageTemplate" class="flex flex-row w-full">
                             <img *ngIf="message.userProfilePicture" [src]="message.userProfilePicture"
                                 alt="Profile Picture" class="w-8 h-8 rounded-full m-2">
                             <div class="flex flex-col">
@@ -64,9 +62,9 @@
             </div>
         </div>
     </div>
-    <div class="chat-input p-4 flex items-center">
+    <div class="chat-input p-4 flex items-center bg-primary">
         <input [(ngModel)]="messageContent" type="text" id="message-input" placeholder="Type your message..."
-            class="flex-grow p-2 border rounded-l-md">
+            class="flex-grow p-2 border rounded-l-md bg-hover border-none text-text">
         <button (click)="sendMessage()" class="px-4 py-2 bg-blue-500 text-text rounded-r-md">Send</button>
     </div>
 </div>

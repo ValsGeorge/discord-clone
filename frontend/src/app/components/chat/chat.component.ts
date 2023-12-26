@@ -14,7 +14,6 @@ import { DM } from 'src/app/models/DM';
 })
 export class ChatComponent {
     messageContent: string = '';
-    userId = '1';
     constructor(
         private chatService: ChatService,
         private utilsService: UtilsService,
@@ -50,11 +49,6 @@ export class ChatComponent {
                 this.messageContent,
                 this.utilsService.getSelectedChannelId()
             );
-    }
-
-    sendDM(): void {
-        if (this.messageContent != '')
-            this.chatService.sendDM(this.messageContent, this.userId, '2');
     }
 
     getProfilePictureUrl(userId: string): string {

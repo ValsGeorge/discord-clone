@@ -1,10 +1,4 @@
-import { Component } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
-import { OnInit } from '@angular/core';
-import { User } from 'src/app/models/user';
-import { Servers } from 'src/app/models/server';
-import { ServersService } from 'src/app/services/servers.service';
-
+import { Component, ViewChild } from '@angular/core';
 @Component({
     selector: 'app-servers',
     templateUrl: './servers.component.html',
@@ -12,14 +6,4 @@ import { ServersService } from 'src/app/services/servers.service';
 })
 export class ServersComponent {
     constructor() {}
-
-    user: User = {
-        id: '',
-        nickname: '',
-        username: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
-        profilePicture: '',
-    };
 }

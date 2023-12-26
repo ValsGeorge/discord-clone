@@ -1,5 +1,5 @@
 <div class="chat-room flex flex-col h-full bg-primary">
-    <div class="bg-primary flex flex-row items-center h-[60px] border-b-2 border-secondary">
+    <div class="bg-primary flex flex-row items-center h-[48px] min-h-[48px] border-b-2 border-secondary">
         <div class="flex flex-row p-3">
             <div class="relative">
                 <img [src]="receiver.profilePicture" alt="Profile Picture" class="w-8 h-8 rounded-full">
@@ -69,7 +69,7 @@
 
     <div class="chat-input p-4 flex items-center h-[80px]">
         <input [(ngModel)]="messageContent" type="text" id="message-input" placeholder="Type your message..."
-            class="flex-grow p-2 border rounded-l-md bg-hover border-none">
+            class="flex-grow p-2 border rounded-l-md bg-hover border-none text-text">
         <div class="">
             <button (click)="sendDM()" class="px-4 py-2 bg-green-500 text-text rounded-r-md">Send</button>
         </div>
