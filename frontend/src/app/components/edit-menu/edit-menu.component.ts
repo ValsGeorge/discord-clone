@@ -1,11 +1,18 @@
-import { Component, HostListener, Input } from '@angular/core';
+import {
+    Component,
+    ComponentRef,
+    HostListener,
+    Input,
+    ViewChildren,
+} from '@angular/core';
 import { ContextMenu } from 'src/app/models/contextMenu';
 import { AuthService } from 'src/app/services/auth.service';
 import { ChannelsService } from 'src/app/services/channels/channels.service';
 import { ServersService } from 'src/app/services/servers.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { DirectMessagesService } from 'src/app/services/direct-messages/direct-messages.service';
-
+import { Servers } from 'src/app/models/server';
+import { SettingsService } from 'src/app/services/settings.service';
 @Component({
     selector: 'app-edit-menu',
     templateUrl: './edit-menu.component.html',
@@ -13,16 +20,33 @@ import { DirectMessagesService } from 'src/app/services/direct-messages/direct-m
 })
 export class EditMenuComponent {
     [x: string]: any;
+    @Input() server: Servers = {
+        id: '',
+        name: '',
+        owner: '',
+        members: [],
+        chats: [],
+        created_at: '',
+        updated_at: '',
+    };
     @Input() targetId: string | undefined;
     @Input() itemsList: ContextMenu[] | undefined;
+
+    @Input() width: number | undefined;
+    @Input() marginX: number | undefined;
+    @Input() marginY: number | undefined;
+
     showMenu = false;
+
+    showDialog = false;
 
     constructor(
         private serversService: ServersService,
         private channelsService: ChannelsService,
         private authService: AuthService,
         private utilsService: UtilsService,
-        private dmService: DirectMessagesService
+        private dmService: DirectMessagesService,
+        private settingsComponent: SettingsService
     ) {}
 
     @HostListener('document:click', ['$event'])
@@ -41,6 +65,8 @@ export class EditMenuComponent {
                 break;
 
             case 'edit-server':
+                this.openSettings();
+                // this.settingsComponent.openSettings();
                 console.log('edit server');
                 break;
 
@@ -143,6 +169,21 @@ export class EditMenuComponent {
 
     handleAddDM() {
         this.dmService.addUserToDMList(this.targetId as string);
+    }
+
+    // openSettings() {
+    //     console.log('open settings');
+    //     this.settingsComponent.openSettings();
+    // }
+
+    openSettings() {
+        console.log('openSettings');
+        this.showDialog = true;
+    }
+
+    closeSettings() {
+        console.log('closeSettings');
+        this.showDialog = false;
     }
 
     setPosition(x: number, y: number) {

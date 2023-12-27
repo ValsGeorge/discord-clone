@@ -1,5 +1,6 @@
 <ng-container>
-    <div *ngIf="showMenu" class="absolute bg-gray-950 text-text shadow-md rounded-md p-2 text-left z-20">
+    <div *ngIf="showMenu" class="absolute bg-gray-950 text-text shadow-md rounded-md p-2 text-left z-20"
+        [style.width.px]="width" [style.margin-top.px]="marginY">
         <div *ngFor="let item of itemsList" (click)="handleAction($event, item.action)"
             class="cursor-pointer p-2 hover:bg-blue-900">
             <div class='{{ item.icon}}'></div>
@@ -7,3 +8,5 @@
         </div>
     </div>
 </ng-container>
+
+<app-server-settings [server]="server" [visible]="showDialog" (close)="closeSettings()"></app-server-settings>

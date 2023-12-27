@@ -36,6 +36,7 @@ import { DatePipe } from '@angular/common';
 import { CustomDatePipe } from './models/custom.datepipe';
 import { ServerNamePipe } from './pipes/server-name.pipe';
 import { ServerNameOptionsComponent } from './components/server-name-options/server-name-options.component';
+import { ServerSettingsComponent } from './components/server-settings/server-settings.component';
 
 @NgModule({
     declarations: [
@@ -64,6 +65,7 @@ import { ServerNameOptionsComponent } from './components/server-name-options/ser
         CustomDatePipe,
         ServerNamePipe,
         ServerNameOptionsComponent,
+        ServerSettingsComponent,
     ],
     imports: [
         BrowserModule,

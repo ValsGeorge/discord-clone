@@ -1,0 +1,65 @@
+<div *ngIf="visible" class="fixed inset-0 flex z-50 bg-primary">
+    <div class="absolute top-10 right-10">
+        <button (click)="onClose()"
+            class="text-text-faded p-2 px-3 rounded-full border-2 border-text-faded hover:text-text">
+            <i class="bi bi-x"></i>
+        </button>
+    </div>
+    <div class="panel flex flex-col items-end bg-secondary h-full w-1/5 p-5 pt-16 text-left">
+        <div class="text-text-faded">
+            <p class="font-semibold pt-1">{{ server.name }}</p>
+            <div class="font-normal pt-1 -ml-1" *ngFor="let option of options">
+                <button
+                    class="w-full text-left hover:bg-hover rounded p-1 {{ option === selectedOption && 'bg-hover text-text font-semibold' }}"
+                    (click)="selectOption(option)">
+                    {{option}}
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="w-4/5 p-5 pt-16 items-start text-left ml-10 mr-20">
+        <ng-container *ngIf="selectedOption === 'Overview'">
+            <h2 class="text-text">Server Overview</h2>
+            <div class="flex items-center  mt-5">
+                <div class="image flex flex-row justify-between w-1/2">
+                    <div class="relative w-24 h-24 shrink-0 grow-0 rounded-full overflow-hidden cursor-pointer shadow-lg shadow-accent"
+                        (mouseenter)="hovered = true" (mouseleave)="hovered = false">
+                        <img *ngIf="server.image" [src]="server.image" alt="Server Image"
+                            class="w-full h-full object-cover">
+                        <div *ngIf="!server.image" #serverName
+                            class="w-full h-full flex items-center justify-center bg-secondary text-text font-semibold text-xl cursor-pointer">
+                            {{ server.name | serverName }}
+                        </div>
+                        <div *ngIf="hovered"
+                            class="absolute inset-0 flex flex-col bg-black items-center text-center justify-center text-xs">
+                            <div class="text-white">
+                                <div (click)="changeImage()">Change Icon</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col ml-5">
+                        <p class="text-text-faded text-xs font-normal">We recommend an image of at least 512x512 for
+                            the
+                            server.
+                        </p>
+                        <button
+                            class="border-2 border-hover text-text text-sm hover:bg-hover rounded-md w-28 h-8 py-4 mt-4 flex items-center justify-center">
+                            Upload Image
+                        </button>
+
+                    </div>
+                </div>
+                <div class="w-1/2 ml-5">
+                    <h3 class="text-xs text-text-faded font-semibold mb-2">SERVER NAME</h3>
+                    <div class="font-normal">
+                        <input class="w-full bg-accent p-2 text-text-faded rounded-md" type="text" maxlength="100"
+                            name="" placeholder="" [(ngModel)]="server.name">
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="selectedOption === 'Roles'">
+            <p>Roles content</p>
+        </ng-container>
+    </div>
+</div>
