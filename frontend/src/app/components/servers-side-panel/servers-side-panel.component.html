@@ -1,19 +1,31 @@
 <div class="h-screen w-20 bg-accent flex flex-col items-center pt-4">
-    <button class="text-text h-16 w-16 bg-secondary rounded-full mb-2" routerLink="/servers"
-        (click)="resetSelectedServer()"><i class="bi bi-house"></i></button>
-    <button *ngFor="let server of servers" (contextmenu)="showContextMenu($event, server.id)"
-        class="bg-red-600 rounded-full w-16 h-16 flex items-center justify-center mb-2"
-        [routerLink]="['/servers', server.id]" [class.bg-white]="server.id.toString() === selectedServerId"
-        [class.border-l-4]="server.id.toString() === selectedServerId" (click)="selectServer(server.id)">
-        <div *ngIf="server.image; else serverName" class="">
-            <img [src]="server.image" alt="Server Image" class="w-16 h-16 rounded-full">
+    <div class="flex flex-row">
+        <div class="bg-white w-[4px] h-4/5 rounded-r-lg mr-2" [class.bg-white]="selectedServerId == '0'">
         </div>
-        <ng-template #serverName>
-            <p class="{{ server.id.toString() === selectedServerId ? 'text-black' : 'text-white' }}">
-                {{ server.name | serverName }}
-            </p>
-        </ng-template>
-        <app-edit-menu [itemsList]="itemsList" [targetId]="server.id"></app-edit-menu>
-    </button> <button class="text-text h-16 w-16 bg-secondary rounded-full" (click)="openCreateServer()"><i
+        <button class="text-text h-16 w-16 bg-secondary rounded-full mb-2 mr-2" routerLink="/servers"
+            (click)="resetSelectedServer()"><i class="bi bi-house"></i></button>
+    </div>
+    <div class="flex flex-row" *ngFor="let server of servers" (contextmenu)="showContextMenu($event, server.id)">
+        <div class="bg-white w-[4px] h-4/5 rounded-r-lg mr-2"
+            [class.bg-white]="server.id.toString() === selectedServerId">
+        </div>
+        <button
+            class="w-14 h-14 flex items-center justify-center mb-2 mr-2 
+        {{ server.id.toString() === selectedServerId ? 'bg-blue-600 rounded-[20px] ' : 'bg-secondary rounded-full' }} hover:bg-blue-600 hover:rounded-3xl hover:transition-all"
+            [routerLink]="['/servers', server.id]" (click)="selectServer(server.id)">
+            <div *ngIf="server.image; else serverName" class="">
+                <img [src]="server.image" alt="Server Image"
+                    class="w-14 h-14 {{ server.id.toString() === selectedServerId ? 'rounded-[20px] ' : 'rounded-full' }} hover:rounded-3xl">
+            </div>
+            <ng-template #serverName>
+                <p class="text-text">
+                    {{ server.name | serverName }}
+                </p>
+            </ng-template>
+            <app-edit-menu [itemsList]="itemsList" [targetId]="server.id"></app-edit-menu>
+
+        </button>
+    </div>
+    <button class="text-text h-16 w-16 bg-secondary rounded-full mx-2" (click)="openCreateServer()"><i
             class="bi bi-plus-lg"></i></button>
 </div>
