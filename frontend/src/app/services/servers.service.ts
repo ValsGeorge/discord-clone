@@ -116,4 +116,22 @@ export class ServersService {
 
         return this.httpClient.get(url, { headers });
     }
+
+    uploadServerImage(serverId: string, image: File): Observable<any> {
+        const token = localStorage.getItem('token') as string;
+        const url = `${this.baseUrl}/upload-server-image`;
+        const formData = new FormData();
+        formData.append('file', image);
+        formData.append('serverId', serverId);
+
+        const headers = new HttpHeaders({
+            token: token,
+        });
+
+        return this.httpClient.post(url, formData, { headers });
+    }
+
+    getServerImageUrl(serverId: string): string {
+        return `${this.baseUrl}/server-image/${serverId}`;
+    }
 }

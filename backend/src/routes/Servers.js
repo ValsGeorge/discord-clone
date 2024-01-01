@@ -228,4 +228,95 @@ router.get("/server-info/:serverId", validateToken, async (req, res) => {
     }
 });
 
+const multer = require("multer");
+const path = require("path");
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "server/images/");
+    },
+    filename: (req, file, cb) => {
+        cb(
+            null,
+            `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`
+        );
+    },
+});
+
+const upload = multer({ storage: storage });
+
+router.post(
+    "/upload-server-image",
+    validateToken,
+    upload.single("file"),
+    async (req, res) => {
+        console.log("req.file: ", req.file);
+        console.log("req.body: ", req.body);
+        try {
+            const file = req.file;
+
+            if (!file) {
+                res.status(400).send("No file uploaded");
+            }
+
+            const server = await Servers.findOne({
+                where: {
+                    id: req.body.serverId,
+                    userId: req.user.id,
+                },
+            });
+
+            if (!server) {
+                return res.status(401).send("Not authorized to upload image");
+            }
+
+            await Servers.update(
+                {
+                    image: file.filename,
+                },
+                {
+                    where: {
+                        id: req.body.serverId,
+                    },
+                }
+            );
+
+            res.status(200).send("File uploaded");
+        } catch (error) {
+            console.error("Error during server image upload:", error);
+            res.status(500).send("Internal Server Error");
+        }
+    }
+);
+
+router.get("/server-image/:serverId", async (req, res) => {
+    const serverId = req.params.serverId;
+    console.log("sserverId: ", serverId);
+
+    const server = await Servers.findOne({
+        where: {
+            id: serverId,
+        },
+    });
+    console.log("server: ", server);
+
+    if (!server) {
+        return res.status(404).send("Server not found");
+    }
+    console.log("server.image: ", server.image);
+    if (!server.image) {
+        res.json({
+            image: null,
+        });
+    } else {
+        const filePath = path.join(
+            __dirname,
+            "../../server/images",
+            server.image
+        );
+        console.log("filePath: ", filePath);
+        res.sendFile(filePath);
+    }
+});
+
 module.exports = router;

@@ -21,6 +21,11 @@ module.exports = (sequelize, DataTypes) => {
             unique: true,
             allowNull: false,
         },
+        image: {
+            type: DataTypes.STRING,
+            unique: false,
+            allowNull: true,
+        },
     });
 
     Servers.associate = (models) => {

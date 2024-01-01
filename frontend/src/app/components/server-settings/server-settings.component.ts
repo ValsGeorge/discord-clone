@@ -1,5 +1,13 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {
+    Component,
+    Input,
+    Output,
+    EventEmitter,
+    ViewChild,
+    ElementRef,
+} from '@angular/core';
 import { Servers } from 'src/app/models/server';
+import { ServersService } from 'src/app/services/servers.service';
 
 @Component({
     selector: 'app-server-settings',
@@ -7,6 +15,7 @@ import { Servers } from 'src/app/models/server';
     styleUrls: ['./server-settings.component.css'],
 })
 export class ServerSettingsComponent {
+    @ViewChild('fileInput') fileInput!: ElementRef;
     @Input() visible: boolean = false;
     @Input() server: Servers = {
         id: '',
@@ -31,7 +40,7 @@ export class ServerSettingsComponent {
     selectedOption: string = 'Overview';
     hovered: boolean = false;
 
-    constructor() {
+    constructor(private serversService: ServersService) {
         this.selectedOption = 'Overview';
     }
     confirm() {
@@ -49,11 +58,21 @@ export class ServerSettingsComponent {
     }
 
     onFileSelected(event: any) {
-        console.log(event);
+        const fileInput = event.target as HTMLInputElement;
+        const file = fileInput.files?.[0];
+
+        if (file) {
+            console.log('Selected File:', file);
+            this.serversService
+                .uploadServerImage(this.server.id, file)
+                .subscribe((response) => {
+                    console.log(response);
+                    this.serversService.updateServers();
+                });
+        }
     }
 
-    changeImage() {
-        // TODO: Implement image change logic
-        console.log('Change Image Clicked');
+    uploadImage() {
+        this.fileInput.nativeElement.click();
     }
 }

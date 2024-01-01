@@ -33,8 +33,10 @@
                         <div *ngIf="hovered"
                             class="absolute inset-0 flex flex-col bg-black items-center text-center justify-center text-xs">
                             <div class="text-white">
-                                <div (click)="changeImage()">Change Icon</div>
+                                <div (click)="uploadImage()">Change Icon</div>
                             </div>
+                            <input type="file" accept=".png, .jpg" (change)="onFileSelected($event)"
+                                style="display: none;" #fileInput />
                         </div>
                     </div>
                     <div class="flex flex-col ml-5">
@@ -43,9 +45,12 @@
                             server.
                         </p>
                         <button
-                            class="border-2 border-hover text-text text-sm hover:bg-hover rounded-md w-28 h-8 py-4 mt-4 flex items-center justify-center">
+                            class="border-2 border-hover text-text text-sm hover:bg-hover rounded-md w-28 h-8 py-4 mt-4 flex items-center justify-center"
+                            (click)="uploadImage()">
                             Upload Image
                         </button>
+                        <input type="file" accept=".png, .jpg" (change)="onFileSelected($event)" style="display: none;"
+                            #fileInput />
 
                     </div>
                 </div>
