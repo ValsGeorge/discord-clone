@@ -25,6 +25,7 @@ export class ServerSettingsComponent {
         chats: [],
         created_at: '',
         updated_at: '',
+        image: '',
     };
     @Output() close: EventEmitter<void> = new EventEmitter<void>();
     options: string[] = [
