@@ -4,6 +4,11 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Channels } from 'src/app/models/channel';
 import { UtilsService } from '../utils.service';
 
+interface DialogData {
+    categoryId: string;
+    serverId: string;
+    visible: boolean;
+}
 @Injectable({
     providedIn: 'root',
 })
@@ -16,18 +21,30 @@ export class ChannelsService {
     private channelsUpdatedSubject = new Subject<void>();
     channelsUpdated$ = this.channelsUpdatedSubject.asObservable();
 
-    selectedServerId: string | null = null;
+    private selectedCategoryId: string | null = null;
+    selectedCategoryIdObservable = new BehaviorSubject<string | null>(null);
 
     baseUrl = 'http://localhost:8000/channels';
+    selectedServerId: string | null = null;
 
-    openDialog() {
-        console.log('open dialog');
-        this.showDialogSubject.next(true);
+    private dialogDataSubject = new BehaviorSubject<DialogData | null>(null);
+    dialogData$: Observable<DialogData | null> =
+        this.dialogDataSubject.asObservable();
+
+    openDialog(dialogData: DialogData): void {
+        console.log('DialogData:', dialogData);
+
+        // Set the dialog data and notify subscribers
+        this.dialogDataSubject.next(dialogData);
     }
 
     closeDialog() {
         console.log('close dialog');
-        this.showDialogSubject.next(false);
+        this.dialogDataSubject.next({
+            categoryId: '',
+            serverId: '',
+            visible: false,
+        });
     }
 
     updateChannels(serverId: string) {
@@ -53,6 +70,7 @@ export class ChannelsService {
         const data = {
             name: channel.name,
             type: channel.type,
+            categoryId: channel.categoryId,
             serverId: this.selectedServerId,
         };
 
@@ -82,5 +100,15 @@ export class ChannelsService {
         this.updateChannels(this.selectedServerId || '0');
 
         return this.http.delete(url, { headers });
+    }
+
+    getCategories(serverId: string): Observable<any> {
+        const url = `${this.baseUrl}/categories/${serverId}`;
+        const token = localStorage.getItem('token') as string;
+        const headers = {
+            'Content-Type': 'application/json',
+            token: token,
+        };
+        return this.http.get(url, { headers });
     }
 }

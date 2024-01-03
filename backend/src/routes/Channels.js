@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { Categories } = require("../models");
 const { Channels } = require("../models");
 const { validateToken } = require("../middlewares/AuthMiddleware");
 
@@ -29,6 +30,19 @@ router.delete("/:id", validateToken, async (req, res) => {
         },
     });
     res.json("Deleted Successfully");
+});
+
+router.get("/categories/:serverId", validateToken, async (req, res) => {
+    const serverId = req.params.serverId;
+    console.log("serverId: ", serverId);
+
+    const categories = await Categories.findAll({
+        where: {
+            serverId: serverId,
+        },
+    });
+
+    res.json(categories);
 });
 
 module.exports = router;

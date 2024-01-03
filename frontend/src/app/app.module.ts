@@ -37,6 +37,7 @@ import { CustomDatePipe } from './models/custom.datepipe';
 import { ServerNamePipe } from './pipes/server-name.pipe';
 import { ServerNameOptionsComponent } from './components/server-name-options/server-name-options.component';
 import { ServerSettingsComponent } from './components/server-settings/server-settings.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
     declarations: [
@@ -79,6 +80,7 @@ import { ServerSettingsComponent } from './components/server-settings/server-set
         FormsModule,
         ContextMenuModule,
         BrowserAnimationsModule,
+        DragDropModule,
     ],
     providers: [DatePipe],
     bootstrap: [AppComponent],

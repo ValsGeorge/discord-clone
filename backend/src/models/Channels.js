@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
                         where: {
                             name: value,
                             serverId: this.serverId,
+                            type: this.type,
                         },
                     });
                     if (existingChannel) {
@@ -34,6 +35,11 @@ module.exports = (sequelize, DataTypes) => {
         Channels.hasMany(models.Messages, {
             onDelete: "CASCADE",
             foreignKey: "channelId",
+        });
+
+        Channels.belongsTo(models.Categories, {
+            onDelete: "CASCADE",
+            foreignKey: "categoryId",
         });
     };
 

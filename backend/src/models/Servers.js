@@ -43,6 +43,11 @@ module.exports = (sequelize, DataTypes) => {
             onDelete: "CASCADE",
             foreignKey: "serverId",
         });
+
+        Servers.hasMany(models.Categories, {
+            onDelete: "CASCADE",
+            foreignKey: "categoryId",
+        });
     };
 
     return Servers;

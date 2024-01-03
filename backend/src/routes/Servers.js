@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Servers, ServerMembers, Channels } = require("../models");
+const { Servers, ServerMembers, Channels, Categories } = require("../models");
 const { validateToken } = require("../middlewares/AuthMiddleware");
 
 router.get("/", validateToken, async (req, res) => {
@@ -51,12 +51,6 @@ router.post("/create-server", validateToken, async (req, res) => {
     data["description"] = data["description"] || "No description provided";
     data["inviteCode"] = data["inviteCode"] || generateInviteCode();
 
-    console.log("data['inviteCode']: ", data["inviteCode"]);
-
-    console.log("username: ", username);
-    console.log("userId: ", userId);
-    console.log("data: ", data);
-
     try {
         // Create the server
         const server = await Servers.create({
@@ -64,12 +58,47 @@ router.post("/create-server", validateToken, async (req, res) => {
             username,
             userId: userId,
         });
+
+        console.log("server: ", server);
         // Add the creator as a member of the server
         const serverMember = await ServerMembers.create({
             userId: userId,
             serverId: server.id,
         });
+        console.log("serverMember: ", serverMember);
 
+        // create a text Categories and a voice Categories
+        const textCategory = await Categories.create({
+            name: "Text Channels",
+            serverId: server.id,
+            order: 0,
+        });
+
+        console.log("textCategory: ", textCategory);
+        const voiceCategory = await Categories.create({
+            name: "Voice Channels",
+            serverId: server.id,
+            order: 1,
+        });
+
+        console.log("voiceCategory: ", voiceCategory);
+
+        // create a general text channel and a general voice channel
+        const generalTextChannel = await Channels.create({
+            name: "general",
+            type: "text",
+            serverId: server.id,
+            categoryId: textCategory.id,
+        });
+        console.log("generalTextChannel: ", generalTextChannel);
+        const generaVoiceChannel = await Channels.create({
+            name: "general",
+            type: "voice",
+            serverId: server.id,
+            categoryId: voiceCategory.id,
+        });
+
+        console.log("generaVoiceChannel: ", generaVoiceChannel);
         console.log("serverMember: ", serverMember);
 
         res.json(server);
@@ -185,7 +214,7 @@ router.delete("/delete-server/:serverId", validateToken, async (req, res) => {
         const server = await Servers.findOne({
             where: {
                 id: serverId,
-                creatorId: userId,
+                userId: userId,
             },
         });
         if (!server) {
