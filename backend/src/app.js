@@ -48,7 +48,7 @@ const io = new Server(3000, {
 
 const onlineUsers = {};
 const connectedUsers = {};
-const { Users } = require("./models");
+const { Users, ServerMembers } = require("./models");
 
 // Function to fetch user details from the database
 async function fetchUserDetails(userId) {
@@ -58,6 +58,19 @@ async function fetchUserDetails(userId) {
                 id: userId,
             },
         });
+
+        const serversIn = await ServerMembers.findAll({
+            where: {
+                userId: userId,
+            },
+        });
+        const serverIds = serversIn.map(
+            (serverMember) => serverMember.serverId
+        );
+
+        // Add serverIds to the user object
+        user.dataValues.serverIds = serverIds;
+
         return user;
     } catch (error) {
         console.error("Error fetching user details:", error);
@@ -81,7 +94,6 @@ io.use(function (socket, next) {
             console.log("user: ", user);
             onlineUsers[userId] = user;
             connectedUsers[user.id] = socket.id;
-            // onlineUsers[socket.id] = user;
             console.log("onlineUsers: ", onlineUsers);
             // Broadcast the updated online user list to all clients
             io.emit("updateOnlineUsers", Object.values(onlineUsers));

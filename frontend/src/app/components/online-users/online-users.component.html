@@ -1,5 +1,6 @@
 <div class="active-users p-4">
-    <div *ngFor="let user of onlineUsers" class="flex items-center p-2">
+    <div *ngFor="let user of onlineUsers" class="flex items-center p-2"
+        (contextmenu)="showContextMenu($event, user.id)">
         <div class="relative">
             <img [src]="user.profilePicture" alt="Profile Picture" class="w-8 h-8 rounded-full">
             <div *ngIf="user.username"
@@ -7,5 +8,6 @@
             </div>
         </div>
         <span class="text-white ml-2">{{ user.username }}</span>
+        <app-edit-menu [itemsList]="itemsList" [targetId]="user.id"></app-edit-menu>
     </div>
 </div>
