@@ -5,7 +5,8 @@ import { Message } from 'src/app/models/message';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormGroup } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
-import { DM } from 'src/app/models/DM';
+import { Channels } from 'src/app/models/channel';
+import { ChannelsService } from 'src/app/services/channels/channels.service';
 
 @Component({
     selector: 'app-chat',
@@ -18,7 +19,8 @@ export class ChatComponent {
         private chatService: ChatService,
         private utilsService: UtilsService,
         private authService: AuthService,
-        private formBuilder: FormBuilder
+        private formBuilder: FormBuilder,
+        private channelsService: ChannelsService
     ) {
         this.editMessageForm = this.formBuilder.group({
             editedContent: [''], // Add a form control for edited content
@@ -31,15 +33,30 @@ export class ChatComponent {
 
     editMessageForm: FormGroup;
 
+    channel: Channels = {
+        id: '',
+        name: '',
+        type: '',
+        messages: [],
+        created_at: '',
+        updated_at: '',
+        categoryId: '',
+    };
+
     loading: boolean = false;
 
     ngOnInit(): void {
         this.chatService.messageUpdate$.subscribe((updatedMessages) => {
             this.messages = updatedMessages;
-            console.log('Messages:', this.messages);
             setTimeout(() => {
                 this.loading = false;
             }, 1000);
+            const selectedChannelId = this.utilsService.getSelectedChannelId();
+            this.channelsService
+                .getChannelInfo(selectedChannelId)
+                .subscribe((channelInfo) => {
+                    this.channel = channelInfo;
+                });
         });
     }
 

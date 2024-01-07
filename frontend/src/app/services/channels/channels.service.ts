@@ -111,4 +111,14 @@ export class ChannelsService {
         };
         return this.http.get(url, { headers });
     }
+
+    getChannelInfo(channelId: string): Observable<any> {
+        const url = `${this.baseUrl}/info/${channelId}`;
+        const token = localStorage.getItem('token') as string;
+        const headers = {
+            'Content-Type': 'application/json',
+            token: token,
+        };
+        return this.http.get(url, { headers });
+    }
 }

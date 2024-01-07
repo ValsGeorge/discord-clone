@@ -45,4 +45,10 @@ router.get("/categories/:serverId", validateToken, async (req, res) => {
     res.json(categories);
 });
 
+router.get("/info/:id", validateToken, async (req, res) => {
+    const id = req.params.id;
+    const channel = await Channels.findByPk(id);
+    res.json(channel);
+});
+
 module.exports = router;
