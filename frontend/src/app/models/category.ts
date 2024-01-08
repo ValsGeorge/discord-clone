@@ -6,4 +6,5 @@ export interface Category {
     channels: Channels[];
     created_at: string;
     updated_at: string;
+    order: number;
 }

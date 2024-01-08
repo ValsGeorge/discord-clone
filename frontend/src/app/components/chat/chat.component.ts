@@ -41,6 +41,7 @@ export class ChatComponent {
         created_at: '',
         updated_at: '',
         categoryId: '',
+        order: 0,
     };
 
     loading: boolean = false;

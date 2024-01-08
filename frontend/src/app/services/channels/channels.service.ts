@@ -51,12 +51,14 @@ export class ChannelsService {
         console.log('update channels');
         console.log('serverId:', serverId);
         this.channelsUpdatedSubject.next();
-        this.getChannels(serverId).subscribe(
-            (channels) => {},
-            (error) => {
-                console.error('Error getting channels:', error);
-            }
-        );
+        // this.getChannels(serverId).subscribe(
+        //     (channels) => {
+
+        //     },
+        //     (error) => {
+        //         console.error('Error getting channels:', error);
+        //     }
+        // );
     }
 
     createChannel(channel: Channels): Observable<any> {
@@ -73,13 +75,13 @@ export class ChannelsService {
             categoryId: channel.categoryId,
             serverId: this.selectedServerId,
         };
-
         this.updateChannels(this.selectedServerId || '0');
 
         return this.http.post(url, data, { headers });
     }
 
     getChannels(serverId: string): Observable<any> {
+        console.log('get channels');
         const url = `${this.baseUrl}/get-channels/${serverId}`;
         const token = localStorage.getItem('token') as string;
         const headers = {
@@ -100,16 +102,6 @@ export class ChannelsService {
         this.updateChannels(this.selectedServerId || '0');
 
         return this.http.delete(url, { headers });
-    }
-
-    getCategories(serverId: string): Observable<any> {
-        const url = `${this.baseUrl}/categories/${serverId}`;
-        const token = localStorage.getItem('token') as string;
-        const headers = {
-            'Content-Type': 'application/json',
-            token: token,
-        };
-        return this.http.get(url, { headers });
     }
 
     getChannelInfo(channelId: string): Observable<any> {

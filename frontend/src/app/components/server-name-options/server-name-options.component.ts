@@ -69,7 +69,9 @@ export class ServerNameOptionsComponent implements OnInit {
         this.serversService.getServerInfo(serverId).subscribe((serverInfo) => {
             console.log(serverInfo);
             this.server = serverInfo;
-            this.server.image = this.serversService.getServerImageUrl(serverId);
+            if (this.server.image)
+                this.server.image =
+                    this.serversService.getServerImageUrl(serverId);
         });
     }
 }

@@ -42,15 +42,10 @@ export class CreateChannelPopupComponent {
 
     confirm() {
         const formData: Channels = this.channelForm.value;
-        console.log('this.categoryId:', this.categoryId);
+        if (this.categoryId) formData.categoryId = this.categoryId;
 
         this.channelsService.createChannel(formData).subscribe(
-            (response) => {
-                console.log('Channel created successfully:', response);
-                this.channelsService.updateChannels(
-                    this.channelsService.selectedServerId || '0'
-                );
-            },
+            (response) => {},
             (error) => {
                 console.error('Error creating channel:', error);
             }

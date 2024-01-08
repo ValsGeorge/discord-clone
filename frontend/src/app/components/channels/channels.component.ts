@@ -12,6 +12,7 @@ import {
     transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { Category } from 'src/app/models/category';
+import { CategoriesService } from 'src/app/services/categories/categories.service';
 @Component({
     selector: 'app-channels',
     templateUrl: './channels.component.html',
@@ -21,7 +22,8 @@ export class ChannelsComponent implements OnInit {
     constructor(
         private channelsService: ChannelsService,
         private utilsService: UtilsService,
-        private chatService: ChatService
+        private chatService: ChatService,
+        private categoriesService: CategoriesService
     ) {}
 
     channels: Channels[] = [];
@@ -62,6 +64,7 @@ export class ChannelsComponent implements OnInit {
                 event.previousIndex,
                 event.currentIndex
             );
+            this.updateCategoryOrder();
         } else {
             transferArrayItem(
                 event.previousContainer.data,
@@ -69,7 +72,24 @@ export class ChannelsComponent implements OnInit {
                 event.previousIndex,
                 event.currentIndex
             );
+            this.updateCategoryOrder();
         }
+    }
+
+    private updateCategoryOrder() {
+        console.log('update category order');
+        console.log('categories:', this.categories);
+        this.categories.forEach((category) => {
+            category.order = this.categories.indexOf(category);
+        });
+        this.categoriesService.updateCategoriesOrder(this.categories).subscribe(
+            (response: any) => {
+                console.log('response:', response);
+            },
+            (error: any) => {
+                console.error('Error updating categories:', error);
+            }
+        );
     }
 
     dropChannel(event: CdkDragDrop<Channels[]>) {
@@ -92,10 +112,11 @@ export class ChannelsComponent implements OnInit {
 
     getCategories() {
         this.selectedServerId = this.utilsService.getSelectedServerId();
-        this.channelsService.getCategories(this.selectedServerId).subscribe(
+        this.categoriesService.getCategories(this.selectedServerId).subscribe(
             (response) => {
                 console.log('categories:', response);
                 this.categories = response;
+                this.categories.sort((a, b) => a.order - b.order);
                 this.getChannels();
             },
             (error) => {

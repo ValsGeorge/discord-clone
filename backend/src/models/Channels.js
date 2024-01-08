@@ -24,6 +24,11 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
+        order: {
+            type: DataTypes.INTEGER,
+            unique: false,
+            allowNull: false,
+        },
     });
 
     Channels.associate = (models) => {

@@ -89,6 +89,7 @@ router.post("/create-server", validateToken, async (req, res) => {
             type: "text",
             serverId: server.id,
             categoryId: textCategory.id,
+            order: 0,
         });
         console.log("generalTextChannel: ", generalTextChannel);
         const generaVoiceChannel = await Channels.create({
@@ -96,6 +97,7 @@ router.post("/create-server", validateToken, async (req, res) => {
             type: "voice",
             serverId: server.id,
             categoryId: voiceCategory.id,
+            order: 0,
         });
 
         console.log("generaVoiceChannel: ", generaVoiceChannel);
@@ -249,7 +251,7 @@ router.get("/server-info/:serverId", validateToken, async (req, res) => {
         if (!server) {
             return res.status(401).send("Not authorized to view this server");
         }
-
+        console.log("server: ", server);
         res.json(server);
     } catch (error) {
         console.error("Error during server info retrieval:", error);

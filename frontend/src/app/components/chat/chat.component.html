@@ -7,7 +7,7 @@
     </div>
     <div
         class="h-full chat-messages flex-grow overflow-y-scroll border-b bg-primary border-scrollbar-bar scrollbar-thin scrollbar-thumb-scrollbar-bar scrollbar-track-secondary">
-        <div class="chat-messages flex-grow border-b border-gray-300">
+        <div class="chat-messages flex-grow ">
             <div class="message mb-2 hover:bg-message-hover rounded-md" *ngFor="let message of messages"
                 (mouseenter)="showOptions(message)" (mouseleave)="hideOptions()">
                 <ng-container *ngIf="loading; else messageTemplate">

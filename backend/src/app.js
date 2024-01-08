@@ -37,6 +37,9 @@ app.get("/messages/get-dms", getDMs);
 const dmListRouter = require("./routes/DMList");
 app.use("/dm-list", dmListRouter);
 
+const categoriesRouter = require("./routes/Categories");
+app.use("/categories", categoriesRouter);
+
 const { Server } = require("socket.io");
 
 const io = new Server(3000, {
