@@ -48,12 +48,12 @@ export class ChannelsComponent implements OnInit {
     ];
 
     ngOnInit(): void {
-        this.getCategories();
-        // this.getChannels();
         this.selectedChannelId = this.utilsService.getSelectedChannelId();
-        // this.channelsService.channelsUpdated$.subscribe(() => {
-        //     this.getChannels();
-        // });
+
+        this.channelsService.channelsUpdated$.subscribe(() => {
+            this.getCategories();
+        });
+        this.getCategories();
     }
 
     dropCategory(event: any) {
@@ -100,6 +100,7 @@ export class ChannelsComponent implements OnInit {
                 event.previousIndex,
                 event.currentIndex
             );
+            this.updateChannelOrder();
         } else {
             transferArrayItem(
                 event.previousContainer.data,
@@ -107,7 +108,26 @@ export class ChannelsComponent implements OnInit {
                 event.previousIndex,
                 event.currentIndex
             );
+            this.updateChannelOrder();
         }
+    }
+
+    private updateChannelOrder() {
+        console.log('update channel order');
+        console.log('channels:', this.channels);
+        this.categories.forEach((category) => {
+            category.channels.forEach((channel) => {
+                channel.order = category.channels.indexOf(channel);
+            });
+        });
+        this.channelsService.updateChannelsOrder(this.channels).subscribe(
+            (response: any) => {
+                console.log('response:', response);
+            },
+            (error: any) => {
+                console.error('Error updating channels:', error);
+            }
+        );
     }
 
     getCategories() {
@@ -143,6 +163,9 @@ export class ChannelsComponent implements OnInit {
                         if (!category.channels) {
                             category.channels = [];
                         }
+
+                        // Sort the channels by order
+                        category.channels.sort((a, b) => a.order - b.order);
 
                         // Add the channel to the category's channels array
                         category.channels.push(channel);

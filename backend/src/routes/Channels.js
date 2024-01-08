@@ -41,4 +41,16 @@ router.get("/info/:id", validateToken, async (req, res) => {
     res.json(channel);
 });
 
+router.put("/update-order", validateToken, async (req, res) => {
+    const { channels } = req.body;
+    console.log("channels: ", channels);
+    channels.forEach(async (channel) => {
+        await Channels.update(
+            { order: channel.order },
+            { where: { id: channel.id } }
+        );
+    });
+    res.json(channels);
+});
+
 module.exports = router;
