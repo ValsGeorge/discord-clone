@@ -10,6 +10,7 @@ import { ChatComponent } from './components/chat/chat.component';
 import { JoinServerComponent } from './components/join-server/join-server.component';
 import { ChatDmComponent } from './components/chat-dm/chat-dm.component';
 import { FriendsComponent } from './components/friends/friends.component';
+import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
     {
         path: 'servers',
         component: ServersComponent,
+        canActivate: [AuthGuard],
         children: [
             { path: 'chat-dm/:userId', component: ChatDmComponent },
             // {
@@ -35,6 +37,7 @@ const routes: Routes = [
     {
         path: 'servers/:id',
         component: ServerDetailsComponent,
+        canActivate: [AuthGuard],
         children: [{ path: 'channels/:channelId', component: ChatComponent }],
     },
     // { path: 'servers/join-server/:inviteCode', component: JoinServerComponent },

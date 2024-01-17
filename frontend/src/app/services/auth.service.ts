@@ -20,7 +20,7 @@ export class AuthService {
     };
     constructor(private httpClient: HttpClient, private router: Router) {}
 
-    private checkLoginStatus(): boolean {
+    public checkLoginStatus(): boolean {
         const token = this.getAuthTokenFromLocalStorage();
         return !!token;
     }
