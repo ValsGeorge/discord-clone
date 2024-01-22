@@ -1,0 +1,50 @@
+2024-01-19 11:13:06 error: =================================
+2024-01-19 11:13:06 error: 💔 App failed to connect to the database
+2024-01-19 11:13:06 error: URI must include hostname, domain name, and tld
+2024-01-19 11:14:31 error: =================================
+2024-01-19 11:14:31 error: 💔 App failed to connect to the database
+2024-01-19 11:14:31 error: URI must include hostname, domain name, and tld
+2024-01-19 13:18:05 error: uncaughtException: Cannot read properties of undefined (reading 'url')
+TypeError: Cannot read properties of undefined (reading 'url')
+    at App.connectToDatabase (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\src\app.ts:56:39)
+    at App.initialize (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\src\app.ts:29:16)
+    at bootstrap (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\src\server.ts:11:13)
+    at Object.<anonymous> (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\src\server.ts:15:1)
+    at Module._compile (node:internal/modules/cjs/loader:1256:14)
+    at Module.m._compile (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+    at Object.require.extensions.<computed> [as .ts] (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1119:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:960:12)
+2024-01-19 13:18:41 error: uncaughtException: Cannot read properties of undefined (reading 'url')
+TypeError: Cannot read properties of undefined (reading 'url')
+    at App.connectToDatabase (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\src\app.ts:56:39)
+    at App.initialize (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\src\app.ts:29:16)
+    at bootstrap (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\src\server.ts:11:13)
+    at Object.<anonymous> (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\src\server.ts:15:1)
+    at Module._compile (node:internal/modules/cjs/loader:1256:14)
+    at Module.m._compile (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+    at Object.require.extensions.<computed> [as .ts] (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1119:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:960:12)
+2024-01-19 13:19:05 error: uncaughtException: Cannot read properties of undefined (reading 'url')
+TypeError: Cannot read properties of undefined (reading 'url')
+    at App.connectToDatabase (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\src\app.ts:56:39)
+    at App.initialize (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\src\app.ts:29:16)
+    at bootstrap (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\src\server.ts:11:13)
+    at Object.<anonymous> (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\src\server.ts:15:1)
+    at Module._compile (node:internal/modules/cjs/loader:1256:14)
+    at Module.m._compile (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+    at Object.require.extensions.<computed> [as .ts] (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1119:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:960:12)
+2024-01-19 13:37:54 error: [POST] /users/register >> StatusCode:: 400, Message:: property id should not exist, property confirmPassword should not exist, createdAt must be a Date instance, updatedAt must be a Date instance
+2024-01-19 13:44:50 error: [POST] /users/register >> StatusCode:: 400, Message:: property id should not exist, property confirmPassword should not exist, createdAt must be a Date instance, updatedAt must be a Date instance
+2024-01-19 13:45:32 error: [POST] /users/register >> StatusCode:: 400, Message:: property id should not exist, property confirmPassword should not exist
+2024-01-19 13:46:46 error: [POST] /users/register >> StatusCode:: 500, Message:: Operation `users.findOne()` buffering timed out after 10000ms
+2024-01-19 15:05:14 error: [POST] /users/register >> StatusCode:: 500, Message:: Operation `users.findOne()` buffering timed out after 10000ms
+2024-01-19 15:06:39 error: [POST] /users/register >> StatusCode:: 500, Message:: Operation `users.findOne()` buffering timed out after 10000ms
+2024-01-19 15:07:56 error: [POST] /users/register >> StatusCode:: 500, Message:: Operation `users.findOne()` buffering timed out after 10000ms
+2024-01-19 15:09:10 error: [POST] /users/register >> StatusCode:: 500, Message:: Operation `users.findOne()` buffering timed out after 10000ms

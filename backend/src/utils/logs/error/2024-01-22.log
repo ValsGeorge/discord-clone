@@ -1,0 +1,86 @@
+2024-01-22 10:54:24 error: [POST] /users/register >> StatusCode:: 409, Message:: This username asd already exists
+2024-01-22 10:56:53 error: uncaughtException: No Sequelize instance passed
+Error: No Sequelize instance passed
+    at Function.init (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\sequelize\src\model.js:960:13)
+    at Object.<anonymous> (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\src\models\users.model.ts:28:6)
+    at Module._compile (node:internal/modules/cjs/loader:1256:14)
+    at Module.m._compile (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+    at Object.require.extensions.<computed> [as .ts] (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1119:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:960:12)
+    at Module.require (node:internal/modules/cjs/loader:1143:19)
+    at require (node:internal/modules/cjs/helpers:110:18)
+2024-01-22 11:04:15 error: =================================
+2024-01-22 11:04:15 error: 💔 App failed to connect to the database
+2024-01-22 11:04:15 error: bad auth : authentication failed
+2024-01-22 11:13:38 error: [POST] /users/register >> StatusCode:: 500, Message:: Operation `users.findOne()` buffering timed out after 10000ms
+2024-01-22 11:15:02 error: =================================
+2024-01-22 11:15:02 error: 💔 App failed to connect to the database
+2024-01-22 11:15:02 error: bad auth : authentication failed
+2024-01-22 11:26:40 error: [GET] /servers/get-servers >> StatusCode:: 404, Message:: Authentication token missing
+2024-01-22 12:01:00 error: [GET] /servers/ >> StatusCode:: 404, Message:: Authentication token missing
+2024-01-22 12:01:53 error: [GET] /servers/ >> StatusCode:: 404, Message:: Authentication token missing
+2024-01-22 12:01:57 error: [GET] /servers/ >> StatusCode:: 404, Message:: Authentication token missing
+2024-01-22 12:02:54 error: [POST] /servers/ >> StatusCode:: 404, Message:: Authentication token missing
+2024-01-22 12:03:15 error: [GET] /servers/ >> StatusCode:: 404, Message:: Authentication token missing
+2024-01-22 12:04:54 error: [GET] /servers/ >> StatusCode:: 404, Message:: Authentication token missing
+2024-01-22 12:05:05 error: [GET] /servers/ >> StatusCode:: 404, Message:: Authentication token missing
+2024-01-22 12:05:15 error: [GET] /servers/ >> StatusCode:: 404, Message:: Authentication token missing
+2024-01-22 12:05:32 error: [GET] /servers/ >> StatusCode:: 404, Message:: Authentication token missing
+2024-01-22 12:06:10 error: [GET] /servers/ >> StatusCode:: 404, Message:: Authentication token missing
+2024-01-22 12:06:47 error: [POST] /servers/ >> StatusCode:: 404, Message:: Authentication token missing
+2024-01-22 12:07:02 error: [GET] /servers/ >> StatusCode:: 404, Message:: Authentication token missing
+2024-01-22 12:08:25 error: [GET] /servers/ >> StatusCode:: 404, Message:: Authentication token missing
+2024-01-22 12:08:57 error: [GET] /servers/ >> StatusCode:: 404, Message:: Authentication token missing
+2024-01-22 12:09:02 error: [GET] /servers/ >> StatusCode:: 404, Message:: Authentication token missing
+2024-01-22 12:09:46 error: [GET] /servers/ >> StatusCode:: 404, Message:: Authentication token missing
+2024-01-22 12:12:13 error: [GET] /servers/ >> StatusCode:: 404, Message:: Authentication token missing
+2024-01-22 12:12:47 error: [GET] /servers/ >> StatusCode:: 404, Message:: Authentication token missing
+2024-01-22 12:12:52 error: [GET] /servers/ >> StatusCode:: 404, Message:: Authentication token missing
+2024-01-22 12:13:00 error: [GET] /servers/ >> StatusCode:: 404, Message:: Authentication token missing
+2024-01-22 12:13:48 error: [GET] /servers >> StatusCode:: 404, Message:: Authentication token missing
+2024-01-22 12:13:54 error: [GET] /servers >> StatusCode:: 404, Message:: Authentication token missing
+2024-01-22 12:14:02 error: [GET] /servers/ >> StatusCode:: 404, Message:: Authentication token missing
+2024-01-22 12:16:23 error: [GET] /servers/ >> StatusCode:: 404, Message:: Authentication token missing
+2024-01-22 12:48:30 error: [POST] /servers/ >> StatusCode:: 404, Message:: Authentication token missing
+2024-01-22 12:48:57 error: [POST] /servers/ >> StatusCode:: 404, Message:: Authentication token missing
+2024-01-22 12:49:29 error: [POST] /servers/ >> StatusCode:: 400, Message:: id must be a string, description must be a string, type must be a string, owner must be a string, members must be an array
+2024-01-22 12:53:45 error: [POST] /servers/ >> StatusCode:: 400, Message:: id must be a string, description must be a string, type must be a string, owner must be a string, members must be an array
+2024-01-22 12:56:35 error: [POST] /servers/ >> StatusCode:: 400, Message:: id must be a string, description must be a string, type must be a string, owner must be a string, members must be an array
+2024-01-22 12:57:39 error: [POST] /servers/ >> StatusCode:: 400, Message:: description must be a string, owner must be a string, members must be an array
+2024-01-22 12:58:06 error: [POST] /servers/ >> StatusCode:: 500, Message:: Servers validation failed: userId: Path `userId` is required., inviteCode: Path `inviteCode` is required., description: Path `description` is required.
+2024-01-22 13:07:37 error: [POST] /servers/ >> StatusCode:: 500, Message:: Servers validation failed: userId: Path `userId` is required., inviteCode: Path `inviteCode` is required., description: Path `description` is required.
+2024-01-22 13:08:42 error: [POST] /servers/ >> StatusCode:: 500, Message:: Servers validation failed: userId: Path `userId` is required., inviteCode: Path `inviteCode` is required., description: Path `description` is required.
+2024-01-22 13:09:13 error: [POST] /servers/ >> StatusCode:: 500, Message:: Servers validation failed: userId: Path `userId` is required., inviteCode: Path `inviteCode` is required., description: Path `description` is required.
+2024-01-22 13:19:53 error: [POST] /servers/ >> StatusCode:: 500, Message:: Servers validation failed: userId: Path `userId` is required., inviteCode: Path `inviteCode` is required., description: Path `description` is required.
+2024-01-22 13:23:44 error: [POST] /servers/ >> StatusCode:: 500, Message:: Servers validation failed: userId: Path `userId` is required., description: Path `description` is required.
+2024-01-22 13:24:42 error: [POST] /servers/ >> StatusCode:: 500, Message:: Servers validation failed: description: Path `description` is required.
+2024-01-22 14:09:17 error: uncaughtException: storage is not defined
+ReferenceError: storage is not defined
+    at new UsersController (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\src\controllers\users.controller.ts:26:32)
+    at new UsersRoute (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\src\routes\users.route.ts:10:30)
+    at bootstrap (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\src\server.ts:12:9)
+    at Object.<anonymous> (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\src\server.ts:21:1)
+    at Module._compile (node:internal/modules/cjs/loader:1256:14)
+    at Module.m._compile (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+    at Object.require.extensions.<computed> [as .ts] (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1119:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:960:12)
+2024-01-22 14:20:16 error: uncaughtException: Route.post() requires a callback function but got a [object Undefined]
+Error: Route.post() requires a callback function but got a [object Undefined]
+    at Route.<computed> [as post] (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\express\lib\router\route.js:211:15)
+    at Function.proto.<computed> [as post] (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\express\lib\router\index.js:521:19)
+    at UsersRoute.initializeRoutes (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\src\routes\users.route.ts:35:21)
+    at new UsersRoute (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\src\routes\users.route.ts:13:14)
+    at bootstrap (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\src\server.ts:12:9)
+    at Object.<anonymous> (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\src\server.ts:21:1)
+    at Module._compile (node:internal/modules/cjs/loader:1256:14)
+    at Module.m._compile (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+    at Object.require.extensions.<computed> [as .ts] (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1621:12)
+2024-01-22 14:25:54 error: [GET] /user/uploads/65ae34bcd3396e26089f5c7a >> StatusCode:: 404, Message:: ENOENT: no such file or directory, stat 'C:\Users\Vals_\Desktop\Projects\discord-clone\backend\uploads\user-profile-picture-65ae34bcd3396e26089f5c7a.jpg'
+2024-01-22 14:27:34 error: [GET] /user/uploads/65ae34bcd3396e26089f5c7a >> StatusCode:: 404, Message:: ENOENT: no such file or directory, stat 'C:\Users\Vals_\Desktop\Projects\discord-clone\backend\uploads\65ae34bcd3396e26089f5c7a'
+2024-01-22 14:27:48 error: [GET] /user/uploads/65ae34bcd3396e26089f5c7a >> StatusCode:: 404, Message:: ENOENT: no such file or directory, stat 'C:\Users\Vals_\Desktop\Projects\discord-clone\backend\uploads\65ae34bcd3396e26089f5c7a'
+2024-01-22 14:28:43 error: [GET] /user/uploads/65ae34bcd3396e26089f5c7a >> StatusCode:: 404, Message:: ENOENT: no such file or directory, stat 'C:\Users\Vals_\Desktop\Projects\discord-clone\backend\uploads\65ae34bcd3396e26089f5c7a'

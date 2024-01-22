@@ -1,0 +1,55 @@
+{
+    "keep": {
+        "days": false,
+        "amount": 30
+    },
+    "auditLog": "/Users/andrei/Documents/code/tylld/tylld-backend/src/logs/error/.154216f6e3fc42f64b7837ae2404f81b75829120-audit.json",
+    "files": [
+        {
+            "date": 1676391778092,
+            "name": "/Users/andrei/Documents/code/tylld/tylld-backend/src/logs/error/2023-02-14.log",
+            "hash": "886feba3397e3b243362affe4531ad83ee09ed658526c801b87a4ab41ecf578e"
+        },
+        {
+            "date": 1677005996181,
+            "name": "/Users/andrei/Documents/code/tylld/tylld-backend/src/logs/error/2023-02-21.log",
+            "hash": "98caad767e20262889dc3aa6f7f24da141943316f8c3795d5420d96ae4e2b974"
+        },
+        {
+            "date": 1677082455037,
+            "name": "/Users/andrei/Documents/code/tylld/tylld-backend/src/logs/error/2023-02-22.log",
+            "hash": "f65c3506be3e9627f7aa48aace78e88a9c086fea935f61edca460c13df1445a9"
+        },
+        {
+            "date": 1677614414842,
+            "name": "/Users/andrei/Documents/code/tylld/tylld-backend/src/logs/error/2023-02-28.log",
+            "hash": "218a02dce75cedef0b072be41b9dbd13b13e70de37337bd61e12ceedb577d4ef"
+        },
+        {
+            "date": 1678113395106,
+            "name": "/Users/andrei/Documents/code/tylld/tylld-backend/src/logs/error/2023-03-06.log",
+            "hash": "e3126e9c1759e833c4819a3896ab1680a2fbc2a35b9563c2cf55b130b0568046"
+        },
+        {
+            "date": 1679837100429,
+            "name": "/Users/andrei/Documents/code/tylld/tylld-backend/src/logs/error/2023-03-26.log",
+            "hash": "00b129691b534e38666cc67e8ac8429424fec37d8275e78463e7e44bea95f6d1"
+        },
+        {
+            "date": 1680035565145,
+            "name": "/Users/andrei/Documents/code/tylld/tylld-backend/src/logs/error/2023-03-28.log",
+            "hash": "8d135afa21935c0c764f7cca9ed706285574baa0cfc287a312fdc9ea25da1a25"
+        },
+        {
+            "date": 1680624809537,
+            "name": "/Users/andrei/Documents/code/tylld/tylld-backend/src/logs/error/2023-04-04.log",
+            "hash": "dcaf0b4e088f01fa72367396920fc539f5a339826385b56c474869d209c9e586"
+        },
+        {
+            "date": 1683053853124,
+            "name": "/Users/andrei/Documents/code/tylld/tylld-backend/src/logs/error/2023-05-02.log",
+            "hash": "2419ede00be17516a80f23488359f05090672e5e6aee2a5d59921f6fd46382ef"
+        }
+    ],
+    "hashType": "sha256"
+}

@@ -35,25 +35,34 @@ export class ServersService {
     createServer(serverName: any): Observable<any> {
         console.log(serverName);
         const token = localStorage.getItem('token') as string;
-        const url = `${this.baseUrl}/create-server`;
+        const url = `${this.baseUrl}/`;
         const headers = {
             'Content-Type': 'application/json',
             token: token,
         };
-        const body = { name: serverName['serverName'] };
+        const body = {
+            name: serverName['serverName'],
+            description: 'a',
+            type: 'text',
+        };
 
-        return this.httpClient.post(url, body, { headers });
+        return this.httpClient.post(url, body, {
+            headers,
+            withCredentials: true,
+        });
     }
 
     getServers(): Observable<any> {
-        const token = localStorage.getItem('token') as string;
-        const url = `${this.baseUrl}/get-servers`;
-        const headers = new HttpHeaders({
-            'Content-Type': 'application/json',
-            token: token,
-        });
+        const url = `${this.baseUrl}/`;
 
-        return this.httpClient.get(url, { headers });
+        return this.httpClient.get(url, { withCredentials: true }).pipe(
+            (response: any) => {
+                return response;
+            },
+            (error: any) => {
+                return error;
+            }
+        );
     }
 
     generateInviteCode(serverId: string): Observable<any> {
@@ -65,7 +74,11 @@ export class ServersService {
         });
         const body = { serverId: serverId };
 
-        return this.httpClient.get(url, { headers, params: body });
+        return this.httpClient.get(url, {
+            headers,
+            params: body,
+            withCredentials: true,
+        });
     }
 
     joinServer(inviteCode: string): Observable<any> {
@@ -77,7 +90,10 @@ export class ServersService {
         });
         const body = { inviteCode: inviteCode };
 
-        return this.httpClient.post(url, body, { headers });
+        return this.httpClient.post(url, body, {
+            headers,
+            withCredentials: true,
+        });
     }
 
     leaveServer(serverId: string): Observable<any> {

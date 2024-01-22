@@ -1,0 +1,30 @@
+{
+    "keep": {
+        "days": false,
+        "amount": 30
+    },
+    "auditLog": "C:\\Users\\Vals_\\Desktop\\Projects\\gourmet\\gourmet-be\\src\\utils\\logs\\debug\\.b80b5e474f3ccd0b1c7e7b55b973a2dbb668726e-audit.json",
+    "files": [
+        {
+            "date": 1705329782024,
+            "name": "C:\\Users\\Vals_\\Desktop\\Projects\\gourmet\\gourmet-be\\src\\utils\\logs\\debug\\2024-01-15.log",
+            "hash": "497e97dc0aea72b08543a1c9f4ed199b2aec80237703dad84ca0ad2f06bec0ce"
+        },
+        {
+            "date": 1705391080155,
+            "name": "C:\\Users\\Vals_\\Desktop\\Projects\\gourmet\\gourmet-be\\src\\utils\\logs\\debug\\2024-01-16.log",
+            "hash": "a4730d6aa14c6fff35d841ce201413b99ca19d6f615b548775e4baa05702947b"
+        },
+        {
+            "date": 1705476896155,
+            "name": "C:\\Users\\Vals_\\Desktop\\Projects\\gourmet\\gourmet-be\\src\\utils\\logs\\debug\\2024-01-17.log",
+            "hash": "38c2598069fa3143784782b6c581e7024d18f6a49cb98269244aec871ab4d501"
+        },
+        {
+            "date": 1705653186810,
+            "name": "C:\\Users\\Vals_\\Desktop\\Projects\\gourmet\\gourmet-be\\src\\utils\\logs\\debug\\2024-01-19.log",
+            "hash": "640c71a94f41ec4c631ffc9d5f2d471a2eb5d0a493b56359bbf05ecd064e6981"
+        }
+    ],
+    "hashType": "sha256"
+}

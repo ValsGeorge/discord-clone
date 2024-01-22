@@ -1,0 +1,71 @@
+2023-02-22 18:14:15 info: =================================
+2023-02-22 18:14:15 info: App connected to the database
+2023-02-22 18:14:15 info: =================================
+2023-02-22 18:14:15 info: ======= ENV: development =======
+2023-02-22 18:14:15 info: 🚀 App listening on the port 3000
+2023-02-22 18:14:15 info: =================================
+2023-02-22 18:15:06 info: =================================
+2023-02-22 18:15:06 info: App connected to the database
+2023-02-22 18:15:06 info: =================================
+2023-02-22 18:15:06 info: ======= ENV: development =======
+2023-02-22 18:15:06 info: 🚀 App listening on the port 3000
+2023-02-22 18:15:06 info: =================================
+2023-02-22 18:15:12 info: =================================
+2023-02-22 18:15:12 info: App connected to the database
+2023-02-22 18:15:12 info: =================================
+2023-02-22 18:15:12 info: ======= ENV: development =======
+2023-02-22 18:15:12 info: 🚀 App listening on the port 3000
+2023-02-22 18:15:12 info: =================================
+2023-02-22 18:15:41 info: =================================
+2023-02-22 18:15:41 info: App connected to the database
+2023-02-22 18:15:41 info: =================================
+2023-02-22 18:15:41 info: ======= ENV: development ========
+2023-02-22 18:15:41 info: 🚀 App listening on the port 3000
+2023-02-22 18:15:41 info: =================================
+2023-02-22 18:15:46 info: =================================
+2023-02-22 18:15:46 info: App connected to the database
+2023-02-22 18:15:46 info: ======= ENV: development ========
+2023-02-22 18:15:46 info: 🚀 App listening on the port 3000
+2023-02-22 18:15:46 info: =================================
+2023-02-22 18:20:42 info: =================================
+2023-02-22 18:20:42 info: 📚 App connected to the database
+2023-02-22 18:20:42 info: ======= ENV: development ========
+2023-02-22 18:20:42 info: 🚀 App listening on the port 3000
+2023-02-22 18:20:42 info: =================================
+2023-02-22 18:21:37 info: =================================
+2023-02-22 18:21:37 info: 📚 App connected to the database
+2023-02-22 18:21:37 info: ======= ENV: development ========
+2023-02-22 18:21:37 info: 🚀 App listening on the port 3000
+2023-02-22 18:21:37 info: =================================
+2023-02-22 18:21:42 info: =================================
+2023-02-22 18:21:42 info: 📚 App connected to the database
+2023-02-22 18:21:42 info: ======= ENV: development ========
+2023-02-22 18:21:42 info: 🚀 App listening on the port 3000
+2023-02-22 18:21:42 info: =================================
+2023-02-22 18:21:47 info: =================================
+2023-02-22 18:21:47 info: 📚 App connected to the database
+2023-02-22 18:21:47 info: ======= ENV: development ========
+2023-02-22 18:21:47 info: 🚀 App listening on the port 3000
+2023-02-22 18:21:47 info: =================================
+2023-02-22 18:22:06 error: =================================
+2023-02-22 18:22:06 error: 💔 App failed to connect to the database
+2023-02-22 18:22:06 error: Invalid scheme, expected connection string to start with "mongodb://" or "mongodb+srv://"
+2023-02-22 18:22:06 info: ======= ENV: development ========
+2023-02-22 18:22:06 info: 🚀 App listening on the port 3000
+2023-02-22 18:22:06 info: =================================
+2023-02-22 18:22:40 error: =================================
+2023-02-22 18:22:40 error: 💔 App failed to connect to the database
+2023-02-22 18:22:40 error: Invalid scheme, expected connection string to start with "mongodb://" or "mongodb+srv://"
+2023-02-22 18:22:40 info: ======= ENV: development ========
+2023-02-22 18:22:40 info: 🚀 App listening on the port 3000
+2023-02-22 18:22:40 info: =================================
+2023-02-22 18:22:44 info: =================================
+2023-02-22 18:22:44 info: 📚 App connected to the database
+2023-02-22 18:22:44 info: ======= ENV: development ========
+2023-02-22 18:22:44 info: 🚀 App listening on the port 3000
+2023-02-22 18:22:44 info: =================================
+2023-02-22 18:26:36 info: =================================
+2023-02-22 18:26:36 info: 📚 App connected to the database
+2023-02-22 18:26:36 info: ======= ENV: development ========
+2023-02-22 18:26:36 info: 🚀 App listening on the port 3000
+2023-02-22 18:26:36 info: =================================

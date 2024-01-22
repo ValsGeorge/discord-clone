@@ -1,0 +1,18 @@
+2023-03-28 23:32:45 error: uncaughtException: listen EADDRINUSE: address already in use :::3000
+Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (node:net:1463:16)
+    at listenInCluster (node:net:1511:12)
+    at Server.listen (node:net:1599:7)
+    at Function.listen (/Users/andrei/Documents/code/tylld/tylld-backend/node_modules/express/lib/application.js:635:24)
+    at App.listen (/Users/andrei/Documents/code/tylld/tylld-backend/src/app.ts:39:14)
+    at bootstrap (/Users/andrei/Documents/code/tylld/tylld-backend/src/server.ts:12:7)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+2023-03-28 23:33:06 error: uncaughtException: listen EADDRINUSE: address already in use :::3000
+Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (node:net:1463:16)
+    at listenInCluster (node:net:1511:12)
+    at Server.listen (node:net:1599:7)
+    at Function.listen (/Users/andrei/Documents/code/tylld/tylld-backend/node_modules/express/lib/application.js:635:24)
+    at App.listen (/Users/andrei/Documents/code/tylld/tylld-backend/src/app.ts:39:14)
+    at bootstrap (/Users/andrei/Documents/code/tylld/tylld-backend/src/server.ts:12:7)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)

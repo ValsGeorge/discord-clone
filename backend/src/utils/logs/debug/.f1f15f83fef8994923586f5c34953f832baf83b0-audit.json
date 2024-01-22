@@ -1,0 +1,25 @@
+{
+    "keep": {
+        "days": false,
+        "amount": 30
+    },
+    "auditLog": "C:\\Users\\Vals_\\Desktop\\Projects\\discord-clone\\backend\\src\\utils\\logs\\debug\\.f1f15f83fef8994923586f5c34953f832baf83b0-audit.json",
+    "files": [
+        {
+            "date": 1705655584316,
+            "name": "C:\\Users\\Vals_\\Desktop\\Projects\\discord-clone\\backend\\src\\utils\\logs\\debug\\2024-01-19.log",
+            "hash": "496843673e2b87b1685cd910e31b3d9ca3040c10e8cad69a2f0dd7ebca291d60"
+        },
+        {
+            "date": 1705701621243,
+            "name": "C:\\Users\\Vals_\\Desktop\\Projects\\discord-clone\\backend\\src\\utils\\logs\\debug\\2024-01-20.log",
+            "hash": "6a413d5a03145b8ed1f678c9f93d3f09345dde8f5469672affae5694063dc2c6"
+        },
+        {
+            "date": 1705913620723,
+            "name": "C:\\Users\\Vals_\\Desktop\\Projects\\discord-clone\\backend\\src\\utils\\logs\\debug\\2024-01-22.log",
+            "hash": "7f8475ac5660b254d7707f0d407a01ba954936e33950fc1918bb9484900266bf"
+        }
+    ],
+    "hashType": "sha256"
+}

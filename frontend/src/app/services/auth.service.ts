@@ -7,7 +7,7 @@ import { Observable, catchError, map, tap, throwError } from 'rxjs';
     providedIn: 'root',
 })
 export class AuthService {
-    baseUrl = 'http://localhost:8000/users';
+    baseUrl = 'http://localhost:8000';
 
     user$: User = {
         id: '',
@@ -38,7 +38,7 @@ export class AuthService {
     }
 
     register(userData: User) {
-        const url = `${this.baseUrl}/register`;
+        const url = `${this.baseUrl}/users/register`;
         const headers = {
             'Content-Type': 'application/json',
         };
@@ -59,33 +59,33 @@ export class AuthService {
     }
 
     login(loginData: User): Observable<any> {
-        const url = `${this.baseUrl}/login`;
-        return this.httpClient.post(url, loginData).pipe(
-            tap((response: any) => {
-                console.log('response: ', response);
-                const token = response.token;
-                this.setAuthTokenInLocalStorage(token);
-                return response;
-            }),
-            catchError((error) => {
-                this.clearLocalStorage();
-                return throwError(() => error);
-            })
-        );
+        const url = `${this.baseUrl}/users/login`;
+        return this.httpClient
+            .post(url, loginData, { withCredentials: true })
+            .pipe(
+                tap((response: any) => {
+                    console.log('response: ', response);
+                    const token = response.token;
+                    this.setAuthTokenInLocalStorage(token);
+                    return response;
+                }),
+                catchError((error) => {
+                    this.clearLocalStorage();
+                    return throwError(() => error);
+                })
+            );
     }
 
     getUser(): Observable<any> {
-        const url = `${this.baseUrl}/details`;
-        const headers = {
-            'Content-Type': 'application/json',
-            token: `${this.getAuthTokenFromLocalStorage()}`,
-        };
-        return this.httpClient.get(url, { headers }).pipe(
+        const url = `${this.baseUrl}/user/details`;
+        return this.httpClient.get(url, { withCredentials: true }).pipe(
             tap((response: any) => {
+                console.log('data: ', response);
                 this.user$ = response;
-                this.user$.profilePicture = this.getProfilePictureUrl(
-                    this.user$.id
-                );
+                console.log('this.user$: ', this.user$);
+                // this.user$.profilePicture = this.getProfilePictureUrl(
+                //     this.user$.id
+                // );
                 return response;
             }),
             catchError((error) => {
@@ -95,7 +95,7 @@ export class AuthService {
     }
 
     getUserName(userId: string): Observable<any> {
-        const url = `${this.baseUrl}/details/${userId}`;
+        const url = `${this.baseUrl}/user/details/${userId}`;
         const headers = {
             'Content-Type': 'application/json',
             token: `${this.getAuthTokenFromLocalStorage()}`,
@@ -104,7 +104,7 @@ export class AuthService {
         return this.httpClient.get(url, { headers });
     }
     getProfilePictureUrl(userId: string): string {
-        return `${this.baseUrl}/uploads/${userId}`;
+        return `${this.baseUrl}/user/uploads/${userId}`;
     }
     getUserId(): string {
         this.getUser();
@@ -113,7 +113,7 @@ export class AuthService {
 
     addFriend(friendId: string): Observable<any> {
         const userId = this.getUserId();
-        const url = `${this.baseUrl}/friends`;
+        const url = `${this.baseUrl}/user/friends`;
         const headers = {
             'Content-Type': 'application/json',
             token: `${this.getAuthTokenFromLocalStorage()}`,
@@ -123,7 +123,7 @@ export class AuthService {
     }
 
     getFriends(): Observable<any> {
-        const url = `${this.baseUrl}/friends`;
+        const url = `${this.baseUrl}/user/friends`;
         const headers = {
             'Content-Type': 'application/json',
             token: `${this.getAuthTokenFromLocalStorage()}`,

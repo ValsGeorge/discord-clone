@@ -68,6 +68,7 @@ export class UserInfoComponent implements OnInit {
     getUserInfo() {
         this.authService.getUser().subscribe(
             (response: User) => {
+                console.log('getUserInfo', response);
                 this.user = response;
                 this.user.profilePicture =
                     this.authService.getProfilePictureUrl(this.user.id);

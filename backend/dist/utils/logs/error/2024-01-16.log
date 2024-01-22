@@ -1,0 +1,38 @@
+2024-01-16 10:38:14 error: [POST] /register >> StatusCode:: 400, Message:: property username should not exist, email must be an email
+2024-01-16 10:42:50 error: [POST] /register >> StatusCode:: 400, Message:: email must be an email
+2024-01-16 10:49:05 error: [POST] /register >> StatusCode:: 400, Message:: email must be an email
+2024-01-16 10:49:31 error: [POST] /register >> StatusCode:: 400, Message:: email must be an email
+2024-01-16 10:50:16 error: [POST] /register >> StatusCode:: 400, Message:: email must be an email
+2024-01-16 11:02:09 error: [POST] /register >> StatusCode:: 400, Message:: email must be an email
+2024-01-16 11:03:08 error: [POST] /register >> StatusCode:: 409, Message:: This email abc@abc.com already exists
+2024-01-16 11:14:03 error: [POST] /register >> StatusCode:: 409, Message:: This email aa@aa.com already exists
+2024-01-16 14:48:42 error: uncaughtException: Route.get() requires a callback function but got a [object Undefined]
+Error: Route.get() requires a callback function but got a [object Undefined]
+    at Route.<computed> [as get] (C:\Users\Vals_\Desktop\Projects\gourmet\gourmet-be\node_modules\express\lib\router\route.js:211:15)
+    at Function.proto.<computed> [as get] (C:\Users\Vals_\Desktop\Projects\gourmet\gourmet-be\node_modules\express\lib\router\index.js:521:19)
+    at UsersRoute.initializeRoutes (C:\Users\Vals_\Desktop\Projects\gourmet\gourmet-be\src\routes\users.route.ts:19:17)
+    at new UsersRoute (C:\Users\Vals_\Desktop\Projects\gourmet\gourmet-be\src\routes\users.route.ts:14:10)
+    at bootstrap (C:\Users\Vals_\Desktop\Projects\gourmet\gourmet-be\src\server.ts:9:37)
+    at Object.<anonymous> (C:\Users\Vals_\Desktop\Projects\gourmet\gourmet-be\src\server.ts:15:1)
+    at Module._compile (node:internal/modules/cjs/loader:1256:14)
+    at Module.m._compile (C:\Users\Vals_\Desktop\Projects\gourmet\gourmet-be\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+    at Object.require.extensions.<computed> [as .ts] (C:\Users\Vals_\Desktop\Projects\gourmet\gourmet-be\node_modules\ts-node\src\index.ts:1621:12)
+2024-01-16 14:59:51 error: [GET] /users/me >> StatusCode:: 400, Message:: UserId is empty
+2024-01-16 14:59:54 error: [GET] /users/me >> StatusCode:: 400, Message:: UserId is empty
+2024-01-16 14:59:59 error: [GET] /users/me >> StatusCode:: 400, Message:: UserId is empty
+2024-01-16 15:02:33 error: [GET] /users/me >> StatusCode:: 400, Message:: UserId is empty
+2024-01-16 15:02:59 error: [GET] /users/me >> StatusCode:: 400, Message:: UserId is empty
+2024-01-16 15:03:43 error: [GET] /users/me >> StatusCode:: 400, Message:: UserId is empty
+2024-01-16 15:03:46 error: [GET] /users/me >> StatusCode:: 400, Message:: UserId is empty
+2024-01-16 15:04:15 error: [GET] /users/me >> StatusCode:: 400, Message:: UserId is empty
+2024-01-16 15:05:41 error: [GET] /users/me >> StatusCode:: 400, Message:: UserId is empty
+2024-01-16 15:06:20 error: [GET] /users/me >> StatusCode:: 400, Message:: UserId is empty
+2024-01-16 15:18:34 error: [GET] /users/me >> StatusCode:: 400, Message:: UserId is empty
+2024-01-16 15:22:58 error: [GET] /users/me >> StatusCode:: 400, Message:: UserId is empty
+2024-01-16 15:27:51 error: [GET] /users/me >> StatusCode:: 400, Message:: email must be an email, password must be a string
+2024-01-16 15:28:27 error: [GET] /users/me >> StatusCode:: 400, Message:: email must be an email, password must be a string
+2024-01-16 15:28:50 error: [GET] /users/me >> StatusCode:: 400, Message:: email must be an email, password must be a string
+2024-01-16 15:41:01 error: [GET] /users/me >> StatusCode:: 400, Message:: email must be an email, password must be a string
+2024-01-16 15:44:56 error: [GET] /users/me >> StatusCode:: 404, Message:: Authentication token missing
+2024-01-16 15:45:45 error: [GET] /users/me >> StatusCode:: 404, Message:: Authentication token missing

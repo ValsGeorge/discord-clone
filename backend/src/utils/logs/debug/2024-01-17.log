@@ -1,0 +1,23 @@
+2024-01-17 09:35:00 info: =================================
+2024-01-17 09:35:00 info: 📚 App connected to the database
+2024-01-17 09:35:00 info: ======= ENV: development ========
+2024-01-17 09:35:00 info: 🚀 App listening on the port 3000
+2024-01-17 09:35:00 info: =================================
+2024-01-17 11:00:47 info: =================================
+2024-01-17 11:00:47 info: 📚 App connected to the database
+2024-01-17 11:00:47 info: ======= ENV: development ========
+2024-01-17 11:00:47 info: 🚀 App listening on the port 3000
+2024-01-17 11:00:47 info: =================================
+2024-01-17 11:00:50 error: [GET] /users/me >> StatusCode:: 404, Message:: Authentication token missing
+2024-01-17 11:00:50 info: ::1 - - [17/Jan/2024:09:00:50 +0000] "GET /users/me HTTP/1.1" 404 42 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-17 11:00:52 error: [GET] /users/me >> StatusCode:: 404, Message:: Authentication token missing
+2024-01-17 11:00:52 info: ::1 - - [17/Jan/2024:09:00:52 +0000] "GET /users/me HTTP/1.1" 404 42 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-17 11:01:06 info: ::1 - - [17/Jan/2024:09:01:06 +0000] "OPTIONS /login HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-17 11:01:06 info: ::1 - - [17/Jan/2024:09:01:06 +0000] "POST /login HTTP/1.1" 200 163 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-17 11:01:11 info: ::1 - - [17/Jan/2024:09:01:11 +0000] "GET /users/me HTTP/1.1" 200 166 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-17 11:01:21 info: ::1 - - [17/Jan/2024:09:01:21 +0000] "GET /users/me HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-17 11:28:29 info: =================================
+2024-01-17 11:28:29 info: 📚 App connected to the database
+2024-01-17 11:28:29 info: ======= ENV: development ========
+2024-01-17 11:28:29 info: 🚀 App listening on the port 3000
+2024-01-17 11:28:29 info: =================================

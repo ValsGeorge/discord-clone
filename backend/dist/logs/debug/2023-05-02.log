@@ -1,0 +1,37 @@
+2023-05-02 21:57:33 info: =================================
+2023-05-02 21:57:33 info: 📚 App connected to the database
+2023-05-02 21:57:33 info: ======= ENV: development ========
+2023-05-02 21:57:33 info: 🚀 App listening on the port 3000
+2023-05-02 21:57:33 info: =================================
+2023-05-02 22:05:21 info: [0mGET /login [33m404[0m 10.682 ms - 144[0m
+2023-05-02 22:05:31 error: [POST] /login >> StatusCode:: 400, Message:: email must be an email, password must be a string
+2023-05-02 22:05:31 info: [0mPOST /login [33m400[0m 9.798 ms - 63[0m
+2023-05-02 22:06:09 error: [POST] /login >> StatusCode:: 409, Message:: Password is not matching
+2023-05-02 22:06:09 info: [0mPOST /login [33m409[0m 149.644 ms - 38[0m
+2023-05-02 22:07:04 error: [POST] /login >> StatusCode:: 409, Message:: This email insandrei@gmail.com was not found
+2023-05-02 22:07:04 info: [0mPOST /login [33m409[0m 47.520 ms - 58[0m
+2023-05-02 22:07:14 info: [0mPOST /signup [32m201[0m 432.974 ms - 174[0m
+2023-05-02 22:07:24 info: [0mPOST /login [32m200[0m 131.338 ms - 173[0m
+2023-05-02 22:07:31 info: [0mPOST /login [32m200[0m 140.700 ms - 173[0m
+2023-05-02 22:08:21 info: [0mPOST /login [32m200[0m 129.351 ms - 173[0m
+2023-05-02 22:37:17 info: [0mGET /swagger [33m404[0m 1.714 ms - 146[0m
+2023-05-02 22:41:56 info: =================================
+2023-05-02 22:41:56 info: 📚 App connected to the database
+2023-05-02 22:41:56 info: ======= ENV: development ========
+2023-05-02 22:41:56 info: 🚀 App listening on the port 3000
+2023-05-02 22:41:56 info: =================================
+2023-05-02 22:42:28 info: =================================
+2023-05-02 22:42:28 info: 📚 App connected to the database
+2023-05-02 22:42:28 info: ======= ENV: development ========
+2023-05-02 22:42:28 info: 🚀 App listening on the port 3000
+2023-05-02 22:42:28 info: =================================
+2023-05-02 22:43:42 info: =================================
+2023-05-02 22:43:42 info: 📚 App connected to the database
+2023-05-02 22:43:42 info: ======= ENV: development ========
+2023-05-02 22:43:42 info: 🚀 App listening on the port 3000
+2023-05-02 22:43:42 info: =================================
+2023-05-02 22:43:51 info: =================================
+2023-05-02 22:43:51 info: 📚 App connected to the database
+2023-05-02 22:43:51 info: ======= ENV: development ========
+2023-05-02 22:43:51 info: 🚀 App listening on the port 3000
+2023-05-02 22:43:51 info: =================================

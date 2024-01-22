@@ -1,0 +1,9 @@
+2024-01-20 00:00:21 error: [GET] /servers/get-servers >> StatusCode:: 404, Message:: Authentication token missing
+2024-01-20 00:00:26 error: [POST] /servers/create-server >> StatusCode:: 404, Message:: Authentication token missing
+2024-01-20 00:00:35 error: [GET] /servers/get-servers >> StatusCode:: 404, Message:: Authentication token missing
+2024-01-20 00:01:05 error: [POST] /servers/ >> StatusCode:: 404, Message:: Authentication token missing
+2024-01-20 00:01:33 error: [GET] /servers/get-servers >> StatusCode:: 404, Message:: Authentication token missing
+2024-01-20 00:01:37 error: [POST] /servers/ >> StatusCode:: 404, Message:: Authentication token missing
+2024-01-20 00:11:25 error: [GET] /servers/get-servers >> StatusCode:: 404, Message:: Authentication token missing
+2024-01-20 00:11:27 error: [POST] /servers/ >> StatusCode:: 404, Message:: Authentication token missing
+2024-01-20 00:11:38 error: [GET] /servers/get-servers >> StatusCode:: 404, Message:: Authentication token missing

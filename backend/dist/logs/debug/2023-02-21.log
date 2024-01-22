@@ -1,0 +1,52 @@
+2023-02-21 20:59:56 info: =================================
+2023-02-21 20:59:56 info: ======= ENV: development =======
+2023-02-21 20:59:56 info: 🚀 App listening on the port 3000
+2023-02-21 20:59:56 info: =================================
+2023-02-21 21:01:08 info: =================================
+2023-02-21 21:01:08 info: ======= ENV: development =======
+2023-02-21 21:01:08 info: 🚀 App listening on the port 3000
+2023-02-21 21:01:08 info: =================================
+2023-02-21 21:01:12 info: [0mGET /api-docs [36m301[0m 2.603 ms - 183[0m
+2023-02-21 21:01:12 info: [0mGET /api-docs/ [32m200[0m 1.965 ms - -[0m
+2023-02-21 21:01:13 info: [0mGET /api-docs/swagger-ui.css [32m200[0m 3.075 ms - -[0m
+2023-02-21 21:01:13 info: [0mGET /api-docs/swagger-ui-init.js [32m200[0m 0.256 ms - -[0m
+2023-02-21 21:01:13 info: [0mGET /api-docs/swagger-ui-standalone-preset.js [32m200[0m 1.962 ms - -[0m
+2023-02-21 21:01:13 info: [0mGET /api-docs/swagger-ui-bundle.js [32m200[0m 2.150 ms - -[0m
+2023-02-21 21:01:13 info: [0mGET /api-docs/favicon-32x32.png [32m200[0m 1.286 ms - 628[0m
+2023-02-21 21:01:13 info: [0mGET /api-docs/favicon-32x32.png [36m304[0m 0.607 ms - -[0m
+2023-02-21 21:01:38 error: =================================
+2023-02-21 21:01:38 error: App failed to connect to the database
+2023-02-21 21:01:38 error: =================================
+2023-02-21 21:01:38 error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/
+2023-02-21 21:04:28 info: =================================
+2023-02-21 21:04:28 info: ======= ENV: development =======
+2023-02-21 21:04:28 info: 🚀 App listening on the port 3000
+2023-02-21 21:04:28 info: =================================
+2023-02-21 21:04:28 info: =================================
+2023-02-21 21:04:28 info: App connected to the database
+2023-02-21 21:04:28 info: =================================
+2023-02-21 21:04:32 info: [0mGET /api-docs/ [36m304[0m 8.787 ms - -[0m
+2023-02-21 21:04:32 info: [0mGET /api-docs/swagger-ui.css [36m304[0m 1.298 ms - -[0m
+2023-02-21 21:04:32 info: [0mGET /api-docs/swagger-ui-bundle.js [36m304[0m 0.853 ms - -[0m
+2023-02-21 21:04:32 info: [0mGET /api-docs/swagger-ui-standalone-preset.js [36m304[0m 0.865 ms - -[0m
+2023-02-21 21:04:32 info: [0mGET /api-docs/swagger-ui-init.js [36m304[0m 0.265 ms - -[0m
+2023-02-21 21:04:32 info: [0mGET /api-docs/favicon-32x32.png [36m304[0m 0.667 ms - -[0m
+2023-02-21 21:04:32 info: [0mGET /api-docs/favicon-32x32.png [36m304[0m 1.475 ms - -[0m
+2023-02-21 21:04:45 info: [0mGET /users [32m200[0m 51.038 ms - 31[0m
+2023-02-21 21:05:14 info: [0mGET /api-docs/ [36m304[0m 2.951 ms - -[0m
+2023-02-21 21:05:14 info: [0mGET /api-docs/swagger-ui.css [36m304[0m 1.246 ms - -[0m
+2023-02-21 21:05:14 info: [0mGET /api-docs/swagger-ui-bundle.js [36m304[0m 1.283 ms - -[0m
+2023-02-21 21:05:14 info: [0mGET /api-docs/swagger-ui-init.js [36m304[0m 0.209 ms - -[0m
+2023-02-21 21:05:14 info: [0mGET /api-docs/swagger-ui-standalone-preset.js [36m304[0m 1.801 ms - -[0m
+2023-02-21 21:05:14 info: [0mGET /api-docs/favicon-32x32.png [36m304[0m 0.898 ms - -[0m
+2023-02-21 21:05:15 info: [0mGET /api-docs/favicon-32x32.png [36m304[0m 0.979 ms - -[0m
+2023-02-21 21:11:39 error: [POST] /users >> StatusCode:: 400, Message:: email must be an email
+2023-02-21 21:11:39 info: [0mPOST /users [33m400[0m 34.079 ms - 36[0m
+2023-02-21 21:12:00 info: [0mPOST /users [32m201[0m 249.920 ms - 175[0m
+2023-02-21 22:32:17 info: =================================
+2023-02-21 22:32:17 info: ======= ENV: development =======
+2023-02-21 22:32:17 info: 🚀 App listening on the port 3000
+2023-02-21 22:32:17 info: =================================
+2023-02-21 22:32:17 info: =================================
+2023-02-21 22:32:17 info: App connected to the database
+2023-02-21 22:32:17 info: =================================
