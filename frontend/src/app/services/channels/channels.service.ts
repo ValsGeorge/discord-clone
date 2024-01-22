@@ -62,7 +62,7 @@ export class ChannelsService {
         const data = {
             name: channel.name,
             type: channel.type,
-            categoryId: channel.categoryId,
+            categoryId: channel.category,
             serverId: this.selectedServerId,
         };
         this.updateChannels(this.selectedServerId || '0');
@@ -72,13 +72,13 @@ export class ChannelsService {
 
     getChannels(serverId: string): Observable<any> {
         console.log('get channels');
-        const url = `${this.baseUrl}/get-channels/${serverId}`;
+        const url = `${this.baseUrl}/${serverId}`;
         const token = localStorage.getItem('token') as string;
         const headers = {
             'Content-Type': 'application/json',
             token: token,
         };
-        return this.http.get(url, { headers });
+        return this.http.get(url, { withCredentials: true });
     }
 
     deleteChannel(channelId: string): Observable<any> {

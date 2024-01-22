@@ -17,7 +17,7 @@ export class CategoriesService {
             'Content-Type': 'application/json',
             token: token,
         };
-        return this.http.get(url, { headers });
+        return this.http.get(url, { withCredentials: true });
     }
 
     updateCategoriesOrder(categories: Category[]): Observable<any> {
@@ -31,6 +31,6 @@ export class CategoriesService {
         const body = {
             categories: categories,
         };
-        return this.http.put(url, body, { headers });
+        return this.http.put(url, body, { withCredentials: true });
     }
 }

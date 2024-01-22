@@ -1,5 +1,5 @@
 import { model, Schema, Document, Types } from 'mongoose';
-import { Server } from '../interfaces/server.interface';
+import { Server } from '../interfaces/servers.interface';
 
 const serverSchema: Schema = new Schema({
     name: {

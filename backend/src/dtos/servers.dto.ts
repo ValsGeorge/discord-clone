@@ -10,9 +10,6 @@ export class CreateServerDto {
     public description?: string;
 
     @IsString()
-    public type: string;
-
-    @IsString()
     @IsOptional()
     public inviteCode?: string;
 

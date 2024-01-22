@@ -1,10 +1,16 @@
 import { NextFunction, Request, Response } from 'express';
 import { CreateServerDto } from '@dtos/servers.dto';
-import { Server } from '@interfaces/server.interface';
-import ServerService from 'services/server.service';
+import { Server } from '@/interfaces/servers.interface';
+import ServerService from '@/services/servers.service';
+import { CreateCategoryDto } from '@/dtos/categories.dto';
+import CategoryService from '@/services/categories.service';
+import { CreateChannelDto } from '@/dtos/channels.dto';
+import ChannelService from '@/services/channels.service';
 
 class ServerController {
     public serverService = new ServerService();
+    public categoryService = new CategoryService();
+    public channelService = new ChannelService();
 
     public getServers = async (
         req: Request,
@@ -15,10 +21,7 @@ class ServerController {
             const findAllServersData: Server[] =
                 await this.serverService.findAllServer();
 
-            res.status(200).json({
-                data: findAllServersData,
-                message: 'findAll',
-            });
+            res.status(200).json(findAllServersData);
         } catch (error) {
             next(error);
         }
@@ -34,10 +37,7 @@ class ServerController {
             const findOneServerData: Server =
                 await this.serverService.findServerById(serverId);
 
-            res.status(200).json({
-                data: findOneServerData,
-                message: 'findOne',
-            });
+            res.status(200).json(findOneServerData);
         } catch (error) {
             next(error);
         }
@@ -57,6 +57,60 @@ class ServerController {
             serverData.members = [userId];
             const createServerData: Server =
                 await this.serverService.createServer(serverData);
+
+            // into that server create two categories ( text and voice )
+            // and one channel in each category
+
+            const createTextCategory: CreateCategoryDto = {
+                name: 'Text',
+                description: 'Text channels',
+                order: 0,
+                server: createServerData.id,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            };
+            const textCategory = await this.categoryService.createCategory(
+                createTextCategory
+            );
+
+            // Create Voice category
+            const createVoiceCategory: CreateCategoryDto = {
+                name: 'Voice',
+                description: 'Voice channels',
+                order: 1,
+                server: createServerData.id,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            };
+            const voiceCategory = await this.categoryService.createCategory(
+                createVoiceCategory
+            );
+
+            // Create Text channel in Text category
+            const createTextChannelData: CreateChannelDto = {
+                name: 'General',
+                description: 'General text channel',
+                type: 'text',
+                order: 0,
+                server: createServerData.id,
+                category: textCategory.id, // Use the ID of the Text category
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            };
+            await this.channelService.createChannel(createTextChannelData);
+
+            // Create Voice channel in Voice category
+            const createVoiceChannelData: CreateChannelDto = {
+                name: 'General',
+                description: 'General voice channel',
+                type: 'voice',
+                order: 0,
+                server: createServerData.id,
+                category: voiceCategory.id, // Use the ID of the Voice category
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            };
+            await this.channelService.createChannel(createVoiceChannelData);
 
             res.status(201).json({
                 data: createServerData,

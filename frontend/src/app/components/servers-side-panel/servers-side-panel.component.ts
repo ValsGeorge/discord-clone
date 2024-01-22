@@ -104,7 +104,7 @@ export class ServersSidePanelComponent implements OnInit {
     getServers() {
         this.serversService.getServers().subscribe(
             (response: any) => {
-                this.servers = response.data;
+                this.servers = response;
                 this.servers.forEach((server) => {
                     console.log('server', server);
                     if (server.image) {

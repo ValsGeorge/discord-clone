@@ -7,7 +7,8 @@ import { Observable, catchError, map, tap, throwError } from 'rxjs';
     providedIn: 'root',
 })
 export class AuthService {
-    baseUrl = 'http://localhost:8000';
+    authUrl = 'http://localhost:8000/auth';
+    userUrl = 'http://localhost:8000/user';
 
     user$: User = {
         id: '',
@@ -38,7 +39,7 @@ export class AuthService {
     }
 
     register(userData: User) {
-        const url = `${this.baseUrl}/users/register`;
+        const url = `${this.authUrl}/register`;
         const headers = {
             'Content-Type': 'application/json',
         };
@@ -54,12 +55,12 @@ export class AuthService {
     }
 
     activateAccount(uidb64: string, token: string): Observable<any> {
-        const url = `${this.baseUrl}/activate/${uidb64}/${token}`;
+        const url = `${this.authUrl}/activate/${uidb64}/${token}`;
         return this.httpClient.post(url, {});
     }
 
     login(loginData: User): Observable<any> {
-        const url = `${this.baseUrl}/users/login`;
+        const url = `${this.authUrl}/login`;
         return this.httpClient
             .post(url, loginData, { withCredentials: true })
             .pipe(
@@ -77,7 +78,7 @@ export class AuthService {
     }
 
     getUser(): Observable<any> {
-        const url = `${this.baseUrl}/user/details`;
+        const url = `${this.userUrl}/details`;
         return this.httpClient.get(url, { withCredentials: true }).pipe(
             tap((response: any) => {
                 console.log('data: ', response);
@@ -95,7 +96,7 @@ export class AuthService {
     }
 
     getUserName(userId: string): Observable<any> {
-        const url = `${this.baseUrl}/user/details/${userId}`;
+        const url = `${this.userUrl}/details/${userId}`;
         const headers = {
             'Content-Type': 'application/json',
             token: `${this.getAuthTokenFromLocalStorage()}`,
@@ -104,7 +105,7 @@ export class AuthService {
         return this.httpClient.get(url, { headers });
     }
     getProfilePictureUrl(userId: string): string {
-        return `${this.baseUrl}/user/uploads/${userId}`;
+        return `${this.userUrl}/uploads/${userId}`;
     }
     getUserId(): string {
         this.getUser();
@@ -113,7 +114,7 @@ export class AuthService {
 
     addFriend(friendId: string): Observable<any> {
         const userId = this.getUserId();
-        const url = `${this.baseUrl}/user/friends`;
+        const url = `${this.userUrl}/friends`;
         const headers = {
             'Content-Type': 'application/json',
             token: `${this.getAuthTokenFromLocalStorage()}`,
@@ -123,7 +124,7 @@ export class AuthService {
     }
 
     getFriends(): Observable<any> {
-        const url = `${this.baseUrl}/user/friends`;
+        const url = `${this.userUrl}/friends`;
         const headers = {
             'Content-Type': 'application/json',
             token: `${this.getAuthTokenFromLocalStorage()}`,
@@ -144,7 +145,7 @@ export class AuthService {
     }
 
     getFriendRequests(): Observable<any> {
-        const url = `${this.baseUrl}/friend-requests`;
+        const url = `${this.userUrl}/friend-requests`;
         const headers = {
             'Content-Type': 'application/json',
             token: `${this.getAuthTokenFromLocalStorage()}`,
@@ -169,7 +170,7 @@ export class AuthService {
         friendRequestId: string,
         status: 'accept' | 'decline'
     ): Observable<any> {
-        const url = `${this.baseUrl}/friend-request`;
+        const url = `${this.userUrl}/friend-request`;
         const headers = {
             'Content-Type': 'application/json',
             token: this.getAuthTokenFromLocalStorage() || '',

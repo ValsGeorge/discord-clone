@@ -40,7 +40,7 @@ export class ChatComponent {
         messages: [],
         created_at: '',
         updated_at: '',
-        categoryId: '',
+        category: '',
         order: 0,
     };
 

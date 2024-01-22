@@ -154,8 +154,9 @@ export class ChannelsComponent implements OnInit {
                 this.channels = response;
 
                 this.channels.forEach((channel) => {
+                    console.log('channel:', channel);
                     const category = this.categories.find(
-                        (cat) => cat.id === channel.categoryId
+                        (cat) => cat.id === channel.category
                     );
 
                     if (category) {

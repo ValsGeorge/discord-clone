@@ -1,5 +1,5 @@
 import { CreateServerDto } from '../dtos/servers.dto';
-import { Server } from '../interfaces/server.interface';
+import { Server } from '../interfaces/servers.interface';
 
 import serverModel from '../models/servers.model';
 import { HttpException } from '@exceptions/HttpException';

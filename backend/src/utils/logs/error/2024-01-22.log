@@ -84,3 +84,46 @@ Error: Route.post() requires a callback function but got a [object Undefined]
 2024-01-22 14:27:34 error: [GET] /user/uploads/65ae34bcd3396e26089f5c7a >> StatusCode:: 404, Message:: ENOENT: no such file or directory, stat 'C:\Users\Vals_\Desktop\Projects\discord-clone\backend\uploads\65ae34bcd3396e26089f5c7a'
 2024-01-22 14:27:48 error: [GET] /user/uploads/65ae34bcd3396e26089f5c7a >> StatusCode:: 404, Message:: ENOENT: no such file or directory, stat 'C:\Users\Vals_\Desktop\Projects\discord-clone\backend\uploads\65ae34bcd3396e26089f5c7a'
 2024-01-22 14:28:43 error: [GET] /user/uploads/65ae34bcd3396e26089f5c7a >> StatusCode:: 404, Message:: ENOENT: no such file or directory, stat 'C:\Users\Vals_\Desktop\Projects\discord-clone\backend\uploads\65ae34bcd3396e26089f5c7a'
+2024-01-22 16:13:54 error: uncaughtException: Cannot find module 'services/server.service'
+Require stack:
+- C:\Users\Vals_\Desktop\Projects\discord-clone\backend\src\controllers\servers.controller.ts
+- C:\Users\Vals_\Desktop\Projects\discord-clone\backend\src\routes\servers.route.ts
+- C:\Users\Vals_\Desktop\Projects\discord-clone\backend\src\server.ts
+Error: Cannot find module 'services/server.service'
+Require stack:
+- C:\Users\Vals_\Desktop\Projects\discord-clone\backend\src\controllers\servers.controller.ts
+- C:\Users\Vals_\Desktop\Projects\discord-clone\backend\src\routes\servers.route.ts
+- C:\Users\Vals_\Desktop\Projects\discord-clone\backend\src\server.ts
+    at Function.Module._resolveFilename (node:internal/modules/cjs/loader:1077:15)
+    at Function.Module._resolveFilename.sharedData.moduleResolveFilenameHook.installedValue (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\@cspotcode\source-map-support\source-map-support.js:811:30)
+    at Function.Module._resolveFilename (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\tsconfig-paths\src\register.ts:115:36)
+    at Function.Module._load (node:internal/modules/cjs/loader:922:27)
+    at Module.require (node:internal/modules/cjs/loader:1143:19)
+    at require (node:internal/modules/cjs/helpers:110:18)
+    at Object.<anonymous> (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\src\controllers\servers.controller.ts:4:1)
+    at Module._compile (node:internal/modules/cjs/loader:1256:14)
+    at Module.m._compile (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+2024-01-22 16:15:19 error: uncaughtException: Serverservice is not defined
+ReferenceError: Serverservice is not defined
+    at Object.<anonymous> (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\src\services\servers.service.ts:92:16)
+    at Module._compile (node:internal/modules/cjs/loader:1256:14)
+    at Module.m._compile (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+    at Object.require.extensions.<computed> [as .ts] (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1119:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:960:12)
+    at Module.require (node:internal/modules/cjs/loader:1143:19)
+    at require (node:internal/modules/cjs/helpers:110:18)
+    at Object.<anonymous> (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\src\controllers\servers.controller.ts:4:1)
+2024-01-22 17:15:47 error: [POST] /servers/ >> StatusCode:: 500, Message:: Categories validation failed: server: Path `server` is required.
+2024-01-22 17:23:32 error: [POST] /servers/ >> StatusCode:: 500, Message:: Categories validation failed: server: Path `server` is required.
+2024-01-22 17:24:15 error: [POST] /servers/ >> StatusCode:: 500, Message:: Channels validation failed: server: Path `server` is required., type: Path `type` is required.
+2024-01-22 17:30:43 error: [POST] /servers/ >> StatusCode:: 500, Message:: E11000 duplicate key error collection: Cluster0.channels index: name_1 dup key: { name: "General" }
+2024-01-22 17:35:08 error: [POST] /servers/ >> StatusCode:: 500, Message:: E11000 duplicate key error collection: Cluster0.channels index: name_1 dup key: { name: "General" }
+2024-01-22 17:36:05 error: [POST] /servers/ >> StatusCode:: 500, Message:: E11000 duplicate key error collection: Cluster0.channels index: name_1 dup key: { name: "General" }
+2024-01-22 17:37:54 error: [POST] /servers/ >> StatusCode:: 500, Message:: E11000 duplicate key error collection: Cluster0.channels index: name_1 dup key: { name: "General" }
+2024-01-22 17:39:48 error: [POST] /servers/ >> StatusCode:: 500, Message:: E11000 duplicate key error collection: Cluster0.channels index: name_1_type_1 dup key: { name: "General", type: "text" }
+2024-01-22 18:42:44 error: [PUT] /categories/update-order >> StatusCode:: 400, Message:: property categories should not exist
+2024-01-22 18:42:45 error: [PUT] /categories/update-order >> StatusCode:: 400, Message:: property categories should not exist
+2024-01-22 18:42:46 error: [PUT] /categories/update-order >> StatusCode:: 400, Message:: property categories should not exist

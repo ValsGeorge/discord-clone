@@ -43,7 +43,6 @@ export class ServersService {
         const body = {
             name: serverName['serverName'],
             description: 'a',
-            type: 'text',
         };
 
         return this.httpClient.post(url, body, {
@@ -57,6 +56,7 @@ export class ServersService {
 
         return this.httpClient.get(url, { withCredentials: true }).pipe(
             (response: any) => {
+                console.log('response', response);
                 return response;
             },
             (error: any) => {
@@ -124,13 +124,8 @@ export class ServersService {
 
     getServerInfo(serverId: string): Observable<any> {
         const token = localStorage.getItem('token') as string;
-        const url = `${this.baseUrl}/server-info/${serverId}`;
-        const headers = new HttpHeaders({
-            'Content-Type': 'application/json',
-            token: token,
-        });
-
-        return this.httpClient.get(url, { headers });
+        const url = `${this.baseUrl}/${serverId}`;
+        return this.httpClient.get(url, { withCredentials: true });
     }
 
     uploadServerImage(serverId: string, image: File): Observable<any> {
