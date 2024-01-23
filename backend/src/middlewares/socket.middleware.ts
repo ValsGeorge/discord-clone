@@ -21,7 +21,6 @@ const authMiddlewareSocket = async (token: string, socket: any, next: any) => {
             } else {
                 next(new HttpException(401, 'Wrong authentication token'));
             }
-            console.log('findUser2: ', findUser);
         } else {
             next(new HttpException(404, 'Authentication token missing'));
         }

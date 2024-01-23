@@ -1,9 +1,8 @@
-import MessageService from '@/services/messages.service';
-// import createDM from './controllers/dms.controller';
-// import sendFriendRequest from './controllers/friends.controller';
 import { Socket, Server } from 'socket.io';
 import authMiddlewareSocket from './middlewares/socket.middleware';
-
+import MessageService from './services/messages.service';
+import { User } from './interfaces/users.interface';
+import UserService from './services/users.service';
 interface ISocket extends Socket {
     decoded?: any;
 }
@@ -30,12 +29,15 @@ const initSocketIO = () => {
         } else {
             next(new Error('Authentication error'));
         }
-    }).on('connection', (socket: ISocket) => {
+    }).on('connection', async (socket: ISocket) => {
         console.log('user connected', socket.id);
         const userId = (socket.decoded as any).id;
         console.log('userId: ', userId);
 
-        onlineUsers[userId] = userId;
+        // using userId, get the user details from the database
+        const user = await new UserService().findUserById(userId);
+
+        onlineUsers[userId] = user;
         connectedUsers[userId] = socket.id;
 
         // Broadcast the updated online user list to all clients
@@ -56,7 +58,18 @@ const initSocketIO = () => {
 
         socket.on('sendMessage', (message) => {
             message.userId = userId;
-            console.log(message);
+            console.log('sendMessage', message);
+            try {
+                message.user = userId as string;
+                message.channel = message.channelId as string;
+                const createMessageData = new MessageService().createMessage(
+                    message
+                );
+
+                io.emit('receiveMessage', createMessageData);
+            } catch (error) {
+                console.error('Error creating message:', error);
+            }
         });
         socket.on('editMessage', (message) => {
             console.log(message);

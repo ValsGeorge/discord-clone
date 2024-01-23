@@ -12,14 +12,10 @@ class CategoryController {
         next: NextFunction
     ) => {
         try {
-            console.log('getCategories', req.params);
             const serverId: string = req.params.serverId;
 
-            console.log('serverIddd', serverId);
             const findAllCategoriesData: Category[] =
                 await this.categoryService.findAllCategories(serverId);
-
-            console.log('findAllCategoriesData', findAllCategoriesData);
 
             res.status(200).json(findAllCategoriesData);
         } catch (error) {

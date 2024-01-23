@@ -7,8 +7,8 @@ export class CreateMessageDto {
     public content: string;
 
     @IsString()
-    public user?: User;
+    public user?: string;
 
     @IsString()
-    public channel?: Channel;
+    public channel?: string;
 }

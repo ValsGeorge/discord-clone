@@ -25,10 +25,8 @@ export class ChatService {
             // if it is Message, then updateLocalMessages
             // if it is DM, then updateLocalDMs
             if (message.channelId) {
-                console.log('message', message);
                 this.updateLocalMessages(message);
             } else {
-                console.log('message', message);
                 this.updateLocalDMs(message);
             }
         });
@@ -61,9 +59,8 @@ export class ChatService {
             this.messages.sort((a, b) => +a.updatedAt - +b.updatedAt);
         }
 
-        this.authService.getUserName(updatedMessage.userId).subscribe(
+        this.authService.getUserName(updatedMessage.user).subscribe(
             (response) => {
-                console.log('response', response);
                 updatedMessage.username = response.username;
                 updatedMessage.userProfilePicture = response.profilePicture;
             },
@@ -90,14 +87,9 @@ export class ChatService {
         }
         this.authService.getUserName(updatedDM.senderId).subscribe(
             (response) => {
-                console.log('response', response);
                 updatedDM.senderUsername = response.username;
                 updatedDM.userProfilePicture =
                     this.authService.getProfilePictureUrl(updatedDM.senderId);
-                console.log(
-                    'this.authService.getProfilePictureUrl(updatedDM.senderId)',
-                    this.authService.getProfilePictureUrl(updatedDM.senderId)
-                );
             },
             (error) => {
                 console.error('Error getting username:', error);
@@ -116,19 +108,16 @@ export class ChatService {
             .subscribe(
                 (initialMessages) => {
                     const userIds = Array.from(
-                        new Set(
-                            initialMessages.map((message) => message.userId)
-                        )
+                        new Set(initialMessages.map((message) => message.user))
                     );
-
                     userIds.forEach((userId) => {
                         this.authService.getUserName(userId).subscribe(
                             (response) => {
                                 initialMessages.forEach((message) => {
-                                    if (message.userId === userId) {
+                                    if (message.user === userId) {
                                         message.username = response.username;
                                         message.userProfilePicture =
-                                            'http://localhost:8000/users/uploads/' +
+                                            'http://localhost:8000/user/uploads/' +
                                             response.id;
                                     }
                                 });
@@ -225,7 +214,7 @@ export class ChatService {
                                 if (message.senderId === userId) {
                                     message.senderUsername = response.username;
                                     message.userProfilePicture =
-                                        'http://localhost:8000/users/uploads/' +
+                                        'http://localhost:8000/user/uploads/' +
                                         response.id;
                                 }
                             });

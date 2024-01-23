@@ -81,12 +81,7 @@ export class AuthService {
         const url = `${this.userUrl}/details`;
         return this.httpClient.get(url, { withCredentials: true }).pipe(
             tap((response: any) => {
-                console.log('data: ', response);
                 this.user$ = response;
-                console.log('this.user$: ', this.user$);
-                // this.user$.profilePicture = this.getProfilePictureUrl(
-                //     this.user$.id
-                // );
                 return response;
             }),
             catchError((error) => {
@@ -96,7 +91,7 @@ export class AuthService {
     }
 
     getUserName(userId: string): Observable<any> {
-        const url = `${this.userUrl}/details/${userId}`;
+        const url = `${this.userUrl}/${userId}`;
         const headers = {
             'Content-Type': 'application/json',
             token: `${this.getAuthTokenFromLocalStorage()}`,

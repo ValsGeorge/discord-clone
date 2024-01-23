@@ -7,6 +7,7 @@ import { isEmpty } from '@/utils/util';
 import { User } from '@/interfaces/users.interface';
 import UserService from './users.service';
 import ChannelService from './channels.service';
+import { Types } from 'mongoose';
 
 class MessageService {
     public messages = messageModel;
@@ -15,7 +16,7 @@ class MessageService {
 
     public async findAllMessage(channelId: string): Promise<Message[]> {
         const messages: Message[] = await this.messages.find({
-            channel: channelId,
+            channel: new Types.ObjectId(channelId),
         });
         return messages;
     }
@@ -35,8 +36,18 @@ class MessageService {
         if (isEmpty(messageData))
             throw new HttpException(400, "You're not messageData");
 
+        const user = await new this.userService().findUserById(
+            messageData.user
+        );
+        const channel = await new this.channelService().findChannelById(
+            messageData.channel
+        );
         const createMessageData: Message = await this.messages.create({
             ...messageData,
+            user,
+            channel,
+            createdAt: new Date(),
+            updatedAt: new Date(),
         });
 
         return createMessageData;

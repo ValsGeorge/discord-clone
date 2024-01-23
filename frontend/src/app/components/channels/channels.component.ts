@@ -134,7 +134,6 @@ export class ChannelsComponent implements OnInit {
         this.selectedServerId = this.utilsService.getSelectedServerId();
         this.categoriesService.getCategories(this.selectedServerId).subscribe(
             (response) => {
-                console.log('categories:', response);
                 this.categories = response;
                 this.categories.sort((a, b) => a.order - b.order);
                 this.getChannels();
@@ -154,7 +153,6 @@ export class ChannelsComponent implements OnInit {
                 this.channels = response;
 
                 this.channels.forEach((channel) => {
-                    console.log('channel:', channel);
                     const category = this.categories.find(
                         (cat) => cat.id === channel.category
                     );
@@ -180,7 +178,6 @@ export class ChannelsComponent implements OnInit {
     }
 
     openDialog(categoryId: string) {
-        console.log('categoryId:', categoryId);
         this.channelsService.openDialog({
             categoryId,
             serverId: '1',

@@ -20,7 +20,6 @@ class MessageController {
             const channelId: string = req.params.channelId;
             const findAllMessagesData: Message[] =
                 await this.messageService.findAllMessage(channelId);
-
             res.status(200).json(findAllMessagesData);
         } catch (error) {
             next(error);

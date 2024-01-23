@@ -71,6 +71,7 @@ export class UtilsService {
                 console.log('Online users:', onlineUsers);
                 this.onlineUsers = onlineUsers;
                 this.onlineUsers.forEach((user) => {
+                    console.log('user: ', user);
                     user.profilePicture = this.authService.getProfilePictureUrl(
                         user.id
                     );

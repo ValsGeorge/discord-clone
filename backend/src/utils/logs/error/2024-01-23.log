@@ -59,3 +59,60 @@ TypeError: Cannot read properties of undefined (reading 'split')
     at Namespace.run (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\socket.io\dist\namespace.js:135:9)
     at Namespace._add (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\socket.io\dist\namespace.js:211:14)
     at processTicksAndRejections (node:internal/process/task_queues:95:5)
+2024-01-23 12:03:14 error: uncaughtException: Messages validation failed: updatedAt: Path `updatedAt` is required., createdAt: Path `createdAt` is required., channel: Path `channel` is required., user: Path `user` is required.
+ValidationError: Messages validation failed: updatedAt: Path `updatedAt` is required., createdAt: Path `createdAt` is required., channel: Path `channel` is required., user: Path `user` is required.
+    at model.Document.invalidate (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\mongoose\lib\document.js:3192:32)
+    at C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\mongoose\lib\document.js:2980:17
+    at C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\mongoose\lib\schematype.js:1350:9
+    at processTicksAndRejections (node:internal/process/task_queues:77:11)
+2024-01-23 12:03:55 error: uncaughtException: Messages validation failed: updatedAt: Path `updatedAt` is required., createdAt: Path `createdAt` is required., channel: Path `channel` is required., user: Path `user` is required.
+ValidationError: Messages validation failed: updatedAt: Path `updatedAt` is required., createdAt: Path `createdAt` is required., channel: Path `channel` is required., user: Path `user` is required.
+    at model.Document.invalidate (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\mongoose\lib\document.js:3192:32)
+    at C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\mongoose\lib\document.js:2980:17
+    at C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\mongoose\lib\schematype.js:1350:9
+    at processTicksAndRejections (node:internal/process/task_queues:77:11)
+2024-01-23 12:04:52 error: uncaughtException: Messages validation failed: updatedAt: Path `updatedAt` is required., createdAt: Path `createdAt` is required., channel: Path `channel` is required., user: Path `user` is required.
+ValidationError: Messages validation failed: updatedAt: Path `updatedAt` is required., createdAt: Path `createdAt` is required., channel: Path `channel` is required., user: Path `user` is required.
+    at model.Document.invalidate (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\mongoose\lib\document.js:3192:32)
+    at C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\mongoose\lib\document.js:2980:17
+    at C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\mongoose\lib\schematype.js:1350:9
+    at processTicksAndRejections (node:internal/process/task_queues:77:11)
+2024-01-23 12:19:41 error: uncaughtException: Messages validation failed: updatedAt: Path `updatedAt` is required., createdAt: Path `createdAt` is required., channel: Path `channel` is required., user: Path `user` is required.
+ValidationError: Messages validation failed: updatedAt: Path `updatedAt` is required., createdAt: Path `createdAt` is required., channel: Path `channel` is required., user: Path `user` is required.
+    at model.Document.invalidate (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\mongoose\lib\document.js:3192:32)
+    at C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\mongoose\lib\document.js:2980:17
+    at C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\mongoose\lib\schematype.js:1350:9
+    at processTicksAndRejections (node:internal/process/task_queues:77:11)
+2024-01-23 12:23:36 error: uncaughtException: Messages validation failed: updatedAt: Path `updatedAt` is required., createdAt: Path `createdAt` is required., channel: Path `channel` is required., user: Path `user` is required.
+ValidationError: Messages validation failed: updatedAt: Path `updatedAt` is required., createdAt: Path `createdAt` is required., channel: Path `channel` is required., user: Path `user` is required.
+    at model.Document.invalidate (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\mongoose\lib\document.js:3192:32)
+    at C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\mongoose\lib\document.js:2980:17
+    at C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\mongoose\lib\schematype.js:1350:9
+    at processTicksAndRejections (node:internal/process/task_queues:77:11)
+2024-01-23 12:29:31 error: uncaughtException: Messages validation failed: updatedAt: Path `updatedAt` is required., createdAt: Path `createdAt` is required., channel: Path `channel` is required., user: Path `user` is required.
+ValidationError: Messages validation failed: updatedAt: Path `updatedAt` is required., createdAt: Path `createdAt` is required., channel: Path `channel` is required., user: Path `user` is required.
+    at model.Document.invalidate (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\mongoose\lib\document.js:3192:32)
+    at C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\mongoose\lib\document.js:2980:17
+    at C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\mongoose\lib\schematype.js:1350:9
+    at processTicksAndRejections (node:internal/process/task_queues:77:11)
+2024-01-23 12:33:36 error: uncaughtException: Cannot access 'user' before initialization
+ReferenceError: Cannot access 'user' before initialization
+    at MessageService.createMessage (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\src\services\messages.service.ts:38:64)
+    at Socket.<anonymous> (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\src\socket.ts:58:64)
+    at Socket.emit (node:events:514:28)
+    at Socket.emit (node:domain:489:12)
+    at Socket.emitUntyped (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\socket.io\dist\typed-events.js:69:22)
+    at C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\socket.io\dist\socket.js:704:39
+    at processTicksAndRejections (node:internal/process/task_queues:77:11)
+2024-01-23 12:35:08 error: uncaughtException: Messages validation failed: updatedAt: Path `updatedAt` is required., createdAt: Path `createdAt` is required.
+ValidationError: Messages validation failed: updatedAt: Path `updatedAt` is required., createdAt: Path `createdAt` is required.
+    at model.Document.invalidate (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\mongoose\lib\document.js:3192:32)
+    at C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\mongoose\lib\document.js:2980:17
+    at C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\mongoose\lib\schematype.js:1350:9
+    at processTicksAndRejections (node:internal/process/task_queues:77:11)
+2024-01-23 12:36:14 error: uncaughtException: Messages validation failed: updatedAt: Path `updatedAt` is required., createdAt: Path `createdAt` is required.
+ValidationError: Messages validation failed: updatedAt: Path `updatedAt` is required., createdAt: Path `createdAt` is required.
+    at model.Document.invalidate (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\mongoose\lib\document.js:3192:32)
+    at C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\mongoose\lib\document.js:2980:17
+    at C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\mongoose\lib\schematype.js:1350:9
+    at processTicksAndRejections (node:internal/process/task_queues:77:11)
