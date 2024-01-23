@@ -56,17 +56,24 @@ const initSocketIO = () => {
             io.emit('updateOnlineUsers', Object.values(onlineUsers));
         });
 
-        socket.on('sendMessage', (message) => {
+        socket.on('sendMessage', async (message) => {
             message.userId = userId;
             console.log('sendMessage', message);
             try {
                 message.user = userId as string;
                 message.channel = message.channelId as string;
-                const createMessageData = new MessageService().createMessage(
-                    message
-                );
-
-                io.emit('receiveMessage', createMessageData);
+                const createMessageData =
+                    await new MessageService().createMessage(message);
+                console.log('createMessageData', createMessageData);
+                const messageBack = {
+                    content: createMessageData.content,
+                    user: message.userId,
+                    channel: createMessageData.channel.id,
+                    createdAt: createMessageData.createdAt,
+                    updatedAt: createMessageData.updatedAt,
+                };
+                console.log('messageBack', messageBack);
+                io.emit('receiveMessage', messageBack);
             } catch (error) {
                 console.error('Error creating message:', error);
             }

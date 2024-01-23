@@ -106,7 +106,6 @@ export class ServersSidePanelComponent implements OnInit {
             (response: any) => {
                 this.servers = response;
                 this.servers.forEach((server) => {
-                    console.log('server', server);
                     if (server.image) {
                         server.image = this.serversService.getServerImageUrl(
                             server.id

@@ -15,11 +15,8 @@ class AuthService {
     public async signup(userData: CreateUserDto): Promise<User> {
         if (isEmpty(userData))
             throw new HttpException(400, 'userData is empty');
-
-        console.log('userData', userData);
-
         const findUser: User = await this.users.findOne({
-            where: { username: userData.username },
+            username: userData.username,
         });
         if (findUser)
             throw new HttpException(
@@ -47,18 +44,23 @@ class AuthService {
             throw new HttpException(400, 'userData is empty');
         console.log('userData', userData);
         const findUser: User = await this.users.findOne({
-            where: { username: userData.username },
+            username: userData.username,
         });
+        console.log('findUser', findUser);
         if (!findUser)
             throw new HttpException(
                 409,
                 `This username ${userData.username} was not found`
             );
 
+        console.log('userData.password', userData.password);
+        console.log('findUser.password', findUser.password);
         const isPasswordMatching: boolean = await compare(
             userData.password,
             findUser.password
         );
+        console.log('isPasswordMatching', isPasswordMatching);
+
         if (!isPasswordMatching)
             throw new HttpException(409, 'Password is not matching');
 
@@ -73,7 +75,8 @@ class AuthService {
             throw new HttpException(400, 'userData is empty');
 
         const findUser: User = await this.users.findOne({
-            where: { username: userData.username, password: userData.password },
+            username: userData.username,
+            password: userData.password,
         });
         if (!findUser)
             throw new HttpException(
@@ -85,6 +88,7 @@ class AuthService {
     }
 
     public createToken(user: User): TokenData {
+        console.log('user', user);
         const dataStoredInToken: DataStoredInToken = { _id: user.id };
         const secretKey: string = SECRET_KEY;
         const expiresIn: number = 60 * 60 * 24 * 7; // 7 days

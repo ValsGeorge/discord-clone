@@ -116,3 +116,41 @@ ValidationError: Messages validation failed: updatedAt: Path `updatedAt` is requ
     at C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\mongoose\lib\document.js:2980:17
     at C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\mongoose\lib\schematype.js:1350:9
     at processTicksAndRejections (node:internal/process/task_queues:77:11)
+2024-01-23 16:11:09 error: [POST] /auth/register >> StatusCode:: 409, Message:: This username qwe already exists
+2024-01-23 16:11:18 error: [POST] /auth/login >> StatusCode:: 409, Message:: Password is not matching
+2024-01-23 16:14:54 error: [POST] /auth/register >> StatusCode:: 400, Message:: email must be an email
+2024-01-23 16:14:58 error: [POST] /auth/register >> StatusCode:: 409, Message:: This username qwe already exists
+2024-01-23 16:16:28 error: [POST] /auth/register >> StatusCode:: 409, Message:: This username wer already exists
+2024-01-23 16:17:10 error: [POST] /auth/register >> StatusCode:: 409, Message:: This username wer already exists
+2024-01-23 17:38:13 error: [GET] /user/undefined >> StatusCode:: 500, Message:: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer
+2024-01-23 17:38:13 error: [GET] /user/undefined >> StatusCode:: 500, Message:: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer
+2024-01-23 17:41:55 error: [GET] /user/undefined >> StatusCode:: 500, Message:: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer
+2024-01-23 17:41:55 error: [GET] /user/undefined >> StatusCode:: 500, Message:: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer
+2024-01-23 17:43:39 error: [GET] /user/undefined >> StatusCode:: 500, Message:: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer
+2024-01-23 17:43:39 error: [GET] /user/undefined >> StatusCode:: 500, Message:: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer
+2024-01-23 17:44:10 error: [GET] /user/undefined >> StatusCode:: 500, Message:: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer
+2024-01-23 17:44:10 error: [GET] /user/undefined >> StatusCode:: 500, Message:: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer
+2024-01-23 17:48:58 error: [GET] /user/undefined >> StatusCode:: 500, Message:: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer
+2024-01-23 17:48:58 error: [GET] /user/undefined >> StatusCode:: 500, Message:: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer
+2024-01-23 17:49:33 error: [GET] /user/undefined >> StatusCode:: 500, Message:: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer
+2024-01-23 17:49:33 error: [GET] /user/undefined >> StatusCode:: 500, Message:: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer
+2024-01-23 17:51:18 error: [GET] /user/undefined >> StatusCode:: 500, Message:: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer
+2024-01-23 17:51:18 error: [GET] /user/undefined >> StatusCode:: 500, Message:: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer
+2024-01-23 17:52:18 error: [GET] /user/undefined >> StatusCode:: 500, Message:: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer
+2024-01-23 17:52:18 error: [GET] /user/undefined >> StatusCode:: 500, Message:: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer
+2024-01-23 17:54:50 error: [GET] /user/undefined >> StatusCode:: 500, Message:: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer
+2024-01-23 17:54:50 error: [GET] /user/undefined >> StatusCode:: 500, Message:: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer
+2024-01-23 18:04:51 error: =================================
+2024-01-23 18:04:51 error: 💔 App failed to connect to the database
+2024-01-23 18:04:51 error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+2024-01-23 18:05:01 error: [GET] /servers/ >> StatusCode:: 401, Message:: Wrong authentication token
+2024-01-23 18:05:01 error: [GET] /categories/65ae8c6dfebd1a03fe389bb6 >> StatusCode:: 401, Message:: Wrong authentication token
+2024-01-23 18:05:01 error: [GET] /servers/65ae8c6dfebd1a03fe389bb6 >> StatusCode:: 401, Message:: Wrong authentication token
+2024-01-23 18:05:01 error: [GET] /user/details >> StatusCode:: 401, Message:: Wrong authentication token
+2024-01-23 18:05:04 error: [GET] /servers/ >> StatusCode:: 401, Message:: Wrong authentication token
+2024-01-23 18:05:04 error: [GET] /user/details >> StatusCode:: 401, Message:: Wrong authentication token
+2024-01-23 18:05:37 error: [POST] /auth/login >> StatusCode:: 500, Message:: Operation `users.findOne()` buffering timed out after 10000ms
+2024-01-23 18:06:24 error: =================================
+2024-01-23 18:06:24 error: 💔 App failed to connect to the database
+2024-01-23 18:06:24 error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+2024-01-23 18:07:15 error: [GET] /messages/0 >> StatusCode:: 500, Message:: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer

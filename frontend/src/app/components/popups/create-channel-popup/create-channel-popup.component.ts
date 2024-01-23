@@ -27,7 +27,6 @@ export class CreateChannelPopupComponent {
         });
         this.channelsService.selectedCategoryIdObservable.subscribe(
             (response) => {
-                console.log('response2:', response);
                 this.categoryId = response;
             }
         );

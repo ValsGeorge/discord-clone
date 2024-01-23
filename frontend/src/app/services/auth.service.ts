@@ -145,7 +145,7 @@ export class AuthService {
             'Content-Type': 'application/json',
             token: `${this.getAuthTokenFromLocalStorage()}`,
         };
-        return this.httpClient.get(url, { headers }).pipe(
+        return this.httpClient.get(url, { withCredentials: true }).pipe(
             tap((response: any) => {
                 response.forEach((request: any) => {
                     request.profilePicture = this.getProfilePictureUrl(

@@ -64,14 +64,12 @@ export class UtilsService {
             this.socket.on('receiveMessage', (message: any) => {
                 console.log('Received message:', message);
                 this.chatUpdatedSubject.next(message);
-                // this.chatService.updateLocalMessages(message);
             });
 
             this.socket.on('updateOnlineUsers', (onlineUsers: User[]) => {
                 console.log('Online users:', onlineUsers);
                 this.onlineUsers = onlineUsers;
                 this.onlineUsers.forEach((user) => {
-                    console.log('user: ', user);
                     user.profilePicture = this.authService.getProfilePictureUrl(
                         user.id
                     );

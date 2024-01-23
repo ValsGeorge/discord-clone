@@ -71,7 +71,6 @@ export class ChannelsService {
     }
 
     getChannels(serverId: string): Observable<any> {
-        console.log('get channels');
         const url = `${this.baseUrl}/${serverId}`;
         const token = localStorage.getItem('token') as string;
         const headers = {

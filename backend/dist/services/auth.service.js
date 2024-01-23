@@ -13,15 +13,32 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
     }
 }
 function _asyncToGenerator(fn) {
-    return function() {
-        var self = this, args = arguments;
-        return new Promise(function(resolve, reject) {
+    return function () {
+        var self = this,
+            args = arguments;
+        return new Promise(function (resolve, reject) {
             var gen = fn.apply(self, args);
             function _next(value) {
-                asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+                asyncGeneratorStep(
+                    gen,
+                    resolve,
+                    reject,
+                    _next,
+                    _throw,
+                    "next",
+                    value
+                );
             }
             function _throw(err) {
-                asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+                asyncGeneratorStep(
+                    gen,
+                    resolve,
+                    reject,
+                    _next,
+                    _throw,
+                    "throw",
+                    err
+                );
             }
             _next(undefined);
         });
@@ -38,7 +55,7 @@ function _defineProperty(obj, key, value) {
             value: value,
             enumerable: true,
             configurable: true,
-            writable: true
+            writable: true,
         });
     } else {
         obj[key] = value;
@@ -46,15 +63,20 @@ function _defineProperty(obj, key, value) {
     return obj;
 }
 function _objectSpread(target) {
-    for(var i = 1; i < arguments.length; i++){
+    for (var i = 1; i < arguments.length; i++) {
         var source = arguments[i] != null ? arguments[i] : {};
         var ownKeys = Object.keys(source);
         if (typeof Object.getOwnPropertySymbols === "function") {
-            ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function(sym) {
-                return Object.getOwnPropertyDescriptor(source, sym).enumerable;
-            }));
+            ownKeys = ownKeys.concat(
+                Object.getOwnPropertySymbols(source).filter(function (sym) {
+                    return Object.getOwnPropertyDescriptor(
+                        source,
+                        sym
+                    ).enumerable;
+                })
+            );
         }
-        ownKeys.forEach(function(key) {
+        ownKeys.forEach(function (key) {
             _defineProperty(target, key, source[key]);
         });
     }
@@ -65,7 +87,7 @@ function ownKeys(object, enumerableOnly) {
     if (Object.getOwnPropertySymbols) {
         var symbols = Object.getOwnPropertySymbols(object);
         if (enumerableOnly) {
-            symbols = symbols.filter(function(sym) {
+            symbols = symbols.filter(function (sym) {
                 return Object.getOwnPropertyDescriptor(object, sym).enumerable;
             });
         }
@@ -76,109 +98,136 @@ function ownKeys(object, enumerableOnly) {
 function _objectSpreadProps(target, source) {
     source = source != null ? source : {};
     if (Object.getOwnPropertyDescriptors) {
-        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+        Object.defineProperties(
+            target,
+            Object.getOwnPropertyDescriptors(source)
+        );
     } else {
-        ownKeys(Object(source)).forEach(function(key) {
-            Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+        ownKeys(Object(source)).forEach(function (key) {
+            Object.defineProperty(
+                target,
+                key,
+                Object.getOwnPropertyDescriptor(source, key)
+            );
         });
     }
     return target;
 }
-var __generator = this && this.__generator || function(thisArg, body) {
-    var f, y, t, g, _ = {
-        label: 0,
-        sent: function() {
-            if (t[0] & 1) throw t[1];
-            return t[1];
-        },
-        trys: [],
-        ops: []
-    };
-    return g = {
-        next: verb(0),
-        "throw": verb(1),
-        "return": verb(2)
-    }, typeof Symbol === "function" && (g[Symbol.iterator] = function() {
-        return this;
-    }), g;
-    function verb(n) {
-        return function(v) {
-            return step([
-                n,
-                v
-            ]);
-        };
-    }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while(_)try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [
-                op[0] & 2,
-                t.value
-            ];
-            switch(op[0]){
-                case 0:
-                case 1:
-                    t = op;
-                    break;
-                case 4:
-                    _.label++;
-                    return {
-                        value: op[1],
-                        done: false
-                    };
-                case 5:
-                    _.label++;
-                    y = op[1];
-                    op = [
-                        0
-                    ];
-                    continue;
-                case 7:
-                    op = _.ops.pop();
-                    _.trys.pop();
-                    continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-                        _ = 0;
-                        continue;
-                    }
-                    if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
-                        _.label = op[1];
-                        break;
-                    }
-                    if (op[0] === 6 && _.label < t[1]) {
-                        _.label = t[1];
-                        t = op;
-                        break;
-                    }
-                    if (t && _.label < t[2]) {
-                        _.label = t[2];
-                        _.ops.push(op);
-                        break;
-                    }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop();
-                    continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) {
-            op = [
-                6,
-                e
-            ];
-            y = 0;
-        } finally{
-            f = t = 0;
+var __generator =
+    (this && this.__generator) ||
+    function (thisArg, body) {
+        var f,
+            y,
+            t,
+            g,
+            _ = {
+                label: 0,
+                sent: function () {
+                    if (t[0] & 1) throw t[1];
+                    return t[1];
+                },
+                trys: [],
+                ops: [],
+            };
+        return (
+            (g = {
+                next: verb(0),
+                throw: verb(1),
+                return: verb(2),
+            }),
+            typeof Symbol === "function" &&
+                (g[Symbol.iterator] = function () {
+                    return this;
+                }),
+            g
+        );
+        function verb(n) {
+            return function (v) {
+                return step([n, v]);
+            };
         }
-        if (op[0] & 5) throw op[1];
-        return {
-            value: op[0] ? op[1] : void 0,
-            done: true
-        };
-    }
-};
+        function step(op) {
+            if (f) throw new TypeError("Generator is already executing.");
+            while (_)
+                try {
+                    if (
+                        ((f = 1),
+                        y &&
+                            (t =
+                                op[0] & 2
+                                    ? y["return"]
+                                    : op[0]
+                                    ? y["throw"] ||
+                                      ((t = y["return"]) && t.call(y), 0)
+                                    : y.next) &&
+                            !(t = t.call(y, op[1])).done)
+                    )
+                        return t;
+                    if (((y = 0), t)) op = [op[0] & 2, t.value];
+                    switch (op[0]) {
+                        case 0:
+                        case 1:
+                            t = op;
+                            break;
+                        case 4:
+                            _.label++;
+                            return {
+                                value: op[1],
+                                done: false,
+                            };
+                        case 5:
+                            _.label++;
+                            y = op[1];
+                            op = [0];
+                            continue;
+                        case 7:
+                            op = _.ops.pop();
+                            _.trys.pop();
+                            continue;
+                        default:
+                            if (
+                                !((t = _.trys),
+                                (t = t.length > 0 && t[t.length - 1])) &&
+                                (op[0] === 6 || op[0] === 2)
+                            ) {
+                                _ = 0;
+                                continue;
+                            }
+                            if (
+                                op[0] === 3 &&
+                                (!t || (op[1] > t[0] && op[1] < t[3]))
+                            ) {
+                                _.label = op[1];
+                                break;
+                            }
+                            if (op[0] === 6 && _.label < t[1]) {
+                                _.label = t[1];
+                                t = op;
+                                break;
+                            }
+                            if (t && _.label < t[2]) {
+                                _.label = t[2];
+                                _.ops.push(op);
+                                break;
+                            }
+                            if (t[2]) _.ops.pop();
+                            _.trys.pop();
+                            continue;
+                    }
+                    op = body.call(thisArg, _);
+                } catch (e) {
+                    op = [6, e];
+                    y = 0;
+                } finally {
+                    f = t = 0;
+                }
+            if (op[0] & 5) throw op[1];
+            return {
+                value: op[0] ? op[1] : void 0,
+                done: true,
+            };
+        }
+    };
 import { hash, compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 import { SECRET_KEY } from "@config";
@@ -186,7 +235,7 @@ import { HttpException } from "@exceptions/HttpException";
 import userModel from "@models/users.model";
 import { isEmpty } from "@utils/util";
 import { v4 as uuidv4 } from "uuid";
-var AuthService = /*#__PURE__*/ function() {
+var AuthService = /*#__PURE__*/ (function () {
     "use strict";
     function AuthService() {
         _classCallCheck(this, AuthService);
@@ -195,83 +244,102 @@ var AuthService = /*#__PURE__*/ function() {
     var _proto = AuthService.prototype;
     _proto.signup = function signup(userData) {
         var _this = this;
-        return _asyncToGenerator(function() {
+        return _asyncToGenerator(function () {
             var findUser, hashedPassword, generatedUUID, createUserData;
-            return __generator(this, function(_state) {
-                switch(_state.label){
+            return __generator(this, function (_state) {
+                switch (_state.label) {
                     case 0:
-                        if (isEmpty(userData)) throw new HttpException(400, "userData is empty");
+                        if (isEmpty(userData))
+                            throw new HttpException(400, "userData is empty");
                         console.log("userData", userData);
                         return [
                             4,
                             _this.users.findOne({
                                 where: {
-                                    username: userData.username
-                                }
-                            })
+                                    username: userData.username,
+                                },
+                            }),
                         ];
                     case 1:
                         findUser = _state.sent();
-                        if (findUser) throw new HttpException(409, "This username ".concat(userData.username, " already exists"));
-                        return [
-                            4,
-                            hash(userData.password, 10)
-                        ];
+                        if (findUser)
+                            throw new HttpException(
+                                409,
+                                "This username ".concat(
+                                    userData.username,
+                                    " already exists"
+                                )
+                            );
+                        return [4, hash(userData.password, 10)];
                     case 2:
                         hashedPassword = _state.sent();
                         generatedUUID = uuidv4();
                         return [
                             4,
-                            _this.users.create(_objectSpreadProps(_objectSpread({}, userData), {
-                                id: generatedUUID,
-                                password: hashedPassword
-                            }))
+                            _this.users.create(
+                                _objectSpreadProps(
+                                    _objectSpread({}, userData),
+                                    {
+                                        id: generatedUUID,
+                                        password: hashedPassword,
+                                    }
+                                )
+                            ),
                         ];
                     case 3:
                         createUserData = _state.sent();
-                        return [
-                            2,
-                            createUserData
-                        ];
+                        return [2, createUserData];
                 }
             });
         })();
     };
     _proto.login = function login(userData) {
         var _this = this;
-        return _asyncToGenerator(function() {
+        return _asyncToGenerator(function () {
             var findUser, isPasswordMatching, tokenData, cookie;
-            return __generator(this, function(_state) {
-                switch(_state.label){
+            return __generator(this, function (_state) {
+                switch (_state.label) {
                     case 0:
-                        if (isEmpty(userData)) throw new HttpException(400, "userData is empty");
+                        if (isEmpty(userData))
+                            throw new HttpException(400, "userData is empty");
                         console.log("userData", userData);
                         return [
                             4,
                             _this.users.findOne({
                                 where: {
-                                    username: userData.username
-                                }
-                            })
+                                    username: userData.username,
+                                },
+                            }),
                         ];
                     case 1:
                         findUser = _state.sent();
-                        if (!findUser) throw new HttpException(409, "This username ".concat(userData.username, " was not found"));
+                        if (!findUser)
+                            throw new HttpException(
+                                409,
+                                "This username ".concat(
+                                    userData.username,
+                                    " was not found"
+                                )
+                            );
                         return [
                             4,
-                            compare(userData.password, findUser.password)
+                            compare(userData.password, findUser.password),
                         ];
                     case 2:
                         isPasswordMatching = _state.sent();
-                        if (!isPasswordMatching) throw new HttpException(409, "Password is not matching");
+                        if (!isPasswordMatching)
+                            throw new HttpException(
+                                409,
+                                "Password is not matching"
+                            );
                         tokenData = _this.createToken(findUser);
                         cookie = _this.createCookie(tokenData);
                         return [
                             2,
                             {
                                 cookie: cookie,
-                                findUser: findUser
-                            }
+                                findUser: findUser,
+                            },
                         ];
                 }
             });
@@ -279,50 +347,57 @@ var AuthService = /*#__PURE__*/ function() {
     };
     _proto.logout = function logout(userData) {
         var _this = this;
-        return _asyncToGenerator(function() {
+        return _asyncToGenerator(function () {
             var findUser;
-            return __generator(this, function(_state) {
-                switch(_state.label){
+            return __generator(this, function (_state) {
+                switch (_state.label) {
                     case 0:
-                        if (isEmpty(userData)) throw new HttpException(400, "userData is empty");
+                        if (isEmpty(userData))
+                            throw new HttpException(400, "userData is empty");
                         return [
                             4,
                             _this.users.findOne({
                                 where: {
                                     username: userData.username,
-                                    password: userData.password
-                                }
-                            })
+                                    password: userData.password,
+                                },
+                            }),
                         ];
                     case 1:
                         findUser = _state.sent();
-                        if (!findUser) throw new HttpException(409, "This username ".concat(userData.username, " was not found"));
-                        return [
-                            2,
-                            findUser
-                        ];
+                        if (!findUser)
+                            throw new HttpException(
+                                409,
+                                "This username ".concat(
+                                    userData.username,
+                                    " was not found"
+                                )
+                            );
+                        return [2, findUser];
                 }
             });
         })();
     };
     _proto.createToken = function createToken(user) {
         var dataStoredInToken = {
-            _id: user.id
+            _id: user.id,
         };
         var secretKey = SECRET_KEY;
         var expiresIn = 60 * 60;
         return {
             expiresIn: expiresIn,
             token: sign(dataStoredInToken, secretKey, {
-                expiresIn: expiresIn
-            })
+                expiresIn: expiresIn,
+            }),
         };
     };
     _proto.createCookie = function createCookie(tokenData) {
-        return "Authorization=".concat(tokenData.token, "; HttpOnly; Max-Age=").concat(tokenData.expiresIn, ";");
+        return "Authorization="
+            .concat(tokenData.token, "; HttpOnly; Max-Age=")
+            .concat(tokenData.expiresIn, ";");
     };
     return AuthService;
-}();
+})();
 export default AuthService;
 
 //# sourceMappingURL=auth.service.js.map

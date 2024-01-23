@@ -24,7 +24,8 @@ export class ChatService {
             // check the type o message
             // if it is Message, then updateLocalMessages
             // if it is DM, then updateLocalDMs
-            if (message.channelId) {
+            console.log('message1111', message);
+            if (message.channel) {
                 this.updateLocalMessages(message);
             } else {
                 this.updateLocalDMs(message);
@@ -47,7 +48,6 @@ export class ChatService {
 
     updateLocalMessages(updatedMessage: Message): void {
         // Check if the message already exists in the array
-        console.log('updatedMessage', updatedMessage);
         const existingIndex = this.messages.findIndex(
             (message) => message.id === updatedMessage.id
         );
@@ -62,13 +62,13 @@ export class ChatService {
         this.authService.getUserName(updatedMessage.user).subscribe(
             (response) => {
                 updatedMessage.username = response.username;
-                updatedMessage.userProfilePicture = response.profilePicture;
+                updatedMessage.userProfilePicture =
+                    this.authService.getProfilePictureUrl(updatedMessage.user);
             },
             (error) => {
                 console.error('Error getting username:', error);
             }
         );
-
         this.messageUpdateSubject.next([...this.messages]);
     }
 
@@ -85,6 +85,7 @@ export class ChatService {
             this.DMs.push(updatedDM);
             this.DMs.sort((a, b) => +a.updatedAt - +b.updatedAt);
         }
+
         this.authService.getUserName(updatedDM.senderId).subscribe(
             (response) => {
                 updatedDM.senderUsername = response.username;

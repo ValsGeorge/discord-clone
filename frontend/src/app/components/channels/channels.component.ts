@@ -113,8 +113,6 @@ export class ChannelsComponent implements OnInit {
     }
 
     private updateChannelOrder() {
-        console.log('update channel order');
-        console.log('channels:', this.channels);
         this.categories.forEach((category) => {
             category.channels.forEach((channel) => {
                 channel.order = category.channels.indexOf(channel);
@@ -149,7 +147,6 @@ export class ChannelsComponent implements OnInit {
 
         this.channelsService.getChannels(this.selectedServerId).subscribe(
             (response) => {
-                console.log('channels:', response);
                 this.channels = response;
 
                 this.channels.forEach((channel) => {

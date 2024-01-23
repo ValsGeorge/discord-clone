@@ -23,7 +23,7 @@ class MessageService {
 
     public async findMessageById(messageId: string): Promise<Message> {
         const findMessage: Message = await this.messages.findOne({
-            where: { id: messageId },
+            _id: messageId,
         });
         if (!findMessage) throw new HttpException(409, "Message doesn't exist");
 

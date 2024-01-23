@@ -18,7 +18,7 @@ class ChanelService {
 
     public async findChannelById(channelId: string): Promise<Channel> {
         const findChannel: Channel = await this.channels.findOne({
-            where: { id: channelId },
+            _id: channelId,
         });
         if (!findChannel) throw new HttpException(409, "Channel doesn't exist");
         console.log('channelId', channelId);
@@ -48,7 +48,7 @@ class ChanelService {
 
         if (channelData.name) {
             const findChannel: Channel = await this.channels.findOne({
-                where: { name: channelData.name },
+                name: channelData.name,
             });
             if (findChannel && findChannel.id !== channelId)
                 throw new HttpException(
@@ -60,7 +60,7 @@ class ChanelService {
         await this.channels.update(channelData, { where: { id: channelId } });
 
         const updateChannel: Channel = await this.channels.findOne({
-            where: { id: channelId },
+            _id: channelId,
         });
 
         return updateChannel;
@@ -68,7 +68,7 @@ class ChanelService {
 
     public async deleteChannel(channelId: string): Promise<Channel> {
         const findChannel: Channel = await this.channels.findOne({
-            where: { id: channelId },
+            _id: channelId,
         });
         if (!findChannel) throw new HttpException(409, "Channel doesn't exist");
 

@@ -20,12 +20,21 @@ class UsersRoute implements Routes {
             authMiddleware,
             this.usersController.getMe
         );
-        this.router.get(`${this.path}/:id`, this.usersController.getUserById);
         this.router.get(
             `${this.path}/uploads/:id`,
             this.usersController.getUserProfilePicture
         );
+        this.router.get(
+            `${this.path}/friend-requests`,
+            this.usersController.getFriendRequests
+        );
 
+        this.router.get(
+            `${this.path}/friends`,
+            this.usersController.getFriends
+        );
+
+        this.router.get(`${this.path}/:id`, this.usersController.getUserById);
         this.router.post(
             `${this.path}`,
             validationMiddleware(CreateUserDto, 'body'),

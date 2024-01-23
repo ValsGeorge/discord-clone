@@ -4,6 +4,7 @@ import { HttpException } from '@exceptions/HttpException';
 import { User } from '@interfaces/users.interface';
 import userModel from '@models/users.model';
 import { isEmpty } from '@utils/util';
+import { Types } from 'mongoose';
 
 class UserService {
     public users = userModel;
@@ -15,9 +16,8 @@ class UserService {
 
     public async findUserById(userId: string): Promise<User> {
         if (isEmpty(userId)) throw new HttpException(400, 'UserId is empty');
-
         const findUser: User = await this.users.findOne({
-            where: { id: userId },
+            _id: new Types.ObjectId(userId),
         });
         if (!findUser) throw new HttpException(409, "User doesn't exist");
 
@@ -29,7 +29,7 @@ class UserService {
             throw new HttpException(400, 'userData is empty');
 
         const findUser: User = await this.users.findOne({
-            where: { email: userData.email },
+            email: userData.email,
         });
         if (findUser)
             throw new HttpException(
@@ -55,7 +55,7 @@ class UserService {
 
         if (userData.email) {
             const findUser: User = await this.users.findOne({
-                where: { email: userData.email },
+                email: userData.email,
             });
             if (findUser && findUser.id != userId)
                 throw new HttpException(
@@ -70,23 +70,23 @@ class UserService {
         }
 
         const updateUserById: User = await this.users.findOne({
-            where: { id: userId },
+            _id: userId,
         });
         if (!updateUserById) throw new HttpException(409, "User doesn't exist");
 
-        await this.users.update(userData, { where: { id: userId } });
+        await this.users.update(userData, { id: userId });
 
         return updateUserById;
     }
 
     public async deleteUser(userId: string): Promise<User> {
         const deleteUserById: User = await this.users.findOne({
-            where: { id: userId },
+            _id: userId,
         });
         if (!deleteUserById) throw new HttpException(409, "User doesn't exist");
 
         await this.users.deleteOne({
-            where: { id: userId },
+            _id: userId,
         });
         return deleteUserById;
     }

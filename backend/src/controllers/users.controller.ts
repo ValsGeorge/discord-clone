@@ -52,7 +52,6 @@ class UsersController {
         next: NextFunction
     ) => {
         try {
-            console.log('getUserById', req.params);
             const userId: string = req.params.id;
             const findOneUserData: User = await this.userService.findUserById(
                 userId
@@ -66,7 +65,6 @@ class UsersController {
 
     public getMe = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            console.log('getMe', req.user);
             const userId: string = req.user.id;
             const findOneUserData: User = await this.userService.findUserById(
                 userId
@@ -104,6 +102,18 @@ class UsersController {
         } catch (error) {
             console.log(error);
         }
+    };
+
+    getFriendRequests = async (
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ) => {
+        console.log('getFriendRequests');
+    };
+
+    getFriends = async (req: Request, res: Response, next: NextFunction) => {
+        console.log('getFriends');
     };
 
     public createUser = async (

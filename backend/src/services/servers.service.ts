@@ -18,7 +18,7 @@ class Serverservice {
 
     public async findServerById(serverId: string): Promise<Server> {
         const findServer: Server = await this.servers.findOne({
-            where: { id: serverId },
+            id: serverId,
         });
         if (!findServer) throw new HttpException(409, "Server doesn't exist");
 
@@ -59,7 +59,7 @@ class Serverservice {
 
         if (serverData.name) {
             const findServer: Server = await this.servers.findOne({
-                where: { name: serverData.name },
+                name: serverData.name,
             });
             if (findServer && findServer.id != serverId)
                 throw new HttpException(
@@ -71,7 +71,7 @@ class Serverservice {
         await this.servers.update(serverData, { where: { id: serverId } });
 
         const updateServer: Server = await this.servers.findOne({
-            where: { id: serverId },
+            _id: serverId,
         });
 
         return updateServer;
@@ -79,7 +79,7 @@ class Serverservice {
 
     public async deleteServer(serverId: string): Promise<Server> {
         const findServer: Server = await this.servers.findOne({
-            where: { id: serverId },
+            _id: serverId,
         });
         if (!findServer) throw new HttpException(409, "Server doesn't exist");
 

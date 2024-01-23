@@ -18,7 +18,7 @@ class CategoryService {
 
     public async findCategoryById(categoryId: string): Promise<Category> {
         const findCategory: Category = await this.categores.findOne({
-            where: { id: categoryId },
+            _id: categoryId,
         });
         if (!findCategory)
             throw new HttpException(409, "Category doesn't exist");
@@ -48,7 +48,7 @@ class CategoryService {
 
         if (categoryData.name) {
             const findCategory: Category = await this.categores.findOne({
-                where: { id: categoryId },
+                id: categoryId,
             });
             if (!findCategory)
                 throw new HttpException(409, "Category doesn't exist");
@@ -60,14 +60,14 @@ class CategoryService {
         }
 
         const updateCategoryData: Category = await this.categores.findOne({
-            where: { id: categoryId },
+            _id: categoryId,
         });
         return updateCategoryData;
     }
 
     public async deleteCategory(categoryId: string): Promise<Category> {
         const findCategory: Category = await this.categores.findOne({
-            where: { id: categoryId },
+            _id: categoryId,
         });
         if (!findCategory)
             throw new HttpException(409, "Category doesn't exist");
