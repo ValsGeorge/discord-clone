@@ -21,8 +21,8 @@ export class AppComponent implements OnInit {
             : this.lightdarkService.toggleTheme(false);
 
         // Setup socket connection
-        // ! REACTIVATE THIS
-        // this.utilsService.setupSocketConnection();
+
+        this.utilsService.setupSocketConnection();
     }
 
     toggleTheme(): void {

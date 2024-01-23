@@ -38,6 +38,9 @@ export class UtilsService {
     setupSocketConnection(): void {
         console.log('Setting up socket connection');
         const token = localStorage.getItem('token');
+
+        console.log('token: ', token);
+
         if (token) {
             this.socket = io(this.socketUrl, {
                 query: { token },

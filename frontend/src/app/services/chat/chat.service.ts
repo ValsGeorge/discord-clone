@@ -108,12 +108,11 @@ export class ChatService {
     }
 
     public fetchInitialMessages(): void {
-        const params = new HttpParams().set(
-            'channelId',
-            this.utilsService.getSelectedChannelId() || ''
-        );
         this.http
-            .get<Message[]>(`${this.baseUrl}/get-messages`, { params })
+            .get<Message[]>(
+                `${this.baseUrl}/${this.utilsService.getSelectedChannelId()}`,
+                { withCredentials: true }
+            )
             .subscribe(
                 (initialMessages) => {
                     const userIds = Array.from(

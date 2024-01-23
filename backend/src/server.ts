@@ -6,6 +6,7 @@ import validateEnv from '@utils/validateEnv';
 import ServerRoute from '@routes/servers.route';
 import CategoryRoute from '@routes/categories.route';
 import ChannelRoute from '@routes/channels.route';
+import MessageRoute from '@routes/messages.route';
 
 async function bootstrap() {
     validateEnv();
@@ -16,6 +17,7 @@ async function bootstrap() {
         new ServerRoute(),
         new CategoryRoute(),
         new ChannelRoute(),
+        new MessageRoute(),
     ];
     const app = new App();
     await app.initialize(routes);

@@ -52,7 +52,7 @@ export class ChannelsService {
     }
 
     createChannel(channel: Channels): Observable<any> {
-        const url = `${this.baseUrl}/create`;
+        const url = `${this.baseUrl}/`;
         const token = localStorage.getItem('token') as string;
         const headers = {
             'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ export class ChannelsService {
         };
         this.updateChannels(this.selectedServerId || '0');
 
-        return this.http.post(url, data, { headers });
+        return this.http.post(url, data, { withCredentials: true });
     }
 
     getChannels(serverId: string): Observable<any> {
@@ -91,7 +91,7 @@ export class ChannelsService {
 
         this.updateChannels(this.selectedServerId || '0');
 
-        return this.http.delete(url, { headers });
+        return this.http.delete(url, { withCredentials: true });
     }
 
     getChannelInfo(channelId: string): Observable<any> {
@@ -101,7 +101,7 @@ export class ChannelsService {
             'Content-Type': 'application/json',
             token: token,
         };
-        return this.http.get(url, { headers });
+        return this.http.get(url, { withCredentials: true });
     }
 
     updateChannelsOrder(channels: Channels[]): Observable<any> {

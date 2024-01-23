@@ -21,7 +21,7 @@ class ChannelRoute implements Routes {
             this.channelController.getChannels
         );
         this.router.get(
-            `${this.path}/:id`,
+            `${this.path}/info/:id`,
             authMiddleware,
             this.channelController.getChannelById
         );

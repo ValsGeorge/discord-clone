@@ -13,11 +13,15 @@ import { dbConnection } from '@databases';
 import { Routes } from '@interfaces/routes.interface';
 import errorMiddleware from '@middlewares/error.middleware';
 import { logger, stream } from '@utils/logger';
+import { createServer } from 'http';
+import { Server } from 'socket.io';
+import initSocketIO from '@/socket';
 
 class App {
     public app: express.Application;
     public env: string;
     public port: string | number;
+    public server: Server;
 
     constructor() {
         this.app = express();
@@ -29,10 +33,15 @@ class App {
         await this.connectToDatabase();
         this.initializeMiddleware();
         this.initializeRoutes(routes);
+        this.initializeSocket();
         if (this.env !== 'production') {
             this.initializeSwagger();
         }
         this.initializeErrorHandling();
+    }
+
+    private initializeSocket() {
+        initSocketIO();
     }
 
     public listen() {
