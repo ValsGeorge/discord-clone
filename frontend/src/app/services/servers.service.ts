@@ -28,7 +28,6 @@ export class ServersService {
     }
 
     updateServers() {
-        console.log('update servers');
         this.serversUpdatedSubject.next();
     }
 

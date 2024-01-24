@@ -22,7 +22,7 @@ class Serverservice {
 
     public async findServerById(serverId: string): Promise<Server> {
         const findServer: Server = await this.servers.findOne({
-            id: serverId,
+            _id: serverId,
         });
         if (!findServer) throw new HttpException(409, "Server doesn't exist");
 
