@@ -18,10 +18,4 @@ export class CreateChannelDto {
 
     @IsString()
     public category: string;
-
-    @IsDate()
-    public createdAt: Date;
-
-    @IsDate()
-    public updatedAt: Date;
 }

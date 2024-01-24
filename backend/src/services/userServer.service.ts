@@ -27,7 +27,7 @@ class UserServerService {
 
         // find all the servers that the user is a member of
         const findUserServer: UserServer[] = await this.userServer.find({
-            userId: new Types.ObjectId(userId),
+            user: new Types.ObjectId(userId),
         });
 
         console.log('findUserServer: ', findUserServer);

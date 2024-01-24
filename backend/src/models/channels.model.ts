@@ -25,6 +25,14 @@ const channelSchema: Schema = new Schema({
         ref: 'Categories',
         required: true,
     },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
+    updatedAt: {
+        type: Date,
+        default: Date.now,
+    },
 });
 
 channelSchema.index(

@@ -136,8 +136,6 @@ class ServerController {
                 order: 0,
                 server: createServerData.id,
                 category: textCategory.id, // Use the ID of the Text category
-                createdAt: new Date(),
-                updatedAt: new Date(),
             };
             await this.channelService.createChannel(createTextChannelData);
 
@@ -149,8 +147,6 @@ class ServerController {
                 order: 0,
                 server: createServerData.id,
                 category: voiceCategory.id, // Use the ID of the Voice category
-                createdAt: new Date(),
-                updatedAt: new Date(),
             };
             await this.channelService.createChannel(createVoiceChannelData);
 
