@@ -3,11 +3,13 @@ import authMiddlewareSocket from './middlewares/socket.middleware';
 import MessageService from './services/messages.service';
 import { User } from './interfaces/users.interface';
 import UserService from './services/users.service';
+import UserServerService from './services/userServer.service';
+
 interface ISocket extends Socket {
     decoded?: any;
 }
 
-const onlineUsers: { [key: string]: any } = {};
+const onlineUsers: { [key: string]: User } = {};
 const connectedUsers: { [key: string]: string } = {};
 
 const initSocketIO = () => {
@@ -34,10 +36,25 @@ const initSocketIO = () => {
         const userId = (socket.decoded as any).id;
         console.log('userId: ', userId);
 
-        // using userId, get the user details from the database
         const user = await new UserService().findUserById(userId);
+        const servers = await new UserServerService().findUserServerByUser(
+            userId
+        );
 
-        onlineUsers[userId] = user;
+        const serverIds = servers.map((server) => server.server.toString());
+
+        const userWithServerIds: any = {
+            id: user.id,
+            nickname: user.nickname,
+            username: user.username,
+            email: user.email,
+            profilePicture: user.profilePicture,
+            createdAt: user.createdAt,
+            updatedAt: user.updatedAt,
+            serverIds,
+        };
+
+        onlineUsers[userId] = userWithServerIds;
         connectedUsers[userId] = socket.id;
 
         // Broadcast the updated online user list to all clients

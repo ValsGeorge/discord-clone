@@ -19,18 +19,16 @@ const serverSchema: Schema = new Schema({
         type: String,
         required: false,
     },
-    owner: {
-        type: Types.ObjectId,
-        ref: 'Users',
+    createdAt: {
+        type: Date,
+        default: Date.now,
         required: true,
     },
-    members: [
-        {
-            type: Types.ObjectId,
-            ref: 'Users',
-            required: true,
-        },
-    ],
+    updatedAt: {
+        type: Date,
+        default: Date.now,
+        required: true,
+    },
 });
 serverSchema.virtual('id').get(function (this: Document) {
     return this._id.toHexString();

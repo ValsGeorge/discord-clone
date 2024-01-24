@@ -1,16 +1,24 @@
 import { NextFunction, Request, Response } from 'express';
-import { CreateServerDto } from '@dtos/servers.dto';
+
 import { Server } from '@/interfaces/servers.interface';
+import { UserServer } from '@/interfaces/userServer.interface';
 import ServerService from '@/services/servers.service';
+import { User } from '@/interfaces/users.interface';
+
 import { CreateCategoryDto } from '@/dtos/categories.dto';
-import CategoryService from '@/services/categories.service';
+import { CreateServerDto } from '@dtos/servers.dto';
 import { CreateChannelDto } from '@/dtos/channels.dto';
+import { CreateUserServerDto } from '@/dtos/userserver.dto';
+
+import CategoryService from '@/services/categories.service';
 import ChannelService from '@/services/channels.service';
+import UserService from '@/services/users.service';
 
 class ServerController {
     public serverService = new ServerService();
     public categoryService = new CategoryService();
     public channelService = new ChannelService();
+    public userService = new UserService();
 
     public getServers = async (
         req: Request,
@@ -43,6 +51,25 @@ class ServerController {
         }
     };
 
+    public generateInviteCode = async (
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ) => {
+        try {
+            const serverId: string = req.params.id;
+            // const generateInviteCodeData: string =
+            //     await this.serverService.generateServerInviteCode(serverId);
+            const server: Server = await this.serverService.findServerById(
+                serverId
+            );
+            const generateInviteCodeData: string = server.inviteCode;
+            res.status(200).json(generateInviteCodeData);
+        } catch (error) {
+            next(error);
+        }
+    };
+
     public createServer = async (
         req: Request,
         res: Response,
@@ -52,11 +79,26 @@ class ServerController {
             const serverData: CreateServerDto = req.body;
 
             const userId = req.user.id;
+
+            // Create Server
+            const user: User = await this.userService.findUserById(userId);
+
             console.log('userId', userId);
-            serverData.owner = userId;
-            serverData.members = [userId];
             const createServerData: Server =
                 await this.serverService.createServer(serverData);
+
+            // Create UserServer
+            const createUserServerData: CreateUserServerDto = {
+                user: user,
+                server: createServerData,
+                role: 'owner',
+            };
+            console.log('createUserServerData: ', createUserServerData);
+
+            const createUserServer = await this.userService.createUserServer(
+                createUserServerData
+            );
+            console.log('createUserServer: ', createUserServer);
 
             // into that server create two categories ( text and voice )
             // and one channel in each category
@@ -121,6 +163,23 @@ class ServerController {
         }
     };
 
+    public joinServer = async (
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ) => {
+        try {
+            const inviteCode: string = req.body.inviteCode;
+            const userId = req.user.id;
+            const joinServerData: UserServer =
+                await this.serverService.joinServer(inviteCode, userId);
+            console.log('joinServerData: ', joinServerData);
+            res.status(200).json(joinServerData);
+        } catch (error) {
+            next(error);
+        }
+    };
+
     public updateServer = async (
         req: Request,
         res: Response,
@@ -132,10 +191,7 @@ class ServerController {
             const updateServerData: Server =
                 await this.serverService.updateServer(serverId, serverData);
 
-            res.status(200).json({
-                data: updateServerData,
-                message: 'updated',
-            });
+            res.status(200).json(updateServerData);
         } catch (error) {
             next(error);
         }

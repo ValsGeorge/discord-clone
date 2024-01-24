@@ -5,9 +5,13 @@ import { User } from '@interfaces/users.interface';
 import userModel from '@models/users.model';
 import { isEmpty } from '@utils/util';
 import { Types } from 'mongoose';
+import { CreateUserServerDto } from '@/dtos/userserver.dto';
+import { UserServer } from '@/interfaces/userServer.interface';
+import userServerModel from '@/models/userServer.model';
 
 class UserService {
     public users = userModel;
+    public userServer = userServerModel;
 
     public async findAllUser(): Promise<User[]> {
         const users: User[] = await this.users.find();
@@ -20,7 +24,6 @@ class UserService {
             _id: new Types.ObjectId(userId),
         });
         if (!findUser) throw new HttpException(409, "User doesn't exist");
-
         return findUser;
     }
 
@@ -44,6 +47,21 @@ class UserService {
         });
 
         return createUserData;
+    }
+
+    public async createUserServer(
+        userServerData: CreateUserServerDto
+    ): Promise<UserServer> {
+        if (isEmpty(userServerData))
+            throw new HttpException(400, 'userServerData is empty');
+
+        const createUserServerData: UserServer = await this.userServer.create({
+            ...userServerData,
+            createAt: new Date(),
+            updateAt: new Date(),
+        });
+        console.log('createUserServerData: ', createUserServerData);
+        return createUserServerData;
     }
 
     public async updateUser(

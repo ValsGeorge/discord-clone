@@ -154,3 +154,247 @@ ValidationError: Messages validation failed: updatedAt: Path `updatedAt` is requ
 2024-01-23 18:06:24 error: 💔 App failed to connect to the database
 2024-01-23 18:06:24 error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
 2024-01-23 18:07:15 error: [GET] /messages/0 >> StatusCode:: 500, Message:: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer
+2024-01-23 19:12:59 error: uncaughtException: dms_controller_1.default is not a constructor
+TypeError: dms_controller_1.default is not a constructor
+    at new DmRoute (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\src\routes\dms.route.ts:11:27)
+    at bootstrap (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\src\server.ts:22:9)
+    at Object.<anonymous> (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\src\server.ts:29:1)
+    at Module._compile (node:internal/modules/cjs/loader:1256:14)
+    at Module.m._compile (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+    at Object.require.extensions.<computed> [as .ts] (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1119:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:960:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+2024-01-23 19:13:38 error: uncaughtException: dms_controller_1.default is not a constructor
+TypeError: dms_controller_1.default is not a constructor
+    at new DmRoute (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\src\routes\dms.route.ts:11:27)
+    at bootstrap (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\src\server.ts:22:9)
+    at Object.<anonymous> (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\src\server.ts:29:1)
+    at Module._compile (node:internal/modules/cjs/loader:1256:14)
+    at Module.m._compile (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+    at Object.require.extensions.<computed> [as .ts] (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1119:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:960:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+2024-01-23 19:14:18 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/dms.controller.ts[0m:[93m86[0m:[93m46[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+[7m86[0m             res.status(200).json(deleteDmData
+[7m  [0m [91m                                             [0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/dms.controller.ts[0m:[93m86[0m:[93m46[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+[7m86[0m             res.status(200).json(deleteDmData
+[7m  [0m [91m                                             [0m
+
+    at createTSError (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:863:19)
+    at C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+    at Object.require.extensions.<computed> [as .ts] (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1119:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:960:12)
+    at Module.require (node:internal/modules/cjs/loader:1143:19)
+2024-01-23 19:14:46 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/dms.controller.ts[0m:[93m86[0m:[93m46[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+[7m86[0m             res.status(200).json(deleteDmData
+[7m  [0m [91m                                             [0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/dms.controller.ts[0m:[93m86[0m:[93m46[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+[7m86[0m             res.status(200).json(deleteDmData
+[7m  [0m [91m                                             [0m
+
+    at createTSError (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:863:19)
+    at C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+    at Object.require.extensions.<computed> [as .ts] (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1119:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:960:12)
+    at Module.require (node:internal/modules/cjs/loader:1143:19)
+2024-01-23 19:14:57 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/dms.controller.ts[0m:[93m86[0m:[93m46[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+[7m86[0m             res.status(200).json(deleteDmData
+[7m  [0m [91m                                             [0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/dms.controller.ts[0m:[93m86[0m:[93m46[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+[7m86[0m             res.status(200).json(deleteDmData
+[7m  [0m [91m                                             [0m
+
+    at createTSError (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:863:19)
+    at C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+    at Object.require.extensions.<computed> [as .ts] (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1119:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:960:12)
+    at Module.require (node:internal/modules/cjs/loader:1143:19)
+2024-01-23 19:15:37 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/dms.controller.ts[0m:[93m86[0m:[93m46[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+[7m86[0m             res.status(200).json(deleteDmData
+[7m  [0m [91m                                             [0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/dms.controller.ts[0m:[93m86[0m:[93m46[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+[7m86[0m             res.status(200).json(deleteDmData
+[7m  [0m [91m                                             [0m
+
+    at createTSError (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:863:19)
+    at C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+    at Object.require.extensions.<computed> [as .ts] (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1119:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:960:12)
+    at Module.require (node:internal/modules/cjs/loader:1143:19)
+2024-01-23 19:15:40 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/dms.controller.ts[0m:[93m86[0m:[93m46[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+[7m86[0m             res.status(200).json(deleteDmData
+[7m  [0m [91m                                             [0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/dms.controller.ts[0m:[93m86[0m:[93m46[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+[7m86[0m             res.status(200).json(deleteDmData
+[7m  [0m [91m                                             [0m
+
+    at createTSError (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:863:19)
+    at C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+    at Object.require.extensions.<computed> [as .ts] (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1119:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:960:12)
+    at Module.require (node:internal/modules/cjs/loader:1143:19)
+2024-01-23 19:22:12 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/dms.controller.ts[0m:[93m86[0m:[93m46[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+[7m86[0m             res.status(200).json(deleteDmData
+[7m  [0m [91m                                             [0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/dms.controller.ts[0m:[93m86[0m:[93m46[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+[7m86[0m             res.status(200).json(deleteDmData
+[7m  [0m [91m                                             [0m
+
+    at createTSError (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:863:19)
+    at C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+    at Object.require.extensions.<computed> [as .ts] (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1119:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:960:12)
+    at Module.require (node:internal/modules/cjs/loader:1143:19)
+2024-01-23 19:23:37 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/dms.controller.ts[0m:[93m86[0m:[93m46[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+[7m86[0m             res.status(200).json(deleteDmData
+[7m  [0m [91m                                             [0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/dms.controller.ts[0m:[93m86[0m:[93m46[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+[7m86[0m             res.status(200).json(deleteDmData
+[7m  [0m [91m                                             [0m
+
+    at createTSError (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:863:19)
+    at C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+    at Object.require.extensions.<computed> [as .ts] (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1119:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:960:12)
+    at Module.require (node:internal/modules/cjs/loader:1143:19)
+2024-01-23 19:25:59 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/dms.controller.ts[0m:[93m86[0m:[93m46[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+[7m86[0m             res.status(200).json(deleteDmData
+[7m  [0m [91m                                             [0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/dms.controller.ts[0m:[93m86[0m:[93m46[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+[7m86[0m             res.status(200).json(deleteDmData
+[7m  [0m [91m                                             [0m
+
+    at createTSError (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:863:19)
+    at C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+    at Object.require.extensions.<computed> [as .ts] (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1119:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:960:12)
+    at Module.require (node:internal/modules/cjs/loader:1143:19)
+2024-01-23 19:26:25 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/dms.controller.ts[0m:[93m86[0m:[93m46[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+[7m86[0m             res.status(200).json(deleteDmData
+[7m  [0m [91m                                             [0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/dms.controller.ts[0m:[93m86[0m:[93m46[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+[7m86[0m             res.status(200).json(deleteDmData
+[7m  [0m [91m                                             [0m
+
+    at createTSError (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:863:19)
+    at C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+    at Object.require.extensions.<computed> [as .ts] (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1119:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:960:12)
+    at Module.require (node:internal/modules/cjs/loader:1143:19)
+2024-01-23 19:26:49 error: uncaughtException: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/dms.controller.ts[0m:[93m86[0m:[93m46[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+[7m86[0m             res.status(200).json(deleteDmData
+[7m  [0m [91m                                             [0m
+
+TSError: ⨯ Unable to compile TypeScript:
+[96msrc/controllers/dms.controller.ts[0m:[93m86[0m:[93m46[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+[7m86[0m             res.status(200).json(deleteDmData
+[7m  [0m [91m                                             [0m
+
+    at createTSError (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:863:19)
+    at C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1379:34
+    at Object.compile (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1458:13)
+    at Module.m._compile (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1617:30)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+    at Object.require.extensions.<computed> [as .ts] (C:\Users\Vals_\Desktop\Projects\discord-clone\backend\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1119:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:960:12)
+    at Module.require (node:internal/modules/cjs/loader:1143:19)

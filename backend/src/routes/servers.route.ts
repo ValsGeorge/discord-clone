@@ -25,11 +25,24 @@ class ServerRoute implements Routes {
             authMiddleware,
             this.serverController.getServerById
         );
+
+        this.router.get(
+            `${this.path}/generate-invite-code/:id`,
+            authMiddleware,
+            this.serverController.generateInviteCode
+        );
+
         this.router.post(
             `${this.path}/`,
             authMiddleware,
             validationMiddleware(CreateServerDto, 'body'),
             this.serverController.createServer
+        );
+
+        this.router.post(
+            `${this.path}/join-server`,
+            authMiddleware,
+            this.serverController.joinServer
         );
         this.router.put(
             `${this.path}/:id`,

@@ -16,12 +16,4 @@ export class CreateServerDto {
     @IsString()
     @IsOptional()
     public image?: string;
-
-    @IsString()
-    @IsOptional()
-    public owner?: User;
-
-    @IsArray()
-    @IsOptional()
-    public members?: User[];
 }

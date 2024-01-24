@@ -3130,3 +3130,167 @@
 2024-01-23 18:22:32 info: ::1 - - [23/Jan/2024:16:22:32 +0000] "GET /user/details HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 2024-01-23 18:22:32 info: ::1 - - [23/Jan/2024:16:22:32 +0000] "GET /user/uploads/65afca91b7358f3d05e7af1d HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 2024-01-23 18:22:32 info: ::1 - - [23/Jan/2024:16:22:32 +0000] "GET /channels/65ae8c6dfebd1a03fe389bb6 HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:44:29 info: =================================
+2024-01-23 18:44:29 info: 📚 App connected to the database
+2024-01-23 18:44:29 info: ======= ENV: development ========
+2024-01-23 18:44:29 info: 🚀 App listening on the port 8000
+2024-01-23 18:44:29 info: =================================
+2024-01-23 18:44:33 info: ::1 - - [23/Jan/2024:16:44:33 +0000] "GET /servers/65ae8c6dfebd1a03fe389bb6 HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:44:33 info: ::1 - - [23/Jan/2024:16:44:33 +0000] "GET /categories/65ae8c6dfebd1a03fe389bb6 HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:44:33 info: ::1 - - [23/Jan/2024:16:44:33 +0000] "GET /servers/ HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:44:33 info: ::1 - - [23/Jan/2024:16:44:33 +0000] "GET /channels/65ae8c6dfebd1a03fe389bb6 HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:44:33 info: ::1 - - [23/Jan/2024:16:44:33 +0000] "GET /user/details HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:44:33 info: ::1 - - [23/Jan/2024:16:44:33 +0000] "OPTIONS /user/friends HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:44:33 info: ::1 - - [23/Jan/2024:16:44:33 +0000] "GET /user/uploads/65ae34bcd3396e26089f5c7a HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:44:33 info: ::1 - - [23/Jan/2024:16:44:33 +0000] "GET /messages/65ae8c6dfebd1a03fe389bbc HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:44:33 info: ::1 - - [23/Jan/2024:16:44:33 +0000] "OPTIONS /user/65ae34bcd3396e26089f5c7a HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:44:33 info: ::1 - - [23/Jan/2024:16:44:33 +0000] "OPTIONS /user/65afca91b7358f3d05e7af1d HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:44:33 info: ::1 - - [23/Jan/2024:16:44:33 +0000] "GET /user/65ae34bcd3396e26089f5c7a HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:44:33 info: ::1 - - [23/Jan/2024:16:44:33 +0000] "GET /user/65afca91b7358f3d05e7af1d HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:44:33 info: ::1 - - [23/Jan/2024:16:44:33 +0000] "GET /channels/info/65ae8c6dfebd1a03fe389bbc HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:44:33 info: ::1 - - [23/Jan/2024:16:44:33 +0000] "GET /user/uploads/65afca91b7358f3d05e7af1d HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:55:56 info: =================================
+2024-01-23 18:55:56 info: 📚 App connected to the database
+2024-01-23 18:55:56 info: ======= ENV: development ========
+2024-01-23 18:55:56 info: 🚀 App listening on the port 8000
+2024-01-23 18:55:56 info: =================================
+2024-01-23 18:55:57 info: ::1 - - [23/Jan/2024:16:55:57 +0000] "GET /messages/65ae8c6dfebd1a03fe389bbc HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:55:57 info: ::1 - - [23/Jan/2024:16:55:57 +0000] "OPTIONS /user/65ae34bcd3396e26089f5c7a HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:55:57 info: ::1 - - [23/Jan/2024:16:55:57 +0000] "OPTIONS /user/65afca91b7358f3d05e7af1d HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:55:57 info: ::1 - - [23/Jan/2024:16:55:57 +0000] "GET /user/65ae34bcd3396e26089f5c7a HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:55:57 info: ::1 - - [23/Jan/2024:16:55:57 +0000] "GET /user/65afca91b7358f3d05e7af1d HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:55:57 info: ::1 - - [23/Jan/2024:16:55:57 +0000] "GET /channels/info/65ae8c6dfebd1a03fe389bbc HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:55:57 info: ::1 - - [23/Jan/2024:16:55:57 +0000] "OPTIONS /user/friends HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:14 info: =================================
+2024-01-23 18:56:14 info: 📚 App connected to the database
+2024-01-23 18:56:14 info: ======= ENV: development ========
+2024-01-23 18:56:14 info: 🚀 App listening on the port 8000
+2024-01-23 18:56:14 info: =================================
+2024-01-23 18:56:14 info: ::1 - - [23/Jan/2024:16:56:14 +0000] "GET /messages/65ae8c6dfebd1a03fe389bbc HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:14 info: ::ffff:127.0.0.1 - - [23/Jan/2024:16:56:14 +0000] "OPTIONS /user/65ae34bcd3396e26089f5c7a HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:14 info: ::1 - - [23/Jan/2024:16:56:14 +0000] "OPTIONS /user/65afca91b7358f3d05e7af1d HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:14 info: ::ffff:127.0.0.1 - - [23/Jan/2024:16:56:14 +0000] "GET /user/65ae34bcd3396e26089f5c7a HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:14 info: ::1 - - [23/Jan/2024:16:56:14 +0000] "GET /user/65afca91b7358f3d05e7af1d HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:14 info: ::1 - - [23/Jan/2024:16:56:14 +0000] "GET /channels/info/65ae8c6dfebd1a03fe389bbc HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:14 info: ::1 - - [23/Jan/2024:16:56:14 +0000] "OPTIONS /user/friends HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:19 info: =================================
+2024-01-23 18:56:19 info: 📚 App connected to the database
+2024-01-23 18:56:19 info: ======= ENV: development ========
+2024-01-23 18:56:19 info: 🚀 App listening on the port 8000
+2024-01-23 18:56:19 info: =================================
+2024-01-23 18:56:20 info: ::ffff:127.0.0.1 - - [23/Jan/2024:16:56:20 +0000] "OPTIONS /user/friends HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:20 info: ::1 - - [23/Jan/2024:16:56:20 +0000] "GET /messages/65ae8c6dfebd1a03fe389bbc HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:20 info: ::1 - - [23/Jan/2024:16:56:20 +0000] "OPTIONS /user/65ae34bcd3396e26089f5c7a HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:20 info: ::1 - - [23/Jan/2024:16:56:20 +0000] "OPTIONS /user/65afca91b7358f3d05e7af1d HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:20 info: ::1 - - [23/Jan/2024:16:56:20 +0000] "GET /user/65afca91b7358f3d05e7af1d HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:20 info: ::1 - - [23/Jan/2024:16:56:20 +0000] "GET /user/65ae34bcd3396e26089f5c7a HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:20 info: ::1 - - [23/Jan/2024:16:56:20 +0000] "GET /channels/info/65ae8c6dfebd1a03fe389bbc HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:25 info: =================================
+2024-01-23 18:56:25 info: 📚 App connected to the database
+2024-01-23 18:56:25 info: ======= ENV: development ========
+2024-01-23 18:56:25 info: 🚀 App listening on the port 8000
+2024-01-23 18:56:25 info: =================================
+2024-01-23 18:56:25 info: ::ffff:127.0.0.1 - - [23/Jan/2024:16:56:25 +0000] "OPTIONS /user/friends HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:26 info: ::1 - - [23/Jan/2024:16:56:26 +0000] "GET /messages/65ae8c6dfebd1a03fe389bbc HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:26 info: ::1 - - [23/Jan/2024:16:56:26 +0000] "OPTIONS /user/65ae34bcd3396e26089f5c7a HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:26 info: ::1 - - [23/Jan/2024:16:56:26 +0000] "OPTIONS /user/65afca91b7358f3d05e7af1d HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:26 info: ::1 - - [23/Jan/2024:16:56:26 +0000] "GET /user/65ae34bcd3396e26089f5c7a HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:26 info: ::1 - - [23/Jan/2024:16:56:26 +0000] "GET /user/65afca91b7358f3d05e7af1d HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:26 info: ::1 - - [23/Jan/2024:16:56:26 +0000] "GET /channels/info/65ae8c6dfebd1a03fe389bbc HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:31 info: =================================
+2024-01-23 18:56:31 info: 📚 App connected to the database
+2024-01-23 18:56:31 info: ======= ENV: development ========
+2024-01-23 18:56:31 info: 🚀 App listening on the port 8000
+2024-01-23 18:56:31 info: =================================
+2024-01-23 18:56:32 info: ::1 - - [23/Jan/2024:16:56:32 +0000] "GET /messages/65ae8c6dfebd1a03fe389bbc HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:32 info: ::ffff:127.0.0.1 - - [23/Jan/2024:16:56:32 +0000] "OPTIONS /user/65ae34bcd3396e26089f5c7a HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:32 info: ::1 - - [23/Jan/2024:16:56:32 +0000] "OPTIONS /user/65afca91b7358f3d05e7af1d HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:32 info: ::ffff:127.0.0.1 - - [23/Jan/2024:16:56:32 +0000] "GET /user/65ae34bcd3396e26089f5c7a HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:32 info: ::1 - - [23/Jan/2024:16:56:32 +0000] "GET /user/65afca91b7358f3d05e7af1d HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:32 info: ::1 - - [23/Jan/2024:16:56:32 +0000] "GET /channels/info/65ae8c6dfebd1a03fe389bbc HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:32 info: ::1 - - [23/Jan/2024:16:56:32 +0000] "OPTIONS /user/friends HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:39 info: =================================
+2024-01-23 18:56:39 info: 📚 App connected to the database
+2024-01-23 18:56:39 info: ======= ENV: development ========
+2024-01-23 18:56:39 info: 🚀 App listening on the port 8000
+2024-01-23 18:56:39 info: =================================
+2024-01-23 18:56:40 info: ::ffff:127.0.0.1 - - [23/Jan/2024:16:56:40 +0000] "OPTIONS /user/friends HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:40 info: ::1 - - [23/Jan/2024:16:56:40 +0000] "GET /messages/65ae8c6dfebd1a03fe389bbc HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:40 info: ::ffff:127.0.0.1 - - [23/Jan/2024:16:56:40 +0000] "OPTIONS /user/65ae34bcd3396e26089f5c7a HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:40 info: ::ffff:127.0.0.1 - - [23/Jan/2024:16:56:40 +0000] "OPTIONS /user/65afca91b7358f3d05e7af1d HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:40 info: ::1 - - [23/Jan/2024:16:56:40 +0000] "GET /user/65ae34bcd3396e26089f5c7a HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:40 info: ::ffff:127.0.0.1 - - [23/Jan/2024:16:56:40 +0000] "GET /user/65afca91b7358f3d05e7af1d HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:40 info: ::1 - - [23/Jan/2024:16:56:40 +0000] "GET /channels/info/65ae8c6dfebd1a03fe389bbc HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:49 info: =================================
+2024-01-23 18:56:49 info: 📚 App connected to the database
+2024-01-23 18:56:49 info: ======= ENV: development ========
+2024-01-23 18:56:49 info: 🚀 App listening on the port 8000
+2024-01-23 18:56:49 info: =================================
+2024-01-23 18:56:49 info: ::ffff:127.0.0.1 - - [23/Jan/2024:16:56:49 +0000] "OPTIONS /user/friends HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:49 info: ::1 - - [23/Jan/2024:16:56:49 +0000] "GET /messages/65ae8c6dfebd1a03fe389bbc HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:49 info: ::1 - - [23/Jan/2024:16:56:49 +0000] "OPTIONS /user/65ae34bcd3396e26089f5c7a HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:49 info: ::1 - - [23/Jan/2024:16:56:49 +0000] "OPTIONS /user/65afca91b7358f3d05e7af1d HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:49 info: ::1 - - [23/Jan/2024:16:56:49 +0000] "GET /user/65ae34bcd3396e26089f5c7a HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:49 info: ::1 - - [23/Jan/2024:16:56:49 +0000] "GET /user/65afca91b7358f3d05e7af1d HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:49 info: ::1 - - [23/Jan/2024:16:56:49 +0000] "GET /channels/info/65ae8c6dfebd1a03fe389bbc HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:54 info: =================================
+2024-01-23 18:56:54 info: 📚 App connected to the database
+2024-01-23 18:56:54 info: ======= ENV: development ========
+2024-01-23 18:56:54 info: 🚀 App listening on the port 8000
+2024-01-23 18:56:54 info: =================================
+2024-01-23 18:56:55 info: ::ffff:127.0.0.1 - - [23/Jan/2024:16:56:55 +0000] "OPTIONS /user/friends HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:55 info: ::1 - - [23/Jan/2024:16:56:55 +0000] "GET /messages/65ae8c6dfebd1a03fe389bbc HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:55 info: ::1 - - [23/Jan/2024:16:56:55 +0000] "OPTIONS /user/65ae34bcd3396e26089f5c7a HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:55 info: ::1 - - [23/Jan/2024:16:56:55 +0000] "OPTIONS /user/65afca91b7358f3d05e7af1d HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:55 info: ::1 - - [23/Jan/2024:16:56:55 +0000] "GET /user/65ae34bcd3396e26089f5c7a HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:55 info: ::1 - - [23/Jan/2024:16:56:55 +0000] "GET /user/65afca91b7358f3d05e7af1d HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:56:55 info: ::1 - - [23/Jan/2024:16:56:55 +0000] "GET /channels/info/65ae8c6dfebd1a03fe389bbc HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:57:01 info: =================================
+2024-01-23 18:57:01 info: 📚 App connected to the database
+2024-01-23 18:57:01 info: ======= ENV: development ========
+2024-01-23 18:57:01 info: 🚀 App listening on the port 8000
+2024-01-23 18:57:01 info: =================================
+2024-01-23 18:57:01 info: ::ffff:127.0.0.1 - - [23/Jan/2024:16:57:01 +0000] "OPTIONS /user/friends HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:57:01 info: ::1 - - [23/Jan/2024:16:57:01 +0000] "GET /messages/65ae8c6dfebd1a03fe389bbc HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:57:01 info: ::ffff:127.0.0.1 - - [23/Jan/2024:16:57:01 +0000] "OPTIONS /user/65ae34bcd3396e26089f5c7a HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:57:01 info: ::ffff:127.0.0.1 - - [23/Jan/2024:16:57:01 +0000] "OPTIONS /user/65afca91b7358f3d05e7af1d HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:57:01 info: ::1 - - [23/Jan/2024:16:57:01 +0000] "GET /user/65ae34bcd3396e26089f5c7a HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:57:01 info: ::ffff:127.0.0.1 - - [23/Jan/2024:16:57:01 +0000] "GET /user/65afca91b7358f3d05e7af1d HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:57:01 info: ::1 - - [23/Jan/2024:16:57:01 +0000] "GET /channels/info/65ae8c6dfebd1a03fe389bbc HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:58:20 info: =================================
+2024-01-23 18:58:20 info: 📚 App connected to the database
+2024-01-23 18:58:20 info: ======= ENV: development ========
+2024-01-23 18:58:20 info: 🚀 App listening on the port 8000
+2024-01-23 18:58:20 info: =================================
+2024-01-23 18:58:21 info: ::1 - - [23/Jan/2024:16:58:21 +0000] "GET /messages/65ae8c6dfebd1a03fe389bbc HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:58:21 info: ::1 - - [23/Jan/2024:16:58:21 +0000] "OPTIONS /user/65ae34bcd3396e26089f5c7a HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:58:21 info: ::1 - - [23/Jan/2024:16:58:21 +0000] "OPTIONS /user/65afca91b7358f3d05e7af1d HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:58:21 info: ::1 - - [23/Jan/2024:16:58:21 +0000] "GET /user/65ae34bcd3396e26089f5c7a HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:58:21 info: ::1 - - [23/Jan/2024:16:58:21 +0000] "GET /user/65afca91b7358f3d05e7af1d HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:58:21 info: ::1 - - [23/Jan/2024:16:58:21 +0000] "GET /channels/info/65ae8c6dfebd1a03fe389bbc HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 18:58:21 info: ::1 - - [23/Jan/2024:16:58:21 +0000] "OPTIONS /user/friends HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 19:27:12 info: =================================
+2024-01-23 19:27:12 info: 📚 App connected to the database
+2024-01-23 19:27:12 info: ======= ENV: development ========
+2024-01-23 19:27:12 info: 🚀 App listening on the port 8000
+2024-01-23 19:27:12 info: =================================
+2024-01-23 19:27:12 info: ::1 - - [23/Jan/2024:17:27:12 +0000] "OPTIONS /user/friends HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 19:27:12 info: ::1 - - [23/Jan/2024:17:27:12 +0000] "GET /messages/65ae8c6dfebd1a03fe389bbc HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 19:27:12 info: ::1 - - [23/Jan/2024:17:27:12 +0000] "OPTIONS /user/65ae34bcd3396e26089f5c7a HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 19:27:12 info: ::1 - - [23/Jan/2024:17:27:12 +0000] "OPTIONS /user/65afca91b7358f3d05e7af1d HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 19:27:12 info: ::1 - - [23/Jan/2024:17:27:12 +0000] "GET /user/65ae34bcd3396e26089f5c7a HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 19:27:12 info: ::1 - - [23/Jan/2024:17:27:12 +0000] "GET /user/65afca91b7358f3d05e7af1d HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 19:27:12 info: ::1 - - [23/Jan/2024:17:27:12 +0000] "GET /channels/info/65ae8c6dfebd1a03fe389bbc HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 19:28:43 info: =================================
+2024-01-23 19:28:43 info: 📚 App connected to the database
+2024-01-23 19:28:43 info: ======= ENV: development ========
+2024-01-23 19:28:43 info: 🚀 App listening on the port 8000
+2024-01-23 19:28:43 info: =================================
+2024-01-23 19:28:43 info: ::ffff:127.0.0.1 - - [23/Jan/2024:17:28:43 +0000] "OPTIONS /user/friends HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 19:28:43 info: ::1 - - [23/Jan/2024:17:28:43 +0000] "GET /messages/65ae8c6dfebd1a03fe389bbc HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 19:28:43 info: ::1 - - [23/Jan/2024:17:28:43 +0000] "OPTIONS /user/65ae34bcd3396e26089f5c7a HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 19:28:43 info: ::1 - - [23/Jan/2024:17:28:43 +0000] "OPTIONS /user/65afca91b7358f3d05e7af1d HTTP/1.1" 204 0 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 19:28:43 info: ::1 - - [23/Jan/2024:17:28:43 +0000] "GET /user/65ae34bcd3396e26089f5c7a HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 19:28:43 info: ::1 - - [23/Jan/2024:17:28:43 +0000] "GET /user/65afca91b7358f3d05e7af1d HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 19:28:43 info: ::1 - - [23/Jan/2024:17:28:43 +0000] "GET /channels/info/65ae8c6dfebd1a03fe389bbc HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+2024-01-23 19:28:46 info: ::ffff:127.0.0.1 - - [23/Jan/2024:17:28:46 +0000] "GET /user/friends HTTP/1.1" - - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
