@@ -1,3 +1,0 @@
-2023-05-02 22:05:31 error: [POST] /login >> StatusCode:: 400, Message:: email must be an email, password must be a string
-2023-05-02 22:06:09 error: [POST] /login >> StatusCode:: 409, Message:: Password is not matching
-2023-05-02 22:07:04 error: [POST] /login >> StatusCode:: 409, Message:: This email insandrei@gmail.com was not found

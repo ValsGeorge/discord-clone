@@ -10,3 +10,4 @@ backend/migrations
 backend/.env
 backend/server/images/*
 backend/uploads/*
+backend/src/utils/*
