@@ -15,6 +15,10 @@ const channelSchema: Schema = new Schema({
         type: String,
         required: true,
     },
+    order: {
+        type: Number,
+        required: true,
+    },
     server: {
         type: Types.ObjectId,
         ref: 'Servers',

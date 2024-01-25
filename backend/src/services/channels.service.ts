@@ -32,8 +32,17 @@ class ChanelService {
         if (isEmpty(channelData))
             throw new HttpException(400, "You're not channelData");
 
+        console.log('channelData:', channelData);
+
+        // count the number of channels in the category and add 1 to the order
+        const count = await this.channels.count({
+            category: new Types.ObjectId(channelData.category),
+        });
+        console.log('count:', count);
+
         const createChannelData: Channel = await this.channels.create({
             ...channelData,
+            order: count,
         });
 
         return createChannelData;

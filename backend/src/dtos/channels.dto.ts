@@ -1,21 +1,19 @@
-import { IsString, IsNumber, IsDate } from 'class-validator';
+import { IsString, IsOptional } from 'class-validator';
 
 export class CreateChannelDto {
     @IsString()
     public name: string;
 
     @IsString()
+    @IsOptional()
     public description: string;
 
     @IsString()
     public type: string;
 
-    @IsNumber()
-    public order: number;
+    @IsString()
+    public category: string;
 
     @IsString()
     public server: string;
-
-    @IsString()
-    public category: string;
 }

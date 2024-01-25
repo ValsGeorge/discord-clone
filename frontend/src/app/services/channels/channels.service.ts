@@ -53,17 +53,12 @@ export class ChannelsService {
 
     createChannel(channel: Channels): Observable<any> {
         const url = `${this.baseUrl}/`;
-        const token = localStorage.getItem('token') as string;
-        const headers = {
-            'Content-Type': 'application/json',
-            token: token,
-        };
         this.selectedServerId = this.utilsService.getSelectedServerId();
         const data = {
             name: channel.name,
             type: channel.type,
-            categoryId: channel.category,
-            serverId: this.selectedServerId,
+            category: channel.category,
+            server: this.selectedServerId,
         };
         this.updateChannels(this.selectedServerId || '0');
 

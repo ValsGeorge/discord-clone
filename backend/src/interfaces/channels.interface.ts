@@ -5,6 +5,7 @@ export interface Channel {
     name: string;
     description: string;
     type: string;
+    order: number;
     server: Server;
     createdAt: Date;
     updatedAt: Date;
