@@ -8,6 +8,7 @@ import CategoryRoute from '@routes/categories.route';
 import ChannelRoute from '@routes/channels.route';
 import MessageRoute from '@routes/messages.route';
 import DmRoute from '@routes/dms.route';
+import DMListRoute from './routes/dmList.route';
 
 async function bootstrap() {
     validateEnv();
@@ -20,6 +21,7 @@ async function bootstrap() {
         new ChannelRoute(),
         new MessageRoute(),
         new DmRoute(),
+        new DMListRoute(),
     ];
     const app = new App();
     await app.initialize(routes);

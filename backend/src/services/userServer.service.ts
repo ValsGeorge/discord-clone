@@ -21,7 +21,6 @@ class UserServerService {
     public async findUserServerByUser(userId: string): Promise<UserServer[]> {
         if (isEmpty(userId)) throw new HttpException(400, 'UserId is empty');
         const findUser: User = await this.userService.findUserById(userId);
-        console.log('findUser: ', findUser);
 
         if (!findUser) throw new HttpException(409, "User doesn't exist");
 
@@ -30,7 +29,6 @@ class UserServerService {
             user: new Types.ObjectId(userId),
         });
 
-        console.log('findUserServer: ', findUserServer);
         return findUserServer;
     }
 }

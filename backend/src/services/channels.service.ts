@@ -21,8 +21,7 @@ class ChanelService {
             _id: channelId,
         });
         if (!findChannel) throw new HttpException(409, "Channel doesn't exist");
-        console.log('channelId', channelId);
-        console.log('findChannel', findChannel);
+
         return findChannel;
     }
 

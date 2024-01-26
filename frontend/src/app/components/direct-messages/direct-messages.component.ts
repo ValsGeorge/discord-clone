@@ -7,6 +7,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { EditMenuComponent } from '../edit-menu/edit-menu.component';
 import { ContextMenu } from 'src/app/models/contextMenu';
 import { DirectMessagesService } from 'src/app/services/direct-messages/direct-messages.service';
+import { DmList } from 'src/app/models/dmList';
 
 @Component({
     selector: 'app-direct-messages',
@@ -15,7 +16,7 @@ import { DirectMessagesService } from 'src/app/services/direct-messages/direct-m
 })
 export class DirectMessagesComponent implements OnInit {
     onlineUsers: User[] = [];
-    dmList: User[] = [];
+    dmList: DmList[] = [];
     currentUser: User = {
         id: '',
         nickname: '',
@@ -62,6 +63,7 @@ export class DirectMessagesComponent implements OnInit {
         this.onlineUserIds = new Set(this.onlineUsers.map((user) => user.id));
         this.dmService.userList$.subscribe((user) => {
             this.dmList = this.dmList.concat(user);
+            console.log('this.dmList', this.dmList);
         });
         this.utilsService.onlineUsers$.subscribe((onlineUsers) => {
             this.onlineUserIds = new Set(onlineUsers.map((user) => user.id));
@@ -73,12 +75,11 @@ export class DirectMessagesComponent implements OnInit {
             (dmList) => {
                 console.log('DM List:', dmList);
                 // add the users to the DM list
-                if (Array.isArray(dmList)) {
-                    this.dmList = dmList;
-                } else {
-                    // If it's a single object, wrap it in an array
-                    this.dmList = [dmList];
-                }
+                this.dmList = dmList;
+                this.dmList.forEach((dm) => {
+                    dm.user.profilePicture =
+                        this.authService.getProfilePictureUrl(dm.user.id);
+                });
             },
             (error) => {
                 console.error('Error fetching DM list:', error);
@@ -95,12 +96,12 @@ export class DirectMessagesComponent implements OnInit {
         this.router.navigate(['/servers/chat-dm', user.id]);
     }
 
-    removeUserFromDMList(userId: string): void {
-        console.log('Removing user from DM list:', userId);
-        this.dmService.removeUserFromDMList(userId).subscribe(
+    removeUserFromDMList(dmListId: string): void {
+        console.log('Removing user from DM list:', dmListId);
+        this.dmService.removeUserFromDMList(dmListId).subscribe(
             (response) => {
                 console.log('User removed from DM list:', response);
-                this.dmList = this.dmList.filter((user) => user.id !== userId);
+                this.dmList = this.dmList.filter((dm) => dm.id !== dmListId);
             },
             (error) => {
                 console.error('Error removing user from DM list:', error);
