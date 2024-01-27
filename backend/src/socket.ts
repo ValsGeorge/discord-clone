@@ -4,6 +4,7 @@ import MessageService from './services/messages.service';
 import { User } from './interfaces/users.interface';
 import UserService from './services/users.service';
 import UserServerService from './services/userServer.service';
+import friendRequestService from './services/friendRequests.service';
 
 interface ISocket extends Socket {
     decoded?: any;
@@ -121,7 +122,7 @@ const initSocketIO = () => {
             //     });
         });
 
-        socket.on('sendFriendRequest', (friendRequest) => {
+        socket.on('sendFriendRequest', async (friendRequest) => {
             console.log(friendRequest);
             // sendFriendRequest(friendRequest)
             //     .then((sender) => {
@@ -131,6 +132,15 @@ const initSocketIO = () => {
             //     .catch((error) => {
             //         console.error('Error sending friend request:', error);
             //     });
+            const data = {
+                from: userId,
+                to: friendRequest.receiverId,
+                status: 'pending',
+            };
+            const res = await new friendRequestService().createFriendRequest(
+                data
+            );
+            console.log('res: ', res);
         });
     });
 };

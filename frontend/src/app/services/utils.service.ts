@@ -5,26 +5,31 @@ import { User } from '../models/user';
 import { Subject } from 'rxjs';
 import { Message } from '../models/message';
 import { AuthService } from './auth.service';
+import { FriendsService } from './friends/friends.service';
+import { Friend, FriendRequest } from '../models/friends';
 
 @Injectable({
     providedIn: 'root',
 })
 export class UtilsService {
-    constructor(private authService: AuthService) {}
+    constructor(
+        private authService: AuthService,
+        private friendsService: FriendsService
+    ) {}
 
     socketUrl = 'http://localhost:3000';
 
     socket: Socket | undefined;
     onlineUsers: User[] = [];
-    onlineFriends: User[] = [];
+    onlineFriends: Friend[] = [];
 
     private onlineUsersSubject = new Subject<User[]>();
     onlineUsers$ = this.onlineUsersSubject.asObservable();
 
-    private onlineFriendsSubject = new Subject<User[]>();
+    private onlineFriendsSubject = new Subject<Friend[]>();
     onlineFriends$ = this.onlineFriendsSubject.asObservable();
 
-    private friendRequestsSubject = new Subject<User[]>();
+    private friendRequestsSubject = new Subject<FriendRequest[]>();
     friendRequests$ = this.friendRequestsSubject.asObservable();
 
     private connectedSubject = new Subject<boolean>();
@@ -96,14 +101,11 @@ export class UtilsService {
 
     updateOnlineFriends() {
         // based on the user id I have to call the backend and check for every friend if he is online
-        this.authService.getFriends().subscribe((friends) => {
-            this.onlineFriends = friends.filter((friend: any) =>
-                this.onlineUsers.find((user) => user.id === friend.id)
-            );
+        this.friendsService.getFriends().subscribe((friends) => {
+            this.onlineFriends = friends;
             this.onlineFriends.forEach((friend) => {
-                friend.profilePicture = this.authService.getProfilePictureUrl(
-                    friend.id
-                );
+                friend.friend.profilePicture =
+                    this.authService.getProfilePictureUrl(friend.friend.id);
             });
             this.onlineFriendsSubject.next([...this.onlineFriends]);
         });
