@@ -7,7 +7,7 @@
 *.sqlite
 backend/config
 backend/migrations
-backend/.env
+*/.env
 backend/server/images/*
 backend/uploads/*
 backend/src/logs
