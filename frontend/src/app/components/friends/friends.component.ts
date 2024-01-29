@@ -63,6 +63,7 @@ export class FriendsComponent implements OnInit {
         this.friendRequestsService
             .getFriendRequests()
             .subscribe((friendRequests) => {
+                // console.log('friendRequests: ', friendRequests);
                 this.friendRequests = friendRequests;
             });
 
@@ -76,6 +77,10 @@ export class FriendsComponent implements OnInit {
 
         this.utilsService.friendRequests$.subscribe((friendRequests) => {
             this.friendRequests = friendRequests;
+            this.friendRequests.forEach((request) => {
+                request.from.profilePicture =
+                    this.authService.getProfilePictureUrl(request.from.id);
+            });
         });
 
         this.friendsService.getFriends().subscribe((friends) => {
@@ -114,7 +119,6 @@ export class FriendsComponent implements OnInit {
         this.friendRequestsService
             .respondFriendRequest(friendRequestId, status)
             .subscribe((res) => {
-                console.log('Friend request:', res);
                 this.friendRequestsService
                     .getFriendRequests()
                     .subscribe((friendRequests) => {

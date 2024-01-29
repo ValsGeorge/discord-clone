@@ -31,6 +31,31 @@ class DmService {
         return findDm;
     }
 
+    public async findDmBySenderAndReceiver(
+        senderId: string,
+        receiverId: string
+    ): Promise<Dm[]> {
+        const findDm: Dm[] = await this.dms.find({
+            $or: [
+                {
+                    $and: [
+                        { sender: new Types.ObjectId(senderId) },
+                        { receiver: new Types.ObjectId(receiverId) },
+                    ],
+                },
+                {
+                    $and: [
+                        { sender: new Types.ObjectId(receiverId) },
+                        { receiver: new Types.ObjectId(senderId) },
+                    ],
+                },
+            ],
+        });
+        // if (!findDm) throw new HttpException(409, "Dm doesn't exist");
+
+        return findDm;
+    }
+
     public async createDm(dmData: CreateDmDto): Promise<Dm> {
         if (isEmpty(dmData)) throw new HttpException(400, "You're not dmData");
 

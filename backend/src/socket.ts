@@ -5,6 +5,8 @@ import { User } from './interfaces/users.interface';
 import UserService from './services/users.service';
 import UserServerService from './services/userServer.service';
 import friendRequestService from './services/friendRequests.service';
+import DmService from './services/dms.service';
+import { FriendRequest } from './interfaces/friendRequests.interface';
 
 interface ISocket extends Socket {
     decoded?: any;
@@ -100,47 +102,57 @@ const initSocketIO = () => {
             console.log(message);
         });
 
-        socket.on('sendDM', ({ dm, to }) => {
-            console.log('dddm', dm);
-            console.log('to', to);
-            // createDM(dm)
-            //     .then((fullDM) => {
-            //         console.log('fullDM: ', fullDM);
+        socket.on('sendDM', async ({ dm, to }) => {
+            const data = await new DmService().createDm({
+                content: dm.content,
+                sender: dm.senderId,
+                receiver: dm.receiverId,
+            });
+            console.log('data: ', data);
+            data.sender = onlineUsers[dm.senderId];
+            data.receiver = onlineUsers[dm.receiverId];
 
-            //         try {
-            //             // Emit the DM to the sender
-            //             io.to(socket.id).emit('privateMessage', fullDM);
-            //             // Emit the DM to the receiver
-            //             const receiverSocketId = connectedUsers[dm.receiverId];
-            //             io.to(receiverSocketId).emit('privateMessage', fullDM);
-            //         } catch (error) {
-            //             console.error('Error sending DM:', error);
-            //         }
-            //     })
-            //     .catch((error) => {
-            //         console.log('Error creating DM:', error);
-            //     });
+            try {
+                // Emit the DM to the sender
+                io.to(socket.id).emit('privateMessage', data);
+                // Emit the DM to the receiver
+                const receiverSocketId = connectedUsers[dm.receiverId];
+                io.to(receiverSocketId).emit('privateMessage', data);
+            } catch (error) {
+                console.error('Error sending DM:', error);
+            }
         });
 
         socket.on('sendFriendRequest', async (friendRequest) => {
             console.log(friendRequest);
-            // sendFriendRequest(friendRequest)
-            //     .then((sender) => {
-            //         console.log('sender: ', sender);
-            //         socket.broadcast.emit('receiveFriendRequest', sender);
-            //     })
-            //     .catch((error) => {
-            //         console.error('Error sending friend request:', error);
-            //     });
             const data = {
                 from: userId,
                 to: friendRequest.receiverId,
                 status: 'pending',
             };
-            const res = await new friendRequestService().createFriendRequest(
-                data
-            );
-            console.log('res: ', res);
+            const createFriendData =
+                await new friendRequestService().createFriendRequest(data);
+
+            // ? check if this res is returning the correct thing
+            if (!createFriendData) {
+                io.to(socket.id).emit(
+                    'exception',
+                    'Error creating friend request'
+                );
+                return;
+            }
+            const res: FriendRequest[] =
+                await new friendRequestService().getFriendRequestsByMyId(
+                    friendRequest.receiverId
+                );
+            try {
+                // Emit the friend request to the receiver
+                const receiverSocketId =
+                    connectedUsers[friendRequest.receiverId];
+                io.to(receiverSocketId).emit('receiveFriendRequest', res);
+            } catch (error) {
+                console.error('Error sending friend request:', error);
+            }
         });
     });
 };

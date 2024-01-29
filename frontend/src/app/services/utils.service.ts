@@ -92,6 +92,9 @@ export class UtilsService {
 
                 this.friendRequestsSubject.next(request);
             });
+            this.socket.on('exception', (exception: any) => {
+                console.log('Exception:', exception);
+            });
         }
     }
 

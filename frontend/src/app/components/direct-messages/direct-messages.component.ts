@@ -63,7 +63,6 @@ export class DirectMessagesComponent implements OnInit {
         this.onlineUserIds = new Set(this.onlineUsers.map((user) => user.id));
         this.dmService.userList$.subscribe((user) => {
             this.dmList = this.dmList.concat(user);
-            console.log('this.dmList', this.dmList);
         });
         this.utilsService.onlineUsers$.subscribe((onlineUsers) => {
             this.onlineUserIds = new Set(onlineUsers.map((user) => user.id));
@@ -73,7 +72,6 @@ export class DirectMessagesComponent implements OnInit {
     getDMList(): void {
         this.dmService.getDMList().subscribe(
             (dmList) => {
-                console.log('DM List:', dmList);
                 // add the users to the DM list
                 this.dmList = dmList;
                 this.dmList.forEach((dm) => {
@@ -97,10 +95,8 @@ export class DirectMessagesComponent implements OnInit {
     }
 
     removeUserFromDMList(dmListId: string): void {
-        console.log('Removing user from DM list:', dmListId);
         this.dmService.removeUserFromDMList(dmListId).subscribe(
             (response) => {
-                console.log('User removed from DM list:', response);
                 this.dmList = this.dmList.filter((dm) => dm.id !== dmListId);
             },
             (error) => {

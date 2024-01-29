@@ -9,19 +9,16 @@ class FriendsService {
     public friends = friendModel;
 
     public async getFriendsByUserId(userId: string): Promise<any> {
-        console.log('getFriendsByUserId', userId);
         if (isEmpty(userId)) throw new HttpException(400, 'No userId provided');
 
         const findFriends = await this.friends
             .find({ user: new Types.ObjectId(userId) })
             .populate('friend');
-        console.log('findFriends: ', findFriends);
 
         return findFriends;
     }
 
     public async addFriend(friendData: CreateFriendDto): Promise<any> {
-        console.log('addFriend');
         if (isEmpty(friendData))
             throw new HttpException(400, 'No friendData provided');
 
@@ -31,7 +28,6 @@ class FriendsService {
             user: friendData.friend,
             friend: friendData.user,
         });
-        console.log('createFriendData: ', createFriendData);
 
         return createFriendData;
     }
@@ -42,7 +38,6 @@ class FriendsService {
             throw new HttpException(400, "You're not friendId");
 
         const deleteFriendData = await this.friends.findByIdAndDelete(friendId);
-        console.log('deleteFriendData: ', deleteFriendData);
 
         return deleteFriendData;
     }

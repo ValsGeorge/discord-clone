@@ -20,6 +20,11 @@ class DmRoute implements Routes {
             authMiddleware,
             this.dmController.getDms
         );
+        this.router.get(
+            `${this.path}/:senderId/:receiverId`,
+            authMiddleware,
+            this.dmController.getDmBySenderAndReceiver
+        );
         this.router.post(
             `${this.path}/`,
             authMiddleware,

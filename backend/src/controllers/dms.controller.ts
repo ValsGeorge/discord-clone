@@ -33,6 +33,29 @@ class DmController {
         }
     };
 
+    public getDmBySenderAndReceiver = async (
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ) => {
+        try {
+            const senderId: string = req.params.senderId;
+            const receiverId: string = req.params.receiverId;
+            const findDmData: Dm[] =
+                await this.dmService.findDmBySenderAndReceiver(
+                    senderId,
+                    receiverId
+                );
+            if (!findDmData) {
+                res.status(200).json(null);
+            } else {
+                res.status(200).json(findDmData);
+            }
+        } catch (error) {
+            next(error);
+        }
+    };
+
     public createDm = async (
         req: Request,
         res: Response,

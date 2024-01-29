@@ -1,8 +1,8 @@
 export interface DM {
     id: string;
     content: string;
-    senderId: string;
-    receiverId: string;
+    sender: string;
+    receiver: string;
     createdAt: Date;
     updatedAt: Date;
     isEditing?: boolean;

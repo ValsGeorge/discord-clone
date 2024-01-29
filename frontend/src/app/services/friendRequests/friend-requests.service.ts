@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { User } from 'src/app/models/user';
-import { Observable, catchError, map, tap, throwError } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable, catchError, tap, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
@@ -40,7 +39,6 @@ export class FriendRequestsService {
         const url = `${this.baseUrl}/friend-request`;
 
         const body = { friendRequestId, status };
-        console.log('body: ', body);
 
         return this.httpClient.put(url, body, { withCredentials: true }).pipe(
             tap((response: any) => {

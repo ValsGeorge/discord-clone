@@ -49,9 +49,16 @@ class FriendRequestsService {
     public async createFriendRequest(
         friendRequestData: CreateFriendRequestDto
     ): Promise<FriendRequest> {
-        console.log('sendFriendRequest');
         if (isEmpty(friendRequestData))
             throw new HttpException(400, "You're not friendRequestData");
+
+        // check if the friend request already exists
+        const findFriendRequest: FriendRequest =
+            await this.friendRequests.findOne({
+                from: friendRequestData.from,
+                to: friendRequestData.to,
+            });
+        if (findFriendRequest) return;
 
         const createFriendRequestData: FriendRequest =
             await this.friendRequests.create({

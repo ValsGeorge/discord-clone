@@ -16,7 +16,6 @@ class FriendsController {
             const userId: string = req.user.id;
             const findAllFriendsData: Friend[] =
                 await this.friendService.getFriendsByUserId(userId);
-            console.log('findAllFriendsData: ', findAllFriendsData);
             res.status(200).json(findAllFriendsData);
         } catch (error) {
             next(error);
