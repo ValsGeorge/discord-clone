@@ -16,7 +16,6 @@ class MessageController {
         next: NextFunction
     ) => {
         try {
-            console.log('req.params', req.params);
             const channelId: string = req.params.channelId;
             const findAllMessagesData: Message[] =
                 await this.messageService.findAllMessage(channelId);

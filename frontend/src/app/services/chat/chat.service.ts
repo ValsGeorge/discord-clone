@@ -24,7 +24,6 @@ export class ChatService {
             // check the type o message
             // if it is Message, then updateLocalMessages
             // if it is DM, then updateLocalDMs
-            console.log('message1111', message);
             if (message.channel) {
                 this.updateLocalMessages(message);
             } else {
@@ -49,9 +48,11 @@ export class ChatService {
 
     updateLocalMessages(updatedMessage: Message): void {
         // Check if the message already exists in the array
+        console.log('updatedMessage', updatedMessage);
         const existingIndex = this.messages.findIndex(
             (message) => message.id === updatedMessage.id
         );
+        console.log('existingIndex', existingIndex);
 
         if (existingIndex !== -1) {
             this.messages.splice(existingIndex, 1, updatedMessage);

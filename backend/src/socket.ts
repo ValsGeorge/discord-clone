@@ -84,15 +84,14 @@ const initSocketIO = () => {
                 message.channel = message.channelId as string;
                 const createMessageData =
                     await new MessageService().createMessage(message);
-                console.log('createMessageData', createMessageData);
                 const messageBack = {
+                    id: createMessageData.id,
                     content: createMessageData.content,
                     user: message.userId,
                     channel: createMessageData.channel.id,
                     createdAt: createMessageData.createdAt,
                     updatedAt: createMessageData.updatedAt,
                 };
-                console.log('messageBack', messageBack);
                 io.emit('receiveMessage', messageBack);
             } catch (error) {
                 console.error('Error creating message:', error);
