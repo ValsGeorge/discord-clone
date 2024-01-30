@@ -4,6 +4,7 @@
     "engines": {
         "node": ">=18 <19"
     },
+    "type": "module",
     "scripts": {
         "start": "cd backend/dist && node app.js",
         "prebuild": "cd backend && npm install",
