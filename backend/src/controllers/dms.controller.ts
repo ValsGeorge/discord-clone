@@ -1,4 +1,5 @@
-import { NextFunction, Request, Response } from 'express';
+import { NextFunction, Response } from 'express';
+import { Request } from '@/interfaces/req.interface';
 import { CreateDmDto } from '../dtos/dms.dto';
 import { Dm } from '../interfaces/dms.interface';
 import DmService from '../services/dms.service';
@@ -66,7 +67,8 @@ class DmController {
 
             const userId = req.user.id;
             console.log('userId', userId);
-            dmData.user = userId;
+            // ! NOTE: not sure if .sender or .receiver | TAKE A LOOK LATER
+            dmData.sender = userId;
             const createDmData: Dm = await this.dmService.createDm(dmData);
 
             res.status(201).json(createDmData);

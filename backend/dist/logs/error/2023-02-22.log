@@ -1,6 +1,0 @@
-2023-02-22 18:22:06 error: =================================
-2023-02-22 18:22:06 error: 💔 App failed to connect to the database
-2023-02-22 18:22:06 error: Invalid scheme, expected connection string to start with "mongodb://" or "mongodb+srv://"
-2023-02-22 18:22:40 error: =================================
-2023-02-22 18:22:40 error: 💔 App failed to connect to the database
-2023-02-22 18:22:40 error: Invalid scheme, expected connection string to start with "mongodb://" or "mongodb+srv://"

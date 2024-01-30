@@ -1,4 +1,5 @@
-import { NextFunction, Request, Response } from 'express';
+import { NextFunction, Response } from 'express';
+import { Request } from '@/interfaces/req.interface';
 import { CreateMessageDto } from '@/dtos/messages.dto';
 import { Message } from '@/interfaces/messages.interface';
 import MessageService from '@/services/messages.service';

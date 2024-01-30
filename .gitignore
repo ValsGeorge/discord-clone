@@ -12,3 +12,4 @@ backend/server/images/*
 backend/uploads/*
 backend/src/logs
 backend/src/utils
+backend/dist

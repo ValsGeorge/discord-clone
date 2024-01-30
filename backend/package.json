@@ -7,7 +7,7 @@
     "scripts": {
         "start": "npm run build && cross-env NODE_ENV=production node dist/server.js",
         "dev": "cross-env NODE_ENV=development nodemon",
-        "build": "swc src -d dist --source-maps --copy-files",
+        "build": "npm install && tsc",
         "build:tsc": "tsc && tsc-alias",
         "test": "jest --forceExit --detectOpenHandles",
         "lint": "eslint --ignore-path .gitignore --ext .ts src/",
@@ -18,7 +18,7 @@
     "dependencies": {
         "bcrypt": "^5.0.1",
         "class-transformer": "^0.5.1",
-        "class-validator": "^0.13.2",
+        "class-validator": "^0.14.1",
         "compression": "^1.7.4",
         "cookie-parser": "^1.4.6",
         "cors": "^2.8.5",

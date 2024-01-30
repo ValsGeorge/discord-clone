@@ -1,4 +1,5 @@
-import { NextFunction, Request, Response } from 'express';
+import { NextFunction, Response } from 'express';
+import { Request } from '@/interfaces/req.interface';
 import { FriendRequest } from '@/interfaces/friendRequests.interface';
 import friendRequestsService from '@/services/friendRequests.service';
 

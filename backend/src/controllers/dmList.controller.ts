@@ -1,4 +1,5 @@
-import { NextFunction, Request, Response } from 'express';
+import { NextFunction, Response } from 'express';
+import { Request } from '@/interfaces/req.interface';
 import { User } from '@/interfaces/users.interface';
 import { DmList } from '@/interfaces/dmList.interface';
 
