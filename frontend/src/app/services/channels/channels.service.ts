@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Channels } from 'src/app/models/channel';
 import { UtilsService } from '../utils.service';
+import { environment } from 'src/environments/environment';
 
 interface DialogData {
     categoryId: string;
@@ -24,7 +25,7 @@ export class ChannelsService {
     private selectedCategoryId: string | null = null;
     selectedCategoryIdObservable = new BehaviorSubject<string | null>(null);
 
-    baseUrl = 'http://localhost:8000/channels';
+    baseUrl = `${environment.baseUrl}/channels`;
     selectedServerId: string | null = null;
 
     private dialogDataSubject = new BehaviorSubject<DialogData | null>(null);

@@ -5,6 +5,7 @@ import { Message } from 'src/app/models/message';
 import { AuthService } from '../auth.service';
 import { UtilsService } from '../utils.service';
 import { DM } from 'src/app/models/DM';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root',
@@ -43,8 +44,8 @@ export class ChatService {
     private DMUpdateSubject = new Subject<DM[]>();
     public DMUpdate$ = this.DMUpdateSubject.asObservable();
 
-    messagesUrl = 'http://localhost:8000/messages';
-    dmsUrl = 'http://localhost:8000/dms';
+    messagesUrl = `${environment.baseUrl}/messages`;
+    dmsUrl = `${environment.baseUrl}/dms`;
 
     updateLocalMessages(updatedMessage: Message): void {
         // Check if the message already exists in the array

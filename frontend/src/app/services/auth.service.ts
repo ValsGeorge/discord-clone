@@ -3,12 +3,14 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { Observable, catchError, map, tap, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
+
 @Injectable({
     providedIn: 'root',
 })
 export class AuthService {
-    authUrl = 'http://localhost:8000/auth';
-    userUrl = 'http://localhost:8000/user';
+    authUrl = `${environment.baseUrl}/auth`;
+    userUrl = `${environment.baseUrl}/user`;
 
     user$: User = {
         id: '',

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root',
@@ -15,7 +16,7 @@ export class ServersService {
 
     constructor(private httpClient: HttpClient) {}
 
-    baseUrl = 'http://localhost:8000/servers';
+    baseUrl = `${environment.baseUrl}/servers`;
 
     openDialog() {
         this.showDialogSubject.next(true);

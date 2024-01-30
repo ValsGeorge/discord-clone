@@ -10,6 +10,8 @@ import { FriendsService } from 'src/app/services/friends/friends.service';
 import { FriendRequestsService } from 'src/app/services/friendRequests/friend-requests.service';
 import { FriendRequest, Friend } from '../../models/friends';
 
+import { environment } from 'src/environments/environment';
+
 @Component({
     selector: 'app-friends',
     templateUrl: './friends.component.html',

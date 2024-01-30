@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Category } from 'src/app/models/category';
-import { BASE_URL } from 'src/app/config';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root',
 })
 export class CategoriesService {
-    baseUrl = `${BASE_URL}/categories`;
+    baseUrl = `${environment.baseUrl}/categories`;
     constructor(private http: HttpClient) {}
 
     getCategories(serverId: string): Observable<any> {
