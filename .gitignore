@@ -11,5 +11,5 @@ backend/migrations
 backend/server/images/*
 backend/uploads/*
 backend/src/logs
-backend/src/utils
+backend/src/utils/logs
 backend/dist
