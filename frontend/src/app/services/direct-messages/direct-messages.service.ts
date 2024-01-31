@@ -5,6 +5,7 @@ import { Observable, Subject } from 'rxjs';
 import { User } from '../../models/user';
 import { DmList } from 'src/app/models/dmList';
 import { catchError, tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root',
@@ -15,7 +16,7 @@ export class DirectMessagesService {
     private userListSubject = new Subject<DmList[]>();
     userList$ = this.userListSubject.asObservable();
 
-    baseUrl = 'http://localhost:8000/dm-list';
+    baseUrl = `${environment}/dm-list`;
 
     getDMList(): Observable<DmList[]> {
         const url = `${this.baseUrl}/`;

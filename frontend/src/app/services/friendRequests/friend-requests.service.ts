@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, tap, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root',
@@ -14,7 +15,7 @@ export class FriendRequestsService {
         private authService: AuthService
     ) {}
 
-    baseUrl = 'http://localhost:8000/friend-requests';
+    baseUrl = `${environment}/friend-requests`;
 
     getFriendRequests(): Observable<any> {
         const url = `${this.baseUrl}/friend-requests`;
