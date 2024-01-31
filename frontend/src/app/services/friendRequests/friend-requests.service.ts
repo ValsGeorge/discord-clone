@@ -15,7 +15,7 @@ export class FriendRequestsService {
         private authService: AuthService
     ) {}
 
-    baseUrl = `${environment}/friend-requests`;
+    baseUrl = `${environment.baseUrl}/friend-requests`;
 
     getFriendRequests(): Observable<any> {
         const url = `${this.baseUrl}/friend-requests`;

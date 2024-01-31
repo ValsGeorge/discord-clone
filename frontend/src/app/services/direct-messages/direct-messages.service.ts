@@ -16,7 +16,7 @@ export class DirectMessagesService {
     private userListSubject = new Subject<DmList[]>();
     userList$ = this.userListSubject.asObservable();
 
-    baseUrl = `${environment}/dm-list`;
+    baseUrl = `${environment.baseUrl}/dm-list`;
 
     getDMList(): Observable<DmList[]> {
         const url = `${this.baseUrl}/`;

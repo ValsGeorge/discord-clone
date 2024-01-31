@@ -101,7 +101,7 @@ class AuthService {
     }
 
     public createCookie(tokenData: TokenData): string {
-        return `Authorization=${tokenData.token}; HttpOnly; Path=/; Max-Age=${tokenData.expiresIn}; Domain=${COOKIE_DOMAIN}`;
+        return `Authorization=${tokenData.token}; HttpOnly; Path=/; Max-Age=${tokenData.expiresIn}; Domain=${COOKIE_DOMAIN}; Secure; SameSite=None;`;
     }
 }
 

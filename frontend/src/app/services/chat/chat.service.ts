@@ -123,7 +123,7 @@ export class ChatService {
                                     if (message.user === userId) {
                                         message.username = response.username;
                                         message.userProfilePicture =
-                                            `${environment}/user/uploads/` +
+                                            `${environment.baseUrl}/user/uploads/` +
                                             response.id;
                                     }
                                 });
@@ -222,7 +222,7 @@ export class ChatService {
                                         message.senderUsername =
                                             response.username;
                                         message.userProfilePicture =
-                                            `${environment}/user/uploads/` +
+                                            `${environment.baseUrl}/user/uploads/` +
                                             response.id;
                                     }
                                 });
