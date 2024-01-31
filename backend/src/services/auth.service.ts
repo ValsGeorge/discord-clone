@@ -8,6 +8,7 @@ import { User } from '@interfaces/users.interface';
 import userModel from '@models/users.model';
 import { isEmpty } from '@utils/util';
 import { v4 as uuidv4 } from 'uuid';
+import { COOKIE_DOMAIN } from '@config';
 
 class AuthService {
     public users = userModel;
@@ -100,7 +101,7 @@ class AuthService {
     }
 
     public createCookie(tokenData: TokenData): string {
-        return `Authorization=${tokenData.token}; HttpOnly; Path=/; Max-Age=${tokenData.expiresIn};`;
+        return `Authorization=${tokenData.token}; HttpOnly; Path=/; Max-Age=${tokenData.expiresIn}; Domain=${COOKIE_DOMAIN}`;
     }
 }
 
