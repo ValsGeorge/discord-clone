@@ -7,6 +7,7 @@
     "type": "module",
     "scripts": {
         "start": "cd backend/dist && node app.js",
+        "dev": "cd backend && npm run dev & cd frontend && ng serve",
         "prebuild": "cd backend && npm run build",
         "build": "cd frontend && npm run build"
     }
