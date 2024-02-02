@@ -17,11 +17,8 @@ export class MessageOptionsComponent {
     @Output() editClick = new EventEmitter<void>();
 
     editMessage(): void {
-        console.log('edit message');
         this.editClick.emit();
     }
 
-    deleteMessage(): void {
-        console.log('delete message');
-    }
+    deleteMessage(): void {}
 }

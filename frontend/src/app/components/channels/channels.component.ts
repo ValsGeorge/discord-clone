@@ -57,7 +57,6 @@ export class ChannelsComponent implements OnInit {
     }
 
     dropCategory(event: any) {
-        console.log('drop category', event.previousIndex, event.currentIndex);
         if (event.previousContainer === event.container) {
             moveItemInArray(
                 event.container.data,
@@ -77,8 +76,6 @@ export class ChannelsComponent implements OnInit {
     }
 
     private updateCategoryOrder() {
-        console.log('update category order');
-        console.log('categories:', this.categories);
         this.categories.forEach((category) => {
             category.order = this.categories.indexOf(category);
         });

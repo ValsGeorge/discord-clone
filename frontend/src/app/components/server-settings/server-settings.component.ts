@@ -44,12 +44,9 @@ export class ServerSettingsComponent {
     constructor(private serversService: ServersService) {
         this.selectedOption = 'Overview';
     }
-    confirm() {
-        console.log('confirm');
-    }
+    confirm() {}
 
     onClose() {
-        console.log('close');
         this.close.emit();
     }
 

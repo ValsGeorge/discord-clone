@@ -67,7 +67,7 @@ export class EditMenuComponent {
             case 'edit-server':
                 this.openSettings();
                 // this.settingsComponent.openSettings();
-                console.log('edit server');
+
                 break;
 
             case 'delete-channel':
@@ -79,15 +79,12 @@ export class EditMenuComponent {
                 break;
 
             case 'edit-channel':
-                console.log('edit channel');
                 break;
 
             case 'edit-message':
-                console.log('edit message');
                 break;
 
             case 'delete-message':
-                console.log('delete message');
                 break;
 
             case 'add-friend':
@@ -95,7 +92,6 @@ export class EditMenuComponent {
                 break;
 
             case 'remove-friend':
-                console.log('remove friend');
                 break;
 
             case 'add-dm':
@@ -103,7 +99,6 @@ export class EditMenuComponent {
                 break;
 
             default:
-                console.log('Unknown action');
                 break;
         }
     }
@@ -149,7 +144,6 @@ export class EditMenuComponent {
     }
 
     handleAddFriend() {
-        console.log('add friend');
         console.log(this.targetId);
         if (this.utilsService.socket) {
             this.utilsService.socket.emit(
@@ -172,17 +166,15 @@ export class EditMenuComponent {
     }
 
     // openSettings() {
-    //     console.log('open settings');
+    //
     //     this.settingsComponent.openSettings();
     // }
 
     openSettings() {
-        console.log('openSettings');
         this.showDialog = true;
     }
 
     closeSettings() {
-        console.log('closeSettings');
         this.showDialog = false;
     }
 

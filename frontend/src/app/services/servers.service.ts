@@ -20,12 +20,10 @@ export class ServersService {
 
     openDialog() {
         this.showDialogSubject.next(true);
-        console.log('open dialog1');
     }
 
     closeDialog() {
         this.showDialogSubject.next(false);
-        console.log('close dialog');
     }
 
     updateServers() {

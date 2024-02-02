@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { ChatService } from './chat/chat.service';
 import { io, Socket } from 'socket.io-client';
 import { User } from '../models/user';
 import { Subject } from 'rxjs';

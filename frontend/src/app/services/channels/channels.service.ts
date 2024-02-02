@@ -40,7 +40,6 @@ export class ChannelsService {
     }
 
     closeDialog() {
-        console.log('close dialog');
         this.dialogDataSubject.next({
             categoryId: '',
             serverId: '',
