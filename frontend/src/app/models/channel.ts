@@ -5,6 +5,6 @@ export interface Channels {
     messages: string[];
     created_at: string;
     updated_at: string;
-    categoryId: string;
+    category: string;
     order: number;
 }

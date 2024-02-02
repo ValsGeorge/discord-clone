@@ -1,30 +1,34 @@
 import { Injectable } from '@angular/core';
-import { ChatService } from './chat/chat.service';
 import { io, Socket } from 'socket.io-client';
 import { User } from '../models/user';
 import { Subject } from 'rxjs';
 import { Message } from '../models/message';
 import { AuthService } from './auth.service';
+import { FriendsService } from './friends/friends.service';
+import { Friend, FriendRequest } from '../models/friends';
 
 @Injectable({
     providedIn: 'root',
 })
 export class UtilsService {
-    constructor(private authService: AuthService) {}
+    constructor(
+        private authService: AuthService,
+        private friendsService: FriendsService
+    ) {}
 
     socketUrl = 'http://localhost:3000';
 
     socket: Socket | undefined;
     onlineUsers: User[] = [];
-    onlineFriends: User[] = [];
+    onlineFriends: Friend[] = [];
 
     private onlineUsersSubject = new Subject<User[]>();
     onlineUsers$ = this.onlineUsersSubject.asObservable();
 
-    private onlineFriendsSubject = new Subject<User[]>();
+    private onlineFriendsSubject = new Subject<Friend[]>();
     onlineFriends$ = this.onlineFriendsSubject.asObservable();
 
-    private friendRequestsSubject = new Subject<User[]>();
+    private friendRequestsSubject = new Subject<FriendRequest[]>();
     friendRequests$ = this.friendRequestsSubject.asObservable();
 
     private connectedSubject = new Subject<boolean>();
@@ -38,6 +42,9 @@ export class UtilsService {
     setupSocketConnection(): void {
         console.log('Setting up socket connection');
         const token = localStorage.getItem('token');
+
+        console.log('token: ', token);
+
         if (token) {
             this.socket = io(this.socketUrl, {
                 query: { token },
@@ -61,7 +68,6 @@ export class UtilsService {
             this.socket.on('receiveMessage', (message: any) => {
                 console.log('Received message:', message);
                 this.chatUpdatedSubject.next(message);
-                // this.chatService.updateLocalMessages(message);
             });
 
             this.socket.on('updateOnlineUsers', (onlineUsers: User[]) => {
@@ -85,6 +91,9 @@ export class UtilsService {
 
                 this.friendRequestsSubject.next(request);
             });
+            this.socket.on('exception', (exception: any) => {
+                console.log('Exception:', exception);
+            });
         }
     }
 
@@ -94,14 +103,11 @@ export class UtilsService {
 
     updateOnlineFriends() {
         // based on the user id I have to call the backend and check for every friend if he is online
-        this.authService.getFriends().subscribe((friends) => {
-            this.onlineFriends = friends.filter((friend: any) =>
-                this.onlineUsers.find((user) => user.id === friend.id)
-            );
+        this.friendsService.getFriends().subscribe((friends) => {
+            this.onlineFriends = friends;
             this.onlineFriends.forEach((friend) => {
-                friend.profilePicture = this.authService.getProfilePictureUrl(
-                    friend.id
-                );
+                friend.friend.profilePicture =
+                    this.authService.getProfilePictureUrl(friend.friend.id);
             });
             this.onlineFriendsSubject.next([...this.onlineFriends]);
         });

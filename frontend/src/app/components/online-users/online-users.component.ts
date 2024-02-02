@@ -64,7 +64,20 @@ export class OnlineUsersComponent implements OnInit {
 
         // Subscribe to the online users subject to get updates when the online users change
         this.utilsService.onlineUsers$.subscribe((onlineUsers) => {
+            const selectedServerId = this.utilsService.getSelectedServerId();
             onlineUsers.forEach((user) => {
+                // if online but not in the server, remove it from the online users list
+                if (
+                    user.serverIds &&
+                    this.onlineUsersIds.has(user.id) &&
+                    !user.serverIds.includes(selectedServerId)
+                ) {
+                    this.onlineUsersIds.delete(user.id);
+                    this.onlineUsers = this.onlineUsers.filter(
+                        (onlineUser) => onlineUser.id !== user.id
+                    );
+                }
+                // if online and in the server, add it to the online users list
                 if (user.serverIds && !this.onlineUsersIds.has(user.id)) {
                     user.serverIds.forEach((serverId) => {
                         if (String(serverId) === String(selectedServerId)) {

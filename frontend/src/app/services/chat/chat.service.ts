@@ -5,6 +5,7 @@ import { Message } from 'src/app/models/message';
 import { AuthService } from '../auth.service';
 import { UtilsService } from '../utils.service';
 import { DM } from 'src/app/models/DM';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root',
@@ -24,11 +25,9 @@ export class ChatService {
             // check the type o message
             // if it is Message, then updateLocalMessages
             // if it is DM, then updateLocalDMs
-            if (message.channelId) {
-                console.log('message', message);
+            if (message.channel) {
                 this.updateLocalMessages(message);
             } else {
-                console.log('message', message);
                 this.updateLocalDMs(message);
             }
         });
@@ -45,7 +44,8 @@ export class ChatService {
     private DMUpdateSubject = new Subject<DM[]>();
     public DMUpdate$ = this.DMUpdateSubject.asObservable();
 
-    baseUrl = 'http://localhost:8000/messages';
+    messagesUrl = `${environment.baseUrl}/messages`;
+    dmsUrl = `${environment.baseUrl}/dms`;
 
     updateLocalMessages(updatedMessage: Message): void {
         // Check if the message already exists in the array
@@ -53,6 +53,7 @@ export class ChatService {
         const existingIndex = this.messages.findIndex(
             (message) => message.id === updatedMessage.id
         );
+        console.log('existingIndex', existingIndex);
 
         if (existingIndex !== -1) {
             this.messages.splice(existingIndex, 1, updatedMessage);
@@ -61,17 +62,16 @@ export class ChatService {
             this.messages.sort((a, b) => +a.updatedAt - +b.updatedAt);
         }
 
-        this.authService.getUserName(updatedMessage.userId).subscribe(
+        this.authService.getUserName(updatedMessage.user).subscribe(
             (response) => {
-                console.log('response', response);
                 updatedMessage.username = response.username;
-                updatedMessage.userProfilePicture = response.profilePicture;
+                updatedMessage.userProfilePicture =
+                    this.authService.getProfilePictureUrl(updatedMessage.user);
             },
             (error) => {
                 console.error('Error getting username:', error);
             }
         );
-
         this.messageUpdateSubject.next([...this.messages]);
     }
 
@@ -88,16 +88,12 @@ export class ChatService {
             this.DMs.push(updatedDM);
             this.DMs.sort((a, b) => +a.updatedAt - +b.updatedAt);
         }
-        this.authService.getUserName(updatedDM.senderId).subscribe(
+
+        this.authService.getUserName(updatedDM.sender).subscribe(
             (response) => {
-                console.log('response', response);
                 updatedDM.senderUsername = response.username;
                 updatedDM.userProfilePicture =
-                    this.authService.getProfilePictureUrl(updatedDM.senderId);
-                console.log(
-                    'this.authService.getProfilePictureUrl(updatedDM.senderId)',
-                    this.authService.getProfilePictureUrl(updatedDM.senderId)
-                );
+                    this.authService.getProfilePictureUrl(updatedDM.sender);
             },
             (error) => {
                 console.error('Error getting username:', error);
@@ -108,28 +104,26 @@ export class ChatService {
     }
 
     public fetchInitialMessages(): void {
-        const params = new HttpParams().set(
-            'channelId',
-            this.utilsService.getSelectedChannelId() || ''
-        );
         this.http
-            .get<Message[]>(`${this.baseUrl}/get-messages`, { params })
+            .get<Message[]>(
+                `${
+                    this.messagesUrl
+                }/${this.utilsService.getSelectedChannelId()}`,
+                { withCredentials: true }
+            )
             .subscribe(
                 (initialMessages) => {
                     const userIds = Array.from(
-                        new Set(
-                            initialMessages.map((message) => message.userId)
-                        )
+                        new Set(initialMessages.map((message) => message.user))
                     );
-
                     userIds.forEach((userId) => {
                         this.authService.getUserName(userId).subscribe(
                             (response) => {
                                 initialMessages.forEach((message) => {
-                                    if (message.userId === userId) {
+                                    if (message.user === userId) {
                                         message.username = response.username;
                                         message.userProfilePicture =
-                                            'http://localhost:8000/users/uploads/' +
+                                            `${environment.baseUrl}/user/uploads/` +
                                             response.id;
                                     }
                                 });
@@ -181,11 +175,6 @@ export class ChatService {
                     console.error('Error getting username:', error);
                 }
             );
-
-            console.log('receiverId', receiverId);
-            console.log('senderId', senderId);
-            console.log('content', content);
-
             this.utilsService.socket.emit('sendDM', {
                 dm: { content, senderId, receiverId },
                 to: receiverId,
@@ -208,41 +197,48 @@ export class ChatService {
     }
 
     fetchInitialDMs(senderId: string, receiverId: string): void {
-        const params = new HttpParams()
-            .set('senderId', senderId)
-            .set('receiverId', receiverId);
-        this.http.get<DM[]>(`${this.baseUrl}/get-dms`, { params }).subscribe(
-            (initialMessages) => {
-                console.log('initialMessages', initialMessages);
-                const userIds = Array.from(
-                    new Set(initialMessages.map((message) => message.senderId))
-                );
+        this.http
+            .get<DM[]>(`${this.dmsUrl}/${senderId}/${receiverId}`, {
+                withCredentials: true,
+            })
+            .subscribe(
+                (initialMessages) => {
+                    if (initialMessages == null) {
+                        return;
+                    }
 
-                userIds.forEach((userId) => {
-                    this.authService.getUserName(userId).subscribe(
-                        (response) => {
-                            initialMessages.forEach((message) => {
-                                // console.log('message', message);
-                                if (message.senderId === userId) {
-                                    message.senderUsername = response.username;
-                                    message.userProfilePicture =
-                                        'http://localhost:8000/users/uploads/' +
-                                        response.id;
-                                }
-                            });
-                        },
-                        (error) => {
-                            console.error('Error getting username:', error);
-                        }
+                    const userIds = Array.from(
+                        new Set(
+                            initialMessages.map((message) => message?.sender)
+                        )
                     );
-                });
 
-                this.DMs = initialMessages;
-                this.DMUpdateSubject.next([...this.DMs]);
-            },
-            (error) => {
-                console.error('Error fetching initial messages:', error);
-            }
-        );
+                    userIds.forEach((userId) => {
+                        this.authService.getUserName(userId).subscribe(
+                            (response) => {
+                                initialMessages.forEach((message) => {
+                                    // console.log('message', message);
+                                    if (message.sender === userId) {
+                                        message.senderUsername =
+                                            response.username;
+                                        message.userProfilePicture =
+                                            `${environment.baseUrl}/user/uploads/` +
+                                            response.id;
+                                    }
+                                });
+                            },
+                            (error) => {
+                                console.error('Error getting username:', error);
+                            }
+                        );
+                    });
+
+                    this.DMs = initialMessages;
+                    this.DMUpdateSubject.next([...this.DMs]);
+                },
+                (error) => {
+                    console.error('Error fetching initial messages:', error);
+                }
+            );
     }
 }

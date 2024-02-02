@@ -67,11 +67,26 @@ export class ServerNameOptionsComponent implements OnInit {
     ngOnInit() {
         const serverId = localStorage.getItem('selectedServerId') as string;
         this.serversService.getServerInfo(serverId).subscribe((serverInfo) => {
-            console.log(serverInfo);
             this.server = serverInfo;
             if (this.server.image)
                 this.server.image =
                     this.serversService.getServerImageUrl(serverId);
+        });
+        this.serversService.serversUpdated$.subscribe((serverId) => {
+            this.serversService
+                .getServerInfo(
+                    localStorage.getItem('selectedServerId') as string
+                )
+                .subscribe((serverInfo) => {
+                    this.server = serverInfo;
+                    if (this.server.image)
+                        this.server.image =
+                            this.serversService.getServerImageUrl(
+                                localStorage.getItem(
+                                    'selectedServerId'
+                                ) as string
+                            );
+                });
         });
     }
 }

@@ -6,6 +6,11 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { Router } from '@angular/router';
 import { EditMenuComponent } from '../edit-menu/edit-menu.component';
 import { ContextMenu } from 'src/app/models/contextMenu';
+import { FriendsService } from 'src/app/services/friends/friends.service';
+import { FriendRequestsService } from 'src/app/services/friendRequests/friend-requests.service';
+import { FriendRequest, Friend } from '../../models/friends';
+
+import { environment } from 'src/environments/environment';
 
 @Component({
     selector: 'app-friends',
@@ -13,9 +18,9 @@ import { ContextMenu } from 'src/app/models/contextMenu';
     styleUrls: ['./friends.component.css'],
 })
 export class FriendsComponent implements OnInit {
-    friends: User[] = [];
-    onlineFriends: User[] = [];
-    friendRequests: User[] = [];
+    friends: Friend[] = [];
+    onlineFriends: Friend[] = [];
+    friendRequests: FriendRequest[] = [];
     onlineFriendsIds = new Set<string>();
 
     selectedTab = 'online';
@@ -49,15 +54,20 @@ export class FriendsComponent implements OnInit {
         private authService: AuthService,
         private utilsService: UtilsService,
         private chatService: ChatService,
-        private router: Router
+        private router: Router,
+        private friendsService: FriendsService,
+        private friendRequestsService: FriendRequestsService
     ) {}
 
     ngOnInit(): void {
         // Get the initial list of online users
         this.getOnlineFriends();
-        this.authService.getFriendRequests().subscribe((friendRequests) => {
-            this.friendRequests = friendRequests;
-        });
+        this.friendRequestsService
+            .getFriendRequests()
+            .subscribe((friendRequests) => {
+                // console.log('friendRequests: ', friendRequests);
+                this.friendRequests = friendRequests;
+            });
 
         // Subscribe to the online users list for updates
         this.utilsService.onlineFriends$.subscribe((onlineFriends) => {
@@ -69,9 +79,13 @@ export class FriendsComponent implements OnInit {
 
         this.utilsService.friendRequests$.subscribe((friendRequests) => {
             this.friendRequests = friendRequests;
+            this.friendRequests.forEach((request) => {
+                request.from.profilePicture =
+                    this.authService.getProfilePictureUrl(request.from.id);
+            });
         });
 
-        this.authService.getFriends().subscribe((friends) => {
+        this.friendsService.getFriends().subscribe((friends) => {
             this.friends = friends;
         });
     }
@@ -101,21 +115,15 @@ export class FriendsComponent implements OnInit {
     }
 
     respondFriendRequest(
-        requesterId: string,
+        friendRequestId: string,
         status: 'accept' | 'decline'
     ): void {
-        this.authService
-            .respondFriendRequest(
-                requesterId,
-                this.authService.getUserId(),
-                status
-            )
+        this.friendRequestsService
+            .respondFriendRequest(friendRequestId, status)
             .subscribe((res) => {
-                console.log('Friend request accepted:', res);
-                this.authService
+                this.friendRequestsService
                     .getFriendRequests()
                     .subscribe((friendRequests) => {
-                        console.log('Friend requests:', friendRequests);
                         this.friendRequests = friendRequests;
                     });
             });

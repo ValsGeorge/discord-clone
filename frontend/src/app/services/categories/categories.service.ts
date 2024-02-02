@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Category } from 'src/app/models/category';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root',
 })
 export class CategoriesService {
-    baseUrl = 'http://localhost:8000/categories';
+    baseUrl = `${environment.baseUrl}/categories`;
     constructor(private http: HttpClient) {}
 
     getCategories(serverId: string): Observable<any> {
@@ -17,7 +18,7 @@ export class CategoriesService {
             'Content-Type': 'application/json',
             token: token,
         };
-        return this.http.get(url, { headers });
+        return this.http.get(url, { withCredentials: true });
     }
 
     updateCategoriesOrder(categories: Category[]): Observable<any> {
@@ -31,6 +32,6 @@ export class CategoriesService {
         const body = {
             categories: categories,
         };
-        return this.http.put(url, body, { headers });
+        return this.http.put(url, body, { withCredentials: true });
     }
 }

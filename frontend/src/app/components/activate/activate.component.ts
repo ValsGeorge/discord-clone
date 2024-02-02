@@ -19,9 +19,6 @@ export class ActivateComponent {
         const uidb64 = this.route.snapshot.paramMap.get('uidb64');
         const token = this.route.snapshot.paramMap.get('token');
 
-        console.log('uidb64: ' + uidb64);
-        console.log('token: ' + token);
-
         // Check if both uidb64 and token are not null
         if (uidb64 !== null && token !== null) {
             this.authService.activateAccount(uidb64, token).subscribe(

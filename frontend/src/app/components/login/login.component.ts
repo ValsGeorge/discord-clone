@@ -10,8 +10,11 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent {
     loginForm: FormGroup;
-
-    constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+    constructor(
+        private fb: FormBuilder,
+        private authService: AuthService,
+        private router: Router
+    ) {
         this.loginForm = this.fb.group({
             username: [''],
             password: [''],

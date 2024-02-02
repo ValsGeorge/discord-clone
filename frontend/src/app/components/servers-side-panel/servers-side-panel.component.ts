@@ -78,6 +78,7 @@ export class ServersSidePanelComponent implements OnInit {
         this.utilsService.setSelectedServerId(serverId);
         this.selectedServerId = this.utilsService.getSelectedServerId();
         this.utilsService.updateOnlineUsers();
+        this.serversService.updateServers(); // Notify about server update
         // Update channels
         this.channelsService.getChannels(this.selectedServerId).subscribe(
             (channels) => {
@@ -112,7 +113,6 @@ export class ServersSidePanelComponent implements OnInit {
                         );
                     }
                 });
-                console.log('servers', this.servers);
             },
             (error: any) => {
                 console.log(error);

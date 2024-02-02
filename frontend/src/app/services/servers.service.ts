@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root',
@@ -15,69 +16,66 @@ export class ServersService {
 
     constructor(private httpClient: HttpClient) {}
 
-    baseUrl = 'http://localhost:8000/servers';
+    baseUrl = `${environment.baseUrl}/servers`;
 
     openDialog() {
         this.showDialogSubject.next(true);
-        console.log('open dialog1');
     }
 
     closeDialog() {
         this.showDialogSubject.next(false);
-        console.log('close dialog');
     }
 
     updateServers() {
-        console.log('update servers');
         this.serversUpdatedSubject.next();
     }
 
     createServer(serverName: any): Observable<any> {
         console.log(serverName);
         const token = localStorage.getItem('token') as string;
-        const url = `${this.baseUrl}/create-server`;
+        const url = `${this.baseUrl}/`;
         const headers = {
             'Content-Type': 'application/json',
             token: token,
         };
-        const body = { name: serverName['serverName'] };
+        const body = {
+            name: serverName['serverName'],
+            description: 'a',
+        };
 
-        return this.httpClient.post(url, body, { headers });
+        return this.httpClient.post(url, body, {
+            headers,
+            withCredentials: true,
+        });
     }
 
     getServers(): Observable<any> {
-        const token = localStorage.getItem('token') as string;
-        const url = `${this.baseUrl}/get-servers`;
-        const headers = new HttpHeaders({
-            'Content-Type': 'application/json',
-            token: token,
-        });
+        const url = `${this.baseUrl}/`;
 
-        return this.httpClient.get(url, { headers });
+        return this.httpClient.get(url, { withCredentials: true }).pipe(
+            (response: any) => {
+                return response;
+            },
+            (error: any) => {
+                return error;
+            }
+        );
     }
 
     generateInviteCode(serverId: string): Observable<any> {
-        const token = localStorage.getItem('token') as string;
         const url = `${this.baseUrl}/generate-invite-code/${serverId}`;
-        const headers = new HttpHeaders({
-            'Content-Type': 'application/json',
-            token: token,
-        });
         const body = { serverId: serverId };
 
-        return this.httpClient.get(url, { headers, params: body });
+        return this.httpClient.get(url, {
+            params: body,
+            withCredentials: true,
+        });
     }
 
     joinServer(inviteCode: string): Observable<any> {
-        const token = localStorage.getItem('token') as string;
         const url = `${this.baseUrl}/join-server`;
-        const headers = new HttpHeaders({
-            'Content-Type': 'application/json',
-            token: token,
-        });
         const body = { inviteCode: inviteCode };
-
-        return this.httpClient.post(url, body, { headers });
+        return this.httpClient.post(url, body, { withCredentials: true });
     }
 
     leaveServer(serverId: string): Observable<any> {
@@ -108,13 +106,8 @@ export class ServersService {
 
     getServerInfo(serverId: string): Observable<any> {
         const token = localStorage.getItem('token') as string;
-        const url = `${this.baseUrl}/server-info/${serverId}`;
-        const headers = new HttpHeaders({
-            'Content-Type': 'application/json',
-            token: token,
-        });
-
-        return this.httpClient.get(url, { headers });
+        const url = `${this.baseUrl}/${serverId}`;
+        return this.httpClient.get(url, { withCredentials: true });
     }
 
     uploadServerImage(serverId: string, image: File): Observable<any> {

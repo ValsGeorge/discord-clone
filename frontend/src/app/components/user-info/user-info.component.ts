@@ -91,7 +91,6 @@ export class UserInfoComponent implements OnInit {
     showDetails = false;
 
     openDetails(event: MouseEvent) {
-        console.log('open details');
         this.showDetails = !this.showDetails;
 
         const clickedElement = event.currentTarget as HTMLElement;

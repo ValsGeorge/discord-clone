@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Channels } from 'src/app/models/channel';
 import { UtilsService } from '../utils.service';
+import { environment } from 'src/environments/environment';
 
 interface DialogData {
     categoryId: string;
@@ -24,7 +25,7 @@ export class ChannelsService {
     private selectedCategoryId: string | null = null;
     selectedCategoryIdObservable = new BehaviorSubject<string | null>(null);
 
-    baseUrl = 'http://localhost:8000/channels';
+    baseUrl = `${environment.baseUrl}/channels`;
     selectedServerId: string | null = null;
 
     private dialogDataSubject = new BehaviorSubject<DialogData | null>(null);
@@ -39,7 +40,6 @@ export class ChannelsService {
     }
 
     closeDialog() {
-        console.log('close dialog');
         this.dialogDataSubject.next({
             categoryId: '',
             serverId: '',
@@ -52,33 +52,27 @@ export class ChannelsService {
     }
 
     createChannel(channel: Channels): Observable<any> {
-        const url = `${this.baseUrl}/create`;
-        const token = localStorage.getItem('token') as string;
-        const headers = {
-            'Content-Type': 'application/json',
-            token: token,
-        };
+        const url = `${this.baseUrl}/`;
         this.selectedServerId = this.utilsService.getSelectedServerId();
         const data = {
             name: channel.name,
             type: channel.type,
-            categoryId: channel.categoryId,
-            serverId: this.selectedServerId,
+            category: channel.category,
+            server: this.selectedServerId,
         };
         this.updateChannels(this.selectedServerId || '0');
 
-        return this.http.post(url, data, { headers });
+        return this.http.post(url, data, { withCredentials: true });
     }
 
     getChannels(serverId: string): Observable<any> {
-        console.log('get channels');
-        const url = `${this.baseUrl}/get-channels/${serverId}`;
+        const url = `${this.baseUrl}/${serverId}`;
         const token = localStorage.getItem('token') as string;
         const headers = {
             'Content-Type': 'application/json',
             token: token,
         };
-        return this.http.get(url, { headers });
+        return this.http.get(url, { withCredentials: true });
     }
 
     deleteChannel(channelId: string): Observable<any> {
@@ -91,7 +85,7 @@ export class ChannelsService {
 
         this.updateChannels(this.selectedServerId || '0');
 
-        return this.http.delete(url, { headers });
+        return this.http.delete(url, { withCredentials: true });
     }
 
     getChannelInfo(channelId: string): Observable<any> {
@@ -101,7 +95,7 @@ export class ChannelsService {
             'Content-Type': 'application/json',
             token: token,
         };
-        return this.http.get(url, { headers });
+        return this.http.get(url, { withCredentials: true });
     }
 
     updateChannelsOrder(channels: Channels[]): Observable<any> {

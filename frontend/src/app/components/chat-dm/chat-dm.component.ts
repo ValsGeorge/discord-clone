@@ -78,6 +78,8 @@ export class ChatDmComponent implements OnInit {
             const receiverId = params.get('userId') as string;
             this.authService.getUserName(receiverId).subscribe((user) => {
                 this.receiver = user;
+                this.receiver.profilePicture =
+                    this.authService.getProfilePictureUrl(this.receiver.id);
             });
         });
         this.chatService.DMUpdate$.subscribe((updatedMessages) => {

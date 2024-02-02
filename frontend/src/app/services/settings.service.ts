@@ -9,12 +9,10 @@ export class SettingsService {
     showDialogObservable = this.showDialogSubject.asObservable();
 
     openSettings() {
-        console.log('openSettings');
         this.showDialogSubject.next(true);
     }
 
     closeSettings() {
-        console.log('closeSettings');
         this.showDialogSubject.next(false);
     }
 }

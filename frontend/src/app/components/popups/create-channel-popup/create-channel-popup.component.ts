@@ -27,7 +27,6 @@ export class CreateChannelPopupComponent {
         });
         this.channelsService.selectedCategoryIdObservable.subscribe(
             (response) => {
-                console.log('response2:', response);
                 this.categoryId = response;
             }
         );
@@ -42,7 +41,7 @@ export class CreateChannelPopupComponent {
 
     confirm() {
         const formData: Channels = this.channelForm.value;
-        if (this.categoryId) formData.categoryId = this.categoryId;
+        if (this.categoryId) formData.category = this.categoryId;
 
         this.channelsService.createChannel(formData).subscribe(
             (response) => {},

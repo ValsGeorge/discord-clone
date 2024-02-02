@@ -1,7 +1,7 @@
 export interface Message {
     id: string;
     content: string;
-    userId: string;
+    user: string;
     username: string;
     userProfilePicture: string;
     channelId: string;

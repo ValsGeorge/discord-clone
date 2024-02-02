@@ -57,7 +57,6 @@ export class ChannelsComponent implements OnInit {
     }
 
     dropCategory(event: any) {
-        console.log('drop category', event.previousIndex, event.currentIndex);
         if (event.previousContainer === event.container) {
             moveItemInArray(
                 event.container.data,
@@ -77,8 +76,6 @@ export class ChannelsComponent implements OnInit {
     }
 
     private updateCategoryOrder() {
-        console.log('update category order');
-        console.log('categories:', this.categories);
         this.categories.forEach((category) => {
             category.order = this.categories.indexOf(category);
         });
@@ -113,8 +110,6 @@ export class ChannelsComponent implements OnInit {
     }
 
     private updateChannelOrder() {
-        console.log('update channel order');
-        console.log('channels:', this.channels);
         this.categories.forEach((category) => {
             category.channels.forEach((channel) => {
                 channel.order = category.channels.indexOf(channel);
@@ -134,7 +129,6 @@ export class ChannelsComponent implements OnInit {
         this.selectedServerId = this.utilsService.getSelectedServerId();
         this.categoriesService.getCategories(this.selectedServerId).subscribe(
             (response) => {
-                console.log('categories:', response);
                 this.categories = response;
                 this.categories.sort((a, b) => a.order - b.order);
                 this.getChannels();
@@ -150,12 +144,11 @@ export class ChannelsComponent implements OnInit {
 
         this.channelsService.getChannels(this.selectedServerId).subscribe(
             (response) => {
-                console.log('channels:', response);
                 this.channels = response;
 
                 this.channels.forEach((channel) => {
                     const category = this.categories.find(
-                        (cat) => cat.id === channel.categoryId
+                        (cat) => cat.id === channel.category
                     );
 
                     if (category) {
@@ -179,7 +172,6 @@ export class ChannelsComponent implements OnInit {
     }
 
     openDialog(categoryId: string) {
-        console.log('categoryId:', categoryId);
         this.channelsService.openDialog({
             categoryId,
             serverId: '1',
