@@ -104,7 +104,9 @@ export class UtilsService {
     updateOnlineFriends() {
         // based on the user id I have to call the backend and check for every friend if he is online
         this.friendsService.getFriends().subscribe((friends) => {
-            this.onlineFriends = friends;
+            this.onlineFriends = friends.filter((friend: any) =>
+                this.onlineUsers.find((user) => user.id === friend.id)
+            );
             this.onlineFriends.forEach((friend) => {
                 friend.friend.profilePicture =
                     this.authService.getProfilePictureUrl(friend.friend.id);

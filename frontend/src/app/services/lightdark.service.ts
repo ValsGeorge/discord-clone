@@ -4,13 +4,9 @@ import { Injectable } from '@angular/core';
     providedIn: 'root',
 })
 export class LightdarkService {
-    toggleTheme(isDarkMode: boolean): void {
+    toggleTheme(themeColor: string): void {
         const root = document.documentElement;
-        if (isDarkMode) {
-            root.classList.add('dark');
-        } else {
-            root.classList.remove('dark');
-        }
-        localStorage.setItem('isDarkMode', isDarkMode.toString());
+        root.classList.add(themeColor);
+        localStorage.setItem('themeColor', themeColor);
     }
 }

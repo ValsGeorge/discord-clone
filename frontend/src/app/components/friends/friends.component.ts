@@ -10,8 +10,6 @@ import { FriendsService } from 'src/app/services/friends/friends.service';
 import { FriendRequestsService } from 'src/app/services/friendRequests/friend-requests.service';
 import { FriendRequest, Friend } from '../../models/friends';
 
-import { environment } from 'src/environments/environment';
-
 @Component({
     selector: 'app-friends',
     templateUrl: './friends.component.html',
@@ -72,6 +70,7 @@ export class FriendsComponent implements OnInit {
         // Subscribe to the online users list for updates
         this.utilsService.onlineFriends$.subscribe((onlineFriends) => {
             this.onlineFriends = onlineFriends;
+            console.log('onlineFriends2: ', this.onlineFriends);
             this.onlineFriendsIds = new Set(
                 this.onlineFriends.map((user) => user.id)
             );
@@ -92,6 +91,7 @@ export class FriendsComponent implements OnInit {
 
     getOnlineFriends(): void {
         this.onlineFriends = this.utilsService.getOnlineFriends();
+        console.log('onlineFriends: ', this.onlineFriends);
         this.onlineFriendsIds = new Set(
             this.onlineFriends.map((user) => user.id)
         );

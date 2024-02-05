@@ -28,7 +28,10 @@ module.exports = {
                 hover: "#e0e1e5",
                 text: "#060607",
                 "message-hover": "#f4f5f7",
-                "text-faded": "#b1b3b5",
+                "text-faded": "#121213",
+                "accent-2": "#ffffff",
+                "bgray-1": "#e1e2e4",
+                "scrollbar-bar": "#c4c9ce",
             },
             dark: {
                 primary: "#313338",

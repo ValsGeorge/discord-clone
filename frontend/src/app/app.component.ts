@@ -9,24 +9,23 @@ import { UtilsService } from './services/utils.service';
     styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-    title = 'frontend';
+    title = 'Discord-Clone';
     constructor(
         private lightdarkService: LightdarkService,
         private utilsService: UtilsService
     ) {}
     ngOnInit(): void {
         // Check if the user has a theme preference
-        localStorage.getItem('isDarkMode') === 'true'
-            ? this.lightdarkService.toggleTheme(true)
-            : this.lightdarkService.toggleTheme(false);
+        localStorage.getItem('themeColor') === 'dark'
+            ? this.lightdarkService.toggleTheme('dark')
+            : this.lightdarkService.toggleTheme('light');
 
         // Setup socket connection
 
         this.utilsService.setupSocketConnection();
     }
 
-    toggleTheme(): void {
-        const isDarkMode = !document.documentElement.classList.contains('dark');
-        this.lightdarkService.toggleTheme(isDarkMode);
+    toggleTheme(color: string): void {
+        this.lightdarkService.toggleTheme(color);
     }
 }
