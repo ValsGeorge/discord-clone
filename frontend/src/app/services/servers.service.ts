@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, catchError, tap } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ServerMembers } from '../models/serverMembers';
+import { User } from '../models/user';
 
 @Injectable({
     providedIn: 'root',
@@ -14,6 +15,8 @@ export class ServersService {
 
     private serversUpdatedSubject = new Subject<void>();
     serversUpdated$ = this.serversUpdatedSubject.asObservable();
+
+    serverMembers: ServerMembers[] = [];
 
     constructor(private httpClient: HttpClient) {}
 
@@ -107,7 +110,14 @@ export class ServersService {
 
     getServerInfo(serverId: string): Observable<any> {
         const url = `${this.baseUrl}/${serverId}`;
-        return this.httpClient.get(url, { withCredentials: true });
+        return this.httpClient.get(url, { withCredentials: true }).pipe(
+            tap((server: any) => {
+                console.log('server: ', server);
+            }),
+            catchError((error: any) => {
+                return error;
+            })
+        );
     }
 
     uploadServerImage(serverId: string, image: File): Observable<any> {
@@ -130,29 +140,31 @@ export class ServersService {
 
     getServerMembers(serverId: string): Observable<any> {
         const url = `${this.baseUrl}/members/${serverId}`;
-        return this.httpClient.get(url, { withCredentials: true });
+        // check if the serverMembers array already has the serverId
+        const serverIndex = this.serverMembers.findIndex(
+            (server) => server.serverId === serverId
+        );
+        if (serverIndex !== -1) {
+            return new Observable((observer) => {
+                observer.next(this.serverMembers[serverIndex].members);
+                observer.complete();
+            });
+        }
+        return this.httpClient.get<User[]>(url, { withCredentials: true }).pipe(
+            tap((members: User[]) => {
+                // check to see if the serverId is already in the serverMembers array
+                const serverIndex = this.serverMembers.findIndex(
+                    (server) => server.serverId === serverId
+                );
+                if (serverIndex !== -1) {
+                    this.serverMembers[serverIndex].members = members;
+                } else {
+                    this.serverMembers.push({ serverId, members });
+                }
+            }),
+            catchError((error: any) => {
+                return error;
+            })
+        );
     }
-
-    // serverMembers: ServerMembers[] = [];
-    //
-    // getServerMembers(serverId: string): Observable<any> {
-    //     const url = `${this.baseUrl}/members/${serverId}`;
-    //     return this.httpClient.get<User[]>(url, { withCredentials: true }).pipe(
-    //         tap((members: User[]) => {
-    //             // check to see if the serverId is already in the serverMembers array
-    //             const serverIndex = this.serverMembers.findIndex(
-    //                 (server) => server.serverId === serverId
-    //             );
-    //             if (serverIndex !== -1) {
-    //                 this.serverMembers[serverIndex].members = members;
-    //             } else {
-    //                 this.serverMembers.push({ serverId, members });
-    //             }
-    //             console.log('this.serverMembers:', this.serverMembers);
-    //         }),
-    //         catchError((error: any) => {
-    //             return error;
-    //         })
-    //     );
-    // }
 }
