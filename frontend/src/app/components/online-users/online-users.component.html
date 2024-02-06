@@ -1,11 +1,26 @@
-<div class="active-users p-4">
-    <div *ngFor="let user of onlineUsers" class="flex items-center p-2"
+<div class="active-users p-4 text-text">
+    <div class="text-text-faded-2 uppercase text-xs font-disc mt-3" *ngIf="onlineUsers.length > 0">
+        <span>Online</span>
+    </div>
+    <div *ngFor="let user of onlineUsers" class="flex items-center p-2 hover:bg-hover rounded-md cursor-pointer"
         (contextmenu)="showContextMenu($event, user.id)">
         <div class="relative">
             <img [src]="user.profilePicture" alt="Profile Picture" class="w-8 h-8 rounded-full">
             <div *ngIf="user.username"
                 class="absolute -bottom-1 -right-1 w-[16px] h-[16px] rounded-full bg-green-500 border-[3px] border-secondary">
             </div>
+        </div>
+        <span class="text-white ml-2">{{ user.username }}</span>
+        <app-edit-menu [itemsList]="itemsList" [targetId]="user.id"></app-edit-menu>
+    </div>
+    <div class="text-text-faded-2 uppercase text-xs font-disc mt-3" *ngIf="serverMembers.length > 0">
+        <span>Offline</span>
+    </div>
+    <div *ngFor="let user of serverMembers" class="flex items-center p-2 hover:bg-hover rounded-md cursor-pointer"
+        (contextmenu)="showContextMenu($event, user.id)">
+        <div class="relative">
+            <img [src]="user.profilePicture" alt="Profile Picture" class="w-8 h-8 rounded-full">
+
         </div>
         <span class="text-white ml-2">{{ user.username }}</span>
         <app-edit-menu [itemsList]="itemsList" [targetId]="user.id"></app-edit-menu>

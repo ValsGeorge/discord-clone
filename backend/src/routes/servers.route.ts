@@ -32,6 +32,12 @@ class ServerRoute implements Routes {
             this.serverController.generateInviteCode
         );
 
+        this.router.get(
+            `${this.path}/members/:id`,
+            authMiddleware,
+            this.serverController.getServerMembers
+        );
+
         this.router.post(
             `${this.path}/`,
             authMiddleware,

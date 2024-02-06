@@ -42,6 +42,7 @@ module.exports = {
                 text: "#e9eaeb",
                 "message-hover": "#2e3035",
                 "text-faded": "#dbdee1",
+                "text-faded-2": "#949ba4",
                 "accent-2": "#111214",
                 "bgray-1": "#2e2f34",
                 "scrollbar-bar": "#1a1b1e",

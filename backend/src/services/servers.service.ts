@@ -9,6 +9,7 @@ import UserService from './users.service';
 import userServerModel from '@/models/userServer.model';
 import { CreateUserServerDto } from '@/dtos/userserver.dto';
 import { UserServer } from '@/interfaces/userServer.interface';
+import { Types } from 'mongoose';
 
 class Serverservice {
     public servers = serverModel;
@@ -27,6 +28,25 @@ class Serverservice {
         if (!findServer) throw new HttpException(409, "Server doesn't exist");
 
         return findServer;
+    }
+
+    public async findServerMembers(serverId: string): Promise<User[]> {
+        const findServer: Server = await this.servers.findOne({
+            _id: serverId,
+        });
+        if (!findServer) throw new HttpException(409, "Server doesn't exist");
+
+        const findUserServer: UserServer[] = await this.userServer
+            .find({
+                server: findServer,
+            })
+            .populate('user');
+
+        const members: User[] = findUserServer.map((userServer) => {
+            return userServer.user;
+        });
+
+        return members;
     }
 
     public async createServer(serverData: CreateServerDto): Promise<Server> {
@@ -67,11 +87,11 @@ class Serverservice {
     }
 
     public async joinServer(
-        serverId: string,
+        inviteCode: string,
         userId: string
     ): Promise<UserServer> {
         const findServer: Server = await this.servers.findOne({
-            id: serverId,
+            inviteCode,
         });
         if (!findServer) throw new HttpException(409, "Server doesn't exist");
 

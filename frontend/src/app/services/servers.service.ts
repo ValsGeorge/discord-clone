@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { ServerMembers } from '../models/serverMembers';
 
 @Injectable({
     providedIn: 'root',
@@ -105,7 +106,6 @@ export class ServersService {
     }
 
     getServerInfo(serverId: string): Observable<any> {
-        const token = localStorage.getItem('token') as string;
         const url = `${this.baseUrl}/${serverId}`;
         return this.httpClient.get(url, { withCredentials: true });
     }
@@ -127,4 +127,32 @@ export class ServersService {
     getServerImageUrl(serverId: string): string {
         return `${this.baseUrl}/server-image/${serverId}`;
     }
+
+    getServerMembers(serverId: string): Observable<any> {
+        const url = `${this.baseUrl}/members/${serverId}`;
+        return this.httpClient.get(url, { withCredentials: true });
+    }
+
+    // serverMembers: ServerMembers[] = [];
+    //
+    // getServerMembers(serverId: string): Observable<any> {
+    //     const url = `${this.baseUrl}/members/${serverId}`;
+    //     return this.httpClient.get<User[]>(url, { withCredentials: true }).pipe(
+    //         tap((members: User[]) => {
+    //             // check to see if the serverId is already in the serverMembers array
+    //             const serverIndex = this.serverMembers.findIndex(
+    //                 (server) => server.serverId === serverId
+    //             );
+    //             if (serverIndex !== -1) {
+    //                 this.serverMembers[serverIndex].members = members;
+    //             } else {
+    //                 this.serverMembers.push({ serverId, members });
+    //             }
+    //             console.log('this.serverMembers:', this.serverMembers);
+    //         }),
+    //         catchError((error: any) => {
+    //             return error;
+    //         })
+    //     );
+    // }
 }

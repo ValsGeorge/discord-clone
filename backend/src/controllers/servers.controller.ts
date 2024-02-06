@@ -52,6 +52,22 @@ class ServerController {
         }
     };
 
+    public getServerMembers = async (
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ) => {
+        try {
+            const serverId: string = req.params.id;
+            const findServerMembersData: User[] =
+                await this.serverService.findServerMembers(serverId);
+
+            res.status(200).json(findServerMembersData);
+        } catch (error) {
+            next(error);
+        }
+    };
+
     public generateInviteCode = async (
         req: Request,
         res: Response,

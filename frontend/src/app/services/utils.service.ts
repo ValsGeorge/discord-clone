@@ -6,6 +6,7 @@ import { Message } from '../models/message';
 import { AuthService } from './auth.service';
 import { FriendsService } from './friends/friends.service';
 import { Friend, FriendRequest } from '../models/friends';
+import { ServerMembers } from '../models/serverMembers';
 
 @Injectable({
     providedIn: 'root',
@@ -36,6 +37,9 @@ export class UtilsService {
 
     private chatUpdatedSubject = new Subject<Message>();
     chatUpdated$ = this.chatUpdatedSubject.asObservable();
+
+    private serverMembersUpdatedSubject = new Subject<ServerMembers>();
+    serverMembersUpdated$ = this.serverMembersUpdatedSubject.asObservable();
 
     private connectedUser: any = {};
 
@@ -115,6 +119,9 @@ export class UtilsService {
         });
         this.onlineFriendsSubject.next([...this.onlineFriends]);
     }
+
+    updateServerMembers(serverId: string, members: User[]) {}
+
     getOnlineUsers() {
         return this.onlineUsers;
     }
