@@ -41,6 +41,7 @@ export class ChatComponent {
         created_at: '',
         updated_at: '',
         category: '',
+        server: '',
         order: 0,
     };
 

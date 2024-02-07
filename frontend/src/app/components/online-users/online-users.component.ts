@@ -53,6 +53,7 @@ export class OnlineUsersComponent implements OnInit {
         // Get all the active users
         const selectedServerId = this.utilsService.getSelectedServerId();
         if (selectedServerId) {
+            this.getServerMembrs(selectedServerId);
             const users = this.utilsService.getOnlineUsers();
             users.forEach((user) => {
                 if (user.serverIds && !this.onlineUsersIds.has(user.id)) {
@@ -68,7 +69,6 @@ export class OnlineUsersComponent implements OnInit {
 
         // Subscribe to the online users subject to get updates when the online users change
         this.utilsService.onlineUsers$.subscribe((onlineUsers) => {
-            console.log('this got called:', onlineUsers);
             this.onlineUsers = [];
             this.onlineUsersIds = new Set();
             this.serverMembers = [];
@@ -85,22 +85,22 @@ export class OnlineUsersComponent implements OnInit {
                 }
             });
             // Get all members of the server
-            this.serversService
-                .getServerMembers(selectedServerId)
-                .subscribe((members) => {
-                    console.log('Server members:', members);
-
-                    // for each member, check if it is online using onlineUserIds
-                    members.map((member: any) => {
-                        if (!this.onlineUsersIds.has(member.id)) {
-                            member.profilePicture =
-                                this.authService.getProfilePictureUrl(
-                                    member.id
-                                );
-                            this.serverMembers.push(member);
-                        }
-                    });
-                });
+            this.getServerMembrs(selectedServerId);
         });
+    }
+
+    getServerMembrs(selectedServerId: string) {
+        this.serversService
+            .getServerMembers(selectedServerId)
+            .subscribe((members) => {
+                // for each member, check if it is online using onlineUserIds
+                members.map((member: any) => {
+                    if (!this.onlineUsersIds.has(member.id)) {
+                        member.profilePicture =
+                            this.authService.getProfilePictureUrl(member.id);
+                        this.serverMembers.push(member);
+                    }
+                });
+            });
     }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, catchError, tap } from 'rxjs';
 import { Category } from 'src/app/models/category';
 import { environment } from 'src/environments/environment';
 
@@ -11,23 +11,42 @@ export class CategoriesService {
     baseUrl = `${environment.baseUrl}/categories`;
     constructor(private http: HttpClient) {}
 
+    categories: Category[] = [];
+
     getCategories(serverId: string): Observable<any> {
         const url = `${this.baseUrl}/${serverId}`;
-        const token = localStorage.getItem('token') as string;
-        const headers = {
-            'Content-Type': 'application/json',
-            token: token,
-        };
-        return this.http.get(url, { withCredentials: true });
+
+        // check if the categories already has the serverId
+        const index = this.categories.findIndex(
+            (category) => category.id === serverId
+        );
+        if (index !== -1) {
+            return new Observable((observer) => {
+                observer.next(this.categories[index]);
+                observer.complete();
+            });
+        }
+        return this.http.get<Category[]>(url, { withCredentials: true }).pipe(
+            tap((response: Category[]) => {
+                // check if the categories already has the serverId
+                const index = this.categories.findIndex(
+                    (category) => category.server === serverId
+                );
+                if (index === -1) {
+                    response.forEach((category) => {
+                        this.categories.push(category);
+                    });
+                }
+                return response;
+            }),
+            catchError((error) => {
+                throw error;
+            })
+        );
     }
 
     updateCategoriesOrder(categories: Category[]): Observable<any> {
         const url = `${this.baseUrl}/update-order`;
-        const token = localStorage.getItem('token') as string;
-        const headers = {
-            'Content-Type': 'application/json',
-            token: token,
-        };
 
         const body = {
             categories: categories,

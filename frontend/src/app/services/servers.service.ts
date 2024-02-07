@@ -95,25 +95,15 @@ export class ServersService {
     }
 
     deleteServer(serverId: string): Observable<any> {
-        console.log('delete server with id', serverId);
-        const token = localStorage.getItem('token') as string;
         const url = `${this.baseUrl}/delete-server/${serverId}`;
-        const headers = new HttpHeaders({
-            'Content-Type': 'application/json',
-            token: token,
-        });
-        console.log('token: ', token);
-        console.log('URL: ', url);
 
-        return this.httpClient.delete(url, { headers });
+        return this.httpClient.delete(url, { withCredentials: true });
     }
 
     getServerInfo(serverId: string): Observable<any> {
         const url = `${this.baseUrl}/${serverId}`;
         return this.httpClient.get(url, { withCredentials: true }).pipe(
-            tap((server: any) => {
-                console.log('server: ', server);
-            }),
+            tap((server: any) => {}),
             catchError((error: any) => {
                 return error;
             })

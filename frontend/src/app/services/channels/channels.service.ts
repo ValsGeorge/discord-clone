@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, catchError, tap } from 'rxjs';
 import { Channels } from 'src/app/models/channel';
 import { UtilsService } from '../utils.service';
 import { environment } from 'src/environments/environment';
@@ -24,6 +24,8 @@ export class ChannelsService {
 
     private selectedCategoryId: string | null = null;
     selectedCategoryIdObservable = new BehaviorSubject<string | null>(null);
+
+    channels: Channels[] = [];
 
     baseUrl = `${environment.baseUrl}/channels`;
     selectedServerId: string | null = null;
@@ -67,21 +69,42 @@ export class ChannelsService {
 
     getChannels(serverId: string): Observable<any> {
         const url = `${this.baseUrl}/${serverId}`;
-        const token = localStorage.getItem('token') as string;
-        const headers = {
-            'Content-Type': 'application/json',
-            token: token,
-        };
-        return this.http.get(url, { withCredentials: true });
+
+        // check if the channels already has the serverId
+        const index = this.channels.findIndex(
+            (channel) => channel.server === serverId
+        );
+        if (index !== -1) {
+            const newChannels = this.channels.filter(
+                (channel) => channel.server === serverId
+            );
+            return new Observable((observer) => {
+                observer.next(newChannels);
+                observer.complete();
+            });
+        }
+
+        return this.http.get<Channels[]>(url, { withCredentials: true }).pipe(
+            tap((response: Channels[]) => {
+                // check if the channels already has the serverId
+                const index = this.channels.findIndex(
+                    (channel) => channel.server === serverId
+                );
+                if (index === -1) {
+                    response.forEach((channel) => {
+                        this.channels.push(channel);
+                    });
+                }
+                return response;
+            }),
+            catchError((error) => {
+                throw error;
+            })
+        );
     }
 
     deleteChannel(channelId: string): Observable<any> {
         const url = `${this.baseUrl}/${channelId}`;
-        const token = localStorage.getItem('token') as string;
-        const headers = {
-            'Content-Type': 'application/json',
-            token: token,
-        };
 
         this.updateChannels(this.selectedServerId || '0');
 
@@ -90,11 +113,6 @@ export class ChannelsService {
 
     getChannelInfo(channelId: string): Observable<any> {
         const url = `${this.baseUrl}/info/${channelId}`;
-        const token = localStorage.getItem('token') as string;
-        const headers = {
-            'Content-Type': 'application/json',
-            token: token,
-        };
         return this.http.get(url, { withCredentials: true });
     }
 

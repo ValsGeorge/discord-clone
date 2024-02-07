@@ -146,7 +146,7 @@ export class ChannelsComponent implements OnInit {
             (response) => {
                 this.channels = response;
 
-                this.channels.forEach((channel) => {
+                response.forEach((channel: Channels) => {
                     const category = this.categories.find(
                         (cat) => cat.id === channel.category
                     );
