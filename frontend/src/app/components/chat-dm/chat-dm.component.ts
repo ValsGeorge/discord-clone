@@ -84,7 +84,6 @@ export class ChatDmComponent implements OnInit {
         });
         this.chatService.DMUpdate$.subscribe((updatedMessages) => {
             this.messages = updatedMessages;
-            console.log('Messages:', this.messages);
 
             setTimeout(() => {
                 this.loading = false;

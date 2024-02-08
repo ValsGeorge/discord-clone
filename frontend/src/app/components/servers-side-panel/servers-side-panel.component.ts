@@ -72,7 +72,6 @@ export class ServersSidePanelComponent implements OnInit {
     }
 
     selectServer(serverId: string) {
-        console.log(`Selected server: ${serverId}`);
         // Save selected server to local storage
         this.selectedServerId = serverId;
         this.utilsService.setSelectedServerId(serverId);

@@ -19,17 +19,14 @@ const initSocketIO = () => {
     console.log('Setting up socket.io server');
     const io = new Server(3000, {
         cors: {
-            origin: '*',
+            origin: 'http://localhost:4200',
             methods: ['GET', 'POST'],
+            credentials: true,
         },
     });
     io.use((socket: ISocket, next) => {
-        // console.log('socket.handshake.query: ', socket.handshake.query);
-        // console.log('socket.handshake.headers: ', socket.handshake.headers);
-        // console.log('socket: ', socket);
-        if (socket.handshake.query && socket.handshake.query.token) {
-            const token: string = socket.handshake.query.token as string;
-            console.log('token: ', token);
+        if (socket.handshake.headers.cookie) {
+            const token: string = socket.handshake.headers.cookie.split('=')[1];
             authMiddlewareSocket(token, socket, next);
         } else {
             next(new Error('Authentication error'));
@@ -37,8 +34,6 @@ const initSocketIO = () => {
     }).on('connection', async (socket: ISocket) => {
         console.log('user connected', socket.id);
         const userId = (socket.decoded as any).id;
-        console.log('userId: ', userId);
-
         const user = await new UserService().findUserById(userId);
         const servers = await new UserServerService().findUserServerByUser(
             userId

@@ -63,14 +63,12 @@ export class FriendsComponent implements OnInit {
         this.friendRequestsService
             .getFriendRequests()
             .subscribe((friendRequests) => {
-                // console.log('friendRequests: ', friendRequests);
                 this.friendRequests = friendRequests;
             });
 
         // Subscribe to the online users list for updates
         this.utilsService.onlineFriends$.subscribe((onlineFriends) => {
             this.onlineFriends = onlineFriends;
-            console.log('onlineFriends2: ', this.onlineFriends);
             this.onlineFriendsIds = new Set(
                 this.onlineFriends.map((user) => user.id)
             );
@@ -91,7 +89,6 @@ export class FriendsComponent implements OnInit {
 
     getOnlineFriends(): void {
         this.onlineFriends = this.utilsService.getOnlineFriends();
-        console.log('onlineFriends: ', this.onlineFriends);
         this.onlineFriendsIds = new Set(
             this.onlineFriends.map((user) => user.id)
         );

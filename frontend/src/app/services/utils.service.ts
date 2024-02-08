@@ -45,58 +45,50 @@ export class UtilsService {
 
     setupSocketConnection(): void {
         console.log('Setting up socket connection');
-        const token = localStorage.getItem('token');
 
-        if (token) {
-            this.socket = io(this.socketUrl, {
-                query: { token },
-            });
+        this.socket = io(this.socketUrl, {
+            withCredentials: true,
+        });
 
-            this.socket.on('connect', () => {
-                console.log('Connected to socket.io server');
+        this.socket.on('connect', () => {
+            console.log('Connected to socket.io server');
 
-                if (this.socket) {
-                    this.connectedUser[this.authService.getUserId()] =
-                        this.socket.id;
-                }
+            if (this.socket) {
+                this.connectedUser[this.authService.getUserId()] =
+                    this.socket.id;
+            }
 
-                this.connectedSubject.next(true);
-            });
+            this.connectedSubject.next(true);
+        });
 
-            this.socket.on('disconnect', () => {
-                console.log('Disconnected from socket.io server');
-            });
+        this.socket.on('disconnect', () => {
+            console.log('Disconnected from socket.io server');
+        });
 
-            this.socket.on('receiveMessage', (message: any) => {
-                console.log('Received message:', message);
-                this.chatUpdatedSubject.next(message);
-            });
+        this.socket.on('receiveMessage', (message: any) => {
+            this.chatUpdatedSubject.next(message);
+        });
 
-            this.socket.on('updateOnlineUsers', (onlineUsers: User[]) => {
-                console.log('Online users:', onlineUsers);
-                this.onlineUsers = onlineUsers;
-                this.onlineUsers.forEach((user) => {
-                    user.profilePicture = this.authService.getProfilePictureUrl(
-                        user.id
-                    );
-                });
-                this.onlineUsersSubject.next([...this.onlineUsers]);
-                this.updateOnlineFriends();
+        this.socket.on('updateOnlineUsers', (onlineUsers: User[]) => {
+            this.onlineUsers = onlineUsers;
+            this.onlineUsers.forEach((user) => {
+                user.profilePicture = this.authService.getProfilePictureUrl(
+                    user.id
+                );
             });
-            this.socket.on('privateMessage', (message) => {
-                console.log('Received private message:', message);
-                // console.log('From:', from);
-                this.chatUpdatedSubject.next(message);
-            });
-            this.socket.on('receiveFriendRequest', (request: any) => {
-                console.log('Received friend request:', request);
-
-                this.friendRequestsSubject.next(request);
-            });
-            this.socket.on('exception', (exception: any) => {
-                console.log('Exception:', exception);
-            });
-        }
+            this.onlineUsersSubject.next([...this.onlineUsers]);
+            this.updateOnlineFriends();
+        });
+        this.socket.on('privateMessage', (message) => {
+            // console.log('From:', from);
+            this.chatUpdatedSubject.next(message);
+        });
+        this.socket.on('receiveFriendRequest', (request: any) => {
+            this.friendRequestsSubject.next(request);
+        });
+        this.socket.on('exception', (exception: any) => {
+            console.log('Exception:', exception);
+        });
     }
 
     updateOnlineUsers() {
