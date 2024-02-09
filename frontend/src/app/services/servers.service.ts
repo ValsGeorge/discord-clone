@@ -95,7 +95,7 @@ export class ServersService {
     }
 
     deleteServer(serverId: string): Observable<any> {
-        const url = `${this.baseUrl}/delete-server/${serverId}`;
+        const url = `${this.baseUrl}/${serverId}`;
 
         return this.httpClient.delete(url, { withCredentials: true });
     }

@@ -81,11 +81,16 @@ class DmService {
         if (!findDm) throw new HttpException(409, "Dm doesn't exist");
 
         const updateDmById: Dm = await this.dms.findByIdAndUpdate(
-            dmId,
-            { dmData },
-            { new: true }
+            {
+                _id: dmId,
+            },
+            {
+                content: dmData.content,
+                updatedAt: new Date(),
+            }
         );
-        return updateDmById;
+        const findDm2: Dm = await this.dms.findOne({ _id: dmId });
+        return findDm2;
     }
 
     public async deleteDm(dmId: string): Promise<Dm> {

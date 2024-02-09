@@ -182,11 +182,23 @@ export class ChatService {
         }
     }
 
-    editMessage(messageId: string, content: string): void {
+    editDM(dm: DM): void {
         if (this.utilsService.socket) {
+            console.log('dm', dm);
+            this.utilsService.socket.emit('editDM', dm, (response: any) => {
+                if (!response.success) {
+                    console.error('Failed to edit dm');
+                }
+            });
+        }
+    }
+
+    editMessage(message: Message): void {
+        if (this.utilsService.socket) {
+            console.log('message', message);
             this.utilsService.socket.emit(
                 'editMessage',
-                { id: messageId, content },
+                { message },
                 (response: any) => {
                     if (!response.success) {
                         console.error('Failed to edit message');

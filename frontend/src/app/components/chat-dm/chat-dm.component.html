@@ -37,8 +37,14 @@
                                 <p class="font-bold text-text">{{ message.senderUsername }}</p>
                                 <p class="text-text-faded text-xs ml-2">{{ message.createdAt | customDate }}</p>
 
+
                             </div>
-                            <p class="text-text">{{ message.content }}</p>
+                            <div class="flex flex-row">
+                                <p class="text-text">{{ message.content }}</p>
+                                <div class="text-text-faded-2 text-xs ml-2 mt-2"
+                                    *ngIf="message.createdAt !== message.updatedAt">
+                                    (edited)</div>
+                            </div>
                         </div>
                     </ng-container>
                     <ng-template #editMessageTemplate>
@@ -61,7 +67,7 @@
                 </div>
             </ng-template>
             <div class="relative">
-                <app-message-options *ngIf="showOptionsForMessage === +message.id" [message]="message"
+                <app-message-options *ngIf="showOptionsForMessage === message.id" [message]="message"
                     (editClick)="handleEditClick(message)"></app-message-options>
             </div>
         </div>

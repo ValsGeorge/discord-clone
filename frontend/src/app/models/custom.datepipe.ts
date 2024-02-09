@@ -13,10 +13,7 @@ export class CustomDatePipe extends DatePipe implements PipeTransform {
             return super.transform(dateValue, 'dd MMMM, yyyy');
         } else {
             if (this.isDateFromYesterday(dateValue)) {
-                const timePart = super.transform(
-                    dateValue,
-                    'dd/MM/yyyy hh:mm a'
-                );
+                const timePart = super.transform(dateValue, 'hh:mm a');
                 return `Yesterday, ${timePart}`;
             }
             if (this.isDateFromToday(dateValue)) {

@@ -148,6 +148,28 @@ const initSocketIO = () => {
                 console.error('Error sending friend request:', error);
             }
         });
+        socket.on('editDM', async (dm) => {
+            const updatedDm = {
+                id: dm.id,
+                content: dm.content,
+                sender: dm.sender,
+                receiver: dm.receiver,
+            };
+            const updatedDmData = await new DmService().updateDm(
+                dm.id,
+                updatedDm
+            );
+            if (!updatedDmData) {
+                io.to(socket.id).emit('exception', 'Error updating DM');
+                return;
+            }
+            console.log('updatedDmData', updatedDmData);
+            io.to(socket.id).emit('receiveMessage', updatedDmData);
+            io.to(connectedUsers[dm.receiver]).emit(
+                'receiveMessage',
+                updatedDmData
+            );
+        });
     });
 };
 

@@ -45,7 +45,7 @@ export class ChatDmComponent implements OnInit {
 
     messages: DM[] = [];
 
-    showOptionsForMessage: number | null = null;
+    showOptionsForMessage: string | null = null;
 
     editMessageForm: FormGroup;
 
@@ -105,9 +105,11 @@ export class ChatDmComponent implements OnInit {
     getProfilePictureUrl(userId: string): string {
         return this.authService.getProfilePictureUrl(userId);
     }
-    showOptions(message: any): void {
+    showOptions(message: DM): void {
         const userId = this.authService.getUserId();
-        if (message.userId == userId) this.showOptionsForMessage = message.id;
+        if (message.sender == userId) {
+            this.showOptionsForMessage = message.id;
+        }
     }
 
     hideOptions(): void {
@@ -130,8 +132,8 @@ export class ChatDmComponent implements OnInit {
 
     saveEditedMessage(message: DM): void {
         const editedContent = this.editMessageForm.value.editedContent;
-        this.chatService.editMessage(message.id, editedContent);
         message.content = editedContent;
+        this.chatService.editDM(message);
         message.isEditing = false;
     }
     scrollToBottom(): void {

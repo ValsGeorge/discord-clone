@@ -98,7 +98,7 @@ export class ChatComponent {
 
     saveEditedMessage(message: Message): void {
         const editedContent = this.editMessageForm.value.editedContent;
-        this.chatService.editMessage(message.id, editedContent);
+        this.chatService.editMessage(message);
         message.content = editedContent;
         message.isEditing = false;
     }
