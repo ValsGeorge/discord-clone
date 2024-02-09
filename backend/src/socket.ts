@@ -7,6 +7,7 @@ import UserServerService from './services/userServer.service';
 import friendRequestService from './services/friendRequests.service';
 import DmService from './services/dms.service';
 import { FriendRequest } from './interfaces/friendRequests.interface';
+import ChanelService from './services/channels.service';
 
 interface ISocket extends Socket {
     decoded?: any;
@@ -14,6 +15,12 @@ interface ISocket extends Socket {
 
 const onlineUsers: { [key: string]: User } = {};
 const connectedUsers: { [key: string]: string } = {};
+
+// Each serverId will have a mapping to channelIds, and each channelId will have a set of user ids
+// that are connected to that server and channel.
+const serverChannelUsers: {
+    [serverId: string]: { [channelId: string]: Set<string> };
+} = {};
 
 const initSocketIO = () => {
     console.log('Setting up socket.io server');
@@ -52,6 +59,24 @@ const initSocketIO = () => {
             serverIds,
         };
 
+        for (const serverId of serverIds) {
+            if (!serverChannelUsers[serverId]) {
+                serverChannelUsers[serverId] = {};
+            }
+            // for each serverId search in the channels and get all the channelsIds
+            const channels = await new ChanelService().findAllChannels(
+                serverId
+            );
+            const channelIds = channels.map((channel) => channel.id);
+
+            for (const channelId of channelIds) {
+                if (!serverChannelUsers[serverId][channelId]) {
+                    serverChannelUsers[serverId][channelId] = new Set();
+                }
+                serverChannelUsers[serverId][channelId].add(socket.id);
+            }
+        }
+
         onlineUsers[userId] = userWithServerIds;
         connectedUsers[userId] = socket.id;
 
@@ -67,13 +92,16 @@ const initSocketIO = () => {
             console.log('user disconnected', socket.id);
             delete onlineUsers[userId];
 
+            for (const serverId of serverIds) {
+                delete serverChannelUsers[serverId][socket.id];
+            }
+
             // Broadcast the updated online user list to all clients
             io.emit('updateOnlineUsers', Object.values(onlineUsers));
         });
 
         socket.on('sendMessage', async (message) => {
             message.userId = userId;
-            console.log('sendMessage', message);
             try {
                 message.user = userId as string;
                 message.channel = message.channelId as string;
@@ -87,7 +115,24 @@ const initSocketIO = () => {
                     createdAt: createMessageData.createdAt,
                     updatedAt: createMessageData.updatedAt,
                 };
-                io.emit('receiveMessage', messageBack);
+
+                const usersToSend = new Set<string>();
+                for (const serverId of serverIds) {
+                    const channelUsers =
+                        serverChannelUsers[serverId][message.channel];
+                    if (channelUsers) {
+                        channelUsers.forEach((userId) =>
+                            usersToSend.add(userId)
+                        );
+                    }
+                }
+
+                // Emit the message only to the relevant users
+                Array.from(usersToSend).forEach((userId) => {
+                    if (userId) {
+                        io.to(userId).emit('receiveMessage', messageBack);
+                    }
+                });
             } catch (error) {
                 console.error('Error creating message:', error);
             }
@@ -98,7 +143,6 @@ const initSocketIO = () => {
                 sender: dm.senderId,
                 receiver: dm.receiverId,
             });
-            console.log('data: ', data);
             data.sender = onlineUsers[dm.senderId];
             data.receiver = onlineUsers[dm.receiverId];
 
@@ -114,7 +158,6 @@ const initSocketIO = () => {
         });
 
         socket.on('sendFriendRequest', async (friendRequest) => {
-            console.log(friendRequest);
             const data = {
                 from: userId,
                 to: friendRequest.receiverId,
@@ -159,7 +202,6 @@ const initSocketIO = () => {
                 io.to(socket.id).emit('exception', 'Error updating DM');
                 return;
             }
-            console.log('updatedDmData', updatedDmData);
             io.to(socket.id).emit('receiveMessage', updatedDmData);
             io.to(connectedUsers[dm.receiver]).emit(
                 'receiveMessage',
@@ -167,16 +209,12 @@ const initSocketIO = () => {
             );
         });
         socket.on('editMessage', async (message) => {
-            console.log('message', message);
-            console.log('message.id', message.id);
-            console.log('message.content', message.content);
             const updatedMessage = {
                 id: message.id,
                 content: message.content,
                 user: message.user,
                 channel: message.channel,
             };
-            console.log('updatedMessage', updatedMessage);
             const updatedMessageData = await new MessageService().updateMessage(
                 message.id,
                 updatedMessage
@@ -185,8 +223,21 @@ const initSocketIO = () => {
                 io.to(socket.id).emit('exception', 'Error updating DM');
                 return;
             }
-            console.log('updatedMessageData', updatedMessageData);
-            io.emit('receiveMessage', updatedMessageData);
+            const usersToSend = new Set<string>();
+            for (const serverId of serverIds) {
+                const channelUsers =
+                    serverChannelUsers[serverId][message.channel];
+                if (channelUsers) {
+                    channelUsers.forEach((userId) => usersToSend.add(userId));
+                }
+            }
+
+            // Emit the message only to the relevant users
+            Array.from(usersToSend).forEach((userId) => {
+                if (userId) {
+                    io.to(userId).emit('receiveMessage', updatedMessageData);
+                }
+            });
         });
     });
 };
