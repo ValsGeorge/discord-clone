@@ -21,6 +21,27 @@ class Serverservice {
         return servers;
     }
 
+    public async findAllServerByUserId(userId: string): Promise<Server[]> {
+        try {
+            const findUserServer: UserServer[] = await this.userServer
+                .find({
+                    user: new Types.ObjectId(userId),
+                })
+                .populate('server');
+
+            console.log('findUserServer:', findUserServer);
+
+            const servers: Server[] = findUserServer.map((userServer) => {
+                return userServer.server;
+            });
+
+            return servers;
+        } catch (error) {
+            console.error('Error finding servers:', error);
+            throw error;
+        }
+    }
+
     public async findServerById(serverId: string): Promise<Server> {
         const findServer: Server = await this.servers.findOne({
             _id: serverId,

@@ -43,6 +43,6 @@ serverSchema.set('toJSON', {
     },
 });
 
-const serverModel = model<Server & Document>('Servers', serverSchema);
+const serverModel = model<Server & Document>('Server', serverSchema);
 
 export default serverModel;

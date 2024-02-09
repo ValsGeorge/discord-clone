@@ -27,8 +27,12 @@ class ServerController {
         next: NextFunction
     ) => {
         try {
+            const userId = req.user.id;
             const findAllServersData: Server[] =
-                await this.serverService.findAllServer();
+                await this.serverService.findAllServerByUserId(userId);
+            // await this.serverService.findAllServer();
+
+            console.log('findAllServersData: ', findAllServersData);
 
             res.status(200).json(findAllServersData);
         } catch (error) {
