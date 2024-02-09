@@ -61,11 +61,19 @@ class MessageService {
             throw new HttpException(400, "You're not messageData");
 
         const updateMessageById: Message =
-            await this.messages.findByIdAndUpdate(messageId, { messageData });
+            await this.messages.findByIdAndUpdate(
+                { _id: messageId },
+                { content: messageData.content, updatedAt: new Date() }
+            );
         if (!updateMessageById)
             throw new HttpException(409, "You're not message");
 
-        return updateMessageById;
+        const returnEditedMessage: Message = await this.messages.findOne({
+            _id: messageId,
+        });
+        console.log('returnEditedMessage', returnEditedMessage);
+
+        return returnEditedMessage;
     }
 
     public async deleteMessage(messageId: string): Promise<Message> {

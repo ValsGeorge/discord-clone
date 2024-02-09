@@ -29,7 +29,7 @@ export class ChatComponent {
 
     messages: Message[] = [];
 
-    showOptionsForMessage: number | null = null;
+    showOptionsForMessage: string | null = null;
 
     editMessageForm: FormGroup;
 
@@ -73,9 +73,9 @@ export class ChatComponent {
     getProfilePictureUrl(userId: string): string {
         return this.authService.getProfilePictureUrl(userId);
     }
-    showOptions(message: any): void {
+    showOptions(message: Message): void {
         const userId = this.authService.getUserId();
-        if (message.userId == userId) this.showOptionsForMessage = message.id;
+        if (message.user == userId) this.showOptionsForMessage = message.id;
     }
 
     hideOptions(): void {
@@ -98,8 +98,8 @@ export class ChatComponent {
 
     saveEditedMessage(message: Message): void {
         const editedContent = this.editMessageForm.value.editedContent;
-        this.chatService.editMessage(message);
         message.content = editedContent;
+        this.chatService.editMessage(message);
         message.isEditing = false;
     }
 }

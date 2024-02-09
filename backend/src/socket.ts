@@ -92,10 +92,6 @@ const initSocketIO = () => {
                 console.error('Error creating message:', error);
             }
         });
-        socket.on('editMessage', (message) => {
-            console.log(message);
-        });
-
         socket.on('sendDM', async ({ dm, to }) => {
             const data = await new DmService().createDm({
                 content: dm.content,
@@ -169,6 +165,28 @@ const initSocketIO = () => {
                 'receiveMessage',
                 updatedDmData
             );
+        });
+        socket.on('editMessage', async (message) => {
+            console.log('message', message);
+            console.log('message.id', message.id);
+            console.log('message.content', message.content);
+            const updatedMessage = {
+                id: message.id,
+                content: message.content,
+                user: message.user,
+                channel: message.channel,
+            };
+            console.log('updatedMessage', updatedMessage);
+            const updatedMessageData = await new MessageService().updateMessage(
+                message.id,
+                updatedMessage
+            );
+            if (!updatedMessageData) {
+                io.to(socket.id).emit('exception', 'Error updating DM');
+                return;
+            }
+            console.log('updatedMessageData', updatedMessageData);
+            io.emit('receiveMessage', updatedMessageData);
         });
     });
 };

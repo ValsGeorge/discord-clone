@@ -198,7 +198,7 @@ export class ChatService {
             console.log('message', message);
             this.utilsService.socket.emit(
                 'editMessage',
-                { message },
+                message,
                 (response: any) => {
                     if (!response.success) {
                         console.error('Failed to edit message');
