@@ -239,6 +239,36 @@ const initSocketIO = () => {
                 }
             });
         });
+        socket.on('deleteMessage', async (message) => {
+            console.log('message', message);
+
+            const deletedMessageData = await new MessageService().deleteMessage(
+                message.id
+            );
+            if (!deletedMessageData) {
+                io.to(socket.id).emit('exception', 'Error deleting message');
+                return;
+            }
+            const usersToSend = new Set<string>();
+            for (const serverId of serverIds) {
+                const channelUsers =
+                    serverChannelUsers[serverId][message.channel];
+                if (channelUsers) {
+                    channelUsers.forEach((userId) => usersToSend.add(userId));
+                }
+            }
+            const data = {
+                id: message.id,
+                deleted: true,
+            };
+
+            // Emit the message only to the relevant users
+            Array.from(usersToSend).forEach((userId) => {
+                if (userId) {
+                    io.to(userId).emit('receiveMessage', data);
+                }
+            });
+        });
     });
 };
 

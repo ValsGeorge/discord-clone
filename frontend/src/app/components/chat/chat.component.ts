@@ -102,4 +102,9 @@ export class ChatComponent {
         this.chatService.editMessage(message);
         message.isEditing = false;
     }
+
+    deleteMessage(message: Message): void {
+        console.log('deleting message');
+        this.chatService.deleteMessage(message);
+    }
 }

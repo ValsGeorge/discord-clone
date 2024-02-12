@@ -58,6 +58,8 @@
                 <div class="relative">
                     <app-message-options *ngIf="showOptionsForMessage === message.id" [message]="message"
                         (editClick)="handleEditClick(message)"></app-message-options>
+                    <app-message-options *ngIf="showOptionsForMessage === message.id" [message]="message"
+                        (click)="deleteMessage(message)"></app-message-options>
                 </div>
             </div>
         </div>

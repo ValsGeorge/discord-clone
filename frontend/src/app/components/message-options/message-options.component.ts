@@ -15,10 +15,13 @@ export class MessageOptionsComponent {
 
     @Input() message: any | undefined;
     @Output() editClick = new EventEmitter<void>();
+    @Output() deleteClick = new EventEmitter<void>();
 
     editMessage(): void {
         this.editClick.emit();
     }
 
-    deleteMessage(): void {}
+    deleteMessage(): void {
+        this.deleteClick.emit();
+    }
 }

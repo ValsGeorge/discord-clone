@@ -25,7 +25,12 @@ export class ChatService {
             // check the type o message
             // if it is Message, then updateLocalMessages
             // if it is DM, then updateLocalDMs
-            if (message.channel) {
+            if (message.deleted) {
+                this.messages = this.messages.filter(
+                    (m) => m.id !== message.id
+                );
+                this.messageUpdateSubject.next([...this.messages]);
+            } else if (message.channel) {
                 this.updateLocalMessages(message);
             } else {
                 this.updateLocalDMs(message);
@@ -252,5 +257,20 @@ export class ChatService {
                     console.error('Error fetching initial messages:', error);
                 }
             );
+    }
+
+    deleteMessage(message: Message): void {
+        console.log('message', message);
+        if (this.utilsService.socket) {
+            this.utilsService.socket.emit(
+                'deleteMessage',
+                message,
+                (response: any) => {
+                    if (!response.success) {
+                        console.error('Failed to delete message');
+                    }
+                }
+            );
+        }
     }
 }
