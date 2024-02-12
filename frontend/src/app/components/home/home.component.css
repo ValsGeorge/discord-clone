@@ -1,0 +1,61 @@
+.body {
+    min-height: 100vh;
+    background: #222;
+    overflow: hidden;
+    color: #eee;
+    display: flex;
+    flex-direction: column;
+}
+
+.body::before {
+    content: "";
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background-color: #522ff0;
+    left: -10%;
+    top: 20%;
+    filter: blur(200px);
+    pointer-events: none;
+}
+
+@property --rotate {
+    syntax: "<angle>";
+    initial-value: 132deg;
+    inherits: false;
+}
+
+.biscord-card-wrapper {
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.biscord-card {
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    cursor: pointer;
+    z-index: -101;
+    border-bottom: 10px solid;
+    border-image: linear-gradient(
+            var(--rotate),
+            #522ff0,
+            #203675 43%,
+            #222,
+            #203675 43%,
+            #522ff0
+        )
+        1;
+    animation: spin 5s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        --rotate: 360deg;
+    }
+    100% {
+        --rotate: 0deg;
+    }
+}
