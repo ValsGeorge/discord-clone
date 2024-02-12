@@ -240,8 +240,6 @@ const initSocketIO = () => {
             });
         });
         socket.on('deleteMessage', async (message) => {
-            console.log('message', message);
-
             const deletedMessageData = await new MessageService().deleteMessage(
                 message.id
             );
@@ -259,7 +257,7 @@ const initSocketIO = () => {
             }
             const data = {
                 id: message.id,
-                deleted: true,
+                delete: 'message',
             };
 
             // Emit the message only to the relevant users
@@ -268,6 +266,34 @@ const initSocketIO = () => {
                     io.to(userId).emit('receiveMessage', data);
                 }
             });
+        });
+
+        socket.on('deleteDm', async (message) => {
+            const deletedMessageData = await new DmService().deleteDm(
+                message.id
+            );
+            if (!deletedMessageData) {
+                io.to(socket.id).emit('exception', 'Error deleting message');
+                return;
+            }
+            const usersToSend = new Set<string>();
+            for (const serverId of serverIds) {
+                const channelUsers =
+                    serverChannelUsers[serverId][message.channel];
+                if (channelUsers) {
+                    channelUsers.forEach((userId) => usersToSend.add(userId));
+                }
+            }
+            const data = {
+                id: message.id,
+                delete: 'dm',
+            };
+
+            io.to(socket.id).emit('privateMessage', data);
+            io.to(connectedUsers[message.receiver]).emit(
+                'privateMessage',
+                data
+            );
         });
     });
 };

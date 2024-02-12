@@ -144,4 +144,7 @@ export class ChatDmComponent implements OnInit {
             console.error(err);
         }
     }
+    deleteDm(message: DM): void {
+        this.chatService.deleteDm(message);
+    }
 }

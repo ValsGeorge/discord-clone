@@ -25,11 +25,16 @@ export class ChatService {
             // check the type o message
             // if it is Message, then updateLocalMessages
             // if it is DM, then updateLocalDMs
-            if (message.deleted) {
-                this.messages = this.messages.filter(
-                    (m) => m.id !== message.id
-                );
-                this.messageUpdateSubject.next([...this.messages]);
+            if (message.delete) {
+                if (message.delete === 'message') {
+                    this.messages = this.messages.filter(
+                        (m) => m.id !== message.id
+                    );
+                    this.messageUpdateSubject.next([...this.messages]);
+                } else if (message.delete === 'dm') {
+                    this.DMs = this.DMs.filter((m) => m.id !== message.id);
+                    this.DMUpdateSubject.next([...this.DMs]);
+                }
             } else if (message.channel) {
                 this.updateLocalMessages(message);
             } else {
@@ -260,7 +265,6 @@ export class ChatService {
     }
 
     deleteMessage(message: Message): void {
-        console.log('message', message);
         if (this.utilsService.socket) {
             this.utilsService.socket.emit(
                 'deleteMessage',
@@ -268,6 +272,20 @@ export class ChatService {
                 (response: any) => {
                     if (!response.success) {
                         console.error('Failed to delete message');
+                    }
+                }
+            );
+        }
+    }
+
+    deleteDm(message: DM): void {
+        if (this.utilsService.socket) {
+            this.utilsService.socket.emit(
+                'deleteDm',
+                message,
+                (response: any) => {
+                    if (!response.success) {
+                        console.log('Failed to delete dm');
                     }
                 }
             );
