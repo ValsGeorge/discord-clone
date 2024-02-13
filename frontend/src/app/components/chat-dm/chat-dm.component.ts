@@ -9,6 +9,8 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { ActivatedRoute } from '@angular/router';
 import { ElementRef, ViewChild } from '@angular/core';
 import { User } from 'src/app/models/user';
+import { Title } from '@angular/platform-browser';
+
 @Component({
     selector: 'app-chat-dm',
     templateUrl: './chat-dm.component.html',
@@ -23,7 +25,8 @@ export class ChatDmComponent implements OnInit {
         private utilsService: UtilsService,
         private authService: AuthService,
         private formBuilder: FormBuilder,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private titleService: Title
     ) {
         this.editMessageForm = this.formBuilder.group({
             editedContent: [''], // Add a form control for edited content
@@ -80,6 +83,7 @@ export class ChatDmComponent implements OnInit {
                 this.receiver = user;
                 this.receiver.profilePicture =
                     this.authService.getProfilePictureUrl(this.receiver.id);
+                this.titleService.setTitle(`Biscord | @${user.nickname}`);
             });
         });
         this.chatService.DMUpdate$.subscribe((updatedMessages) => {

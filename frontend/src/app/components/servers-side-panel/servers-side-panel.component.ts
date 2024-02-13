@@ -6,6 +6,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { ChannelsService } from 'src/app/services/channels/channels.service';
 import { EditMenuComponent } from '../edit-menu/edit-menu.component';
 import { ContextMenu } from 'src/app/models/contextMenu';
+import { Title } from '@angular/platform-browser';
 @Component({
     selector: 'app-servers-side-panel',
     templateUrl: './servers-side-panel.component.html',
@@ -18,7 +19,8 @@ export class ServersSidePanelComponent implements OnInit {
     constructor(
         private serversService: ServersService,
         private utilsService: UtilsService,
-        private channelsService: ChannelsService
+        private channelsService: ChannelsService,
+        private titleService: Title
     ) {}
     servers: Servers[] = [];
 

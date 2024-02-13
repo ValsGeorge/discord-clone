@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ServerMembers } from '../models/serverMembers';
 import { User } from '../models/user';
+import { Title } from '@angular/platform-browser';
 
 @Injectable({
     providedIn: 'root',
@@ -18,7 +19,7 @@ export class ServersService {
 
     serverMembers: ServerMembers[] = [];
 
-    constructor(private httpClient: HttpClient) {}
+    constructor(private httpClient: HttpClient, private title: Title) {}
 
     baseUrl = `${environment.baseUrl}/servers`;
 
@@ -102,7 +103,9 @@ export class ServersService {
     getServerInfo(serverId: string): Observable<any> {
         const url = `${this.baseUrl}/${serverId}`;
         return this.httpClient.get(url, { withCredentials: true }).pipe(
-            tap((server: any) => {}),
+            tap((server: any) => {
+                this.title.setTitle(`Biscord | ${server.name}`);
+            }),
             catchError((error: any) => {
                 return error;
             })

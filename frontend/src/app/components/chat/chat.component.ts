@@ -7,6 +7,7 @@ import { FormGroup } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { Channels } from 'src/app/models/channel';
 import { ChannelsService } from 'src/app/services/channels/channels.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-chat',
@@ -20,7 +21,8 @@ export class ChatComponent {
         private utilsService: UtilsService,
         private authService: AuthService,
         private formBuilder: FormBuilder,
-        private channelsService: ChannelsService
+        private channelsService: ChannelsService,
+        private titleService: Title
     ) {
         this.editMessageForm = this.formBuilder.group({
             editedContent: [''], // Add a form control for edited content
@@ -58,6 +60,15 @@ export class ChatComponent {
                 .getChannelInfo(selectedChannelId)
                 .subscribe((channelInfo) => {
                     this.channel = channelInfo;
+                    let currentTitle = this.titleService.getTitle();
+                    // Current title right now should be 'Biscord | ServerName'
+                    // If the title is 'Biscord | ServerName | <Something>' then we want to remove the <Something>
+                    const titleParts = currentTitle.split('|');
+                    currentTitle = titleParts[0] + '|' + titleParts[1];
+
+                    this.titleService.setTitle(
+                        `${currentTitle} | ${this.channel.name}`
+                    );
                 });
         });
     }

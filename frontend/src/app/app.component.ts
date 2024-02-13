@@ -8,7 +8,7 @@ import { OnInit } from '@angular/core';
     styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-    title = 'Discord-Clone';
+    title = 'Biscord';
     constructor(private lightdarkService: LightdarkService) {}
     ngOnInit(): void {
         // Check if the user has a theme preference

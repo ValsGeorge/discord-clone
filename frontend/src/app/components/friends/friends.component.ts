@@ -9,6 +9,7 @@ import { ContextMenu } from 'src/app/models/contextMenu';
 import { FriendsService } from 'src/app/services/friends/friends.service';
 import { FriendRequestsService } from 'src/app/services/friendRequests/friend-requests.service';
 import { FriendRequest, Friend } from '../../models/friends';
+import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-friends',
@@ -54,8 +55,11 @@ export class FriendsComponent implements OnInit {
         private chatService: ChatService,
         private router: Router,
         private friendsService: FriendsService,
-        private friendRequestsService: FriendRequestsService
-    ) {}
+        private friendRequestsService: FriendRequestsService,
+        private titleService: Title
+    ) {
+        this.titleService.setTitle('Biscord | Friends');
+    }
 
     ngOnInit(): void {
         // Get the initial list of online users
