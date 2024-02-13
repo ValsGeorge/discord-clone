@@ -9,12 +9,17 @@ import {
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
+import { UtilsService } from '../services/utils.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-    constructor(private authService: AuthService, private router: Router) {}
+    constructor(
+        private authService: AuthService,
+        private router: Router,
+        private utilsService: UtilsService
+    ) {}
 
     canActivate(
         next: ActivatedRouteSnapshot,
@@ -24,6 +29,9 @@ export class AuthGuard implements CanActivate {
         return this.authService.checkLoginStatus().pipe(
             map((response: any) => {
                 if (response) {
+                    // Setup socket connection
+                    this.utilsService.setupSocketConnection();
+
                     return true;
                 }
                 this.router.navigate(['/login']);
