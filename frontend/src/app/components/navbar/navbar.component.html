@@ -1,12 +1,43 @@
+<!-- navbar.component.html -->
 <nav class="bg-transparent p-4">
-    <div class="flex items-center justify-between -m-2 text-text">
-        <div class="flex flex-row space-x-4">
-            <a routerLink="#" class=" font-bold hover:underline">Home</a>
-            <a routerLink="/register" class="hover:underline">Register</a>
-            <a routerLink="/login" class="hover:underline">Login</a>
+    <div class="flex items-center justify-between -m-2 text-text-faded">
+        <!-- Menu button for small screens (mobile) -->
+        <button (click)="toggleSidePanel()" id="menuToggle" class="md:hidden">
+            <i class="bi bi-list text-2xl"></i>
+        </button>
+
+        <!-- Navigation links for larger screens (medium and above) -->
+        <div class="hidden md:flex flex-row space-x-4">
+            <a routerLink="#" class="font-bold hover:underline hover:text-text">Home</a>
+            <a routerLink="/register" class="hover:underline hover:text-text">Register</a>
+            <a routerLink="/login" class="hover:underline hover:text-text">Login</a>
         </div>
+
         <a routerLink="/servers"
             class="text-black ml-auto mr-4 bg-white p-2 rounded-lg hover:shadow-[0_10px_20px_10px_rgba(0,0,0,0.2)] shadow-black hover:text-blue-600">Open
-            Discord</a>
+            Discord
+        </a>
+    </div>
+
+    <!-- Side panel for small screens (mobile) -->
+    <div *ngIf="isSidePanelOpen" #sidePanel
+        class="md:hidden fixed top-0 right-0 h-screen w-64 bg-transparent shadow-lg overflow-y-auto z-20">
+        <div class="backdrop-filter backdrop-blur-md h-full">
+            <div class="flex flex-row p-4 pt-10">
+                <p class="font-bold text-xl">Biscord</p>
+                <button (click)="toggleSidePanel()" class="ml-auto">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+
+            <div class="border-b border-text-faded mx-4"></div>
+
+            <!-- Side panel links -->
+            <div class="flex flex-col space-y-4 p-4">
+                <a routerLink="#" class="font-bold hover:underline hover:text-text">Home</a>
+                <a routerLink="/register" class="hover:underline hover:text-text">Register</a>
+                <a routerLink="/login" class="hover:underline hover:text-text">Login</a>
+            </div>
+        </div>
     </div>
 </nav>
