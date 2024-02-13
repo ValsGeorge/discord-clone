@@ -13,6 +13,24 @@ import { COOKIE_DOMAIN } from '@config';
 class AuthService {
     public users = userModel;
 
+    public async checkLogin(userData: User): Promise<User> {
+        if (isEmpty(userData))
+            throw new HttpException(400, 'userData is empty');
+        const findUser: User = await this.users
+            .findOne({
+                username: userData.username,
+                password: userData.password,
+            })
+            .select('-password');
+        if (!findUser)
+            throw new HttpException(
+                409,
+                `This username ${userData.username} was not found`
+            );
+
+        return findUser;
+    }
+
     public async signup(userData: CreateUserDto): Promise<User> {
         if (isEmpty(userData))
             throw new HttpException(400, 'userData is empty');
@@ -54,13 +72,10 @@ class AuthService {
                 `This username ${userData.username} was not found`
             );
 
-        console.log('userData.password', userData.password);
-        console.log('findUser.password', findUser.password);
         const isPasswordMatching: boolean = await compare(
             userData.password,
             findUser.password
         );
-        console.log('isPasswordMatching', isPasswordMatching);
 
         if (!isPasswordMatching)
             throw new HttpException(409, 'Password is not matching');

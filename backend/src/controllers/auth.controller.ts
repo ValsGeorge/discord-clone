@@ -7,6 +7,22 @@ import AuthService from '@services/auth.service';
 class AuthController {
     public authService = new AuthService();
 
+    public checkLogin = async (
+        req: RequestWithUser,
+        res: Response,
+        next: NextFunction
+    ) => {
+        try {
+            const userData: User = req.user;
+            const checkLoginUserData: User = await this.authService.checkLogin(
+                userData
+            );
+            res.status(200).json(checkLoginUserData);
+        } catch (error) {
+            next(error);
+        }
+    };
+
     public signUp = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const userData: CreateUserDto = req.body;

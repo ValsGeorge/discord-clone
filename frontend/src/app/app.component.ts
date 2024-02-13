@@ -21,7 +21,6 @@ export class AppComponent implements OnInit {
         this.lightdarkService.toggleTheme(themeColor);
 
         // Setup socket connection
-
         this.utilsService.setupSocketConnection();
     }
 
