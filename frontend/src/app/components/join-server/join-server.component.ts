@@ -23,9 +23,7 @@ export class JoinServerComponent {
         // Check if inviteCode is not null
         if (inviteCode !== null) {
             this.serversService.joinServer(inviteCode).subscribe(
-                (response) => {
-                    console.log(response);
-                },
+                (response) => {},
                 (error) => {
                     console.log(error);
                 }

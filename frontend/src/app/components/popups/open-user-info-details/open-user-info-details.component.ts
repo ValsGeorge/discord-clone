@@ -21,7 +21,6 @@ export class OpenUserInfoDetailsComponent {
     @Input() bottomOffset: number = 0;
     constructor(private authService: AuthService) {
         this.authService.getUser().subscribe((user) => {
-            console.log('user:', user);
             this.user = user;
         });
     }

@@ -26,7 +26,6 @@ export class CreateServerPopupComponent {
     confirm() {
         this.serversService.createServer(this.serverNameForm.value).subscribe(
             (response) => {
-                console.log('Server created successfully:', response);
                 this.serversService.updateServers();
             },
             (error) => {

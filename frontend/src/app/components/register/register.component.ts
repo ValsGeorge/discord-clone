@@ -23,7 +23,6 @@ export class RegisterComponent {
     }
 
     onSubmit() {
-        console.log(this.registrationForm?.value);
         if (this.registrationForm.valid) {
             const registrationFormData = this.registrationForm.value;
             this.user = {
@@ -37,9 +36,7 @@ export class RegisterComponent {
             };
 
             this.authService.register(this.user).subscribe(
-                (response: any) => {
-                    console.log(response);
-                },
+                (response: any) => {},
                 (error: any) => {
                     console.log(error);
                 }

@@ -67,7 +67,6 @@ export class AuthService {
             .post(url, loginData, { withCredentials: true })
             .pipe(
                 tap((response: any) => {
-                    console.log('response: ', response);
                     const token = response.token;
                     this.setAuthTokenInLocalStorage(token);
                     return response;

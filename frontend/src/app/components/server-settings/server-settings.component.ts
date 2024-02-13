@@ -51,7 +51,6 @@ export class ServerSettingsComponent {
     }
 
     selectOption(option: string) {
-        console.log(option);
         this.selectedOption = option;
     }
 
@@ -60,11 +59,9 @@ export class ServerSettingsComponent {
         const file = fileInput.files?.[0];
 
         if (file) {
-            console.log('Selected File:', file);
             this.serversService
                 .uploadServerImage(this.server.id, file)
                 .subscribe((response) => {
-                    console.log(response);
                     this.serversService.updateServers();
                 });
         }

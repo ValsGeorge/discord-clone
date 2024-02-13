@@ -59,11 +59,9 @@ export class ChatService {
 
     updateLocalMessages(updatedMessage: Message): void {
         // Check if the message already exists in the array
-        console.log('updatedMessage', updatedMessage);
         const existingIndex = this.messages.findIndex(
             (message) => message.id === updatedMessage.id
         );
-        console.log('existingIndex', existingIndex);
 
         if (existingIndex !== -1) {
             this.messages.splice(existingIndex, 1, updatedMessage);
@@ -87,7 +85,6 @@ export class ChatService {
 
     updateLocalDMs(updatedDM: DM): void {
         // Check if the message already exists in the array
-        console.log('updatedDM', updatedDM);
         const existingIndex = this.DMs.findIndex(
             (DM) => DM.id === updatedDM.id
         );
@@ -155,9 +152,7 @@ export class ChatService {
     sendMessage(content: string, channelId: string): void {
         if (this.utilsService.socket) {
             this.authService.getUser().subscribe(
-                (response) => {
-                    console.log('response', response);
-                },
+                (response) => {},
                 (error) => {
                     console.error('Error getting username:', error);
                 }
@@ -178,9 +173,7 @@ export class ChatService {
     sendDM(content: string, senderId: string, receiverId: string): void {
         if (this.utilsService.socket) {
             this.authService.getUser().subscribe(
-                (response) => {
-                    console.log('response', response);
-                },
+                (response) => {},
                 (error) => {
                     console.error('Error getting username:', error);
                 }
@@ -194,7 +187,6 @@ export class ChatService {
 
     editDM(dm: DM): void {
         if (this.utilsService.socket) {
-            console.log('dm', dm);
             this.utilsService.socket.emit('editDM', dm, (response: any) => {
                 if (!response.success) {
                     console.error('Failed to edit dm');
@@ -205,7 +197,6 @@ export class ChatService {
 
     editMessage(message: Message): void {
         if (this.utilsService.socket) {
-            console.log('message', message);
             this.utilsService.socket.emit(
                 'editMessage',
                 message,
@@ -239,7 +230,6 @@ export class ChatService {
                         this.authService.getUserName(userId).subscribe(
                             (response) => {
                                 initialMessages.forEach((message) => {
-                                    // console.log('message', message);
                                     if (message.sender === userId) {
                                         message.senderUsername =
                                             response.username;

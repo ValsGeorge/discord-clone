@@ -22,9 +22,7 @@ export class ActivateComponent {
         // Check if both uidb64 and token are not null
         if (uidb64 !== null && token !== null) {
             this.authService.activateAccount(uidb64, token).subscribe(
-                (response) => {
-                    console.log(response);
-                },
+                (response) => {},
                 (error) => {
                     console.log(error);
                 }

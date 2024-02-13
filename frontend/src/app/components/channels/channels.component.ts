@@ -80,9 +80,7 @@ export class ChannelsComponent implements OnInit {
             category.order = this.categories.indexOf(category);
         });
         this.categoriesService.updateCategoriesOrder(this.categories).subscribe(
-            (response: any) => {
-                console.log('response:', response);
-            },
+            (response: any) => {},
             (error: any) => {
                 console.error('Error updating categories:', error);
             }
@@ -116,9 +114,7 @@ export class ChannelsComponent implements OnInit {
             });
         });
         this.channelsService.updateChannelsOrder(this.channels).subscribe(
-            (response: any) => {
-                console.log('response:', response);
-            },
+            (response: any) => {},
             (error: any) => {
                 console.error('Error updating channels:', error);
             }

@@ -35,7 +35,6 @@ export class ServersService {
     }
 
     createServer(serverName: any): Observable<any> {
-        console.log(serverName);
         const token = localStorage.getItem('token') as string;
         const url = `${this.baseUrl}/`;
         const headers = {

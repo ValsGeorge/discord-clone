@@ -26,7 +26,6 @@ export class LoginComponent {
             const loginData = this.loginForm.value;
             this.authService.login(loginData).subscribe(
                 (response) => {
-                    console.log(response);
                     this.loginForm.reset();
                     return this.router.navigate(['/servers']);
                 },

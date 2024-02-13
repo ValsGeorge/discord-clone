@@ -35,8 +35,6 @@ export class ChannelsService {
         this.dialogDataSubject.asObservable();
 
     openDialog(dialogData: DialogData): void {
-        console.log('DialogData:', dialogData);
-
         // Set the dialog data and notify subscribers
         this.dialogDataSubject.next(dialogData);
     }
