@@ -21,6 +21,7 @@ module.exports = {
     plugins: [
         createThemes({
             light: {
+                home: "#eee",
                 primary: "#ffffff",
                 secondary: "#f2f3f5",
                 accent: "#e3e5e8",
@@ -32,8 +33,11 @@ module.exports = {
                 "accent-2": "#ffffff",
                 "bgray-1": "#e1e2e4",
                 "scrollbar-bar": "#c4c9ce",
+                "color-accent": "#0b24b5", // blue
+                "color-contrast": "#222", // black
             },
             dark: {
+                home: "#222",
                 primary: "#313338",
                 secondary: "#2b2d31",
                 accent: "#232428",
@@ -46,6 +50,25 @@ module.exports = {
                 "accent-2": "#111214",
                 "bgray-1": "#2e2f34",
                 "scrollbar-bar": "#1a1b1e",
+                "color-accent": "#0b24b5", // blue
+                "color-contrast": "#eee", // white
+            },
+            darker: {
+                home: "#222",
+                primary: "#17181a",
+                secondary: "#171717",
+                accent: "#0d0d0d",
+                "secondary-accent": "#0a0a0a",
+                hover: "#1f1f1f",
+                text: "#e9eaeb",
+                "message-hover": "#2e3035",
+                "text-faded": "#dbdee1",
+                "text-faded-2": "#949ba4",
+                "accent-2": "#111214",
+                "bgray-1": "#2e2f34",
+                "scrollbar-bar": "#1a1b1e",
+                "color-accent": "#0b24b5", // blue
+                "color-contrast": "#eee", // white
             },
         }),
         require("tailwind-scrollbar"),

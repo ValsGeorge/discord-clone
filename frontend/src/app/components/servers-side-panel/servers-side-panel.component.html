@@ -11,7 +11,7 @@
         </div>
         <button
             class="w-14 h-14 flex items-center justify-center mb-2 mr-2 
-        {{ server.id.toString() === selectedServerId ? 'bg-blue-600 rounded-[20px] ' : 'bg-secondary rounded-full' }} hover:bg-blue-600 hover:rounded-3xl hover:transition-all"
+        {{ server.id.toString() === selectedServerId ? 'bg-color-accent rounded-[20px] ' : 'bg-secondary rounded-full' }} hover:bg-color-accent hover:rounded-3xl hover:transition-all"
             [routerLink]="['/servers', server.id]" (click)="selectServer(server.id)">
             <div *ngIf="server.image; else serverName" class="">
                 <img [src]="server.image" alt="Server Image"
