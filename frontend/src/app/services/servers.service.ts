@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { ServerMembers } from '../models/serverMembers';
 import { User } from '../models/user';
 import { Title } from '@angular/platform-browser';
+import { Servers } from '../models/server';
 
 @Injectable({
     providedIn: 'root',
@@ -18,6 +19,8 @@ export class ServersService {
     serversUpdated$ = this.serversUpdatedSubject.asObservable();
 
     serverMembers: ServerMembers[] = [];
+
+    servers: Servers[] = [];
 
     constructor(private httpClient: HttpClient, private title: Title) {}
 
@@ -35,22 +38,25 @@ export class ServersService {
         this.serversUpdatedSubject.next();
     }
 
-    createServer(serverName: any): Observable<any> {
-        const token = localStorage.getItem('token') as string;
+    createServer(serverName: string): Observable<any> {
         const url = `${this.baseUrl}/`;
-        const headers = {
-            'Content-Type': 'application/json',
-            token: token,
-        };
         const body = {
-            name: serverName['serverName'],
+            name: serverName,
             description: 'a',
         };
 
-        return this.httpClient.post(url, body, {
-            headers,
-            withCredentials: true,
-        });
+        return this.httpClient
+            .post(url, body, {
+                withCredentials: true,
+            })
+            .pipe(
+                tap(() => {
+                    this.updateServers();
+                }),
+                catchError((error: any) => {
+                    return error;
+                })
+            );
     }
 
     getServers(): Observable<any> {
@@ -58,6 +64,7 @@ export class ServersService {
 
         return this.httpClient.get(url, { withCredentials: true }).pipe(
             (response: any) => {
+                console.log('servers response', response);
                 return response;
             },
             (error: any) => {

@@ -24,14 +24,16 @@ export class CreateServerPopupComponent {
     }
 
     confirm() {
-        this.serversService.createServer(this.serverNameForm.value).subscribe(
-            (response) => {
-                this.serversService.updateServers();
-            },
-            (error) => {
-                console.error('Error creating server:', error);
-            }
-        );
+        this.serversService
+            .createServer(this.serverNameForm.value.serverName)
+            .subscribe(
+                (response) => {
+                    this.serversService.updateServers();
+                },
+                (error) => {
+                    console.error('Error creating server:', error);
+                }
+            );
 
         this.serverNameForm.reset();
         this.serversService.closeDialog();
