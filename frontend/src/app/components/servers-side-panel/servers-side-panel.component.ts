@@ -80,16 +80,7 @@ export class ServersSidePanelComponent implements OnInit {
         this.selectedServerId = this.utilsService.getSelectedServerId();
         this.utilsService.updateOnlineUsers();
         // Update channels
-        this.channelsService.getChannels(this.selectedServerId).subscribe(
-            (channels) => {
-                this.channelsService.updateChannels(
-                    this.selectedServerId || '0'
-                ); // Notify about channel update
-            },
-            (error) => {
-                console.error('Error getting channels:', error);
-            }
-        );
+        this.channelsService.updateChannels(this.selectedServerId || '0');
     }
 
     openCreateServer() {
