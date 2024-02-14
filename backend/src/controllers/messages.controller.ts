@@ -51,7 +51,6 @@ class MessageController {
             const messageData: CreateMessageDto = req.body;
 
             const userId = req.user.id;
-            console.log('userId', userId);
             messageData.user = userId;
             const createMessageData: Message =
                 await this.messageService.createMessage(messageData);

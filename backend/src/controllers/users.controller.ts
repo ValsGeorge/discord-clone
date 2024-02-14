@@ -79,11 +79,9 @@ class UsersController {
 
     public getUserProfilePicture = async (req: Request, res: Response) => {
         try {
-            console.log('getUserProfilePicture', req.params);
             const userId: string = req.params.id;
 
             const findUser = await this.userService.findUserById(userId);
-            console.log('findUser', findUser);
             let profilePicturePath = '';
             if (!findUser.profilePicture || findUser.profilePicture === '') {
                 profilePicturePath = path.join(
@@ -98,7 +96,6 @@ class UsersController {
                 );
             }
 
-            console.log('profilePicturePath', profilePicturePath);
             res.sendFile(profilePicturePath);
         } catch (error) {
             console.log(error);
@@ -109,13 +106,9 @@ class UsersController {
         req: Request,
         res: Response,
         next: NextFunction
-    ) => {
-        console.log('getFriendRequests');
-    };
+    ) => {};
 
-    getFriends = async (req: Request, res: Response, next: NextFunction) => {
-        console.log('getFriends');
-    };
+    getFriends = async (req: Request, res: Response, next: NextFunction) => {};
 
     public createUser = async (
         req: Request,
@@ -123,7 +116,6 @@ class UsersController {
         next: NextFunction
     ) => {
         try {
-            console.log('createUser', req.body);
             const userData: CreateUserDto = req.body;
             const createUserData: User = await this.userService.createUser(
                 userData

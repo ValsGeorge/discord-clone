@@ -32,8 +32,6 @@ class ServerController {
                 await this.serverService.findAllServerByUserId(userId);
             // await this.serverService.findAllServer();
 
-            console.log('findAllServersData: ', findAllServersData);
-
             res.status(200).json(findAllServersData);
         } catch (error) {
             next(error);
@@ -104,7 +102,6 @@ class ServerController {
             // Create Server
             const user: User = await this.userService.findUserById(userId);
 
-            console.log('userId', userId);
             const createServerData: Server =
                 await this.serverService.createServer(serverData);
 
@@ -114,12 +111,10 @@ class ServerController {
                 server: createServerData,
                 role: 'owner',
             };
-            console.log('createUserServerData: ', createUserServerData);
 
             const createUserServer = await this.userService.createUserServer(
                 createUserServerData
             );
-            console.log('createUserServer: ', createUserServer);
 
             // into that server create two categories ( text and voice )
             // and one channel in each category
@@ -190,7 +185,6 @@ class ServerController {
             const userId = req.user.id;
             const joinServerData: UserServer =
                 await this.serverService.joinServer(inviteCode, userId);
-            console.log('joinServerData: ', joinServerData);
             res.status(200).json(joinServerData);
         } catch (error) {
             next(error);

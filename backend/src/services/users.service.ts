@@ -62,7 +62,6 @@ class UserService {
             createAt: new Date(),
             updateAt: new Date(),
         });
-        console.log('createUserServerData: ', createUserServerData);
         return createUserServerData;
     }
 

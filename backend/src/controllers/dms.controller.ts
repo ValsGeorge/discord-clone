@@ -66,8 +66,6 @@ class DmController {
             const dmData: CreateDmDto = req.body;
 
             const userId = req.user.id;
-            console.log('userId', userId);
-            // ! NOTE: not sure if .sender or .receiver | TAKE A LOOK LATER
             dmData.sender = userId;
             const createDmData: Dm = await this.dmService.createDm(dmData);
 

@@ -46,8 +46,6 @@ class ChannelController {
         try {
             const channelData: CreateChannelDto = req.body;
 
-            console.log('channelData:', channelData);
-
             const createChannelData: Channel =
                 await this.channelService.createChannel(channelData);
 

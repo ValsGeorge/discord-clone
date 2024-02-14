@@ -18,11 +18,6 @@ class FriendRequestController {
                     userId
                 );
 
-            console.log(
-                'findAllFriendRequestsData: ',
-                findAllFriendRequestsData
-            );
-
             res.status(200).json(findAllFriendRequestsData);
         } catch (error) {
             next(error);
@@ -44,11 +39,6 @@ class FriendRequestController {
                         friendRequestId,
                         status
                     );
-
-                console.log(
-                    'respondFriendRequestData: ',
-                    respondFriendRequestData
-                );
 
                 res.status(200).json({
                     message: 'Friend request accepted',

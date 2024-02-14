@@ -33,7 +33,6 @@ class FriendsService {
     }
 
     public async removeFriend(friendId: string): Promise<any> {
-        console.log('removeFriend');
         if (isEmpty(friendId))
             throw new HttpException(400, "You're not friendId");
 

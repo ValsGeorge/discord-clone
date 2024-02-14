@@ -17,11 +17,8 @@ class DMListController {
     ) => {
         try {
             const dmListId: string = req.user.id;
-            console.log('dmListId:', dmListId);
             const findDMListData: DmList[] =
                 await this.dmListService.findAllDMListByMe(dmListId);
-
-            console.log('findDMListData:', findDMListData);
 
             res.status(200).json(findDMListData);
         } catch (error) {

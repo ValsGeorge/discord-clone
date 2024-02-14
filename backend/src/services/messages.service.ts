@@ -71,7 +71,6 @@ class MessageService {
         const returnEditedMessage: Message = await this.messages.findOne({
             _id: messageId,
         });
-        console.log('returnEditedMessage', returnEditedMessage);
 
         return returnEditedMessage;
     }

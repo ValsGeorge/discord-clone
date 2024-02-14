@@ -12,13 +12,11 @@ class DMListService {
     public userService = UserService;
 
     public async findAllDMListByMe(me: string): Promise<DmList[]> {
-        console.log('findAllDMListByMe:', me);
         const findDMList: DmList[] = await this.dmLists
             .find({
                 me: new Types.ObjectId(me),
             })
             .populate('user');
-        console.log('findDMList:', findDMList);
 
         if (!findDMList) throw new HttpException(409, "DMList doesn't exist");
 
@@ -28,19 +26,15 @@ class DMListService {
     public async createDMList(dmListData: CreateDmListDto): Promise<DmList> {
         if (isEmpty(dmListData))
             throw new HttpException(400, "You're not dmListData");
-        console.log('dmListData:', dmListData);
 
         const me = await new this.userService().findUserById(dmListData.me);
-        console.log('me:', me);
         const user = await new this.userService().findUserById(dmListData.user);
-        console.log('user:', user);
         const createDMListData: DmList = await this.dmLists.create({
             me: me,
             user: user,
             createdAt: new Date(),
             updatedAt: new Date(),
         });
-        console.log('createDMListData:', createDMListData);
 
         return createDMListData;
     }

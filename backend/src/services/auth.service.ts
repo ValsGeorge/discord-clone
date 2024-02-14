@@ -61,11 +61,9 @@ class AuthService {
     ): Promise<{ cookie: string; findUser: User }> {
         if (isEmpty(userData))
             throw new HttpException(400, 'userData is empty');
-        console.log('userData', userData);
         const findUser: User = await this.users.findOne({
             username: userData.username,
         });
-        console.log('findUser', findUser);
         if (!findUser)
             throw new HttpException(
                 409,
@@ -104,7 +102,6 @@ class AuthService {
     }
 
     public createToken(user: User): TokenData {
-        console.log('user', user);
         const dataStoredInToken: DataStoredInToken = { _id: user.id };
         const secretKey: string = SECRET_KEY;
         const expiresIn: number = 60 * 60 * 24 * 7; // 7 days

@@ -64,7 +64,6 @@ class FriendRequestsService {
             await this.friendRequests.create({
                 ...friendRequestData,
             });
-        console.log('createFriendRequestData: ', createFriendRequestData);
 
         return createFriendRequestData;
     }
@@ -91,8 +90,6 @@ class FriendRequestsService {
         const createFriendData = await this.friendsService.addFriend(
             friendData
         );
-
-        console.log('createFriendData: ', createFriendData);
 
         // delete the friend request
         const deleteFriendRequestById: FriendRequest =

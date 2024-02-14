@@ -29,8 +29,6 @@ class Serverservice {
                 })
                 .populate('server');
 
-            console.log('findUserServer:', findUserServer);
-
             const servers: Server[] = findUserServer.map((userServer) => {
                 return userServer.server;
             });
@@ -76,7 +74,6 @@ class Serverservice {
 
         serverData.inviteCode = this.generateInviteCode();
         serverData.image = null;
-        console.log('serverData', serverData);
 
         const createServerData: Server = await this.servers.create({
             ...serverData,
