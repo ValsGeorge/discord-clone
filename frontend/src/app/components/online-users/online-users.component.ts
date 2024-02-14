@@ -53,7 +53,7 @@ export class OnlineUsersComponent implements OnInit {
         // Get all the active users
         const selectedServerId = this.utilsService.getSelectedServerId();
         if (selectedServerId) {
-            this.getServerMembrs(selectedServerId);
+            this.getServerMembers(selectedServerId);
             const users = this.utilsService.getOnlineUsers();
             users.forEach((user) => {
                 if (user.serverIds && !this.onlineUsersIds.has(user.id)) {
@@ -85,11 +85,11 @@ export class OnlineUsersComponent implements OnInit {
                 }
             });
             // Get all members of the server
-            this.getServerMembrs(selectedServerId);
+            this.getServerMembers(selectedServerId);
         });
     }
 
-    getServerMembrs(selectedServerId: string) {
+    getServerMembers(selectedServerId: string) {
         this.serversService
             .getServerMembers(selectedServerId)
             .subscribe((members) => {
