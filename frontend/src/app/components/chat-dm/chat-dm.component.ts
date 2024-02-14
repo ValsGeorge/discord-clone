@@ -98,12 +98,14 @@ export class ChatDmComponent implements OnInit {
 
     sendDM(): void {
         const receiverId = this.route.snapshot.paramMap.get('userId') as string;
-        if (this.messageContent != '')
+        if (this.messageContent != '') {
             this.chatService.sendDM(
                 this.messageContent,
                 this.authService.getUserId(),
                 receiverId
             );
+            this.messageContent = '';
+        }
     }
 
     getProfilePictureUrl(userId: string): string {

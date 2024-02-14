@@ -74,11 +74,13 @@ export class ChatComponent {
     }
 
     sendMessage(): void {
-        if (this.messageContent != '')
+        if (this.messageContent != '') {
             this.chatService.sendMessage(
                 this.messageContent,
                 this.utilsService.getSelectedChannelId()
             );
+            this.messageContent = '';
+        }
     }
 
     getProfilePictureUrl(userId: string): string {
