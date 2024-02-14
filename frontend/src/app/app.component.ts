@@ -13,8 +13,15 @@ export class AppComponent implements OnInit {
     ngOnInit(): void {
         // Check if the user has a theme preference
 
-        const themeColor = localStorage.getItem('themeColor') || 'light';
-        this.lightdarkService.toggleTheme(themeColor);
+        const themes = ['light', 'dark', 'darker'];
+        const themeColor = localStorage.getItem('themeColor') || 'dark';
+
+        if (!themes.includes(themeColor)) {
+            localStorage.setItem('themeColor', 'dark');
+            this.lightdarkService.toggleTheme('dark');
+        } else {
+            this.lightdarkService.toggleTheme(themeColor);
+        }
     }
 
     toggleTheme(color: string): void {
