@@ -60,9 +60,17 @@ export class ChannelsService {
             category: channel.category,
             server: this.selectedServerId,
         };
-        this.updateChannels(this.selectedServerId || '0');
 
-        return this.http.post(url, data, { withCredentials: true });
+        return this.http.post(url, data, { withCredentials: true }).pipe(
+            tap((response: any) => {
+                this.channels.push(response);
+                this.updateChannels(this.selectedServerId || '0');
+                return response;
+            }),
+            catchError((error) => {
+                throw error;
+            })
+        );
     }
 
     getChannels(serverId: string): Observable<any> {

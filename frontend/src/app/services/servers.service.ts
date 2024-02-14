@@ -64,7 +64,6 @@ export class ServersService {
 
         return this.httpClient.get(url, { withCredentials: true }).pipe(
             (response: any) => {
-                console.log('servers response', response);
                 return response;
             },
             (error: any) => {

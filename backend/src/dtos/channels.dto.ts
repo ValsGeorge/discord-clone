@@ -11,9 +11,6 @@ export class CreateChannelDto {
     @IsString()
     public type: string;
 
-    @IsNumber()
-    public order: number;
-
     @IsString()
     public category: string;
 
