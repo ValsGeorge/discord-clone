@@ -32,6 +32,11 @@ class CategoryRoute implements Routes {
             validationMiddleware(CreateCategoryDto, 'body'),
             this.categoryController.createCategory
         );
+        this.router.post(
+            `${this.path}/update-order`,
+            authMiddleware,
+            this.categoryController.updateCategoriesOrder
+        );
         this.router.put(
             `${this.path}/:id`,
             authMiddleware,

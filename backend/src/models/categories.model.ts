@@ -18,6 +18,10 @@ const categorySchema: Schema = new Schema({
             required: false,
         },
     ],
+    order: {
+        type: Number,
+        required: true,
+    },
     createdAt: {
         type: Date,
         required: true,

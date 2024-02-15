@@ -48,9 +48,8 @@ export class CategoriesService {
     updateCategoriesOrder(categories: Category[]): Observable<any> {
         const url = `${this.baseUrl}/update-order`;
 
-        const body = {
-            categories: categories,
-        };
-        return this.http.put(url, body, { withCredentials: true });
+        console.log('categories:', categories);
+
+        return this.http.post(url, categories, { withCredentials: true });
     }
 }

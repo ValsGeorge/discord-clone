@@ -5,6 +5,7 @@ export interface Category {
     name: string;
     server: Server;
     channels: Channel[];
+    order: number;
     createdAt: Date;
     updatedAt: Date;
 }

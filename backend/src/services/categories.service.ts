@@ -65,6 +65,29 @@ class CategoryService {
         return updateCategoryData;
     }
 
+    public async updateCategoriesOrder(
+        categories: Category[]
+    ): Promise<Category[]> {
+        if (isEmpty(categories))
+            throw new HttpException(400, "You're not categories");
+
+        categories.forEach(async (category) => {
+            const findCategory: Category = await this.categores.findOne({
+                _id: category.id,
+            });
+            if (findCategory) {
+                if (findCategory.order !== category.order) {
+                    await this.categores.updateMany(
+                        { _id: category.id },
+                        { $set: { order: category.order } }
+                    );
+                }
+            }
+        });
+
+        return categories;
+    }
+
     public async deleteCategory(categoryId: string): Promise<Category> {
         const findCategory: Category = await this.categores.findOne({
             _id: categoryId,

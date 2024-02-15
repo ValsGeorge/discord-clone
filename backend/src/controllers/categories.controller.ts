@@ -76,6 +76,22 @@ class CategoryController {
         }
     };
 
+    public updateCategoriesOrder = async (
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ) => {
+        try {
+            const categoryData: Category[] = req.body;
+            const updateCategoriesOrderData: Category[] =
+                await this.categoryService.updateCategoriesOrder(categoryData);
+
+            res.status(200).json(updateCategoriesOrderData);
+        } catch (error) {
+            next(error);
+        }
+    };
+
     public deleteCategory = async (
         req: Request,
         res: Response,
