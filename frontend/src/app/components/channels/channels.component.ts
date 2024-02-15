@@ -149,6 +149,7 @@ export class ChannelsComponent implements OnInit {
     }
 
     getChannels() {
+        console.log('getChannels');
         this.selectedServerId = this.utilsService.getSelectedServerId();
 
         this.channelsService.getChannels(this.selectedServerId).subscribe(

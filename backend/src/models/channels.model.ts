@@ -1,5 +1,6 @@
 import { model, Schema, Document, Types } from 'mongoose';
 import { Channel } from '../interfaces/channels.interface';
+import messageModel from './messages.model';
 
 const channelSchema: Schema = new Schema({
     name: {
@@ -55,6 +56,17 @@ channelSchema.set('toJSON', {
     transform: function (doc: any, ret: any) {
         delete ret._id;
     },
+});
+
+channelSchema.pre<Channel & Document>('remove', async function (next) {
+    try {
+        // Delete entries in messageModel
+        await messageModel.deleteMany({ channel: this._id });
+
+        next();
+    } catch (error) {
+        next(error);
+    }
 });
 
 const channelModel = model<Channel & Document>('Channels', channelSchema);

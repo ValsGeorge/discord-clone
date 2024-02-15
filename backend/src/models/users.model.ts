@@ -1,5 +1,6 @@
 import { model, Schema, Document } from 'mongoose';
 import { User } from '@interfaces/users.interface';
+import userServerModel from './userServer.model';
 
 const userSchema: Schema = new Schema({
     nickname: {
@@ -37,6 +38,17 @@ userSchema.set('toJSON', {
     transform: function (doc: any, ret: any) {
         delete ret._id;
     },
+});
+
+userSchema.pre<User & Document>('remove', async function (next) {
+    try {
+        // Delete entries in userServerModel, categoryModel
+        await userServerModel.deleteMany({ user: this._id });
+
+        next();
+    } catch (error) {
+        next(error);
+    }
 });
 
 const userModel = model<User & Document>('User', userSchema);

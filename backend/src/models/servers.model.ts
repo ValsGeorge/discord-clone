@@ -1,5 +1,7 @@
 import { model, Schema, Document, Types } from 'mongoose';
 import { Server } from '../interfaces/servers.interface';
+import userServerModel from './userServer.model';
+import categoryModel from './categories.model';
 
 const serverSchema: Schema = new Schema({
     name: {
@@ -41,6 +43,23 @@ serverSchema.set('toJSON', {
     transform: function (doc: any, ret: any) {
         delete ret._id;
     },
+});
+
+serverSchema.pre<Server & Document>('remove', async function (next) {
+    try {
+        // Delete entries in userServerModel, categoryModel
+        await userServerModel.deleteMany({ server: this._id });
+
+        // Call the remove method for each category
+        const categories = await categoryModel.find({ server: this._id });
+        categories.forEach(async (category) => {
+            await category.remove();
+        });
+
+        next();
+    } catch (error) {
+        next(error);
+    }
 });
 
 const serverModel = model<Server & Document>('Server', serverSchema);

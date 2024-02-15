@@ -80,6 +80,7 @@ export class ChannelsService {
         const index = this.channels.findIndex(
             (channel) => channel.server === serverId
         );
+        console.log('channels', this.channels);
         if (index !== -1) {
             const newChannels = this.channels.filter(
                 (channel) => channel.server === serverId

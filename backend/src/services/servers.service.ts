@@ -171,7 +171,7 @@ class Serverservice {
         });
         if (!findServer) throw new HttpException(409, "Server doesn't exist");
 
-        await this.servers.deleteOne({ _id: serverId });
+        await (findServer as any).remove();
 
         return findServer;
     }
