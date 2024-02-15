@@ -71,6 +71,38 @@ class ChanelService {
         return updateChannel;
     }
 
+    public async updateChannelsOrder(
+        channels: Channel[]
+    ): Promise<Channel[] | void> {
+        if (isEmpty(channels))
+            throw new HttpException(400, "You're not channelsData");
+        // update the order and category of each channel
+        // but only if the order or category has changed
+        channels.forEach(async (channel) => {
+            const findChannel: Channel = await this.channels.findOne({
+                _id: channel.id,
+            });
+            if (findChannel) {
+                if (
+                    findChannel.order !== channel.order ||
+                    findChannel.category !== channel.category
+                ) {
+                    await this.channels.updateMany(
+                        { _id: channel.id },
+                        {
+                            $set: {
+                                order: channel.order,
+                                category: channel.category,
+                            },
+                        }
+                    );
+                }
+            }
+        });
+
+        return channels;
+    }
+
     public async deleteChannel(channelId: string): Promise<Channel> {
         const findChannel: Channel = await this.channels.findOne({
             _id: channelId,

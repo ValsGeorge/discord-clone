@@ -73,6 +73,27 @@ class ChannelController {
         }
     };
 
+    public updateChannelsOrder = async (
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ) => {
+        try {
+            const channelsData: Channel[] = req.body;
+
+            const updateChannelsOrderData: Channel[] | void =
+                await this.channelService.updateChannelsOrder(channelsData);
+
+            if (updateChannelsOrderData) {
+                res.status(200).json(updateChannelsOrderData);
+            } else {
+                next(new Error('Failed to update channels order'));
+            }
+        } catch (error) {
+            next(error);
+        }
+    };
+
     public deleteChannel = async (
         req: Request,
         res: Response,

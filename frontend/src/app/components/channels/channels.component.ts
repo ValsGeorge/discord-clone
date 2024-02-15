@@ -88,32 +88,45 @@ export class ChannelsComponent implements OnInit {
     }
 
     dropChannel(event: CdkDragDrop<Channels[]>) {
-        console.log('drop channel', event.previousIndex, event.currentIndex);
         if (event.previousContainer === event.container) {
+            // Move the channel within the same category
             moveItemInArray(
                 event.container.data,
                 event.previousIndex,
                 event.currentIndex
             );
-            this.updateChannelOrder();
+            this.updateChannelOrder(event.container.data);
         } else {
-            transferArrayItem(
-                event.previousContainer.data,
-                event.container.data,
-                event.previousIndex,
-                event.currentIndex
+            // Transfer the channel to a different category
+            const previousCategory = this.categories.find(
+                (category) => category.channels === event.previousContainer.data
             );
-            this.updateChannelOrder();
+            const currentCategory = this.categories.find(
+                (category) => category.channels === event.container.data
+            );
+
+            if (previousCategory && currentCategory) {
+                const movedChannel =
+                    event.previousContainer.data[event.previousIndex];
+                movedChannel.category = currentCategory.id;
+                transferArrayItem(
+                    event.previousContainer.data,
+                    event.container.data,
+                    event.previousIndex,
+                    event.currentIndex
+                );
+                this.updateChannelOrder(previousCategory.channels);
+                this.updateChannelOrder(currentCategory.channels);
+            }
         }
     }
 
-    private updateChannelOrder() {
-        this.categories.forEach((category) => {
-            category.channels.forEach((channel) => {
-                channel.order = category.channels.indexOf(channel);
-            });
+    private updateChannelOrder(channels: Channels[]) {
+        channels.forEach((channel, index) => {
+            channel.order = index;
         });
-        this.channelsService.updateChannelsOrder(this.channels).subscribe(
+
+        this.channelsService.updateChannelsOrder(channels).subscribe(
             (response: any) => {},
             (error: any) => {
                 console.error('Error updating channels:', error);
@@ -141,6 +154,7 @@ export class ChannelsComponent implements OnInit {
         this.channelsService.getChannels(this.selectedServerId).subscribe(
             (response) => {
                 this.channels = response;
+                this.channels.sort((a, b) => a.order - b.order);
 
                 response.forEach((channel: Channels) => {
                     const category = this.categories.find(

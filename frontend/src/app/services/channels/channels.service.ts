@@ -124,14 +124,7 @@ export class ChannelsService {
 
     updateChannelsOrder(channels: Channels[]): Observable<any> {
         const url = `${this.baseUrl}/update-order`;
-        const token = localStorage.getItem('token') as string;
-        const headers = {
-            'Content-Type': 'application/json',
-            token: token,
-        };
-        const body = {
-            channels: channels,
-        };
-        return this.http.put(url, body, { headers });
+
+        return this.http.post(url, channels, { withCredentials: true });
     }
 }
