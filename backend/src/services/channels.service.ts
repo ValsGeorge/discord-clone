@@ -56,7 +56,6 @@ class ChanelService {
                 name: channelData.name,
                 category: new Types.ObjectId(channelData.category),
             });
-            console.log('findChannel', findChannel);
             if (findChannel && findChannel.id !== channelId)
                 throw new HttpException(
                     409,

@@ -40,7 +40,6 @@ class CategoryRoute implements Routes {
         this.router.put(
             `${this.path}/:id`,
             authMiddleware,
-            validationMiddleware(CreateCategoryDto, 'body', true),
             this.categoryController.updateCategory
         );
         this.router.delete(

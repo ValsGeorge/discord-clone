@@ -48,16 +48,24 @@ class CategoryService {
 
         if (categoryData.name) {
             const findCategory: Category = await this.categores.findOne({
-                id: categoryId,
+                name: categoryData.name,
+                server: new Types.ObjectId(categoryData.server),
             });
-            if (!findCategory)
-                throw new HttpException(409, "Category doesn't exist");
-
-            await this.categores.update(
-                { name: categoryData.name },
-                { where: { id: categoryId } }
-            );
+            if (findCategory && findCategory.id !== categoryId)
+                throw new HttpException(
+                    409,
+                    `Category ${categoryData.name} already exists`
+                );
         }
+
+        await this.categores.updateOne(
+            { _id: categoryId },
+            {
+                $set: {
+                    name: categoryData.name,
+                },
+            }
+        );
 
         const updateCategoryData: Category = await this.categores.findOne({
             _id: categoryId,

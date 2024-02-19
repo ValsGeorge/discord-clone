@@ -50,4 +50,11 @@ export class CategoriesService {
 
         return this.http.post(url, categories, { withCredentials: true });
     }
+
+    editCategory(categoryId: string, category: Category): Observable<any> {
+        const url = `${this.baseUrl}/${categoryId}`;
+        console.log(category);
+
+        return this.http.put(url, category, { withCredentials: true });
+    }
 }

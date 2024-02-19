@@ -130,7 +130,6 @@ export class ChannelsService {
 
     editChannel(channelId: string, channelData: Channels): Observable<any> {
         const url = `${this.baseUrl}/${channelId}`;
-        console.log('channelData', channelData);
         return this.http.put(url, channelData, { withCredentials: true });
     }
 }
