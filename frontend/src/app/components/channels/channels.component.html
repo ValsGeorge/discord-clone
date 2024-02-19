@@ -18,9 +18,9 @@
                         (click)="selectChannel(channel.id)" (contextmenu)="showContextMenu($event, channel.id)">
                         <div class="text-text w-full" cdkDragHandle>
                             {{ channel.name }}
-                            <app-edit-menu [itemsList]="channelItemsList" [targetId]="channel.id"
-                                [channel]="channel"></app-edit-menu>
                         </div>
+                        <app-edit-menu [itemsList]="channelItemsList" [targetId]="channel.id"
+                            [channel]="channel"></app-edit-menu>
 
                     </div>
 

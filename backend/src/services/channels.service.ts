@@ -54,7 +54,9 @@ class ChanelService {
         if (channelData.name) {
             const findChannel: Channel = await this.channels.findOne({
                 name: channelData.name,
+                category: new Types.ObjectId(channelData.category),
             });
+            console.log('findChannel', findChannel);
             if (findChannel && findChannel.id !== channelId)
                 throw new HttpException(
                     409,
@@ -62,7 +64,16 @@ class ChanelService {
                 );
         }
 
-        await this.channels.update(channelData, { where: { id: channelId } });
+        await this.channels.updateOne(
+            { _id: channelId },
+            {
+                $set: {
+                    name: channelData.name,
+                    description: channelData.description,
+                    updated_at: Date.now(),
+                },
+            }
+        );
 
         const updateChannel: Channel = await this.channels.findOne({
             _id: channelId,

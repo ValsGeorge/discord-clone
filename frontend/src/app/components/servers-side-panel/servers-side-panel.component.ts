@@ -122,4 +122,9 @@ export class ServersSidePanelComponent implements OnInit {
             }
         );
     }
+
+    handleModalClick(event: Event) {
+        // Stop event propagation to prevent clicks on the modal from reaching underlying elements
+        event.stopPropagation();
+    }
 }

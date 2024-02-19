@@ -46,6 +46,7 @@ export class EditMenuComponent {
     @Input() channel: Channels = {
         id: '',
         name: '',
+        description: '',
         messages: [],
         category: '',
         server: '',
@@ -72,8 +73,7 @@ export class EditMenuComponent {
         private channelsService: ChannelsService,
         private authService: AuthService,
         private utilsService: UtilsService,
-        private dmService: DirectMessagesService,
-        private settingsComponent: SettingsService
+        private dmService: DirectMessagesService
     ) {}
 
     @HostListener('document:click', ['$event'])
@@ -88,9 +88,9 @@ export class EditMenuComponent {
     }
 
     handleAction(event: Event, action: string) {
+        event.stopPropagation();
         console.log(`Action for ${this.targetId}: ${action}`);
         this.showMenu = false;
-        event.stopPropagation();
 
         switch (action) {
             case 'delete-server':

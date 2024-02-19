@@ -38,6 +38,7 @@ export class ChatComponent {
     channel: Channels = {
         id: '',
         name: '',
+        description: '',
         type: '',
         messages: [],
         created_at: '',

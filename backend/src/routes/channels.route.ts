@@ -34,7 +34,6 @@ class ChannelRoute implements Routes {
         this.router.put(
             `${this.path}/:id`,
             authMiddleware,
-            validationMiddleware(CreateChannelDto, 'body', true),
             this.channelController.updateChannel
         );
         this.router.post(

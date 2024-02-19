@@ -1,4 +1,4 @@
-<div *ngIf="visible" class="fixed inset-0 flex z-50 bg-primary">
+<div *ngIf="visible" class="fixed inset-0 flex z-50 bg-primary" (click)="handleModalClick($event)">
     <div class="absolute top-10 right-10">
         <button (click)="onClose()"
             class="text-text-faded p-2 px-3 rounded-full border-2 border-text-faded hover:text-text">

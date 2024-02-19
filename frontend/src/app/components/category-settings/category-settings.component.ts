@@ -44,4 +44,9 @@ export class CategorySettingsComponent implements OnInit {
     selectOption(option: string) {
         this.selectedOption = option;
     }
+
+    handleModalClick(event: Event) {
+        // Stop event propagation to prevent clicks on the modal from reaching underlying elements
+        event.stopPropagation();
+    }
 }

@@ -149,7 +149,6 @@ class ServerController {
                 name: 'General',
                 description: 'General text channel',
                 type: 'text',
-                order: 0,
                 server: createServerData.id,
                 category: textCategory.id, // Use the ID of the Text category
             };
@@ -160,7 +159,6 @@ class ServerController {
                 name: 'General',
                 description: 'General voice channel',
                 type: 'voice',
-                order: 0,
                 server: createServerData.id,
                 category: voiceCategory.id, // Use the ID of the Voice category
             };
