@@ -13,3 +13,5 @@
     (close)="closeSettings('server')"></app-server-settings>
 <app-category-settings *ngIf="showCategoryDialog" [category]="category" [visible]="showCategoryDialog"
     (close)="closeSettings('category')"></app-category-settings>
+<app-channels-settings *ngIf="showChannelDialog" [channel]="channel" [visible]="showChannelDialog"
+    (close)="closeSettings('channel')"></app-channels-settings>

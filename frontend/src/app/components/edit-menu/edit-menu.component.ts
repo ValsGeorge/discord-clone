@@ -15,6 +15,7 @@ import { Servers } from 'src/app/models/server';
 import { SettingsService } from 'src/app/services/settings.service';
 import { Category } from 'src/app/models/category';
 import { BehaviorSubject } from 'rxjs';
+import { Channels } from 'src/app/models/channel';
 @Component({
     selector: 'app-edit-menu',
     templateUrl: './edit-menu.component.html',
@@ -40,6 +41,18 @@ export class EditMenuComponent {
         created_at: '',
         updated_at: '',
         order: 0,
+    };
+
+    @Input() channel: Channels = {
+        id: '',
+        name: '',
+        messages: [],
+        category: '',
+        server: '',
+        created_at: '',
+        updated_at: '',
+        order: 0,
+        type: '',
     };
     @Input() targetId: string | undefined;
     @Input() itemsList: ContextMenu[] | undefined;
@@ -99,6 +112,7 @@ export class EditMenuComponent {
                 break;
 
             case 'edit-channel':
+                this.openSettings('channel');
                 break;
 
             case 'edit-message':

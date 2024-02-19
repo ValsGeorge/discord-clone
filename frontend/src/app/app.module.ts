@@ -39,6 +39,7 @@ import { ServerNameOptionsComponent } from './components/server-name-options/ser
 import { ServerSettingsComponent } from './components/server-settings/server-settings.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CategorySettingsComponent } from './components/category-settings/category-settings.component';
+import { ChannelsSettingsComponent } from './components/channels-settings/channels-settings.component';
 
 @NgModule({
     declarations: [
@@ -69,6 +70,7 @@ import { CategorySettingsComponent } from './components/category-settings/catego
         ServerNameOptionsComponent,
         ServerSettingsComponent,
         CategorySettingsComponent,
+        ChannelsSettingsComponent,
     ],
     imports: [
         BrowserModule,
