@@ -38,6 +38,7 @@ import { ServerNamePipe } from './pipes/server-name.pipe';
 import { ServerNameOptionsComponent } from './components/server-name-options/server-name-options.component';
 import { ServerSettingsComponent } from './components/server-settings/server-settings.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { CategorySettingsComponent } from './components/category-settings/category-settings.component';
 
 @NgModule({
     declarations: [
@@ -67,6 +68,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
         ServerNamePipe,
         ServerNameOptionsComponent,
         ServerSettingsComponent,
+        CategorySettingsComponent,
     ],
     imports: [
         BrowserModule,

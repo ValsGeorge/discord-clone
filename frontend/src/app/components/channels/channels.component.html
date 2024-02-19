@@ -1,37 +1,28 @@
-<!-- <div class="flex flex-col space-y-1 mt-4 max-w-sm mx-auto">
-    <button *ngFor="let channel of channels" (contextmenu)="showContextMenu($event, channel.id)"
-        class="hover:bg-primary text-text font-bold py-2 px-4 rounded text-left mx-4"
-        [routerLink]="['/servers', selectedServerId, 'channels', channel.id]" (click)="selectChannel(channel.id)">
-        <p>{{ channel.name }}</p>
-        <app-edit-menu [itemsList]="itemsList" [targetId]="channel.id"></app-edit-menu>
-    </button>
-
-</div> -->
-
-<!-- <button (click)="openDialog()" class="mt-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-    Create Channel
-</button> -->
-
 <div class="flex flex-col text-text space-y-4">
     <div cdkDropList cdkDropListGroup [cdkDropListData]="categories" (cdkDropListDropped)="dropCategory($event)"
         class="p-2 rounded-md list">
-        <div *ngFor="let category of categories" cdkDrag class="rounded-md box">
-            <div class="flex flex-row cursor-pointer">
+        <div *ngFor="let category of categories" cdkDrag class="rounded-md box"
+            (contextmenu)="showContextMenu($event, category.id)">
+            <div class="flex flex-row cursor-pointer" cdkDragHandle>
                 <div class="">v</div>
                 <div class="ml-2">{{ category.name }}</div>
                 <div class="ml-auto" (click)="openDialog(category.id)">+</div>
             </div>
+            <app-edit-menu [itemsList]="categoryItemsList" [targetId]="category.id"
+                [category]="category"></app-edit-menu>
             <div class="ml-2 min-h-[60px]">
                 <div cdkDropList [cdkDropListData]="category.channels" (cdkDropListDropped)="dropChannel($event)"
                     class="rounded-md list">
                     <div cdkDrag class="flex flex-row cursor-pointer p-2 box" *ngFor="let channel of category.channels"
                         [routerLink]="['/servers', selectedServerId, 'channels', channel.id]"
-                        (click)="selectChannel(channel.id)">
-                        <!-- let i = index -->
-                        <div class="text-text">
+                        (click)="selectChannel(channel.id)" (contextmenu)="showContextMenu($event, channel.id)">
+                        <div class="text-text w-full" cdkDragHandle>
                             {{ channel.name }}
                         </div>
+                        <app-edit-menu [itemsList]="channelItemsList" [targetId]="channel.id"></app-edit-menu>
+
                     </div>
+
                 </div>
             </div>
         </div>

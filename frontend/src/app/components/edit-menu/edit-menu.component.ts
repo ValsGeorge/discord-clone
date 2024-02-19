@@ -13,6 +13,8 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { DirectMessagesService } from 'src/app/services/direct-messages/direct-messages.service';
 import { Servers } from 'src/app/models/server';
 import { SettingsService } from 'src/app/services/settings.service';
+import { Category } from 'src/app/models/category';
+import { BehaviorSubject } from 'rxjs';
 @Component({
     selector: 'app-edit-menu',
     templateUrl: './edit-menu.component.html',
@@ -29,6 +31,16 @@ export class EditMenuComponent {
         created_at: '',
         updated_at: '',
     };
+
+    @Input() category: Category = {
+        id: '',
+        name: '',
+        channels: [],
+        server: '',
+        created_at: '',
+        updated_at: '',
+        order: 0,
+    };
     @Input() targetId: string | undefined;
     @Input() itemsList: ContextMenu[] | undefined;
 
@@ -39,6 +51,8 @@ export class EditMenuComponent {
     showMenu = false;
 
     showDialog = false;
+    showCategoryDialog = false;
+    showChannelDialog = false;
 
     constructor(
         private serversService: ServersService,
@@ -53,6 +67,12 @@ export class EditMenuComponent {
     clickOutside(event: Event) {
         this.showMenu = false;
     }
+    private showMenuSubject = new BehaviorSubject<boolean>(false);
+    showMenu$ = this.showMenuSubject.asObservable();
+
+    setShowMenu(value: boolean) {
+        this.showMenuSubject.next(value);
+    }
 
     handleAction(event: Event, action: string) {
         console.log(`Action for ${this.targetId}: ${action}`);
@@ -65,7 +85,7 @@ export class EditMenuComponent {
                 break;
 
             case 'edit-server':
-                this.openSettings();
+                this.openSettings('server');
                 // this.settingsComponent.openSettings();
 
                 break;
@@ -96,6 +116,13 @@ export class EditMenuComponent {
 
             case 'add-dm':
                 this.handleAddDM();
+                break;
+
+            case 'edit-category':
+                this.openSettings('category');
+                break;
+
+            case 'delete-category':
                 break;
 
             default:
@@ -165,17 +192,24 @@ export class EditMenuComponent {
         this.dmService.addUserToDMList(this.targetId as string);
     }
 
-    // openSettings() {
-    //
-    //     this.settingsComponent.openSettings();
-    // }
-
-    openSettings() {
-        this.showDialog = true;
+    openSettings(type: string) {
+        if (type === 'server') {
+            this.showDialog = true;
+        } else if (type === 'category') {
+            this.showCategoryDialog = true;
+        } else if (type === 'channel') {
+            this.showChannelDialog = true;
+        }
     }
 
-    closeSettings() {
-        this.showDialog = false;
+    closeSettings(type: string) {
+        if (type === 'server') {
+            this.showDialog = false;
+        } else if (type === 'category') {
+            this.showCategoryDialog = false;
+        } else if (type === 'channel') {
+            this.showChannelDialog = false;
+        }
     }
 
     setPosition(x: number, y: number) {

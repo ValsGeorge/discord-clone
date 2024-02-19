@@ -34,7 +34,7 @@ export class ChannelsComponent implements OnInit {
     selectedChannelId: string | null = null;
 
     @ViewChildren(EditMenuComponent) editMenu!: QueryList<EditMenuComponent>;
-    itemsList: ContextMenu[] = [
+    channelItemsList: ContextMenu[] = [
         {
             icon: 'pi pi-pencil',
             label: 'Edit Channel',
@@ -44,6 +44,19 @@ export class ChannelsComponent implements OnInit {
             icon: 'pi pi-trash',
             label: 'Delete Channel',
             action: 'delete-channel',
+        },
+    ];
+
+    categoryItemsList: ContextMenu[] = [
+        {
+            icon: 'pi pi-pencil',
+            label: 'Edit Category',
+            action: 'edit-category',
+        },
+        {
+            icon: 'pi pi-trash',
+            label: 'Delete Category',
+            action: 'delete-category',
         },
     ];
 
@@ -149,7 +162,6 @@ export class ChannelsComponent implements OnInit {
     }
 
     getChannels() {
-        console.log('getChannels');
         this.selectedServerId = this.utilsService.getSelectedServerId();
 
         this.channelsService.getChannels(this.selectedServerId).subscribe(

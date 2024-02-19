@@ -1,0 +1,36 @@
+<div *ngIf="visible" class="fixed inset-0 flex z-50 bg-primary">
+    <div class="absolute top-10 right-10">
+        <button (click)="onClose()"
+            class="text-text-faded p-2 px-3 rounded-full border-2 border-text-faded hover:text-text">
+            <i class="bi bi-x"></i>
+        </button>
+    </div>
+    <div class="panel flex flex-col items-end bg-secondary h-full w-1/5 p-5 pt-16 text-left">
+        <div class="text-text-faded">
+            <p class="font-semibold pt-1">{{ category.name }}</p>
+            <div class="font-normal pt-1 -ml-1" *ngFor="let option of options">
+                <button
+                    class="w-full text-left hover:bg-hover rounded p-1 {{ option === selectedOption && 'bg-hover text-text font-semibold' }}"
+                    (click)="selectOption(option)">
+                    {{option}}
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="w-4/5 p-5 pt-16 items-start text-left ml-10 mr-20">
+        <ng-container *ngIf="selectedOption === 'Overview'">
+            <h2 class="text-xl">Overview</h2>
+            <div class="flex flex-col items-start  mt-5">
+
+                <h3 class="text-xs text-text-faded font-semibold mb-2 uppercase">Category name</h3>
+                <div class="font-normal">
+                    <input class="w-full bg-accent p-2 text-text-faded rounded-md" type="text" maxlength="100" name=""
+                        placeholder="" [(ngModel)]="category.name">
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="selectedOption === 'Roles'">
+            <p>Roles content</p>
+        </ng-container>
+    </div>
+</div>
