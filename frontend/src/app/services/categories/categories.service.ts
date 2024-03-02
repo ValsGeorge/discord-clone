@@ -53,7 +53,6 @@ export class CategoriesService {
 
     editCategory(categoryId: string, category: Category): Observable<any> {
         const url = `${this.baseUrl}/${categoryId}`;
-        console.log(category);
 
         return this.http.put(url, category, { withCredentials: true });
     }

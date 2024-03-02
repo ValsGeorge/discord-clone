@@ -34,17 +34,22 @@
         <ng-container *ngIf="selectedOption === 'Roles'">
             <p>Roles content</p>
         </ng-container>
-        <button type="button" [disabled]="!isFormEdited"
-            class="px-4 py-2 bg-gray-300 text-gray-700 rounded-md cursor-pointer disabled:opacity-50 ml-2"
-            (click)="resetForm()">
-            Reset Changes
-        </button>
-        <button type="button" [disabled]="!isFormEdited || categorySettingsForm.invalid"
-            class="px-4 py-2 bg-green-500 text-white rounded-md cursor-pointer disabled:opacity-50"
-            (click)="onSubmit()">
-            Save Changes
-        </button>
 
     </form>
+    <div class="fixed bottom-2 right-1/4 bg-accent flex flex-row w-1/2 justify-between rounded-md h-[40px]"
+        *ngIf="isFormEdited">
+        <p class="ml-2 mt-2">Careful - you have unsaved changes!</p>
+        <div class="mt-1">
+            <button type="button" [disabled]="!isFormEdited"
+                class="px-4 py-1 text-text rounded-md cursor-pointer disabled:opacity-50 mx-2" (click)="resetForm()">
+                Reset Changes
+            </button>
+            <button type="button" [disabled]="!isFormEdited || categorySettingsForm.invalid"
+                class="px-4 py-1 bg-green-500 text-text rounded-md cursor-pointer disabled:opacity-50 mx-2"
+                (click)="onSubmit()">
+                Save Changes
+            </button>
+        </div>
+    </div>
 
 </div>
